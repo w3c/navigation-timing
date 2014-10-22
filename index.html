@@ -420,6 +420,8 @@ partial interface Window {
 
   readonly attribute <a href="#NavigationType">NavigationType</a> <a href="#dom-performancenavigationtiming-type" title="navigationtype">type</a>;
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-redirectcount" title="redirectcount">redirectCount</a>;
+  readonly attribute unsigned short <a href="#dom-performancenavigationtiming-transfersize" title="transfersize">transferSize</a>;
+  readonly attribute unsigned short <a href="#dom-performancenavigationtiming-decodedsize" title="decodedsize">decodedSize</a>;
 };
 
 enum <dfn id="NavigationType">NavigationType</dfn> { "navigate", "reload", "back_forward", "prerender" };
@@ -777,6 +779,14 @@ non-redirect navigation under the current browsing context. If there is no
 redirect or there is any redirect that is not from the same
 <a href="http://tools.ietf.org/html/rfc6454">
 origin</a> as the destination document, this attribute MUST return zero. </p>
+
+<h4><code><dfn id="dom-performancenavigationtiming-transfersize">transferSize</dfn></code> attribute </h4>
+
+<p>This attribute MUST return the size, in octets received by the client, consumed by the response header fields and the response <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">message body</a>. This SHOULD include HTTP overhead (such as HTTP/1.1 chunked encoding and whitespace around header fields, including newlines, and HTTP/2 frame overhead, along with other server-to-client frames on the same stream), but SHOULD NOT include lower-layer protocol overhead (such as TLS or TCP).</p>
+
+<h4><code><dfn id="dom-performancenavigationtiming-decodedsize">decodedSize</dfn></code> attribute </h4>
+
+<p>This attribute MUST return the size, in octets, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">message body</a> used, after removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a>.</p>
 
 <h2 id="process"><span class="secno">5 </span>Process</h2>
 
