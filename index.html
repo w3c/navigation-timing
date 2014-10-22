@@ -1002,9 +1002,10 @@ non-normative intervals between timings.</p>
   <li id="step-response-end">Record the time as <a
     href="#dom-performancenavigationtiming-responseend">responseEnd</a> immediately after receiving the
     last byte of the response.
-    <p>Return to step <a href="#step-connect-start">16</a> if the user agent
+    <ol>
+    <li>Return to step <a href="#step-connect-start">16</a> if the user agent
     fails to send the request or receive the entire response, and needs to
-    reopen the connection.</p>
+    reopen the connection.
 
     <div class="example">
     <div class="exampleHeader">Example</div>
@@ -1013,8 +1014,12 @@ non-normative intervals between timings.</p>
     connect to send the request while the connection can be <a
     href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4">asynchronously
     closed</a>. In such case, connectStart, connectEnd and requestStart should represent
-    timing information collected over the re-open connection. </p>
-    </div>
+    timing information collected over the re-open connection.</p>
+    </div></li>
+    <li>Set the value of <a
+    href="#dom-performancenavigationtiming-transfersize">transferSize</a> to the number of received response header field and message body octets, and value of <a
+    href="#dom-performancenavigationtiming-decodedsize">decodedSize</a> to the number of message body octets after removing any applied content-codings.</li>
+    </ol>
   </li>
   <li>If the fetched resource results in an HTTP redirect
     <a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>,
