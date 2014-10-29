@@ -421,7 +421,8 @@ partial interface Window {
   readonly attribute <a href="#NavigationType">NavigationType</a> <a href="#dom-performancenavigationtiming-type" title="navigationtype">type</a>;
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-redirectcount" title="redirectcount">redirectCount</a>;
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-transfersize" title="transfersize">transferSize</a>;
-  readonly attribute unsigned short <a href="#dom-performancenavigationtiming-decodedsize" title="decodedsize">decodedSize</a>;
+  readonly attribute unsigned short <a href="#dom-performancenavigationtiming-transferbodysize" title="transferbodysize">transferBodySize</a>;
+  readonly attribute unsigned short <a href="#dom-performancenavigationtiming-decodedbodysize" title="decodedbodysize">decodedBodySize</a>;
 };
 
 enum <dfn id="NavigationType">NavigationType</dfn> { "navigate", "reload", "back_forward", "prerender" };
@@ -784,9 +785,13 @@ origin</a> as the destination document, this attribute MUST return zero. </p>
 
 <p>This attribute MUST return the size, in octets received by the client, consumed by the response header fields and the response <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">message body</a>. This SHOULD include HTTP overhead (such as HTTP/1.1 chunked encoding and whitespace around header fields, including newlines, and HTTP/2 frame overhead, along with other server-to-client frames on the same stream), but SHOULD NOT include lower-layer protocol overhead (such as TLS or TCP).</p>
 
-<h4><code><dfn id="dom-performancenavigationtiming-decodedsize">decodedSize</dfn></code> attribute </h4>
+<h4><code><dfn id="dom-performancenavigationtiming-transferbodysize">transferBodySize</dfn></code> attribute </h4>
 
-<p>This attribute MUST return the size, in octets, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">message body</a> used, after removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a>.</p>
+<p>This attribute MUST return the size, in octets received by the client, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">payload body</a>, prior to removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a>.
+
+<h4><code><dfn id="dom-performancenavigationtiming-decodedbodysize">decodedBodySize</dfn></code> attribute </h4>
+
+<p>This attribute MUST return the size, in octets received by the client, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">message body</a>, after removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a>.</p>
 
 <h2 id="process"><span class="secno">5 </span>Process</h2>
 
@@ -1017,8 +1022,9 @@ non-normative intervals between timings.</p>
     timing information collected over the re-open connection.</p>
     </div></li>
     <li>Set the value of <a
-    href="#dom-performancenavigationtiming-transfersize">transferSize</a> to the number of received response header field and message body octets, and value of <a
-    href="#dom-performancenavigationtiming-decodedsize">decodedSize</a> to the number of message body octets after removing any applied content-codings.</li>
+    href="#dom-performancenavigationtiming-transfersize">transferSize</a>, <a
+    href="#dom-performancenavigationtiming-transferbodysize">transferBodySize</a>, <a
+    href="#dom-performancenavigationtiming-decodedbodysize">decodedBodySize</a> to corresponding values.</li>
     </ol>
   </li>
   <li>If the fetched resource results in an HTTP redirect
