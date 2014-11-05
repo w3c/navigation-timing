@@ -420,7 +420,7 @@ partial interface Window {
 
   readonly attribute <a href="#NavigationType">NavigationType</a> <a href="#dom-performancenavigationtiming-type" title="navigationtype">type</a>;
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-redirectcount" title="redirectcount">redirectCount</a>;
-  readonly attribute DOMString <a href="#dom-performancenavigationtiming-networkprotocol" title="networkprotocol">networkProtocol</a>;
+  readonly attribute DOMString <a href="#dom-performancenavigationtiming-nexthopprotocol" title="nexthopprotocol">nextHopProtocol</a>;
 };
 
 enum <dfn id="NavigationType">NavigationType</dfn> { "navigate", "reload", "back_forward", "prerender" };
@@ -779,7 +779,7 @@ redirect or there is any redirect that is not from the same
 <a href="http://tools.ietf.org/html/rfc6454">
 origin</a> as the destination document, this attribute MUST return zero. </p>
 
-<h4><code><dfn id="dom-performancenavigationtiming-networkprotocol">networkProtocol</dfn></code> attribute </h4>
+<h4><code><dfn id="dom-performancenavigationtiming-nexthopprotocol">nextHopProtocol</dfn></code> attribute </h4>
 
 <p>This attribute must return the network protocol used to fetch the resource, as identified by the ALPN Protocol ID (<a href="https://tools.ietf.org/html/rfc7301">RFC 7301</a>). When a proxy is configured, if a tunnel connection is established then this attribute must return the ALPN Protocol ID of the tunneled protocol, otherwise it must return the ALPN Protocol ID of the first hop to the proxy.</p>
 
@@ -918,7 +918,7 @@ non-normative intervals between timings.</p>
   </li>
   <li>Set <a href="#name-attribute">name</a> to the DOMString <code>document</code>.</li>
   <li>Set <a href="#entryType-attribute">entryType</a> to the DOMString <code>navigation</code>.</li>
-  <li>Set <a href="#startTime-attribute">startTime</a> to a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero.</li>
+  <li>Set <a href="#startTime-attribute">startTime</a> to a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero, and <a href="#dom-performancenavigationtiming-nexthopprotocol">nextHopProtocol</a> to the empty DOMString.</li>
   <li> Record the current navigation type in <a href="#dom-performancenavigationtiming-type">type</a>
     if it has not been set:
     <ol style="list-style-type:lower-alpha;">
@@ -994,7 +994,7 @@ non-normative intervals between timings.</p>
     </ol></li>
   <li id="step-request-start">Immediately before a user agent starts sending
     request for the document, record the current time as <a
-    href="#dom-performancenavigationtiming-requeststart">requestStart</a>, and set the value of <a href="#dom-performancenavigationtiming-networkprotocol">networkProtocol</a> to the ALPN ID used by the transport connection.</li>
+    href="#dom-performancenavigationtiming-requeststart">requestStart</a>, and set the value of <a href="#dom-performancenavigationtiming-nexthopprotocol">nextHopProtocol</a> to the ALPN ID used by the transport connection.</li>
   <li id="step-response-start">Record the time as <a href="#dom-performancenavigationtiming-responsestart">
     responseStart</a> immediately after the user agent receives the first byte
     of the response.</li>
