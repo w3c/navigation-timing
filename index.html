@@ -421,7 +421,7 @@ partial interface Window {
   readonly attribute <a href="#NavigationType">NavigationType</a> <a href="#dom-performancenavigationtiming-type" title="navigationtype">type</a>;
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-redirectcount" title="redirectcount">redirectCount</a>;
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-transfersize" title="transfersize">transferSize</a>;
-  readonly attribute unsigned short <a href="#dom-performancenavigationtiming-transferbodysize" title="transferbodysize">transferBodySize</a>;
+  readonly attribute unsigned short <a href="#dom-performancenavigationtiming-encodedbodysize" title="encodedbodysize">encodedBodySize</a>;
   readonly attribute unsigned short <a href="#dom-performancenavigationtiming-decodedbodysize" title="decodedbodysize">decodedBodySize</a>;
 };
 
@@ -783,9 +783,9 @@ origin</a> as the destination document, this attribute MUST return zero. </p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-transfersize">transferSize</dfn></code> attribute </h4>
 
-<p>This attribute MUST return the size, in octets received by the client, consumed by the response header fields and the response <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">message body</a>. This SHOULD include HTTP overhead (such as HTTP/1.1 chunked encoding and whitespace around header fields, including newlines, and HTTP/2 frame overhead, along with other server-to-client frames on the same stream), but SHOULD NOT include lower-layer protocol overhead (such as TLS or TCP).</p>
+<p>This attribute MUST return the size, in octets received by the client, consumed by the response header fields and the response <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">payload body</a>. This SHOULD include HTTP overhead (such as HTTP/1.1 chunked encoding and whitespace around header fields, including newlines, and HTTP/2 frame overhead, along with other server-to-client frames on the same stream), but SHOULD NOT include lower-layer protocol overhead (such as TLS or TCP).</p>
 
-<h4><code><dfn id="dom-performancenavigationtiming-transferbodysize">transferBodySize</dfn></code> attribute </h4>
+<h4><code><dfn id="dom-performancenavigationtiming-encodedbodysize">encodedBodySize</dfn></code> attribute </h4>
 
 <p>This attribute MUST return the size, in octets received by the client, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">payload body</a>, prior to removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a>.
 
@@ -1023,7 +1023,7 @@ non-normative intervals between timings.</p>
     </div></li>
     <li>Set the value of <a
     href="#dom-performancenavigationtiming-transfersize">transferSize</a>, <a
-    href="#dom-performancenavigationtiming-transferbodysize">transferBodySize</a>, <a
+    href="#dom-performancenavigationtiming-encodedbodysize">encodedBodySize</a>, <a
     href="#dom-performancenavigationtiming-decodedbodysize">decodedBodySize</a> to corresponding values.</li>
     </ol>
   </li>
