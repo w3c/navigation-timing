@@ -783,7 +783,13 @@ origin</a> as the destination document, this attribute MUST return zero. </p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-transfersize">transferSize</dfn></code> attribute </h4>
 
-<p>This attribute MUST return the size, in octets received by the client, consumed by the response header fields and the response <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">payload body</a>. This SHOULD include HTTP overhead (such as HTTP/1.1 chunked encoding and whitespace around header fields, including newlines, and HTTP/2 frame overhead, along with other server-to-client frames on the same stream), but SHOULD NOT include lower-layer protocol overhead (such as TLS or TCP).</p>
+<p>This attribute MUST return the size, in octets received by the client, consumed by the response header fields and the response <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">payload body</a>.</p>
+
+<p>This attribute SHOULD include HTTP overhead (such as HTTP/1.1 chunked encoding and whitespace around header fields, including newlines, and HTTP/2 frame overhead, along with other server-to-client frames on the same stream), but SHOULD NOT include lower-layer protocol overhead (such as TLS or TCP). If there are HTTP redirects
+<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
+when navigating and if all the redirects or equivalent are from the
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+this attribute SHOULD include the HTTP overhead of incurred redirects.</p>
 
 <h4><code><dfn id="dom-performancenavigationtiming-encodedbodysize">encodedBodySize</dfn></code> attribute </h4>
 
