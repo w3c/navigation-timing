@@ -940,7 +940,7 @@ non-normative intervals between timings.</p>
     <a href="http://tools.ietf.org/html/rfc6454">origins</a>,
     set both <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a> and
     <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a> to 0 then go to step
-    <a href="#step-linknegotiation-start">10</a>. Otherwise, record <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a>
+    <a href="#step-linknegotiation-start">9</a>. Otherwise, record <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a>
     as the time immediately before the unload event.</li>
   <li>Immediately after the unload event is completed,
     record the current time as <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a>.</li>
@@ -962,9 +962,9 @@ non-normative intervals between timings.</p>
     href="http://www.w3.org/html/wg/drafts/html/master/browsers.html#relevant-application-cache">relevant
     application cache</a> or local resources, including the
     <a href="http://www.ietf.org/rfc/rfc2616.txt">HTTP cache</a>,
-    go to step <a href="#step-request-start">18</a>.</li>
+    go to step <a href="#step-request-start">17</a>.</li>
   <li>If no domain lookup is required, go to step <a
-    href="#step-connect-start">16</a>. Otherwise, immediately before a user
+    href="#step-connect-start">15</a>. Otherwise, immediately before a user
     agent starts the domain name lookup, record the time as
     <a href="#dom-performancenavigationtiming-domainlookupstart">domainLookupStart</a>. </li>
   <li>Record the time as <a href="#dom-performancenavigationtiming-domainlookupend">domainLookupEnd</a>
@@ -980,9 +980,8 @@ non-normative intervals between timings.</p>
     the connection to the server and record the time as
     <a href="#dom-performancenavigationtiming-connectend">connectEnd</a> immediately
     after the connection to the server or the proxy is established. A user agent may
-    need multiple retries before this time. If a connection can not be
-    established, abort the rest of the steps. </li>
-  <li>In step <a href="#step-connect-start">16</a>, a user agent should also
+    need multiple retries before this time. Once connection is established set the value of <a href="#dom-performanceresourcetiming-nexthopprotocol">nextHopProtocol</a> to the ALPN ID used by the connection. If a connection can not be established, abort the rest of the steps. </li>
+  <li>In step <a href="#step-connect-start">15</a>, a user agent should also
     carry out these additional steps if it supports the
     <a href="#dom-performancenavigationtiming-secureconnectstart">secureConnectionStart</a> attribute:
     <ol>
@@ -994,14 +993,14 @@ non-normative intervals between timings.</p>
     </ol></li>
   <li id="step-request-start">Immediately before a user agent starts sending
     request for the document, record the current time as <a
-    href="#dom-performancenavigationtiming-requeststart">requestStart</a>, and set the value of <a href="#dom-performancenavigationtiming-nexthopprotocol">nextHopProtocol</a> to the ALPN ID used by the transport connection.</li>
+    href="#dom-performancenavigationtiming-requeststart">requestStart</a>.</li>
   <li id="step-response-start">Record the time as <a href="#dom-performancenavigationtiming-responsestart">
     responseStart</a> immediately after the user agent receives the first byte
     of the response.</li>
   <li id="step-response-end">Record the time as <a
     href="#dom-performancenavigationtiming-responseend">responseEnd</a> immediately after receiving the
     last byte of the response.
-    <p>Return to step <a href="#step-connect-start">16</a> if the user agent
+    <p>Return to step <a href="#step-connect-start">15</a> if the user agent
     fails to send the request or receive the entire response, and needs to
     reopen the connection.</p>
 
@@ -1026,7 +1025,7 @@ non-normative intervals between timings.</p>
         <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a>,
         <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a> and
         <a href="#dom-performancenavigationtiming-redirectcount">redirectCount</a> to 0. Then,
-        return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
+        return to step <a href="#step-linknegotiation-start">9</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
         same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
         set <a href="#dom-performancenavigationtiming-redirectstart">redirectStart</a>,
@@ -1034,7 +1033,7 @@ non-normative intervals between timings.</p>
         <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a>,
         <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventStart</a> and
         <a href="#dom-performancenavigationtiming-redirectcount">redirectCount</a> to 0. Then,
-        return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
+        return to step <a href="#step-linknegotiation-start">9</a> with the new resource.</li>
       <li>Increment <a href="#dom-performancenavigationtiming-redirectcount">redirectCount</a> by 1.</li>
       <li>If the value of <a href="#dom-performancenavigationtiming-redirectstart">redirectStart</a> is 0,
         let it be the value of <a href="#dom-performancenavigationtiming-fetchstart">fetchStart</a>.</li>
@@ -1046,7 +1045,7 @@ non-normative intervals between timings.</p>
         <a href="#dom-performancenavigationtiming-redirectend">redirectEnd</a>,
         <a href="#dom-performancenavigationtiming-unloadeventstart">unloadEventStart</a> and
         <a href="#dom-performancenavigationtiming-unloadeventend">unloadEventEnd</a>.</li>
-      <li>Return to step <a href="#step-linknegotiation-start">10</a> with the new resource.</li>
+      <li>Return to step <a href="#step-linknegotiation-start">9</a> with the new resource.</li>
     </ol>
   </li>
   <li>Record the time as <a href="#dom-performancenavigationtiming-domloading">domLoading</a> immediately
