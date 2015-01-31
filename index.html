@@ -690,7 +690,41 @@ this attribute SHOULD include the HTTP overhead of incurred redirects.</p>
 <dd>
 <p>This attribute MUST return the size, in octets received by the client, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">message body</a> [[RFC7230]], after removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a> [[!RFC7231]].</p>
 </dd>
+<dt>serializer = { inherit, unloadEventStart,
+ unloadEventEnd,
+ linkNegotiationStart,
+ linkNegotiationEnd,
+ redirectStart,
+ redirectEnd,
+ fetchStart,
+ domainLookupStart,
+ domainLookupEnd,
+ connectStart,
+ connectEnd,
+ secureConnectionStart,
+ requestStart,
+ responseStart,
+ responseEnd,
+ domLoading,
+ domInteractive,
+ domContentLoadedEventStart,
+ domContentLoadedEventEnd,
+ domComplete,
+ loadEventStart,
+ loadEventEnd,
+ prerenderSwitch,
+ type,
+ nextHopProtocol,
+ redirectCount,
+ transferSize,
+ encodedBodySize,
+ decodedBodySize }
+    </dt>
 </dl>
+
+<section id="sec-performance-interface">
+<h4>Navigation types</h4>
+
 
 <dl title="enum NavigationType" class="idl">
 <dt>navigate</dt>
@@ -714,6 +748,9 @@ agent's address bar, or form submission, or initializing through a script operat
 <p>Navigation initiated by a <a href='http://microformats.org/wiki/rel-prerender'>prerender</a> hint.</p>
 </dd>
 </dl>
+
+</section>
+
 </section>
 </section>
 
