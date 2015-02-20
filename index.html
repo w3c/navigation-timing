@@ -72,28 +72,25 @@
 <body>
 
 <section id="abstract">
-
-<p>This specification defines a unified interface to store and retrieve high resolution performance metric data
-related to the navigation of a document.</p>
+  <p>This specification defines an interface for web applications to access the complete timing information for navigation of a document.</p>
 </section>
 
 <section id="sotd">
-
 <p>This is a <strong>work in progress</strong> and may change without any
 notices. </p>
 
 <p>
- Navigation Timing 2 replaces the first version of <a href='http://www.w3.org/TR/navigation-timing/'>Navigation Timing</a> [[Navigation-Timing]]
+ Navigation Timing 2 replaces the first version of [[NAVIGATION-TIMING]]
  and includes the following changes:
 </p>
 <ul>
-<li><a>Performance</a> interface implements EventTarget;</li>
-<li>support for <code>PerformanceTimeline</code> [[Performance-Timeline]];</li>
-<li>support for <a href="http://www.w3.org/TR/hr-time/">High Resolution Time</a> [[HR-Time]];</li>
+<li>definition of Performance interface is moved to [[PERFORMANCE-TIMELINE]];</li>
+<li>support for [[PERFORMANCE-TIMELINE]];</li>
+<li>support for [[HR-TIME]];</li>
 <li>timing information for <a href='#widl-PerformanceNavigationTiming-linkNegotiationStart'>link negotiation</a>;</li>
 <li>the <a href='#widl-PerformanceNavigationTiming-redirectCount'>number of redirects</a>  since the last non-redirect navigation;</li>
 <li><a href='#widl-PerformanceNavigationTiming-linkNegotiationStart'>protocol</a> information; <strong>NEW!</strong></li>
-<li><a href='#widl-PerformanceNavigationTiming-transferSize'>transfer</a> and <a href='#widl-PerformanceNavigationTiming-encodedBodySize'>body</a> size information; <strong>NEW!</strong></li>
+<li><a href='#widl-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#widl-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#widl-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information; <strong>NEW!</strong></li>
 <li>support for <a href="http://microformats.org/wiki/rel-prerender">prerender</a> navigation [[prerender]].</li>
 </ul>
 
@@ -108,18 +105,8 @@ notices. </p>
 <section id="introduction" class='informative'>
 <h2>Introduction</h2>
 
-<p>
-Accurately measuring performance characteristics of web applications is an important
-aspect of making web applications faster.
-While JavaScript-based mechanisms, such as the one described in
-[[JSMEASURE]], can
-provide comprehensive instrumentation for
-user latency measurements within an application, in many cases, they are
-unable to provide a complete or detailed end-to-end latency picture.
-</p>
+<p>Accurately measuring performance characteristics of web applications is an important aspect of making web applications faster. While JavaScript-based mechanisms, such as the one described in [[JSMEASURE]], can provide comprehensive instrumentation for user latency measurements within an application, in many cases, they are unable to provide a complete or detailed end-to-end latency picture. For example, the following JavaScript shows a naive attempt to measure the time it takes to fully load a page:</p>
 
-<p>For example, the following JavaScript shows a naive attempt to
-measure the time it takes to fully load a page:</p>
 <pre class='example highlight'>&lt;html&gt;
 &lt;head&gt;
 &lt;script type="text/javascript"&gt;
@@ -136,57 +123,16 @@ function onLoad() {
 &lt;/body&gt;
 &lt;/html&gt;</pre>
 
-<p>The script calculates the time it takes to load the page <b>after</b> the
-first bit of JavaScript in the head is executed, but it does not give any
-information about the time it takes to get the page from the server. </p>
+<p>The above script calculates the time it takes to load the page <b>after</b> the first bit of JavaScript in the head is executed, but it does not give any information about the time it takes to get the page from the server, or the initialization lifecycle of the page.</p>
 
-<p>To address the need for complete and detailed information on the navigation of the
-document, the <a href="http://www.w3.org/TR/navigation-timing/">Navigation Timing</a>
-specification [[Navigation-Timing]] defines the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a>
-interface. This interface allows JavaScript mechanisms to provide complete client-side latency
-measurements within applications. </p>
+<p>This specification defines the <a>PerformanceNavigationTiming</a> interface which participates in the [[PERFORMANCE-TIMELINE]] to store and retrieve high resolution performance metric data related to the navigation of a document. As the <a>PerformanceNavigationTiming</a> interface uses [[HR-TIME]], all time values are measured from the start of the navigation. For example, if we know that the response end occurs 100ms after the start of navigation, we MAY find data that the <a>PerformanceNavigationTiming</a> data looks like so:</p>
 
-<p>
-However, the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a>
-interface was not defined to provide data in sub-millisecond resolution, which can be useful for analysis purposes.
-Further, the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a> interface
-does not participate in the
-<a href="https://w3c.github.io/web-performance/specs/PerformanceTimeline/Overview.html">Performance Timeline</a> [[Performance-Timeline]], a unifying
-interface to access and retrieve performance metrics from the performance timeline of a web application.
-</p>
-
-<p>
-Additionally, the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a>
-interface measures the time of its attributes from January 01 1970, leading to very large numbers representing the time values.
-</p>
-
-<p>For example, if we know that the response end occurs 100ms after the start of navigation, we MAY find data that the
-the <a href="http://www.w3.org/TR/navigation-timing/#performancetiming">PerformanceTiming</a> data looks like so:
-</p>
-<pre class='example highlight'>
-navigationStart:   1314223489190
-responseEnd:       1314223489290
-</pre>
-
-<p>
-This specification defines the <a>PerformanceNavigationTiming</a> interface which participates
-in the <a href="https://w3c.github.io/web-performance/specs/PerformanceTimeline/Overview.html">Performance Timeline</a>
-to store and retrieve high resolution performance metric data related to the navigation of a document.
-As the <a>PerformanceNavigationTiming</a> interface uses
-<a href="http://www.w3.org/TR/hr-time/">High Resolution Time</a> [[HR-Time]], all time values are measured from the start
-of the navigation.
-</p>
-
-<p>For example, if we know that the response end occurs 100ms after the start of navigation, we MAY find data that the <a>PerformanceNavigationTiming</a> data looks like so:
-</p>
 <pre class="example highlight">
-startTime:           0.000
-responseEnd:       100.000
+startTime:           0.000  // start time of the navigation request
+responseEnd:       100.000  // high resolution time of last received byte
 </pre>
 
-<p>The following script shows how a developer can use the <a>PerformanceNavigationTiming</a> interface
-to obtain accurate timing data related to the navigation of the document.
-</p>
+<p>The following script shows how a developer can use the <a>PerformanceNavigationTiming</a> interface to obtain accurate timing data related to the navigation of the document:</p>
 
 <pre class="example highlight">
 &lt;!doctype html&gt;
@@ -198,7 +144,7 @@ to obtain accurate timing data related to the navigation of the document.
 function init() {
   var navigationTiming = performance.getEntriesByType("navigation")[0];
   if (window.console) {
-    console.log("Name: "        + navigationTiming.name      + "\n" +
+    console.log("Name: "       + navigationTiming.name      + "\n" +
                 "Entry Type: " + navigationTiming.entryType + "\n" +
                 "Start Time: " + navigationTiming.startTime + "\n" +
                 "Duration: "   + navigationTiming.duration  + "\n" +
@@ -226,7 +172,6 @@ function init() {
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
-
 </section>
 
 <section  id="conformance">
@@ -252,90 +197,36 @@ easy to follow, and not intended to be performant.) </p>
 
 <section id="terminology">
 <h2>Terminology</h2>
+  <p>The construction "a <code>Foo</code> object", where <code>Foo</code> is actually an interface, is sometimes used instead of the more accurate "an object implementing the interface <code>Foo</code>.</p>
 
-<p>The construction "a <code class='example'>Foo</code> object", where <code
-class='example'>Foo</code> is actually an interface, is sometimes used instead of the more accurate "an object implementing the interface <code
-class='example'>Foo</code>". </p>
+  <p>The term "navigation" refers to the act of <a href="http://www.w3.org/TR/html5/browsers.html#navigate" title='navigation'>navigating</a>.</p>
 
-<p>The term "navigation" refers to the act of
-<a href="http://www.w3.org/TR/html5/browsers.html#navigate" title='navigation'>navigating</a>.</p>
+  <p>The term "JavaScript" is used to refer to ECMA262, rather than the
+official term ECMAScript, since the term JavaScript is more widely known. [[ECMA-262]]</p>
 
-<p>The term "JavaScript" is used to refer to ECMA262, rather than the
-official term ECMAScript, since the term JavaScript is more widely known. [[ECMA-262]]
-</p>
-<p>
-  Throughout this work, all time values are measured in milliseconds since the start of
-  navigation of the document. For example, the start of navigation of the document
-  occurs at time 0. The term <i>current time</i> refers to the number of milliseconds
-  since the start of navigation of the document until the current moment in time.
-  This definition of time is based on the High Resolution Time specification
-  [[high-resolution-time] and is different
-  from the definition of time used in the Navigation Timing specification
-  [[Navigation-Timing]],
-  where time is measured in milliseconds since midnight of January 1, 1970 (UTC).
-</p>
+  <p>Throughout this work, all time values are measured in milliseconds since the start of navigation of the document. For example, the start of navigation of the document occurs at time 0. The term <i>current time</i> refers to the number of milliseconds since the start of navigation of the document until the current moment in time. This definition of time is based on [[HR-TIME]] specification.</p>
 </section>
 
 <section id="sec-navigation-timing">
 <h2>Navigation Timing</h2>
 
-<section id="sec-Introduction" class='informative'>
-<h3>Introduction</h3>
-
-<p>
-	This specification defines the <a>Performance</a> interface
-  to host performance related attributes and methods, and the
-  <a>PerformanceNavigationTiming</a> interface
-  to store and retrieve high resolution performance metric data related to the navigation of a document.
-</p>
-</section>
-
-<section id="sec-performance-interface">
-<h3>The <code>Performance</code> interface</h3>
-
-<p>
-The <a>Performance</a> interface hosts performance related attributes and methods.
-</p>
-
-<dl class="idl" title="interface Performance : EventTarget">
-</dl>
-
-<dl class='idl' title='partial interface Window'>
-<dt>[Replaceable] readonly attribute Performance performance</dt>
-<dd>
-<p>This attribute allows access to performance related attributes and methods.</p>
-</dd>
-</dl>
-
-</section>
-
 <section id="sec-PerformanceNavigationTiming">
 <h3>The <code>PerformanceNavigationTiming</code> interface</h3>
-<p>
-The <a>PerformanceNavigationTiming</a> interface participates in the
-	<a href="http://www.w3.org/TR/performance-timeline/#sec-performance-timeline">Performance Timeline</a> [[!Performance-Timeline]] and extends the following attributes of the
-    <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface:
-</p>
+
+<p>The <a>PerformanceNavigationTiming</a> interface participates in the [[!PERFORMANCE-TIMELINE]] and extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline/#performanceentry">PerformanceEntry</a> interface:</p>
 
 <dl class='attributes'>
-<dt id='widl-PerformanceNavigationTiming-name'><code>name</code></dt>
-<dd>
-This attribute MUST return the <code>DOMString</code> "<code>document</code>".
-</dd>
-<dt id='widl-PerformanceNavigationTiming-entryType'><code>entryType</code></dt>
-<dd>
-This attribute MUST return the <code>DOMString</code> "<code id="perf-navigation">navigation</code>".
-</dd>
-<dt id='widl-PerformanceNavigationTiming-startTime'><code>startTime</code></dt>
-<dd>
-This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-	    with a time value of 0. [[!HR-Time]]
-</dd>
-<dt id='widl-PerformanceNavigationTiming-duration'><code>duration</code></dt>
-<dd>
-This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-	    equal to the difference between <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a> and <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>, respectively.
-</dd>
+  <dt id='widl-PerformanceNavigationTiming-name'><code>name</code></dt>
+  <dd>This attribute MUST return the <code>DOMString</code> "<code>document</code>".</dd>
+
+  <dt id='widl-PerformanceNavigationTiming-entryType'><code>entryType</code></dt>
+  <dd>This attribute MUST return the <code>DOMString</code> "<code id="perf-navigation">navigation</code>".</dd>
+
+  <dt id='widl-PerformanceNavigationTiming-startTime'><code>startTime</code></dt>
+  <dd>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of 0. [[!HR-TIME]]</dd>
+
+  <dt id='widl-PerformanceNavigationTiming-duration'><code>duration</code></dt>
+  <dd>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a> equal to the difference between <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a> and <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>, respectively.</dd>
 </dl>
 
 <dl title='interface PerformanceNavigationTiming : PerformanceEntry' class='idl'>
