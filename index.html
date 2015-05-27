@@ -84,14 +84,15 @@ notices. </p>
  and includes the following changes:
 </p>
 <ul>
-<li>definition of Performance interface is moved to [[PERFORMANCE-TIMELINE]];</li>
+<li>the definition of Performance interface was moved to [[PERFORMANCE-TIMELINE]];</li>
 <li>support for [[PERFORMANCE-TIMELINE]];</li>
 <li>support for [[HR-TIME]];</li>
 <li>timing information for <a href='#widl-PerformanceNavigationTiming-linkNegotiationStart'>link negotiation</a>;</li>
-<li>the <a href='#widl-PerformanceNavigationTiming-redirectCount'>number of redirects</a>  since the last non-redirect navigation;</li>
-<li><a href='#widl-PerformanceNavigationTiming-linkNegotiationStart'>protocol</a> information; <strong>NEW!</strong></li>
-<li><a href='#widl-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#widl-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#widl-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information; <strong>NEW!</strong></li>
+<li>the <a href='#widl-PerformanceNavigationTiming-redirectCount'>number of redirects</a> since the last non-redirect navigation;</li>
+<li><a href='#widl-PerformanceNavigationTiming-linkNegotiationStart'>protocol</a> information;</li>
+<li><a href='#widl-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#widl-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#widl-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
 <li>support for <a href="http://microformats.org/wiki/rel-prerender">prerender</a> navigation [[prerender]].</li>
+<li>the <a href='#widl-PerformanceNavigationTiming-domLoading'>domLoading</a> attribute is deprecated. <strong>NEW!</strong></li>
 </ul>
 
 <p id="unstable"><strong class="redNote">Implementers SHOULD be aware that this document is not
@@ -458,6 +459,7 @@ with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
 document readiness</a> to
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness" title='"loading" document readiness'>"loading"</a> [[!HTML5]].</p>
+  <p class="warning">The <code>domLoading</code> attribute is <strong>deprecated</strong> and may be removed in future versions of this specification. Due to differences in when a Document object is created in existing user agents, the value returned by the domLoading is implementation specific and should not be used in meaningful metrics.</p>
 </dd>
 
 <dt>readonly attribute DOMHighResTimeStamp domInteractive</dt>
