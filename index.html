@@ -396,14 +396,8 @@ such as SSL handshake and SOCKS authentication.
 
 <dt>readonly attribute DOMHighResTimeStamp secureConnectionStart</dt>
 <dd>
-<p>This attribute is optional. User agents that don't have this attribute
-available MUST set it as undefined. When this attribute is available, if the
-<a href="http://www.w3.org/TR/url/#concept-url-scheme">scheme</a> [[URL]] of the
-current page is <a href="http://tools.ietf.org/html/rfc2817">HTTPS</a> [[RFC2817]], this
-attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time immediately before the user agent starts the
-handshake process to secure the current connection. If this attribute is
-available but HTTPS is not used, this attribute MUST return zero.
+<p>
+When a secure transport is used, this attribute MUST return the time immediately before the user agent starts the handshake process to secure the current connection. If a secure transport is not used, this attribute MUST return zero.
 </p>
 </dd>
 
@@ -687,7 +681,7 @@ non-normative intervals between timings.
     <text x="490" y="613.32599"><tspan>domainLookupStart</tspan></text>
     <text x="490" y="633.56696"><tspan>domainLookupEnd</tspan></text>
     <text x="490" y="653.56866"><tspan>connectStart</tspan></text>
-    <text x="490" y="674.04889"><tspan>(secureConnectionStart)</tspan></text>
+    <text x="490" y="674.04889"><tspan>secureConnectionStart</tspan></text>
     <text x="490" y="694.28986"><tspan>connectEnd</tspan></text>
     <text x="440.20801" y="812" class="end"><tspan>requestStart</tspan></text>
     <text x="440.20801" y="838.98895" class="end"><tspan>responseStart</tspan></text>
@@ -816,9 +810,9 @@ non-normative intervals between timings.
     <a href="#widl-PerformanceNavigationTiming-connectEnd">connectEnd</a> immediately
     after the connection to the server or the proxy is established. A user agent MAY
     need multiple retries before this time. Once connection is established set the value of <a href="#widl-PerformanceNavigationTiming-nextHopProtocol">nextHopProtocol</a> to the ALPN ID used by the connection. If a connection can not be established, abort the rest of the steps. </li>
-  <li>In step <a href="#step-connect-start">15</a>, a user agent SHOULD also
-    carry out these additional steps if it supports the
-    <a href="#widl-PerformanceNavigationTiming-secureConnectionStart">secureConnectionStart</a> attribute:
+  <li>A user agent MUST also
+    set the
+    <a href="#widl-PerformanceNavigationTiming-secureConnectionStart">secureConnectionStart</a> attribute as follows:
     <ol>
     <li>If the scheme of the current document is HTTPS, the user agent MUST
         record the time as <a href="#widl-PerformanceNavigationTiming-secureConnectionStart">secureConnectionStart</a>
