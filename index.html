@@ -89,9 +89,8 @@ notices. </p>
 <li>the definition of Performance interface was moved to [[PERFORMANCE-TIMELINE]];</li>
 <li>support for [[PERFORMANCE-TIMELINE]];</li>
 <li>support for [[HR-TIME]];</li>
-<li>timing information for <a href='#widl-PerformanceNavigationTiming-linkNegotiationStart'>link negotiation</a>;</li>
 <li>the <a href='#widl-PerformanceNavigationTiming-redirectCount'>number of redirects</a> since the last non-redirect navigation;</li>
-<li><a href='#widl-PerformanceNavigationTiming-linkNegotiationStart'>protocol</a> information;</li>
+<li><a href='#widl-PerformanceNavigationTiming-nextHopProtocol'>protocol</a> information;</li>
 <li><a href='#widl-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#widl-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#widl-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
 <li>support for <a href="http://microformats.org/wiki/rel-prerender">prerender</a> navigation [[prerender]].</li>
 <li>the <a href='#widl-PerformanceNavigationTiming-domLoading'>domLoading</a> attribute is deprecated. <strong>NEW!</strong></li>
@@ -272,19 +271,6 @@ with a time value equal to zero.</p>
 
 <dt>readonly attribute DOMHighResTimeStamp workerStart</dt>
 <dd>If the current document has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this atribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
-
-<dt>readonly attribute DOMHighResTimeStamp linkNegotiationStart</dt>
-<dd>
-<p>This attribute is optional. User agents that don't have this attribute
-available MUST set it as undefined. If the network interface is not immediately available and MUST be powered on, or cycled, before a network connection can be made, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
- with a time value equal to the time immediately before starting that process. If the network interface is immediately available, this attribute MUST return the same value as <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>. </p>
-</dd>
-<dt>readonly attribute DOMHighResTimeStamp linkNegotiationEnd</dt>
-<dd>
-<p>This attribute is optional. User agents that don't have this attribute
-available MUST set it as undefined.  If the network interface is not immediately available and MUST be powered on, or cycled, before a network connection can be made, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#domhighrestimestamp">DOMHighResTimeStamp</a>
- with a time value equal to the time immediately after the network interface becomes available. If the network interface is immediately available, this attribute MUST return the same value as <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>. </p>
-</dd>
 
 <dt>readonly attribute DOMHighResTimeStamp redirectStart</dt>
 <dd>
@@ -608,7 +594,7 @@ agent's address bar, or form submission, or initializing through a script operat
 <dt>back_forward</dt>
 <dd>
 <p>Navigation
-  through a <a href="http://www.w3.org/TR/html5/browsers.html#traverse-the-history">history traversal</a> operation.</p>
+  through a <a href="http:o//www.w3.org/TR/html5/browsers.html#traverse-the-history">history traversal</a> operation.</p>
   </dd>
 <dt>prerender</dt>
 <dd>
@@ -651,7 +637,6 @@ non-normative intervals between timings.
    .highlight { font-style: italic; }
   </style>
   <g transform="translate(-4.3,-477.125)">
-    <rect width="80" height="80" x="10" y="702"/>
     <rect width="70" height="80" x="100" y="702"/>
     <rect width="59.999966" height="79.999962" x="880" y="702"/>
     <rect width="210" height="80" x="660" y="702"/>
@@ -663,8 +648,7 @@ non-normative intervals between timings.
     <rect width="80" height="80" x="180" y="702"/>
     <rect width="160" height="50" x="690" y="762"/>
     <rect width="80" height="50" x="200" y="762"/>
-    <text class="middle"><tspan x="50" y="729">Prompt</tspan><tspan x="50" y="747">for</tspan><tspan x="50" y="764">unload</tspan></text>
-    <text class="middle"><tspan x="135.28711" y="738">Negotiate</tspan><tspan x="135" y="756">link</tspan></text>
+    <text class="middle"><tspan x="135.28711" y="729">Prompt</tspan><tspan x="135.28711" y="747">for</tspan><tspan x="135.28711" y="764">unload</tspan></text>
     <text x="219.94189" y="747.12683" class="middle"><tspan>redirect</tspan></text>
     <text class="middle"><tspan x="299.95557" y="738">App</tspan><tspan x="300" y="755.7572">cache</tspan></text>
     <text x="365.25977" y="745" class="middle"><tspan>DNS</tspan></text>
@@ -675,9 +659,7 @@ non-normative intervals between timings.
     <text x="909.77441" y="745" class="middle"><tspan>load</tspan></text>
     <text x="769.86328" y="792" class="middle"><tspan>DOMContentLoaded</tspan></text>
     <text x="239.97607" y="792.12683" class="middle"><tspan>unload</tspan></text>
-    <text x="490" y="512.12122"><tspan>(linkNegotiationStart)</tspan></text>
-    <text x="490.49219" y="491.88022" class='highlight'><tspan>startTime</tspan></text>
-    <text x="490" y="532"><tspan>(linkNegotiationEnd)</tspan></text>
+    <text x="490" y="532" class='highlight'><tspan>startTime</tspan></text>
     <text x="490" y="552.60315"  class='highlight'><tspan>redirectStart</tspan></text>
     <text x="490" y="593.08502"><tspan>fetchStart</tspan></text>
     <text x="490" y="572.84412"  class='highlight'><tspan>redirectEnd</tspan></text>
@@ -696,10 +678,8 @@ non-normative intervals between timings.
     <text x="439.83203" y="919.10858" class="end"><tspan>domInteractive</tspan></text>
     <text x="439.83203" y="945.73541" class="end"><tspan>domContentLoadedEventStart</tspan></text>
     <text x="439.83203" y="972" class="end"><tspan>domContentLoadedEventEnd</tspan></text>
-    <path d="M 480,40 150,40 90,250" transform="translate(0,452)"/>
     <text x="144.81705" y="846" class="end highlight"><tspan>unloadEventStart</tspan></text>
     <text x="143.46094" y="872" class="end highlight"><tspan>unloadEventEnd</tspan></text>
-    <path d="m 480,512 -310,0 -70,190"/>
     <path d="m 480,532 -280,0 -30,170"/>
     <path d="m 480,552 -270,0 -30,150"/>
     <path d="m 480,572 -200,0 -20,130"/>
@@ -776,7 +756,6 @@ non-normative intervals between timings.
     <a href="#step-linknegotiation-start">9</a>. Otherwise, record <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventStart</a>
     as the time immediately before the unload event.</li>
   <li>Immediately after the unload event is completed, record the current time as <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a>. If the navigation URL has an <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker registration</a>, immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">runs the worker</a> record the time as <a href="#widl-PerformanceResourceTiming-workerStart">workerStart</a>, or if the worker is available, record the time before the <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">event named `fetch` is fired</a> at the active worker. Otherwise, if the navigation URL has no matching <a href="http://www.w3.org/TR/service-workers/#dfn-service-worker-registration">service worker registration</a>, set <a href="#widl-PerformanceResourceTiming-workerStart">workerStart</a> value to zero.</li>
-  <li id="step-linknegotiation-start">If the navigation requires the network interface to be powered on or cycled, record the time immediately before doing that as <a href="#widl-PerformanceNavigationTiming-linkNegotiationStart">linkNegotiationStart</a>, and record the time immediately after the network interface becomes available as <a href="#widl-PerformanceNavigationTiming-linkNegotiationEnd">linkNegotiationEnd</a>. If the network interface was immediately available, let <a href="#widl-PerformanceNavigationTiming-linkNegotiationStart">linkNegotiationStart</a> and <a href="#widl-PerformanceNavigationTiming-linkNegotiationEnd">linkNegotiationEnd</a> be the same value as <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
     or <a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-get" title='HTTP GET method equivalence'>equivalent</a>,
     immediately before a user agent checks with the <a
@@ -794,9 +773,9 @@ non-normative intervals between timings.
     href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title="relevant application cache">relevant
     application cache</a> or local resources, including the
     <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]],
-    go to step <a href="#step-request-start">17</a>.</li>
+    go to step <a href="#step-request-start">16</a>.</li>
   <li>If no domain lookup is required, go to step <a
-    href="#step-connect-start">15</a>. Otherwise, immediately before a user
+    href="#step-connect-start">14</a>. Otherwise, immediately before a user
     agent starts the domain name lookup, record the time as
     <a href="#widl-PerformanceNavigationTiming-domainLookupStart">domainLookupStart</a>. </li>
   <li>Record the time as <a href="#widl-PerformanceNavigationTiming-domainLookupEnd">domainLookupEnd</a>
@@ -833,7 +812,7 @@ non-normative intervals between timings.
     href="#widl-PerformanceNavigationTiming-responseEnd">responseEnd</a> immediately after receiving the
     last byte of the response.
     <ol>
-    <li>Return to step <a href="#step-connect-start">15</a> if the user agent fails to send the request or receive the entire response, and needs to
+    <li>Return to step <a href="#step-connect-start">14</a> if the user agent fails to send the request or receive the entire response, and needs to
     reopen the connection.
 
     <div class="note">
