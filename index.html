@@ -899,27 +899,6 @@ the <a>PerformanceNavigationTiming</a> object MUST NOT
 be altered during the navigation. Also note that the while the graph above suggests that link negotiation happens before handling a redirect or checking the local caches, in some situations, it MAY happen after those steps. For example, if the current navigation results in a redirect which is present in the local cache, but the target of the redirect is not present in the local cache, the user agent MAY turn on the network interface after processing the redirect and just before it starts to fetch the redirect target from the network.</p>
 </section>
 
-<section id="vendor-prefixes">
-<h3>Vendor Prefixes</h3>
-<p>Vendor-specific proprietary user agent extensions are discouraged. If such extensions are needed,
-e.g., for experimental purposes, vendors MUST use the following extension mechanisms:</p>
-
-<ul>
-<li>If the extension to be added is an navigation type, the new type MUST
-  <ul>
-  <li>return a <code>DOMString</code> in the following naming convention: [vendorprefix]_[type], where [vendorprefix] is a name
-  that identifies the vendor.</li>
-  </ul>
-</li>
-<li>If the extension is a new timing attribute, it MUST
-  <ul>
-  <li>follow the naming convention: [vendorprefix]TimeAttribute, where [vendorprefix] identifies
-  the vendor name and TimeAttribute identifies the name of the timing attribute.</li>
-  <li>return its time value in a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>.</li>
-  </ul>
-</li>
-</ul>
-</section>
 </section>
 <section id="privacy" class='informative'>
 <h2>Privacy</h2>
