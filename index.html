@@ -965,6 +965,383 @@ In case of an HTTP proxy, the user agent might not have any knowledge about the 
 all so it's not always feasible to mitigate this attack.</p>
 </section>
 </section>
+
+<section class='appendix'>
+<h2>Historical</h2>
+
+<p>
+This section defines attributes and interfaces previously introduced in [[NAVIGATION-TIMING]] and are kept here for legacy purposes. Authors are advised to use the <a>PerformanceNavigationTiming</a> interface instead.
+</p>
+<p>All time values defined in this appendix are measured in milliseconds since midnight of January 1, 1970 (UTC).</p>
+
+
+<section>
+<h3>The PerformanceTiming interface</h3>
+
+<dl title='[Exposed=Window] interface PerformanceTiming' class='idl'>
+<dt>readonly attribute unsigned long long navigationStart</dt>
+<dd>
+
+<p>This attribute must return the time immediately after the user agent finishes <a
+href="http://www.w3.org/TR/html5/browsers.html#prompt-to-unload-a-document">prompting
+to unload</a> the previous document. If there is no previous document, this attribute must return the time the current document is created.
+
+</dd>
+<dt>readonly attribute unsigned long long unloadEventStart</dt>
+<dd>
+
+<p>If the previous document and the current document have the same
+<a href="http://tools.ietf.org/html/rfc6454">origin</a>
+[<a href='#rfc6454'>IETF RFC 6454</a>],
+this attribute must return the time immediately before the user agent starts
+the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a>
+event of the previous document.
+
+If there is no previous document or the previous document has a
+different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
+current document, this attribute must return zero.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long unloadEventEnd</dt>
+<dd>
+
+<p>If the previous document and the current document have the
+same <a href="http://tools.ietf.org/html/rfc6454">same origin</a>,
+this attribute must return the time immediately after the user agent finishes the
+<a href="http://www.w3.org/TR/html5/browsers.html#unload-a-document">unload</a>
+event of the previous document. If there is no previous document or the previous document has
+a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
+current document or the unload is not yet completed, this attribute must return zero.</p>
+
+<p>If there are HTTP redirects
+<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
+when navigating and not all the redirects or equivalent are from the
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+both <a href="#widl-PerformanceTiming-unloadEventStart">unloadEventStart</a> and
+<a href="#widl-PerformanceTiming-unloadEventEnd">unloadEventEnd</a> must return the zero.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long redirectStart</dt>
+<dd>
+
+<p>If there are HTTP redirects
+<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
+when navigating and if all the redirects or equivalent are from the
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+this attribute must return the <a href="#widl-PerformanceTiming-fetchStart">starting time
+of the fetch</a> that initiates the redirect. Otherwise, this attribute must return zero.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long redirectEnd</dt>
+<dd>
+
+<p>If there are HTTP redirects
+<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
+when navigating and all redirects and equivalents are from the
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+this attribute must return the time immediately after receiving the last byte of
+the response of the last redirect. Otherwise, this attribute must return zero.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long fetchStart</dt>
+<dd>
+
+<p>If the new resource is to be
+<a href="http://www.w3.org/TR/html5/infrastructure.html#fetching-resources">fetched</a> using HTTP GET
+<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-get">or
+equivalent</a>, fetchStart must return the time immediately before the user agent starts
+checking <a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache">
+any relevant application caches</a>. Otherwise, it must return the time when the
+user agent starts
+<a href="http://www.w3.org/TR/html5/infrastructure.html#fetching-resources">fetching</a> the resource.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long domainLookupStart</dt>
+<dd>
+
+<p>This attribute must return the time immediately before the user agent starts the domain name
+lookup for the current document.
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [[!RFC2616]] is used or the current document
+is retrieved from <a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache">relevant
+application caches</a> or local resources,
+this attribute must return the same value as <a href="#widl-PerformanceTiming-fetchStart">fetchStart</a>. </p>
+
+</dd>
+<dt>readonly attribute unsigned long long domainLookupEnd</dt>
+<dd>
+
+<p>This attribute must return the time immediately after the user agent
+finishes the domain name lookup for the current document.
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [[!RFC2616]] is used or the current document
+is retrieved from <a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache">relevant
+application caches</a> or local resources,
+this attribute must return the same value as <a href="#widl-PerformanceTiming-fetchStart">fetchStart</a>. </p>
+
+<div class="example">
+<p>This section is non-normative.</p>
+<p>Checking and retrieving contents from the
+<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13">HTTP cache</a> [[!RFC2616]]
+is part of the <a href="http://www.w3.org/TR/html5/infrastructure.html#fetching-resources">
+fetching process</a>. It's covered by the
+<a href="#widl-PerformanceTiming-requestStart">requestStart</a>,
+<a href="#widl-PerformanceTiming-responseStart">responseStart</a> and
+<a href="#widl-PerformanceTiming-responseEnd">responseEnd</a> attributes.</p>
+</div>
+<div class="example">
+
+<div class="exampleHeader">Example</div>
+
+<p>In case where the user agent already has the domain information in cache,
+domainLookupStart and domainLookupEnd represent the times when the user agent
+starts and ends the domain data retrieval from the cache. </p>
+
+</div>
+
+</dd>
+<dt>readonly attribute unsigned long long connectStart</dt>
+<dd>
+
+<p>This attribute must return the time immediately before the user agent start
+establishing the connection to the server to retrieve the document.
+If a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [[!RFC2616]] is used or the current document is retrieved from <a
+href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache">relevant
+application caches</a> or local resources,
+this attribute must return value of <a href="#widl-PerformanceTiming-domainLookupEnd">domainLookupEnd</a>.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long connectEnd</dt>
+<dd>
+
+<p>This attribute must return the time immediately after the user agent
+finishes establishing the connection to the server to retrieve the current document.
+If a <a
+href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+connection</a> [[!RFC2616]] is used or the current document is retrieved from <a
+href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache">relevant
+application caches</a> or local resources,
+this attribute must return the value of <a href="#widl-PerformanceTiming-domainLookupEnd">domainLookupEnd</a>
+</p>
+
+<p>If the transport connection fails and the user agent reopens a connection,
+<a href="#widl-PerformanceTiming-connectStart">connectStart</a> and
+<a href="#widl-PerformanceTiming-connectEnd">connectEnd</a> should return the corresponding
+values of the new connection. </p>
+<p>
+<a href="#widl-PerformanceTiming-connectEnd">connectEnd</a> must include the time interval to
+establish the transport connection as well as other time interval
+such as SSL handshake and SOCKS authentication.
+</p>
+
+</dd>
+<dt>readonly attribute unsigned long long secureConnectionStart</dt>
+<dd>
+
+<p>This attribute is optional. User agents that don't have this attribute
+available must set it as undefined. When this attribute is available, if the
+<a href="http://www.w3.org/TR/html5/infrastructure.html#url-scheme">scheme</a> of the
+current page is <a href="http://tools.ietf.org/html/rfc2817">HTTPS</a>, this
+attribute must return the time immediately before the user agent starts the
+handshake process to secure the current connection. If this attribute is
+available but HTTPS is not used, this attribute must return zero.
+</p>
+
+</dd>
+<dt>readonly attribute unsigned long long requestStart</dt>
+<dd>
+
+<p>This attribute must return the time immediately before the user agent
+starts requesting the current document from the server, or from
+<a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache">
+relevant application caches</a> or from local resources.</p>
+
+<p>If the transport connection fails after a request is sent and the user
+agent reopens a connection and resend the request, <a
+href="#widl-PerformanceTiming-requestStart">requestStart</a> should return the corresponding values
+of the new request.</p>
+
+<div class="note">
+<p>This interface does not include an attribute to represent the completion of
+sending the request, e.g., requestEnd.
+<ul>
+<li>Completion of sending the request from the user agent does not always
+indicate the corresponding completion time in the network transport, which
+brings most of the benefit of having such an attribute.</li>
+<li>Some user agents have high cost to determine the actual completion time of
+sending the request due to the HTTP layer encapsulation.</li>
+</ul>
+</div>
+
+</dd>
+<dt>readonly attribute unsigned long long responseStart</dt>
+<dd>
+
+<p>This attribute must return the time immediately after the user agent receives the first
+byte of the response from the server, or from
+<a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache">relevant
+application caches</a> or from local resources. </p>
+
+</dd>
+<dt>readonly attribute unsigned long long responseEnd</dt>
+<dd>
+
+<p>This attribute must return the time immediately after the user agent
+receives the last byte of the current document or immediately before the
+transport connection is closed, whichever comes first. The document here
+can be received either from the server,
+<a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache">relevant
+application caches</a> or from local resources.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long domLoading</dt>
+<dd>
+
+<p>This attribute must return the time immediately before the user agent sets the
+<a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
+document readiness</a> to
+<a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">"loading"</a>.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long domInteractive</dt>
+<dd>
+
+<p>This attribute must return the time immediately before the user agent sets the
+<a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
+document readiness</a> to
+<a href="http://www.w3.org/TR/html5/syntax.html#the-end">"interactive"</a>.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long domContentLoadedEventStart</dt>
+<dd>
+
+<p>This attribute must return the time immediately before the user agent fires <a
+href="http://www.w3.org/TR/html5/syntax.html#the-end">the DOMContentLoaded
+event</a> at the <a href="http://www.w3.org/TR/html5/dom.html#document"><code>Document</code></a>.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long domContentLoadedEventEnd</dt>
+<dd>
+
+<p>This attribute must return the time immediately after the document's <a
+href="http://www.w3.org/TR/html5/syntax.html#the-end">DOMContentLoaded
+event</a> completes.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long domComplete</dt>
+<dd>
+
+<p>This attribute must return the time immediately before the user agent sets the
+<a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
+document readiness</a> to
+<a href="http://www.w3.org/TR/html5/syntax.html#the-end">"complete"</a>.</p>
+
+<p>If the <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">
+current document readiness</a> changes to the same state multiple times,
+<a href="#widl-PerformanceTiming-domLoading">domLoading</a>,
+<a href="#widl-PerformanceTiming-domInteractive">domInteractive</a>,
+<a href="#widl-PerformanceTiming-domContentEventStart">domContentLoadedEventStart</a>,
+<a href="#widl-PerformanceTiming-domContentEventEnd">domContentLoadedEventEnd</a> and
+<a href="#widl-PerformanceTiming-domComplete">domComplete</a> must return the time of the first
+occurrence of the corresponding
+<a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">document readiness</a>
+change.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long loadEventStart</dt>
+<dd>
+
+<p>This attribute must return the time immediately before the load event of
+the current document is fired. It must return zero when the load event is not
+fired yet.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long loadEventEnd</dt>
+<dd>
+
+<p>This attribute must return the time when the load event of the current
+document is completed. It must return zero when the load event is not fired
+or is not completed.</p>
+</dd>
+<dt>serializer = { attribute }</dt>
+</dl>
+</section>
+
+<section>
+<h3>The <code>PerformanceNavigation</code> interface</h3>
+<dl class="idl" title='[Exposed=Window] interface PerformanceNavigation'>
+  <dt>const unsigned short TYPE_NAVIGATE = 0</dt>
+  <dd><p>Navigation started by clicking on a link, or entering the URL in the user
+    agent's address bar, or form submission, or initializing through a script operation other than
+    the ones used by <code>TYPE_RELOAD</code>
+    and <code>TYPE_BACK_FORWARD</code> as listed below.</p></dd>
+  <dt>const unsigned short TYPE_RELOAD = 1</dt>
+    <dd><p>Navigation through
+    the reload operation or the
+    <a href="http://www.w3.org/TR/html5/browsers.html#dom-location-reload">location.reload()</a>
+    method.</p></dd>
+  <dt>const unsigned short TYPE_BACK_FORWARD = 2</dt>
+   <dd><p>Navigation
+  through a <a href="http://www.w3.org/TR/html5/browsers.html#traverse-the-history">history traversal</a> operation.</p></dd>
+  <dt>const unsigned short TYPE_RESERVED = 3</dt>
+  <dd><p>Any navigation types not defined by values above.</p></dd>
+
+<dt>readonly attribute unsigned long long type</dt>
+  <dt>serializer = { attribute }</dt>
+<dd>
+
+<p>This attribute must return the type of the last non-redirect <a
+href="http://www.w3.org/TR/html5/browsers.html#navigate">navigation</a>
+in the current browsing context. It must have one of the following <a
+href="#widl-PerformanceNavigation-type">navigation type</a> values. </p>
+<dl>
+</dl>
+
+<p class="note">Client-side redirects, such as those using <a href="hhttp://www.w3.org/TR/html5/document-metadata.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
+are not considered HTTP redirects <a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes">or equivalent</a> by this spec.
+In those cases, the <a href="#widl-PerformanceNavigation-type">type</a> attribute should return appropriate value,
+such as <code>TYPE_RELOAD</code> if reloading the current page, or
+<code>TYPE_NAVIGATE</code> if navigating to a new URL.</p>
+
+</dd>
+<dt>readonly attribute unsigned long long redirectCount</dt>
+<dd>
+
+<p>This attribute must return the number of redirects since the last
+non-redirect navigation under the current browsing context. If there is no
+redirect or there is any redirect that is not from the same
+<a href="http://tools.ietf.org/html/rfc6454">
+origin</a> as the destination document, this attribute must return zero. </p>
+</dd>
+</dl>
+
+</section>
+
+<section>
+<h3>Extensions to the <code>Performance</code> interface</h3>
+
+<dl class='idl' title='[Exposed=Window] partial interface Performance'>
+
+<dt>[SameObject] readonly attribute PerformanceTiming timing</dt>
+<dd>
+<p>
+  The <code>timing</code> attribute
+  represents the timing information related to the browsing contexts since the
+  last non-redirect navigation. This attribute is defined by the <code>PerformanceTiming</code> interface.
+</p>
+</dd>
+<dt>[SameObject] readonly attribute PerformanceNavigation navigation</dt>
+<dd>
+<p>
+  The <code>navigation</code> attribute is defined by the <code>PerformanceNavigation</code> interface.
+</p>
+</dd>
+</dl>
+</section>
+
+</section>
+
 <section id="acknowledgements" class="appendix">
 <h2>Acknowledgments</h2>
 
