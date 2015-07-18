@@ -1265,15 +1265,12 @@ or is not completed.</p>
   <dd><p>Any navigation types not defined by values above.</p></dd>
 
 <dt>readonly attribute unsigned long long type</dt>
-  <dt>serializer = { attribute }</dt>
 <dd>
 
 <p>This attribute must return the type of the last non-redirect <a
 href="http://www.w3.org/TR/html5/browsers.html#navigate">navigation</a>
 in the current browsing context. It must have one of the following <a
 href="#widl-PerformanceNavigation-type">navigation type</a> values. </p>
-<dl>
-</dl>
 
 <p class="note">Client-side redirects, such as those using <a href="hhttp://www.w3.org/TR/html5/document-metadata.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
 are not considered HTTP redirects <a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes">or equivalent</a> by this spec.
@@ -1291,6 +1288,7 @@ redirect or there is any redirect that is not from the same
 <a href="http://tools.ietf.org/html/rfc6454">
 origin</a> as the destination document, this attribute must return zero. </p>
 </dd>
+<dt>serializer = { attribute }</dt>
 </dl>
 
 </section>
