@@ -894,7 +894,7 @@ non-normative intervals between timings.
 <p>Some user agents maintain the DOM structure of the document in memory
 during navigation operations such as forward and backward. In those cases,
 the <a>PerformanceNavigationTiming</a> object MUST NOT
-be altered during the navigation. Also note that the while the graph above suggests that link negotiation happens before handling a redirect or checking the local caches, in some situations, it MAY happen after those steps. For example, if the current navigation results in a redirect which is present in the local cache, but the target of the redirect is not present in the local cache, the user agent MAY turn on the network interface after processing the redirect and just before it starts to fetch the redirect target from the network.</p>
+be altered during the navigation.</p>
 </section>
 
 </section>
