@@ -751,7 +751,7 @@ non-normative intervals between timings.
     <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a> to 0 then go to step
     <a href="#step-linknegotiation-start">9</a>. Otherwise, record <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventStart</a>
     as the time immediately before the unload event.</li>
-  <li>Immediately after the unload event is completed, record the current time as <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a>. If the navigation URL has an <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker registration</a>, immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">runs the worker</a> record the time as <a href="#widl-PerformanceResourceTiming-workerStart">workerStart</a>, or if the worker is available, record the time before the <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">event named `fetch` is fired</a> at the active worker. Otherwise, if the navigation URL has no matching <a href="http://www.w3.org/TR/service-workers/#dfn-service-worker-registration">service worker registration</a>, set <a href="#widl-PerformanceResourceTiming-workerStart">workerStart</a> value to zero.</li>
+  <li>Immediately after the unload event is completed, record the current time as <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a>. If the navigation URL has an <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker registration</a>, immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">runs the worker</a> record the time as <a href="#widl-PerformanceNavigationTiming-workerStart">workerStart</a>, or if the worker is available, record the time before the <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">event named `fetch` is fired</a> at the active worker. Otherwise, if the navigation URL has no matching <a href="http://www.w3.org/TR/service-workers/#dfn-service-worker-registration">service worker registration</a>, set <a href="#widl-PerformanceNavigationTiming-workerStart">workerStart</a> value to zero.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
     or <a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-get" title='HTTP GET method equivalence'>equivalent</a>,
     immediately before a user agent checks with the <a
@@ -836,7 +836,7 @@ non-normative intervals between timings.
         <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a>,
         <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a> and
         <a href="#widl-PerformanceNavigationTiming-redirectCount">redirectCount</a> to 0. Then,
-        return to step <a href="#step-linknegotiation-start">9</a> with the new resource.</li>
+        return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
         same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
         set <a href="#widl-PerformanceNavigationTiming-redirectStart">redirectStart</a>,
@@ -844,7 +844,7 @@ non-normative intervals between timings.
         <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a>,
         <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventStart</a> and
         <a href="#widl-PerformanceNavigationTiming-redirectCount">redirectCount</a> to 0. Then,
-        return to step <a href="#step-linknegotiation-start">9</a> with the new resource.</li>
+        return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
       <li>Increment <a href="#widl-PerformanceNavigationTiming-redirectCount">redirectCount</a> by 1.</li>
       <li>If the value of <a href="#widl-PerformanceNavigationTiming-redirectStart">redirectStart</a> is 0,
         let it be the value of <a href="#widl-PerformanceNavigationTiming-fetchStart">fetchStart</a>.</li>
@@ -856,7 +856,7 @@ non-normative intervals between timings.
         <a href="#widl-PerformanceNavigationTiming-redirectEnd">redirectEnd</a>,
         <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a> and
         <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a>.</li>
-      <li>Return to step <a href="#step-linknegotiation-start">9</a> with the new resource.</li>
+      <li>Return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
     </ol>
   </li>
   <li>Record the time as <a href="#widl-PerformanceNavigationTiming-domLoading">domLoading</a> immediately
@@ -909,7 +909,7 @@ carefully crafted timing attacks. For instance, the unloading time reveals how l
 page takes to execute its unload handler, which could be used to infer the user's login status.
 These attacks have been mitigated by enforcing the same
 <a href="http://tools.ietf.org/html/rfc6454">origin</a> policy when
-timing information involving the previous navigation is accessed.</p>
+timing information involving the previous navigation is accessed. [[RFC6454]]</p>
 
 <p>The <a href="http://www.w3.org/TR/html5/browsers.html#relaxing-the-same-origin-restriction">
 relaxed same origin policy</a> doesn't provide sufficient protection against unauthorized visits
@@ -969,7 +969,7 @@ to unload</a> the previous document. If there is no previous document, this attr
 
 <p>If the previous document and the current document have the same
 <a href="http://tools.ietf.org/html/rfc6454">origin</a>
-[<a href='#rfc6454'>IETF RFC 6454</a>],
+[[!RFC6454]],
 this attribute must return the time immediately before the user agent starts
 the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a>
 event of the previous document.
@@ -1218,8 +1218,8 @@ document readiness</a> to
 current document readiness</a> changes to the same state multiple times,
 <a href="#widl-PerformanceTiming-domLoading">domLoading</a>,
 <a href="#widl-PerformanceTiming-domInteractive">domInteractive</a>,
-<a href="#widl-PerformanceTiming-domContentEventStart">domContentLoadedEventStart</a>,
-<a href="#widl-PerformanceTiming-domContentEventEnd">domContentLoadedEventEnd</a> and
+<a href="#widl-PerformanceTiming-domContentLoadedEventStart">domContentLoadedEventStart</a>,
+<a href="#widl-PerformanceTiming-domContentLoadedEventEnd">domContentLoadedEventEnd</a> and
 <a href="#widl-PerformanceTiming-domComplete">domComplete</a> must return the time of the first
 occurrence of the corresponding
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">document readiness</a>
