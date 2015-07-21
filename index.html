@@ -850,10 +850,12 @@ non-normative intervals between timings.
         let it be the value of <a href="#widl-PerformanceNavigationTiming-fetchStart">fetchStart</a>.</li>
       <li>Let <a href="#widl-PerformanceNavigationTiming-redirectEnd">redirectEnd</a> be the value of
         <a href="#widl-PerformanceNavigationTiming-responseEnd">responseEnd</a>.</li>
-      <li>Set all the attributes in window.performance.timing to 0 except
+      <li>Set all of the attributes in the <a>PerformanceNavigationTiming</a> object to 0 except
         <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>,
         <a href="#widl-PerformanceNavigationTiming-redirectStart">redirectStart</a>,
         <a href="#widl-PerformanceNavigationTiming-redirectEnd">redirectEnd</a>,
+        <a href="#widl-PerformanceNavigationTiming-redirectCount">redirectCount</a>,
+        <a href="#widl-PerformanceNavigationTiming-type">type</a>,
         <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a> and
         <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a>.</li>
       <li>Return to step <a href="#step-linknegotiation-start">9</a> with the new resource.</li>
