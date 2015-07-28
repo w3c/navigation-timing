@@ -248,7 +248,7 @@ with a time value equal to zero.</p>
 <dt>readonly attribute DOMHighResTimeStamp unloadEventEnd</dt>
 <dd>
 <p>If the previous document and the current document have the
-same <a href="http://tools.ietf.org/html/rfc6454">same origin</a>,
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the user agent finishes the
 <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document. If there is no previous document or the previous document has
@@ -266,7 +266,7 @@ with a time value equal to zero.</p>
 </dd>
 
 <dt>readonly attribute DOMHighResTimeStamp workerStart</dt>
-<dd>If the current document has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this atribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
+<dd>If the current document has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
 
 <dt>readonly attribute DOMHighResTimeStamp redirectStart</dt>
 <dd>
@@ -1320,7 +1320,7 @@ origin</a> as the destination document, this attribute must return zero. </p>
 <section id="acknowledgements" class="appendix">
 <h2>Acknowledgments</h2>
 
-<p>We would like to offer my sincere thanks to James Simonsen, Tony Gentilcore, Zhiheng Wang, Karen Anderson and Jason Weber for all their contributions to this work.</p>
+<p>We would like to offer our sincere thanks to James Simonsen, Tony Gentilcore, Zhiheng Wang, Karen Anderson and Jason Weber for all their contributions to this work.</p>
 </section>
 </body>
 </html>
