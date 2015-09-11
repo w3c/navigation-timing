@@ -228,45 +228,66 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
   <dd>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> equal to the difference between <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a> and <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>, respectively.</dd>
 </dl>
 
-<dl title='interface PerformanceNavigationTiming : PerformanceEntry' class='idl'>
+<p>The <a>PerformanceNavigationTiming</a> interface also extends the following attributes of the <a href="http://www.w3.org/TR/resource-timing/#idl-def-PerformanceResourceTiming">PerformanceResourceTiming</a> interface:</p>
 
-<dt>readonly attribute DOMHighResTimeStamp unloadEventStart</dt>
+
+<dl class='attributes'>
+  <dt id='widl-PerformanceNavigationTiming-initiatorType'><code>initiatorType</code></dt>
+  <dd>This attribute MUST return the empty <code>DOMString</code> "".</dd>
+
+  <dt>readonly attribute DOMHighResTimeStamp workerStart</dt>
+  <dd>If the current document has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
+
+<dt>readonly attribute DOMHighResTimeStamp fetchStart</dt>
 <dd>
-<p>If the previous document and the current document have the same
-<a href="http://tools.ietf.org/html/rfc6454">origin</a>
-[[!RFC6454]],
-this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p>If the new resource is to be
+<a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>fetched</a> using HTTP GET or
+<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-get" title='HTTP GET method equivalence'>equivalent</a>, fetchStart MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent starts
-the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document.
-
-If there is no previous document or the previous document has a
-different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-current document, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to zero.</p>
+checking <a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title='relevant application cache'>
+any relevant application caches</a>. Otherwise, it MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to the time when the user agent starts
+<a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>fetching</a> the resource.</p>
 </dd>
 
-<dt>readonly attribute DOMHighResTimeStamp unloadEventEnd</dt>
+</dl>
+
+<!-- from domainLookupEnd -->
+<div class="note">
+<p>Checking and retrieving contents from the
+<a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]]
+is part of the <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>
+fetching process</a>. It's covered by the
+<a href="#widl-PerformanceNavigationTiming-requestStart">requestStart</a>,
+<a href="#widl-PerformanceNavigationTiming-responseStart">responseStart</a> and
+<a href="#widl-PerformanceNavigationTiming-responseEnd">responseEnd</a> attributes.</p>
+</div>
+
+<!-- from requestStart -->
+<div class="note">
+<p>This interface does not include an attribute to represent the completion of
+sending the request, e.g., requestEnd.</p>
+<ul>
+<li>Completion of sending the request from the user agent does not always
+indicate the corresponding completion time in the network transport, which
+brings most of the benefit of having such an attribute.</li>
+<li>Some user agents have high cost to determine the actual completion time of
+sending the request due to the HTTP layer encapsulation.</li>
+</ul>
+</div>
+
+
+<dl title='interface PerformanceNavigationTiming : PerformanceResourceTiming' class='idl'>
+
+<!--
+<dt>readonly attribute DOMString nextHopProtocol</dt>
 <dd>
-<p>If the previous document and the current document have the
-same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time immediately after the user agent finishes the
-<a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document. If there is no previous document or the previous document has
-a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-current document or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to zero.</p>
+<p>This attribute MUST return the network protocol used to fetch the resource, as identified by the ALPN Protocol ID [[!RFC7301]]. When a proxy is configured, if a tunnel connection is established then this attribute MUST return the ALPN Protocol ID of the tunneled protocol, otherwise it MUST return the ALPN Protocol ID of the first hop to the proxy.</p>
 
-<p>If there are HTTP redirects or
-<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes" title='HTTP response codes equivalence'>equivalent</a>
-when navigating and not all the redirects or equivalent are from the
-same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-both <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a> and
-<a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a> MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to zero.</p>
+<p>In order to have precisely one way to represent any ALPN protocol ID, the following additional constraints apply: octets in the ALPN protocol MUST NOT be percent-encoded if they are valid token characters except "%", and when using percent-encoding, uppercase hex digits MUST be used.</p>
+
+<p>Note that this attribute is intended to identify the network protocol in use for the fetch regardless of how it was actually negotiated; that is, even if ALPN is not used to negotiate the network protocol, this attribute still uses the ALPN Protocol ID's to indicate the protocol in use.</p>
 </dd>
-
-<dt>readonly attribute DOMHighResTimeStamp workerStart</dt>
-<dd>If the current document has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
 
 <dt>readonly attribute DOMHighResTimeStamp redirectStart</dt>
 <dd>
@@ -290,18 +311,6 @@ this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhig
 with a time value equal to the time immediately after receiving the last byte of
 the response of the last redirect. Otherwise, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
-</dd>
-
-<dt>readonly attribute DOMHighResTimeStamp fetchStart</dt>
-<dd>
-<p>If the new resource is to be
-<a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>fetched</a> using HTTP GET or
-<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-get" title='HTTP GET method equivalence'>equivalent</a>, fetchStart MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time immediately before the user agent starts
-checking <a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title='relevant application cache'>
-any relevant application caches</a>. Otherwise, it MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time when the user agent starts
-<a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>fetching</a> the resource.</p>
 </dd>
 
 <dt>readonly attribute DOMHighResTimeStamp domainLookupStart</dt>
@@ -431,6 +440,65 @@ can be received either from the server,
 application caches</a> or from local resources.</p>
 </dd>
 
+<dt>readonly attribute unsigned short transferSize</dt>
+<dd>
+<p>This attribute MUST return the size, in octets received by the client, consumed by the response header fields and the response <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">payload body</a> [[RFC7230]].</p>
+
+<p>This attribute SHOULD include HTTP overhead (such as HTTP/1.1 chunked encoding and whitespace around header fields, including newlines, and HTTP/2 frame overhead, along with other server-to-client frames on the same stream), but SHOULD NOT include lower-layer protocol overhead (such as TLS or TCP). If there are HTTP redirects or
+<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes" title='HTTP response codes equivalence'>equivalent</a>
+when navigating and if all the redirects or equivalent are from the
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+this attribute SHOULD include the HTTP overhead of incurred redirects.</p>
+</dd>
+
+<dt>readonly attribute unsigned short encodedBodySize</dt>
+<dd>
+<p>This attribute MUST return the size, in octets received by the client, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">payload body</a> [[RFC7230]], prior to removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a> [[!RFC7231]].
+</p>
+</dd>
+
+<dt>readonly attribute unsigned short decodedBodySize</dt>
+<dd>
+<p>This attribute MUST return the size, in octets received by the client, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">message body</a> [[RFC7230]], after removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a> [[!RFC7231]].</p>
+</dd>
+
+-->
+
+<dt>readonly attribute DOMHighResTimeStamp unloadEventStart</dt>
+<dd>
+<p>If the previous document and the current document have the same
+<a href="http://tools.ietf.org/html/rfc6454">origin</a>
+[[!RFC6454]],
+this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to the time immediately before the user agent starts
+the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document.
+
+If there is no previous document or the previous document has a
+different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
+current document, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to zero.</p>
+</dd>
+
+<dt>readonly attribute DOMHighResTimeStamp unloadEventEnd</dt>
+<dd>
+<p>If the previous document and the current document have the
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to the time immediately after the user agent finishes the
+<a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document. If there is no previous document or the previous document has
+a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
+current document or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to zero.</p>
+
+<p>If there are HTTP redirects or
+<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes" title='HTTP response codes equivalence'>equivalent</a>
+when navigating and not all the redirects or equivalent are from the
+same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+both <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a> and
+<a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a> MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to zero.</p>
+</dd>
+
 <dt>readonly attribute DOMHighResTimeStamp domLoading</dt>
 <dd>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
@@ -529,15 +597,6 @@ such as <a href="#idl-def-NavigationType.navigate">reload</a> if reloading the c
 </div>
 </dd>
 
-<dt>readonly attribute DOMString nextHopProtocol</dt>
-<dd>
-<p>This attribute MUST return the network protocol used to fetch the resource, as identified by the ALPN Protocol ID [[!RFC7301]]. When a proxy is configured, if a tunnel connection is established then this attribute MUST return the ALPN Protocol ID of the tunneled protocol, otherwise it MUST return the ALPN Protocol ID of the first hop to the proxy.</p>
-
-<p>In order to have precisely one way to represent any ALPN protocol ID, the following additional constraints apply: octets in the ALPN protocol MUST NOT be percent-encoded if they are valid token characters except "%", and when using percent-encoding, uppercase hex digits MUST be used.</p>
-
-<p>Note that this attribute is intended to identify the network protocol in use for the fetch regardless of how it was actually negotiated; that is, even if ALPN is not used to negotiate the network protocol, this attribute still uses the ALPN Protocol ID's to indicate the protocol in use.</p>
-</dd>
-
 <dt>readonly attribute unsigned short redirectCount</dt>
 <dd>
 <p>This attribute MUST return the number of redirects since the last
@@ -547,27 +606,6 @@ redirect or there is any redirect that is not from the same
 origin</a> [[!RFC6454]] as the destination document, this attribute MUST return zero. </p>
 </dd>
 
-<dt>readonly attribute unsigned short transferSize</dt>
-<dd>
-<p>This attribute MUST return the size, in octets received by the client, consumed by the response header fields and the response <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">payload body</a> [[RFC7230]].</p>
-
-<p>This attribute SHOULD include HTTP overhead (such as HTTP/1.1 chunked encoding and whitespace around header fields, including newlines, and HTTP/2 frame overhead, along with other server-to-client frames on the same stream), but SHOULD NOT include lower-layer protocol overhead (such as TLS or TCP). If there are HTTP redirects or
-<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes" title='HTTP response codes equivalence'>equivalent</a>
-when navigating and if all the redirects or equivalent are from the
-same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-this attribute SHOULD include the HTTP overhead of incurred redirects.</p>
-</dd>
-
-<dt>readonly attribute unsigned short encodedBodySize</dt>
-<dd>
-<p>This attribute MUST return the size, in octets received by the client, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">payload body</a> [[RFC7230]], prior to removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a> [[!RFC7231]].
-</p>
-</dd>
-
-<dt>readonly attribute unsigned short decodedBodySize</dt>
-<dd>
-<p>This attribute MUST return the size, in octets received by the client, of the <a href="http://httpwg.github.io/specs/rfc7230.html#message.body">message body</a> [[RFC7230]], after removing any applied <a href="http://httpwg.github.io/specs/rfc7231.html#data.encoding">content-codings</a> [[!RFC7231]].</p>
-</dd>
 <dt>serializer = { inherit, attribute }</dt>
 </dl>
 
