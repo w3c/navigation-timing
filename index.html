@@ -85,6 +85,7 @@ notices. </p>
 <li>the definition of Performance interface was moved to [[PERFORMANCE-TIMELINE-2]];</li>
 <li>support for [[PERFORMANCE-TIMELINE-2]];</li>
 <li>support for [[HR-TIME-2]];</li>
+<li>Now builds on top of [[RESOURCE-TIMING]];</li>
 <li>the <a href='#widl-PerformanceNavigationTiming-redirectCount'>number of redirects</a> since the last non-redirect navigation;</li>
 <li><a href='#widl-PerformanceNavigationTiming-nextHopProtocol'>protocol</a> information;</li>
 <li><a href='#widl-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#widl-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#widl-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
@@ -238,18 +239,6 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
   <dt>readonly attribute DOMHighResTimeStamp workerStart</dt>
   <dd>If the current document has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
 
-<dt>readonly attribute DOMHighResTimeStamp fetchStart</dt>
-<dd>
-<p>If the new resource is to be
-<a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>fetched</a> using HTTP GET or
-<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-get" title='HTTP GET method equivalence'>equivalent</a>, fetchStart MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time immediately before the user agent starts
-checking <a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title='relevant application cache'>
-any relevant application caches</a>. Otherwise, it MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time when the user agent starts
-<a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>fetching</a> the resource.</p>
-</dd>
-
 </dl>
 
 <!-- from domainLookupEnd -->
@@ -287,6 +276,18 @@ sending the request due to the HTTP layer encapsulation.</li>
 <p>In order to have precisely one way to represent any ALPN protocol ID, the following additional constraints apply: octets in the ALPN protocol MUST NOT be percent-encoded if they are valid token characters except "%", and when using percent-encoding, uppercase hex digits MUST be used.</p>
 
 <p>Note that this attribute is intended to identify the network protocol in use for the fetch regardless of how it was actually negotiated; that is, even if ALPN is not used to negotiate the network protocol, this attribute still uses the ALPN Protocol ID's to indicate the protocol in use.</p>
+</dd>
+
+<dt>readonly attribute DOMHighResTimeStamp fetchStart</dt>
+<dd>
+<p>If the new resource is to be
+<a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>fetched</a> using HTTP GET or
+<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-get" title='HTTP GET method equivalence'>equivalent</a>, fetchStart MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to the time immediately before the user agent starts
+checking <a href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title='relevant application cache'>
+any relevant application caches</a>. Otherwise, it MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to the time when the user agent starts
+<a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>fetching</a> the resource.</p>
 </dd>
 
 <dt>readonly attribute DOMHighResTimeStamp redirectStart</dt>
