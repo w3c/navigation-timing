@@ -55,11 +55,6 @@
         ]
     ,   status:  "The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS)"
     ,   date: "March 2001"
-    },
-    "prerender": {
-        title:    'Link type "prerender"'
-    ,   href:     "http://microformats.org/wiki/rel-prerender"
-    ,   publisher:  "microformats"
     }
     },
     wgPatentURI:  "http://www.w3.org/2004/01/pp-impl/45211/status"
@@ -89,7 +84,7 @@ notices. </p>
 <li>the <a href='#widl-PerformanceNavigationTiming-redirectCount'>number of redirects</a> since the last non-redirect navigation;</li>
 <li><a href='#widl-PerformanceNavigationTiming-nextHopProtocol'>protocol</a> information;</li>
 <li><a href='#widl-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#widl-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#widl-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
-<li>support for <a href="http://microformats.org/wiki/rel-prerender">prerender</a> navigation [[prerender]].</li>
+<li>support for <a href="http://www.w3.org/TR/resource-hints/#prerender">prerender</a> navigation [[RESOURCE-HINTS]].</li>
 <li>the <a href='#widl-PerformanceNavigationTiming-domLoading'>domLoading</a> attribute is deprecated. <strong>NEW!</strong></li>
 <li>the <a href='#widl-PerformanceNavigationTiming-secureConnectionStart'>secureConnectionStart</a> attribute is now mandatory. <strong>NEW!</strong></li>
 </ul>
@@ -591,7 +586,7 @@ or is not completed.</p>
 <dd>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the User Agent changes the <a href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a> of the <a>current document</a>
-from <code>prerender</code> to <code>visible</code> [[!Page-Visibility]]. If the document has not been <a href='http://microformats.org/wiki/rel-prerender' title='prerender'>prerendered</a> by the User Agent [[prerender]], this attribute MUST return a
+from <code>prerender</code> to <code>visible</code> [[!Page-Visibility]]. If the document has not been <a href='http://www.w3.org/TR/resource-hints/#prerender' title='prerender'>prerendered</a> by the User Agent [[!RESOURCE-HINTS]], this attribute MUST return a
 <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value equal to zero.
 </p>
 </dd>
@@ -646,7 +641,7 @@ agent's address bar, or form submission, or initializing through a script operat
   </dd>
 <dt>prerender</dt>
 <dd>
-<p>Navigation initiated by a <a href='http://microformats.org/wiki/rel-prerender'>prerender</a> hint.</p>
+<p>Navigation initiated by a <a href='http://www.w3.org/TR/resource-hints/#prerender'>prerender</a> hint [[!RESOURCE-HINTS]].</p>
 </dd>
 </dl>
 
