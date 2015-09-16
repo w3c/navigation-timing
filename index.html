@@ -199,9 +199,11 @@ easy to follow, and not intended to be performant.) </p>
 <h2>Terminology</h2>
   <p>The construction "a <code>Foo</code> object", where <code>Foo</code> is actually an interface, is sometimes used instead of the more accurate "an object implementing the interface <code>Foo</code>.</p>
 
-  <p>The term "navigation" refers to the act of <a href="http://www.w3.org/TR/html5/browsers.html#navigate" title='navigation'>navigating</a>.</p>
+  <p>The term <dfn>navigation</dfn> refers to the act of <a href="http://www.w3.org/TR/html5/browsers.html#navigate">navigating</a>.</p>
 
-  <p>The term "JavaScript" is used to refer to ECMA262, rather than the
+  <p>The term <dfn>current document</dfn> refers to the document associated with the <a href="http://www.w3.org/TR/html5/browsers.html#dom-document-0">Window object's newest Document object</a>.</p>
+
+  <p>The term <dfn>JavaScript</dfn> is used to refer to ECMA262, rather than the
 official term ECMAScript, since the term JavaScript is more widely known. [[ECMA-262]]</p>
 
   <p>Throughout this work, all time values are measured in milliseconds since the start of navigation of the document. For example, the start of navigation of the document occurs at time 0. The term <i>current time</i> refers to the number of milliseconds since the start of navigation of the document until the current moment in time. This definition of time is based on [[HR-TIME-2]] specification.</p>
@@ -210,8 +212,8 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
 <section id="sec-navigation-timing">
 <h2>Navigation Timing</h2>
 
-<section id="sec-PerformanceNavigationTiming">
-<h3>The <code>PerformanceNavigationTiming</code> interface</h3>
+<section id='performanceentry'>
+<h3>Relation with the <a href="http://www.w3.org/TR/performance-timeline-2/#idl-def-PerformanceEntry">PerformanceEntry</a> interface</h3>
 
 <p>The <a>PerformanceNavigationTiming</a> interface participates in the [[!PERFORMANCE-TIMELINE-2]] and extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline-2/#idl-def-PerformanceEntry">PerformanceEntry</a> interface:</p>
 
@@ -229,17 +231,28 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
   <dd>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> equal to the difference between <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a> and <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>, respectively.</dd>
 </dl>
 
-<p>The <a>PerformanceNavigationTiming</a> interface also extends the following attributes of the <a href="http://www.w3.org/TR/resource-timing/#idl-def-PerformanceResourceTiming">PerformanceResourceTiming</a> interface:</p>
+</section>
 
+<section id='PerformanceResourceTiming'>
+<h3>Relation with the <a href="http://www.w3.org/TR/resource-timing/#idl-def-PerformanceResourceTiming">PerformanceResourceTiming</a> interface</h3>
+
+<p>Only the <a>current document</a> resource gets included as the <em>only</em> <a>PerformanceNavigationTiming</a> object in the Performance Timeline of the relevant context.</p>
+
+<p>The <a>PerformanceNavigationTiming</a> interface extends the following attributes of the <a href="http://www.w3.org/TR/resource-timing/#idl-def-PerformanceResourceTiming">PerformanceResourceTiming</a> interface:</p>
 
 <dl class='attributes'>
   <dt id='widl-PerformanceNavigationTiming-initiatorType'><code>initiatorType</code></dt>
   <dd>This attribute MUST return the empty <code>DOMString</code> "".</dd>
 
-  <dt>readonly attribute DOMHighResTimeStamp workerStart</dt>
-  <dd>If the current document has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
+  <dt id='widl-PerformanceNavigationTiming-workerStart'><code>workerStart</code></dt>
+  <dd>If the <a>current document</a> has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
 
 </dl>
+
+</section>
+
+<section id="sec-PerformanceNavigationTiming">
+<h3>The <code>PerformanceNavigationTiming</code> interface</h3>
 
 <!-- from domainLookupEnd -->
 <div class="note">
@@ -467,7 +480,7 @@ this attribute SHOULD include the HTTP overhead of incurred redirects.</p>
 
 <dt>readonly attribute DOMHighResTimeStamp unloadEventStart</dt>
 <dd>
-<p>If the previous document and the current document have the same
+<p>If the previous document and the <a>current document</a> have the same
 <a href="http://tools.ietf.org/html/rfc6454">origin</a>
 [[!RFC6454]],
 this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
@@ -476,19 +489,19 @@ the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unloa
 
 If there is no previous document or the previous document has a
 different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-current document, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<a>current document</a>, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 </dd>
 
 <dt>readonly attribute DOMHighResTimeStamp unloadEventEnd</dt>
 <dd>
-<p>If the previous document and the current document have the
+<p>If the previous document and the <a>current document</a> have the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the user agent finishes the
 <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document. If there is no previous document or the previous document has
 a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-current document or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<a>current document</a> or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
 <p>If there are HTTP redirects or
@@ -505,7 +518,7 @@ with a time value equal to zero.</p>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
-document readiness</a> to
+document readiness</a> of the <a>current document</a> to
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness" title='"loading" document readiness'>"loading"</a> [[!HTML5]].</p>
   <p class="warning">The <code>domLoading</code> attribute is <strong>deprecated</strong> and may be removed in future versions of this specification. Due to differences in when a Document object is created in existing user agents, the value returned by the domLoading is implementation specific and should not be used in meaningful metrics.</p>
 </dd>
@@ -515,7 +528,7 @@ document readiness</a> to
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
-document readiness</a> to
+document readiness</a> of the <a>current document</a> to
 <a href="http://www.w3.org/TR/html5/syntax.html#the-end" title='"interactive" document readiness'>"interactive"</a> [[!HTML5]].</p>
 </dd>
 
@@ -524,13 +537,13 @@ document readiness</a> to
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent fires the <a
 href="http://www.w3.org/TR/html5/syntax.html#the-end">DOMContentLoaded
-event</a> at the Document.</p>
+event</a> at the <a>current document</a>.</p>
 </dd>
 
 <dt>readonly attribute DOMHighResTimeStamp domContentLoadedEventEnd</dt>
 <dd>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time immediately after the document's <a
+with a time value equal to the time immediately after the <a>current document</a>'s <a
 href="http://www.w3.org/TR/html5/syntax.html#the-end">DOMContentLoaded
 event</a> completes.</p>
 </dd>
@@ -540,7 +553,7 @@ event</a> completes.</p>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
-document readiness</a> to
+document readiness</a> of the <a>current document</a> to
 <a href="http://www.w3.org/TR/html5/syntax.html#the-end" title='"complete" document readiness'>"complete"</a> [[!HTML5]].</p>
 
 <p>If the <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">
@@ -560,7 +573,7 @@ change [[!HTML5]].</p>
 <dd>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the load event of
-the current document is fired. It MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+the <a>current document</a> is fired. It MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero when the load event is not
 fired yet.</p>
 </dd>
@@ -568,8 +581,8 @@ fired yet.</p>
 <dt>readonly attribute DOMHighResTimeStamp loadEventEnd</dt>
 <dd>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time when the load event of the current
-document is completed. It MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to the time when the load event of the <a>current
+document</a> is completed. It MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero when the load event is not fired
 or is not completed.</p>
 </dd>
@@ -577,7 +590,7 @@ or is not completed.</p>
 <dt>readonly attribute DOMHighResTimeStamp prerenderSwitch</dt>
 <dd>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time immediately after the User Agent changes the <a href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a>
+with a time value equal to the time immediately after the User Agent changes the <a href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a> of the <a>current document</a>
 from <code>prerender</code> to <code>visible</code> [[!Page-Visibility]]. If the document has not been <a href='http://microformats.org/wiki/rel-prerender' title='prerender'>prerendered</a> by the User Agent [[prerender]], this attribute MUST return a
 <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value equal to zero.
 </p>
@@ -767,6 +780,7 @@ non-normative intervals between timings.
   <li>Set <a href="#widl-PerformanceNavigationTiming-name">name</a> to the <code>DOMString</code> "<code>document</code>".</li>
   <li>Set <a href="#widl-PerformanceNavigationTiming-entryType">entryType</a> to the <code>DOMString</code> "<code>navigation</code>".</li>
   <li>Set <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a> to a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero, and <a href="#widl-PerformanceNavigationTiming-nextHopProtocol">nextHopProtocol</a> to the empty <code>DOMString</code>.</li>
+  <li><a href='http://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry'>Queue</a> the new <a>PerformanceNavigationTiming</a> object.</li>
   <li> Record the current navigation type in <a href="#widl-PerformanceNavigationTiming-type">type</a>
     if it has not been set:
     <ol style="list-style-type:lower-alpha;">
