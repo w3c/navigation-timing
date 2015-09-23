@@ -981,6 +981,12 @@ to access timing information of the previous one, such as timing regarding redir
 <section id="security" class='informative'>
 <h2>Security</h2>
 
+<p>The <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface exposes timing information for the <a>current document</a> to any resource loaded by the document, such as a web page or a worker. To limit the access to the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface, the <a href="https://tools.ietf.org/html/rfc6454#section-5">same origin</a>
+policy is enforced by default and certain attributes are set to zero, as described in <a href="http://www.w3.org/TR/resource-timing/#cross-origin-resources" class="sec-ref"><span class="secno">4.5</span> <span class="sec-title">Cross-origin Resources</span></a> [[!RESOURCE-TIMING]]. Resource providers can
+explicitly allow all timing information to be collected for a <a>current document</a> by
+adding the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header, which specifies the
+domains that are allowed to access the timing information. </p>
+
 <section id="authentication">
 <h3>Detecting proxy servers</h3>
 <p>In case a proxy is deployed between the user agent and the web server, the time interval
