@@ -236,7 +236,9 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
 
 <dl class='attributes'>
   <dt id='widl-PerformanceNavigationTiming-initiatorType'><code>initiatorType</code></dt>
-  <dd>This attribute MUST return the empty <code>DOMString</code> "".</dd>
+  <dd>This attribute MUST return the empty <code>DOMString</code> "".
+  <p class='ednote'>Should it return something else, like <code>"navigation"</code>?</p>
+  </dd>
 
   <dt id='widl-PerformanceNavigationTiming-workerStart'><code>workerStart</code></dt>
   <dd>If the <a>current document</a> has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
