@@ -775,7 +775,6 @@ non-normative intervals between timings.
   <li>Set <a href="#widl-PerformanceNavigationTiming-name">name</a> to the <code>DOMString</code> "<code>document</code>".</li>
   <li>Set <a href="#widl-PerformanceNavigationTiming-entryType">entryType</a> to the <code>DOMString</code> "<code>navigation</code>".</li>
   <li>Set <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a> to a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero, and <a href="#widl-PerformanceNavigationTiming-nextHopProtocol">nextHopProtocol</a> to the empty <code>DOMString</code>.</li>
-  <li><a href='http://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry'>Queue</a> the new <a>PerformanceNavigationTiming</a> object.</li>
   <li> Record the current navigation type in <a href="#widl-PerformanceNavigationTiming-type">type</a>
     if it has not been set:
     <ol style="list-style-type:lower-alpha;">
@@ -940,6 +939,7 @@ non-normative intervals between timings.
     Set the <a href="#widl-PerformanceNavigationTiming-duration">duration</a> to a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 	equal to the difference between <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a> and <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>, respectively.
   </li>
+  <li><a href='http://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry'>Queue</a> the new <a>PerformanceNavigationTiming</a> object.</li>
 </ol>
 
 <p>Some user agents maintain the DOM structure of the document in memory
