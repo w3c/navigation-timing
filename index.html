@@ -261,20 +261,6 @@ fetching process</a>. It's covered by the
 <a href="#widl-PerformanceNavigationTiming-responseEnd">responseEnd</a> attributes.</p>
 </div>
 
-<!-- from requestStart -->
-<div class="note">
-<p>This interface does not include an attribute to represent the completion of
-sending the request, e.g., requestEnd.</p>
-<ul>
-<li>Completion of sending the request from the user agent does not always
-indicate the corresponding completion time in the network transport, which
-brings most of the benefit of having such an attribute.</li>
-<li>Some user agents have high cost to determine the actual completion time of
-sending the request due to the HTTP layer encapsulation.</li>
-</ul>
-</div>
-
-
 <dl title='interface PerformanceNavigationTiming : PerformanceResourceTiming' class='idl'>
 
 <!--
