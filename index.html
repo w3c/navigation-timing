@@ -85,7 +85,6 @@ notices. </p>
 <li><a href='#widl-PerformanceNavigationTiming-nextHopProtocol'>protocol</a> information;</li>
 <li><a href='#widl-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#widl-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#widl-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
 <li>support for <a href="http://www.w3.org/TR/resource-hints/#prerender">prerender</a> navigation [[RESOURCE-HINTS]].</li>
-<li>the <a href='#widl-PerformanceNavigationTiming-domLoading'>domLoading</a> attribute is deprecated. <strong>NEW!</strong></li>
 <li>the <a href='#widl-PerformanceNavigationTiming-secureConnectionStart'>secureConnectionStart</a> attribute is now mandatory. <strong>NEW!</strong></li>
 </ul>
 
@@ -508,16 +507,6 @@ both <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventSta
 with a time value equal to zero.</p>
 </dd>
 
-<dt>readonly attribute DOMHighResTimeStamp domLoading</dt>
-<dd>
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time immediately before the user agent sets the
-<a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
-document readiness</a> of the <a>current document</a> to
-<a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness" title='"loading" document readiness'>"loading"</a> [[!HTML5]].</p>
-  <p class="warning">The <code>domLoading</code> attribute is <strong>deprecated</strong> and may be removed in future versions of this specification. Due to differences in when a Document object is created in existing user agents, the value returned by the domLoading is implementation specific and should not be used in meaningful metrics.</p>
-</dd>
-
 <dt>readonly attribute DOMHighResTimeStamp domInteractive</dt>
 <dd>
 <p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
@@ -553,7 +542,6 @@ document readiness</a> of the <a>current document</a> to
 
 <p>If the <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">
 current document readiness</a> changes to the same state multiple times,
-<a href="#widl-PerformanceNavigationTiming-domLoading">domLoading</a>,
 <a href="#widl-PerformanceNavigationTiming-domInteractive">domInteractive</a>,
 <a href="#widl-PerformanceNavigationTiming-domContentLoadedEventStart">domContentLoadedEventStart</a>,
 <a href="#widl-PerformanceNavigationTiming-domContentLoadedEventEnd">domContentLoadedEventEnd</a> and
@@ -717,7 +705,6 @@ non-normative intervals between timings.
     <text x="858.44238" y="952" class="end"><tspan>domComplete</tspan></text>
     <text x="852.79004" y="612" class="end"><tspan>loadEventEnd</tspan></text>
     <text x="852.79004" y="644.65131" class="end"><tspan>loadEventStart</tspan></text>
-    <text x="439.83203" y="892.48181" class="end"><tspan>domLoading</tspan></text>
     <text x="439.83203" y="919.10858" class="end"><tspan>domInteractive</tspan></text>
     <text x="439.83203" y="945.73541" class="end"><tspan>domContentLoadedEventStart</tspan></text>
     <text x="439.83203" y="972" class="end"><tspan>domContentLoadedEventEnd</tspan></text>
@@ -735,7 +722,6 @@ non-normative intervals between timings.
     <path d="m 450,812 10,0 10,-30"/>
     <path d="m 450,832 50,0 60,-50"/>
     <path d="m 450,862 100,0 100,-80"/>
-    <path d="m 450,892 140,0 80,-110"/>
     <path d="m 450,922 150,0 80,-120"/>
     <path d="m 450,942 190,0 50,-130"/>
     <path d="m 450,972 220,0 180,-160"/>
@@ -909,10 +895,6 @@ non-normative intervals between timings.
       <li>Return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
     </ol>
   </li>
-  <li>Record the time as <a href="#widl-PerformanceNavigationTiming-domLoading">domLoading</a> immediately
-    before the user agent sets the <a
-    href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
-    document readiness</a> to "loading".</li>
   <li>Record the time as <a href="#widl-PerformanceNavigationTiming-domInteractive">domInteractive</a>
     immediately before the user agent sets the <a
     href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
@@ -1236,6 +1218,9 @@ application caches</a> or from local resources.</p>
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
 document readiness</a> to
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">"loading"</a>.</p>
+<p class="warning">Due to differences in when a Document object is created in existing user agents,
+ the value returned by the <code>domLoading</code> is implementation specific and should not be used
+ in meaningful metrics.</p>
 
 </dd>
 <dt>readonly attribute unsigned long long domInteractive</dt>
