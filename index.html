@@ -886,8 +886,7 @@ is retrieved from <a href="http://www.w3.org/TR/html5/browsers.html#relevant-app
 application caches</a> or local resources,
 this attribute must return the same value as <a href="#widl-PerformanceTiming-fetchStart">fetchStart</a>. </p>
 
-<div class="example">
-<p>This section is non-normative.</p>
+<div class="note">
 <p>Checking and retrieving contents from the
 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13">HTTP cache</a> [[!RFC2616]]
 is part of the <a href="http://www.w3.org/TR/html5/infrastructure.html#fetching-resources">
@@ -896,16 +895,9 @@ fetching process</a>. It's covered by the
 <a href="#widl-PerformanceTiming-responseStart">responseStart</a> and
 <a href="#widl-PerformanceTiming-responseEnd">responseEnd</a> attributes.</p>
 </div>
-<div class="example">
-
-<div class="exampleHeader">Example</div>
-
-<p>In case where the user agent already has the domain information in cache,
+<p class="note">In case where the user agent already has the domain information in cache,
 domainLookupStart and domainLookupEnd represent the times when the user agent
 starts and ends the domain data retrieval from the cache. </p>
-
-</div>
-
 </dd>
 <dt>readonly attribute unsigned long long connectStart</dt>
 <dd>
