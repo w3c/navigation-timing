@@ -379,15 +379,6 @@ with a time value equal to zero when the load event is not fired
 or is not completed.</p>
 </dd>
 
-<dt>readonly attribute DOMHighResTimeStamp prerenderSwitch</dt>
-<dd>
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time immediately after the User Agent changes the <a href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a> of the <a>current document</a>
-from <code>prerender</code> to <code>visible</code> [[!Page-Visibility]]. If the document has not been <a href='http://www.w3.org/TR/resource-hints/#prerender' title='prerender'>prerendered</a> by the User Agent [[!RESOURCE-HINTS]], this attribute MUST return a
-<a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value equal to zero.
-</p>
-</dd>
-
 <dt>readonly attribute NavigationType type</dt>
 <dd>
 <p>This attribute MUST return a <code>DOMString</code> describing the type of the last non-redirect <a
@@ -723,9 +714,6 @@ non-normative intervals between timings.
     immediately before the user agent fires the load event.</li>
   <li>Record the time as <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a>
     immediately after the user agent completes the load event.</li>
-  <li>Record the time as <a href="#widl-PerformanceNavigationTiming-prerenderSwitch">prerenderSwitch</a>
-    immediately after the user agent changes the <a href="http://www.w3.org/TR/page-visibility/#dom-document-visibilitystate">visibilityState</a>
-    from <code>prerender</code> to <code>visible</code>. Otherwise, set this attribute to 0.</li>
   <li>
     Set the <a href="#widl-PerformanceNavigationTiming-duration">duration</a> to a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 	equal to the difference between <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a> and <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>, respectively.
