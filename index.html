@@ -8,6 +8,7 @@
   var respecConfig = {
     shortName: "navigation-timing-2",
     specStatus: "ED",
+    useExperimentalStyles: true,
     edDraftURI: "https://w3c.github.io/navigation-timing/",
     editors: [{
       name: "Tobin Titus",
@@ -99,14 +100,13 @@ notices. </p>
 <li>support for [[PERFORMANCE-TIMELINE-2]];</li>
 <li>support for [[HR-TIME-2]];</li>
 <li>Now builds on top of [[RESOURCE-TIMING]];</li>
-<li>the <a href='#widl-PerformanceNavigationTiming-redirectCount'>number of redirects</a> since the last non-redirect navigation;</li>
-<li><a href='#widl-PerformanceNavigationTiming-nextHopProtocol'>protocol</a> information;</li>
-<li><a href='#widl-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#widl-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#widl-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
-<li>support for <a href="http://www.w3.org/TR/resource-hints/#prerender">prerender</a> navigation [[RESOURCE-HINTS]].</li>
-<li>the <a href='#widl-PerformanceNavigationTiming-secureConnectionStart'>secureConnectionStart</a> attribute is now mandatory. <strong>NEW!</strong></li>
+<li>the <a href='#dom-PerformanceNavigationTiming-redirectCount'>number of redirects</a> since the last non-redirect navigation;</li>
+<li><a href='#dom-PerformanceNavigationTiming-nextHopProtocol'>protocol</a> information;</li>
+<li><a href='#dom-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#dom-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#dom-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
+<li>the <a href='#dom-PerformanceNavigationTiming-secureConnectionStart'>secureConnectionStart</a> attribute is now mandatory.</li>
 </ul>
 
-<p id="unstable"><strong class="redNote">Implementers SHOULD be aware that this document is not
+<p id="unstable" class='advisement'><strong>Implementers SHOULD be aware that this document is not
         stable.</strong> Implementers who are not taking part in the discussions
         are likely to find the specification changing out from under them in
         incompatible ways. Vendors interested in implementing this document
@@ -216,7 +216,7 @@ easy to follow, and not intended to be performant.) </p>
   <p>The term <dfn>current document</dfn> refers to the document associated with the <a href="http://www.w3.org/TR/html5/browsers.html#dom-document-0">Window object's newest Document object</a>.</p>
 
   <p>The term <dfn>JavaScript</dfn> is used to refer to ECMA262, rather than the
-official term ECMAScript, since the term JavaScript is more widely known. [[ECMA-262]]</p>
+official term ECMAScript, since the term JavaScript is more widely known. [[ECMASCRIPT]]</p>
 
   <p>Throughout this work, all time values are measured in milliseconds since the start of navigation of the document. For example, the start of navigation of the document occurs at time 0. The term <i>current time</i> refers to the number of milliseconds since the start of navigation of the document until the current moment in time. This definition of time is based on [[HR-TIME-2]] specification.</p>
 </section>
@@ -227,20 +227,15 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
 <section id='performanceentry'>
 <h3>Relation with the <a href="http://www.w3.org/TR/performance-timeline-2/#idl-def-PerformanceEntry">PerformanceEntry</a> interface</h3>
 
-<p>The <a>PerformanceNavigationTiming</a> interface participates in the [[!PERFORMANCE-TIMELINE-2]] and extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline-2/#idl-def-PerformanceEntry">PerformanceEntry</a> interface:</p>
+<p>The <a>PerformanceNavigationTiming</a> interface participates in the [[!PERFORMANCE-TIMELINE-2]] and extends the following attributes of the <a href="http://www.w3.org/TR/performance-timeline-2/#idl-def-PerformanceEntry">PerformanceEntry</a> interface.</p>
 
-<dl class='attributes'>
-  <dt id='widl-PerformanceNavigationTiming-name'><code>name</code></dt>
-  <dd>This attribute MUST return the <code>DOMString</code> "<code>document</code>".</dd>
+<p>The <dfn id='dom-PerformanceNavigationTiming-name'><code>name</code></dfn> attribute MUST return the <code>DOMString</code> "<code>document</code>".</p>
 
-  <dt id='widl-PerformanceNavigationTiming-entryType'><code>entryType</code></dt>
-  <dd>This attribute MUST return the <code>DOMString</code> "<code id="perf-navigation">navigation</code>".</dd>
+<p>The <dfn id='dom-PerformanceNavigationTiming-entryType'><code>entryType</code></dfn> attribute MUST return the <code>DOMString</code> "<code id="perf-navigation">navigation</code>".</p>
 
-  <dt id='widl-PerformanceNavigationTiming-startTime'><code>startTime</code></dt>
-  <dd>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of 0. [[!HR-TIME-2]]</dd>
+<p>The <dfn id='dom-PerformanceNavigationTiming-startTime'><code>startTime</code></dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of 0. [[!HR-TIME-2]]</p>
 
-  <dt id='widl-PerformanceNavigationTiming-duration'><code>duration</code></dt>
-  <dd>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> equal to the difference between <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a> and <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>, respectively.</dd>
+<p>The <dfn id='dom-PerformanceNavigationTiming-duration'><code>duration</code></dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> equal to the difference between <a link-for="PerformanceNavigationTiming">loadEventEnd</a> and <a href="#dom-PerformanceNavigationTiming-starttime"><code>startTime</code></a>, respectively.</dd>
 </dl>
 
 </section>
@@ -250,18 +245,12 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
 
 <p>Only the <a>current document</a> resource gets included as the <em>only</em> <a>PerformanceNavigationTiming</a> object in the Performance Timeline of the relevant context.</p>
 
-<p>The <a>PerformanceNavigationTiming</a> interface extends the following attributes of the <a href="http://www.w3.org/TR/resource-timing/#idl-def-PerformanceResourceTiming">PerformanceResourceTiming</a> interface:</p>
+<p>The <a>PerformanceNavigationTiming</a> interface extends the following attributes of the <a href="http://www.w3.org/TR/resource-timing/#idl-def-PerformanceResourceTiming">PerformanceResourceTiming</a> interface.</p>
 
-<dl class='attributes'>
-  <dt id='widl-PerformanceNavigationTiming-initiatorType'><code>initiatorType</code></dt>
-  <dd>This attribute MUST return the empty <code>DOMString</code> "".
+<p>The <dfn id='dom-PerformanceNavigationTiming-initiatorType'><code>initiatorType</code></dfn> attribute MUST return the empty <code>DOMString</code> "".</p>
   <p class='ednote'>Should it return something else, like <code>"navigation"</code>?</p>
-  </dd>
 
-  <dt id='widl-PerformanceNavigationTiming-workerStart'><code>workerStart</code></dt>
-  <dd>If the <a>current document</a> has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), this attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</dd>
-
-</dl>
+<p>If the <a>current document</a> has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> ([[!SERVICE-WORKERS]]), the <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>workerStart</code></dfn> attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</p>
 
 </section>
 
@@ -274,76 +263,75 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
 <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]]
 is part of the <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>
 fetching process</a>. It's covered by the
-<a href="#widl-PerformanceNavigationTiming-requestStart">requestStart</a>,
-<a href="#widl-PerformanceNavigationTiming-responseStart">responseStart</a> and
-<a href="#widl-PerformanceNavigationTiming-responseEnd">responseEnd</a> attributes.</p>
+<a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-requeststart"><code>requestStart</code></a>,
+<a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responsestart"><code>responseStart</code></a> and
+<a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a> attributes.</p>
 </div>
 
-<dl title='interface PerformanceNavigationTiming : PerformanceResourceTiming' class='idl'>
+<pre class='idl'>
+interface PerformanceNavigationTiming : PerformanceResourceTiming {
+    readonly        attribute DOMHighResTimeStamp unloadEventStart;
+    readonly        attribute DOMHighResTimeStamp unloadEventEnd;
+    readonly        attribute DOMHighResTimeStamp domInteractive;
+    readonly        attribute DOMHighResTimeStamp domContentLoadedEventStart;
+    readonly        attribute DOMHighResTimeStamp domContentLoadedEventEnd;
+    readonly        attribute DOMHighResTimeStamp domComplete;
+    readonly        attribute DOMHighResTimeStamp loadEventStart;
+    readonly        attribute DOMHighResTimeStamp loadEventEnd;
+    readonly        attribute NavigationType      type;
+    readonly        attribute unsigned short      redirectCount;
+    serializer = {inherit, attribute};
+};
+</pre>
 
-<dt>readonly attribute DOMHighResTimeStamp unloadEventStart</dt>
-<dd>
-<p>If the previous document and the <a>current document</a> have the same
+
+<p dfn-for='PerformanceNavigationTiming'>If the previous document and the <a>current document</a> have the same
 <a href="http://tools.ietf.org/html/rfc6454">origin</a>
 [[!RFC6454]],
-this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+the <dfn>unloadEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent starts
 the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document.
 
 If there is no previous document or the previous document has a
 different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-<a>current document</a>, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<a>current document</a>, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
-</dd>
 
-<dt>readonly attribute DOMHighResTimeStamp unloadEventEnd</dt>
-<dd>
-<p>If the previous document and the <a>current document</a> have the
+<p dfn-for='PerformanceNavigationTiming'>If the previous document and the <a>current document</a> have the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+the <dfn>unloadEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the user agent finishes the
 <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document. If there is no previous document or the previous document has
 a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-<a>current document</a> or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<a>current document</a> or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
 <p>If there are HTTP redirects or
 <a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes" title='HTTP response codes equivalence'>equivalent</a>
 when navigating and not all the redirects or equivalent are from the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-both <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a> and
-<a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a> MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+both <a link-for='PerformanceNavigationTiming'>unloadEventStart</a> and
+<a link-for='PerformanceNavigationTiming'>unloadEventEnd</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
-</dd>
 
-<dt>readonly attribute DOMHighResTimeStamp domInteractive</dt>
-<dd>
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p dfn-for='PerformanceNavigationTiming'>The <dfn>domInteractive</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
 document readiness</a> of the <a>current document</a> to
 <a href="http://www.w3.org/TR/html5/syntax.html#the-end" title='"interactive" document readiness'>"interactive"</a> [[!HTML5]].</p>
-</dd>
 
-<dt>readonly attribute DOMHighResTimeStamp domContentLoadedEventStart</dt>
-<dd>
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p dfn-for='PerformanceNavigationTiming'>The <dfn>domContentLoadedEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent fires the <a
 href="http://www.w3.org/TR/html5/syntax.html#the-end">DOMContentLoaded
 event</a> at the <a>current document</a>.</p>
-</dd>
 
-<dt>readonly attribute DOMHighResTimeStamp domContentLoadedEventEnd</dt>
-<dd>
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p dfn-for='PerformanceNavigationTiming'>The <dfn>domContentLoadedEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the <a>current document</a>'s <a
 href="http://www.w3.org/TR/html5/syntax.html#the-end">DOMContentLoaded
 event</a> completes.</p>
 </dd>
 
-<dt>readonly attribute DOMHighResTimeStamp domComplete</dt>
-<dd>
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p dfn-for='PerformanceNavigationTiming'>The <dfn>domComplete</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
 document readiness</a> of the <a>current document</a> to
@@ -351,85 +339,70 @@ document readiness</a> of the <a>current document</a> to
 
 <p>If the <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">
 current document readiness</a> changes to the same state multiple times,
-<a href="#widl-PerformanceNavigationTiming-domInteractive">domInteractive</a>,
-<a href="#widl-PerformanceNavigationTiming-domContentLoadedEventStart">domContentLoadedEventStart</a>,
-<a href="#widl-PerformanceNavigationTiming-domContentLoadedEventEnd">domContentLoadedEventEnd</a> and
-<a href="#widl-PerformanceNavigationTiming-domComplete">domComplete</a> MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<a link-for="PerformanceNavigationTiming">domInteractive</a>,
+<a link-for="PerformanceNavigationTiming">domContentLoadedEventStart</a>,
+<a link-for="PerformanceNavigationTiming">domContentLoadedEventEnd</a> and
+<a link-for="PerformanceNavigationTiming">domComplete</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time of the first
 occurrence of the corresponding
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness" title='current document readiness'>document readiness</a>
 change [[!HTML5]].</p>
 </dd>
 
-<dt>readonly attribute DOMHighResTimeStamp loadEventStart</dt>
-<dd>
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p dfn-for='PerformanceNavigationTiming'>The <dfn>loadEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the load event of
-the <a>current document</a> is fired. It MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+the <a>current document</a> is fired. It MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero when the load event is not
 fired yet.</p>
-</dd>
 
-<dt>readonly attribute DOMHighResTimeStamp loadEventEnd</dt>
-<dd>
-<p>This attribute MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p dfn-for='PerformanceNavigationTiming'>The <dfn>loadEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time when the load event of the <a>current
-document</a> is completed. It MUST return a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+document</a> is completed. It MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero when the load event is not fired
 or is not completed.</p>
-</dd>
 
-<dt>readonly attribute NavigationType type</dt>
-<dd>
-<p>This attribute MUST return a <code>DOMString</code> describing the type of the last non-redirect <a
+<p dfn-for='PerformanceNavigationTiming'>The <dfn>type</dfn> attribute MUST return a <code>DOMString</code> describing the type of the last non-redirect <a
 href="http://www.w3.org/TR/html5/browsers.html#navigate">navigation</a>
 in the current browsing context. It MUST have one of the <a>NavigationType</a> values. </p>
 
 <div class="note">
 <p>Client-side redirects, such as those using the <a href="http://www.w3.org/TR/html5/document-metadata.html#attr-meta-http-equiv-refresh">Refresh pragma directive</a>,
 are not considered HTTP redirects or <a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes" title='HTTP response codes equivalence'>equivalent</a> by this spec.
-In those cases, the <a href="#widl-PerformanceNavigationTiming-type">type</a> attribute SHOULD return appropriate value,
-such as <a href="#idl-def-NavigationType.navigate">reload</a> if reloading the current page, or
-<a href="#idl-def-NavigationType.navigate">navigate</a> if navigating to a new URL.</p>
+In those cases, the <a link-for="PerformanceNavigationTiming">type</a> attribute SHOULD return appropriate value,
+such as <a link-for="NavigationType">reload</a> if reloading the current page, or
+<a link-for="NavigationType">navigate</a> if navigating to a new URL.</p>
 </div>
-</dd>
 
-<dt>readonly attribute unsigned short redirectCount</dt>
-<dd>
-<p>This attribute MUST return the number of redirects since the last
+<p dfn-for='PerformanceNavigationTiming'>The <dfn>redirectCount</dfn> attribute MUST return the number of redirects since the last
 non-redirect navigation under the current browsing context. If there is no
 redirect or there is any redirect that is not from the same
 <a href="http://tools.ietf.org/html/rfc6454">
 origin</a> [[!RFC6454]] as the destination document, this attribute MUST return zero. </p>
-</dd>
-
-<dt>serializer = { inherit, attribute }</dt>
-</dl>
 
 <section id="sec-performance-navigation-types">
 <h4>Navigation types</h4>
 
+<pre class='idl'>
+enum NavigationType {
+    "navigate",
+    "reload",
+    "back_forward"
+};
+</pre>
 
-<dl title="enum NavigationType" class="idl">
-<dt>navigate</dt>
-<dd>
-<p>Navigation started by clicking on a link, or entering the URL in the user
-agent's address bar, or form submission, or initializing through a script operation other than the ones used by <a href="#idl-def-NavigationType.navigate">reload</a> and <a href="#idl-def-NavigationType.back_forward">back_forward</a> as listed below.</p>
+<p>The values are defined as follows:
+<dl dfn-for='NavigationType'>
+<dt><dfn>navigate</dfn></dt>
+<dd>Navigation started by clicking on a link, or entering the URL in the user
+agent's address bar, or form submission, or initializing through a script operation other than the ones used by <a link-for="NavigationType">reload</a> and <a link-for="NavigationType">back_forward</a> as listed below.</p>
 </dd>
-<dt>reload</dt>
-<dd>
-<p>Navigation through the reload operation or the
+<dt><dfn>reload</dfn></dt>
+<dd>Navigation through the reload operation or the
     <a href="http://www.w3.org/TR/html5/browsers.html#dom-location-reload">location.reload()</a>
-    method.</p>
-    </dd>
-<dt>back_forward</dt>
-<dd>
-<p>Navigation
+    method.</dd>
+<dt><dfn>back_forward</dfn></dt>
+<dd>Navigation
   through a <a href="http://www.w3.org/TR/html5/browsers.html#traverse-the-history">history traversal</a> operation.</p>
-  </dd>
-<dt>prerender</dt>
-<dd>
-<p>Navigation initiated by a <a href='http://www.w3.org/TR/resource-hints/#prerender'>prerender</a> hint [[!RESOURCE-HINTS]].</p>
 </dd>
 </dl>
 
@@ -558,16 +531,16 @@ non-normative intervals between timings.
   </li>
   <li id="step-create-object">Create a new <a>PerformanceNavigationTiming</a> object.
   </li>
-  <li>Set <a href="#widl-PerformanceNavigationTiming-name">name</a> to the <code>DOMString</code> "<code>document</code>".</li>
-  <li>Set <a href="#widl-PerformanceNavigationTiming-entryType">entryType</a> to the <code>DOMString</code> "<code>navigation</code>".</li>
-  <li>Set <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a> to a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero, and <a href="#widl-PerformanceNavigationTiming-nextHopProtocol">nextHopProtocol</a> to the empty <code>DOMString</code>.</li>
-  <li> Record the current navigation type in <a href="#widl-PerformanceNavigationTiming-type">type</a>
+  <li>Set <a>name</a> to the <code>DOMString</code> "<code>document</code>".</li>
+  <li>Set <a>entryType</a> to the <code>DOMString</code> "<code>navigation</code>".</li>
+  <li>Set <a>startTime</a> to a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero, and <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the empty <code>DOMString</code>.</li>
+  <li> Record the current navigation type in <a link-for="PerformanceNavigationTiming">type</a>
     if it has not been set:
     <ol style="list-style-type:lower-alpha;">
     <li>If the navigation was started by clicking on a link, or entering the URL in the user
         agent's address bar, or form submission, or initializing through a script operation other than the
         <a href="http://www.w3.org/TR/html5/browsers.html#dom-location-reload">location.reload()</a> method,
-        let the navigation type be the <code>DOMString</code> "<a href="#idl-def-NavigationType.navigate">navigate</a>".</li>
+        let the navigation type be the <code>DOMString</code> "<a link-for="NavigationType">navigate</a>".</li>
     <li>If the navigation was started either as a result of a
         <a href="http://www.w3.org/TR/html5/document-metadata.html#attr-meta-http-equiv-refresh" title='Refresh pragma directive'>meta refresh</a>,
         or the <a href="http://www.w3.org/TR/html5/browsers.html#dom-location-reload">location.reload()</a>
@@ -575,29 +548,25 @@ non-normative intervals between timings.
         be the <code>DOMString</code> "<a href="#idl-def-NavigationType.reload">reload</a>".</li>
     <li>If the navigation was started as a result of
         <a href="http://www.w3.org/TR/html5/browsers.html#traverse-the-history">history traversal</a>,
-        let the navigation type be the <code>DOMString</code> "<a href="#idl-def-NavigationType.back_forward">back_forward</a>".</li>
+        let the navigation type be the <code>DOMString</code> "<a link-for="NavigationType">back_forward</a>".</li>
     </ol>
   </li>
   <li>If the current document and the previous document are from different
     <a href="http://tools.ietf.org/html/rfc6454" title='origin'>origins</a>,
-    set both <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventStart</a> and
-    <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a> to 0 then go to step
-    <a href="#step-linknegotiation-start">9</a>. Otherwise, record <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventStart</a>
+    set both <a link-for="PerformanceNavigationTiming">unloadEventStart</a> and
+    <a link-for="PerformanceNavigationTiming">unloadEventEnd</a> to 0 then go to step
+    <a href="#step-linknegotiation-start">9</a>. Otherwise, record <a link-for="PerformanceNavigationTiming">unloadEventStart</a>
     as the time immediately before the unload event.</li>
-  <li>Immediately after the unload event is completed, record the current time as <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a>. If the navigation URL has an <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker registration</a>, immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">runs the worker</a> record the time as <a href="#widl-PerformanceNavigationTiming-workerStart">workerStart</a>, or if the worker is available, record the time before the <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">event named `fetch` is fired</a> at the active worker. Otherwise, if the navigation URL has no matching <a href="http://www.w3.org/TR/service-workers/#dfn-service-worker-registration">service worker registration</a>, set <a href="#widl-PerformanceNavigationTiming-workerStart">workerStart</a> value to zero.</li>
+  <li>Immediately after the unload event is completed, record the current time as <a link-for="PerformanceNavigationTiming">unloadEventEnd</a>. If the navigation URL has an <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker registration</a>, immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">runs the worker</a> record the time as <a href="#dom-performanceresourcetiming-workerstart"><code>workerStart</code></a>, or if the worker is available, record the time before the <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">event named `fetch` is fired</a> at the active worker. Otherwise, if the navigation URL has no matching <a href="http://www.w3.org/TR/service-workers/#dfn-service-worker-registration">service worker registration</a>, set <a href="#dom-performanceresourcetiming-workerstart"><code>workerStart</code></a> value to zero.</li>
   <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
     or <a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-get" title='HTTP GET method equivalence'>equivalent</a>,
     immediately before a user agent checks with the <a
     href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title="relevant application cache">
     relevant application caches</a>, record the current time as
-    <a href="#widl-PerformanceNavigationTiming-fetchStart">fetchStart</a>. Otherwise, immediately before a user agent starts the
+    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>. Otherwise, immediately before a user agent starts the
     <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>
-    fetching process</a>, record the current time as <a href="#widl-PerformanceNavigationTiming-fetchStart">fetchStart</a>.</li>
-  <li>Let <a href="#widl-PerformanceNavigationTiming-domainLookupStart">domainLookupStart</a>, <a
-    href="#widl-PerformanceNavigationTiming-domainLookupEnd">domainLookupEnd</a>, <a
-    href="#widl-PerformanceNavigationTiming-connectStart">connectStart</a> and <a
-    href="#widl-PerformanceNavigationTiming-connectEnd">connectEnd</a> be the same value as <a
-    href="#widl-PerformanceNavigationTiming-fetchStart">fetchStart</a>.</li>
+    fetching process</a>, record the current time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
+  <li>Let <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupstart"><code>domainLookupStart</code></a>, <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>, <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> be the same value as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
   <li>If the resource is fetched from the <a
     href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title="relevant application cache">relevant
     application cache</a> or local resources, including the
@@ -606,39 +575,36 @@ non-normative intervals between timings.
   <li>If no domain lookup is required, go to step <a
     href="#step-connect-start">14</a>. Otherwise, immediately before a user
     agent starts the domain name lookup, record the time as
-    <a href="#widl-PerformanceNavigationTiming-domainLookupStart">domainLookupStart</a>. </li>
-  <li>Record the time as <a href="#widl-PerformanceNavigationTiming-domainLookupEnd">domainLookupEnd</a>
+    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupstart"><code>domainLookupStart</code></a>. </li>
+  <li>Record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>
     immediately after the domain name lookup is successfully done. A user
     agent MAY need multiple retries before that. If the domain lookup fails,
     abort the rest of the steps. </li>
   <li id="step-connect-start">If a persistent transport connection is used to
-    fetch the resource, let <a href="#widl-PerformanceNavigationTiming-connectStart">connectStart</a> and
-    <a href="#widl-PerformanceNavigationTiming-connectEnd">connectEnd</a> be the same value of
-    <a href="#widl-PerformanceNavigationTiming-domainLookupEnd">domainLookupEnd</a>.
-    Otherwise, record the time as <a
-    href="#widl-PerformanceNavigationTiming-connectStart">connectStart</a> immediately before initiating
+    fetch the resource, let <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and
+    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> be the same value of
+    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>.
+    Otherwise, record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> immediately before initiating
     the connection to the server and record the time as
-    <a href="#widl-PerformanceNavigationTiming-connectEnd">connectEnd</a> immediately
+    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> immediately
     after the connection to the server or the proxy is established. A user agent MAY
-    need multiple retries before this time. Once connection is established set the value of <a href="#widl-PerformanceNavigationTiming-nextHopProtocol">nextHopProtocol</a> to the ALPN ID used by the connection. If a connection can not be established, abort the rest of the steps. </li>
+    need multiple retries before this time. Once connection is established set the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the ALPN ID used by the connection. If a connection can not be established, abort the rest of the steps. </li>
   <li>A user agent MUST also
     set the
-    <a href="#widl-PerformanceNavigationTiming-secureConnectionStart">secureConnectionStart</a> attribute as follows:
+    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a> attribute as follows:
     <ol>
     <li>When a secure transport is used, the user agent MUST
-        record the time as <a href="#widl-PerformanceNavigationTiming-secureConnectionStart">secureConnectionStart</a>
+        record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a>
         immediately before the handshake process to secure the connection.</li>
     <li>When a secure transport is not used, the user agent MUST
-        set the value of <a href="#widl-PerformanceNavigationTiming-secureConnectionStart">secureConnectionStart</a> to 0.</li>
+        set the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a> to 0.</li>
     </ol></li>
   <li id="step-request-start">Immediately before a user agent starts sending
     request for the document, record the current time as <a
-    href="#widl-PerformanceNavigationTiming-requestStart">requestStart</a>.</li>
-  <li id="step-response-start">Record the time as <a href="#widl-PerformanceNavigationTiming-responseStart">
-    responseStart</a> immediately after the user agent receives the first byte
+    href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-resquestStart"><code>requestStart</code></a>.</li>
+  <li id="step-response-start">Record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responsestart"><code>responseStart</code></a> immediately after the user agent receives the first byte
     of the response.</li>
-  <li id="step-response-end">Record the time as <a
-    href="#widl-PerformanceNavigationTiming-responseEnd">responseEnd</a> immediately after receiving the
+  <li id="step-response-end">Record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a> immediately after receiving the
     last byte of the response.
     <ol>
     <li>Return to step <a href="#step-connect-start">14</a> if the user agent fails to send the request or receive the entire response, and needs to
@@ -652,10 +618,7 @@ non-normative intervals between timings.
     closed</a>. In such case, connectStart, connectEnd and requestStart SHOULD represent
     timing information collected over the re-open connection.</p>
     </div></li>
-    <li>Set the value of <a
-    href="#widl-PerformanceNavigationTiming-transferSize">transferSize</a>, <a
-    href="#widl-PerformanceNavigationTiming-encodedBodySize">encodedBodySize</a>, <a
-    href="#widl-PerformanceNavigationTiming-decodedBodySize">decodedBodySize</a> to corresponding values.</li>
+    <li>Set the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-transfersize"><code>transferSize</code></a>, <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-encodedbodysize"><code>encodedBodySize</code></a>, <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-decodedbodysize"><code>decodedBodySize</code></a> to corresponding values.</li>
     </ol>
   </li>
   <li>If the fetched resource results in an HTTP redirect or
@@ -664,59 +627,57 @@ non-normative intervals between timings.
     <ol style="list-style-type:lower-alpha;">
       <li>if the current document and the document that is redirected to are not from the
         same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-        set <a href="#widl-PerformanceNavigationTiming-redirectStart">redirectStart</a>,
-        <a href="#widl-PerformanceNavigationTiming-redirectEnd">redirectEnd</a>,
-        <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a>,
-        <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a> and
-        <a href="#widl-PerformanceNavigationTiming-redirectCount">redirectCount</a> to 0. Then,
+        set <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
+        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
+        <a link-for="PerformanceNavigationTiming">unloadEventStart</a>,
+        <a link-for="PerformanceNavigationTiming">unloadEventEnd</a> and
+        <a link-for="PerformanceNavigationTiming">redirectCount</a> to 0. Then,
         return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
         same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-        set <a href="#widl-PerformanceNavigationTiming-redirectStart">redirectStart</a>,
-        <a href="#widl-PerformanceNavigationTiming-redirectEnd">redirectEnd</a>,
-        <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a>,
-        <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventStart</a> and
-        <a href="#widl-PerformanceNavigationTiming-redirectCount">redirectCount</a> to 0. Then,
+        set <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
+        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
+        <a link-for="PerformanceNavigationTiming">unloadEventStart</a>,
+        <a link-for="PerformanceNavigationTiming">unloadEventStart</a> and
+        <a link-for="PerformanceNavigationTiming">redirectCount</a> to 0. Then,
         return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
-      <li>Increment <a href="#widl-PerformanceNavigationTiming-redirectCount">redirectCount</a> by 1.</li>
-      <li>If the value of <a href="#widl-PerformanceNavigationTiming-redirectStart">redirectStart</a> is 0,
-        let it be the value of <a href="#widl-PerformanceNavigationTiming-fetchStart">fetchStart</a>.</li>
-      <li>Let <a href="#widl-PerformanceNavigationTiming-redirectEnd">redirectEnd</a> be the value of
-        <a href="#widl-PerformanceNavigationTiming-responseEnd">responseEnd</a>.</li>
+      <li>Increment <a link-for="PerformanceNavigationTiming">redirectCount</a> by 1.</li>
+      <li>If the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a> is 0,
+        let it be the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
+      <li>Let <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a> be the value of
+        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a>.</li>
       <li>Set all of the attributes in the <a>PerformanceNavigationTiming</a> object to 0 except
-        <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>,
-        <a href="#widl-PerformanceNavigationTiming-redirectStart">redirectStart</a>,
-        <a href="#widl-PerformanceNavigationTiming-redirectEnd">redirectEnd</a>,
-        <a href="#widl-PerformanceNavigationTiming-redirectCount">redirectCount</a>,
-        <a href="#widl-PerformanceNavigationTiming-type">type</a>,
-        <a href="#widl-PerformanceNavigationTiming-nextHopProtocol">nextHopProtocol</a>,
-        <a href="#widl-PerformanceNavigationTiming-unloadEventStart">unloadEventStart</a> and
-        <a href="#widl-PerformanceNavigationTiming-unloadEventEnd">unloadEventEnd</a>. Set <a href="#widl-PerformanceNavigationTiming-nextHopProtocol">nextHopProtocol</a> to the empty <code>DOMString</code>.</li>
+        <a>startTime</a>,
+        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
+        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
+        <a link-for="PerformanceNavigationTiming">redirectCount</a>,
+        <a link-for="PerformanceNavigationTiming">type</a>,
+        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a>,
+        <a link-for="PerformanceNavigationTiming">unloadEventStart</a> and
+        <a link-for="PerformanceNavigationTiming">unloadEventEnd</a>. Set <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the empty <code>DOMString</code>.</li>
       <li>Return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
     </ol>
   </li>
-  <li>Record the time as <a href="#widl-PerformanceNavigationTiming-domInteractive">domInteractive</a>
+  <li>Record the time as <a link-for="PerformanceNavigationTiming">domInteractive</a>
     immediately before the user agent sets the <a
     href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
     document readiness</a> to "interactive".</li>
-  <li>Record the time as <a
-    href="#widl-PerformanceNavigationTiming-domContentLoadedEventStart">domContentLoadedEventStart</a> immediately before the
+  <li>Record the time as <a link-for="PerformanceNavigationTiming">domContentLoadedEventStart</a> immediately before the
     user agent fires the <a href="http://www.w3.org/TR/html5/syntax.html#the-end">DOMContentLoaded event</a> at the document.</li>
-  <li>Record the time as <a
-    href="#widl-PerformanceNavigationTiming-domContentLoadedEventEnd">domContentLoadedEventEnd</a> immediately after
+  <li>Record the time as <a link-for="PerformanceNavigationTiming">domContentLoadedEventEnd</a> immediately after
     the <a href="http://www.w3.org/TR/html5/syntax.html#the-end">
     DOMContentLoaded event</a> completes.</li>
-  <li>Record the time as <a href="#widl-PerformanceNavigationTiming-domComplete">domComplete</a>
+  <li>Record the time as <a link-for="PerformanceNavigationTiming">domComplete</a>
     immediately before the user agent sets the <a
     href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
     document readiness</a> to "complete".</li>
-  <li>Record the time as <a href="#widl-PerformanceNavigationTiming-loadEventStart">loadEventStart</a>
+  <li>Record the time as <a link-for="PerformanceNavigationTiming">loadEventStart</a>
     immediately before the user agent fires the load event.</li>
-  <li>Record the time as <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a>
+  <li>Record the time as <a link-for="PerformanceNavigationTiming">loadEventEnd</a>
     immediately after the user agent completes the load event.</li>
   <li>
-    Set the <a href="#widl-PerformanceNavigationTiming-duration">duration</a> to a <a href="http://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-	equal to the difference between <a href="#widl-PerformanceNavigationTiming-loadEventEnd">loadEventEnd</a> and <a href="#widl-PerformanceNavigationTiming-startTime">startTime</a>, respectively.
+    Set the <a>duration</a> to a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+	equal to the difference between <a link-for="PerformanceNavigationTiming">loadEventEnd</a> and <a>startTime</a>, respectively.
   </li>
   <li><a href='http://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry'>Queue</a> the new <a>PerformanceNavigationTiming</a> object.</li>
   <li>Add the new <a>PerformanceNavigationTiming</a> object to the <a href='https://w3c.github.io/performance-timeline/#dfn-performance-entry-buffer'>performance entry buffer</a>.</li>
@@ -770,8 +731,8 @@ domains that are allowed to access the timing information. </p>
 <section id="authentication">
 <h3>Detecting proxy servers</h3>
 <p>In case a proxy is deployed between the user agent and the web server, the time interval
-between the <a href="#widl-PerformanceNavigationTiming-connectStart">connectStart</a> and the
-<a href="#widl-PerformanceNavigationTiming-connectEnd">connectEnd</a> attributes indicates the delay between the user agent
+between the <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and the
+<a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> attributes indicates the delay between the user agent
 and the proxy instead of the web server. With that, web server can potentially infer the
 existence of the proxy. For SOCKS proxy, this time interval includes the proxy authentication
 time and time the proxy takes to connect to the web server, which obfuscate the proxy detection.
