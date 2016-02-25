@@ -102,6 +102,7 @@ notices. </p>
 <li>Now builds on top of [[RESOURCE-TIMING]];</li>
 <li>the <a href='#dom-PerformanceNavigationTiming-redirectCount'>number of redirects</a> since the last non-redirect navigation;</li>
 <li><a href='#dom-PerformanceNavigationTiming-nextHopProtocol'>protocol</a> information;</li>
+<li>support for <a href="http://www.w3.org/TR/resource-hints/#prerender">prerender</a> navigation [[RESOURCE-HINTS]].</li>
 <li><a href='#dom-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#dom-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#dom-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
 <li>the <a href='#dom-PerformanceNavigationTiming-secureConnectionStart'>secureConnectionStart</a> attribute is now mandatory.</li>
 </ul>
@@ -386,7 +387,8 @@ origin</a> [[!RFC6454]] as the destination document, this attribute MUST return 
 enum NavigationType {
     "navigate",
     "reload",
-    "back_forward"
+    "back_forward",
+    "prerender"
 };
 </pre>
 
@@ -403,6 +405,9 @@ agent's address bar, or form submission, or initializing through a script operat
 <dt><dfn>back_forward</dfn></dt>
 <dd>Navigation
   through a <a href="http://www.w3.org/TR/html5/browsers.html#traverse-the-history">history traversal</a> operation.</p>
+</dd>
+<dt><dfn>prerender</dfn></dt>
+<dd>Navigation initiated by a <a href='http://www.w3.org/TR/resource-hints/#prerender'>prerender</a> hint [[!RESOURCE-HINTS]].</p>
 </dd>
 </dl>
 
