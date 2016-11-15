@@ -137,7 +137,9 @@ function onLoad() {
 
 <p>The above script calculates the time it takes to load the page <b>after</b> the first bit of JavaScript in the head is executed, but it does not give any information about the time it takes to get the page from the server, or the initialization lifecycle of the page.</p>
 
-<p>This specification defines the <a>PerformanceNavigationTiming</a> interface which participates in the [[PERFORMANCE-TIMELINE-2]] to store and retrieve high resolution performance metric data related to the navigation of a document. As the <a>PerformanceNavigationTiming</a> interface uses [[HR-TIME-2]], all time values are measured from the start of the navigation. For example, if we know that the response end occurs 100ms after the start of navigation, we MAY find data that the <a>PerformanceNavigationTiming</a> data looks like so:</p>
+<p>This specification defines the <a>PerformanceNavigationTiming</a> interface which participates in the [[PERFORMANCE-TIMELINE-2]] to store and retrieve high resolution performance metric data related to the navigation of a document. As the <a>PerformanceNavigationTiming</a> interface uses [[HR-TIME-2]], all time values are measured with respect to the <a href="https://www.w3.org/TR/hr-time-2/#time-origin-1">time origin</a> of the Window object.</p>
+
+<p>For example, if we know that the response end occurs 100ms after the start of navigation, the <a>PerformanceNavigationTiming</a> data could look like so:</p>
 
 <pre class="example highlight">
 startTime:           0.000  // start time of the navigation request
