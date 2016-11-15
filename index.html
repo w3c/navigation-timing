@@ -97,31 +97,21 @@
 </section>
 
 <section id="sotd">
-<p>This is a <strong>work in progress</strong> and may change without any
-notices. </p>
-
 <p>
  Navigation Timing 2 replaces the first version of [[NAVIGATION-TIMING]]
  and includes the following changes:
 </p>
 <ul>
 <li>the definition of Performance interface was moved to [[PERFORMANCE-TIMELINE-2]];</li>
+<li>builds on top of [[RESOURCE-TIMING-2]];</li>
 <li>support for [[PERFORMANCE-TIMELINE-2]];</li>
 <li>support for [[HR-TIME-2]];</li>
-<li>Now builds on top of [[RESOURCE-TIMING]];</li>
-<li>the <a href='#dom-PerformanceNavigationTiming-redirectCount'>number of redirects</a> since the last non-redirect navigation;</li>
-<li><a href='#dom-PerformanceNavigationTiming-nextHopProtocol'>protocol</a> information;</li>
-<li>support for <a href="http://www.w3.org/TR/resource-hints/#prerender">prerender</a> navigation [[RESOURCE-HINTS]].</li>
-<li><a href='#dom-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#dom-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#dom-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
-<li>the <a href='#dom-PerformanceNavigationTiming-secureConnectionStart'>secureConnectionStart</a> attribute is now mandatory.</li>
+<li>support for <a href="http://www.w3.org/TR/resource-hints/#prerender">prerender</a> navigations [[RESOURCE-HINTS]];</li>
+<li>exposes <a href='#dom-PerformanceNavigationTiming-redirectCount'>number of redirects</a> since the last non-redirect navigation;</li>
+<li>exposes <a href='#dom-PerformanceNavigationTiming-nextHopProtocol'>next hop network protocol</a>;</li>
+<li>exposes <a href='#dom-PerformanceNavigationTiming-transferSize'>transfer</a>, <a href='#dom-PerformanceNavigationTiming-encodedBodySize'>encoded body</a> and <a href='#dom-PerformanceNavigationTiming-decodedBodySize'>decoded body</a> size information;</li>
+<li><a href='#dom-PerformanceNavigationTiming-secureConnectionStart'>secureConnectionStart</a> attribute is now mandatory.</li>
 </ul>
-
-<p id="unstable" class='advisement'><strong>Implementers SHOULD be aware that this document is not
-        stable.</strong> Implementers who are not taking part in the discussions
-        are likely to find the specification changing out from under them in
-        incompatible ways. Vendors interested in implementing this document
-        before it eventually reaches the Candidate Recommendation stage SHOULD
-        join the aforementioned mailing lists and take part in the discussions.</p>
 </section>
 
 <section id="introduction" class='informative'>
