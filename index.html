@@ -250,8 +250,7 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
   <h3>Relation with the <a href="http://www.w3.org/TR/resource-timing/#idl-def-PerformanceResourceTiming">PerformanceResourceTiming</a> interface</h3>
   <p><a>PerformanceNavigationTiming</a> interface extends the following attributes of the <a href="http://www.w3.org/TR/resource-timing/#idl-def-PerformanceResourceTiming">PerformanceResourceTiming</a> interface:</p>
   <ul>
-    <li>The <dfn id='dom-PerformanceNavigationTiming-initiatorType'><code>initiatorType</code></dfn> attribute MUST return the empty <code>DOMString</code> "".</li>
-    <p class='issue'>Should it return <code>"navigation"</code>?</p>
+    <li>The <dfn id='dom-PerformanceNavigationTiming-initiatorType'><code>initiatorType</code></dfn> attribute MUST return the <code>DOMString</code> "<code>navigation</code>".</li>
     <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>workerStart</code></dfn> attribute MUST return the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> (if the <a>current document</a> has an <a href="http://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> [[!SERVICE-WORKERS]]) required to service the request, or if the worker was already available, the time immediately before the user agent <a href="http://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</li>
   </ul>
   <p class="note">Only the <a>current document</a> resource is included in the performance timeline; there is only one <a>PerformanceNavigationTiming</a> object in the performance timeline.</p>
@@ -542,7 +541,7 @@ non-normative intervals between timings.
   <li id="step-create-object">Create a new <a>PerformanceNavigationTiming</a> object.
   </li>
   <li>Set <a>name</a> to the <code>DOMString</code> "<code>document</code>".</li>
-  <li>Set <a>entryType</a> to the <code>DOMString</code> "<code>navigation</code>".</li>
+  <li>Set <a>entryType</a> and <a>initiatorType</a> to the <code>DOMString</code> "<code>navigation</code>".</li>
   <li>Set <a>startTime</a> to a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero, and <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the empty <code>DOMString</code>.</li>
   <li> Record the current navigation type in <a link-for="PerformanceNavigationTiming">type</a>
     if it has not been set:
