@@ -427,93 +427,14 @@ it due to backwards compatibility issues with shipped implementations.</p>
 <h3>Processing Model</h3>
 
 <figure title='Timing attributes'>
-<figcaption>
-This figure illustrates the timing attributes defined by the
-<a>PerformanceNavigationTiming</a> interface. Attributes in parenthesis may not be
-available in navigation involving documents from different
-<a href="http://tools.ietf.org/html/rfc6454" title='origin'>origins</a>. User
-agents may perform internal processing in between timings, which allow for
-non-normative intervals between timings.
-</figcaption>
-<svg xmlns="http://www.w3.org/2000/svg" width="942" height="501" style='display:block;margin:auto' >
-  <defs>
-    <marker refX="0" refY="0" orient="auto" id="Arrow2Mend" style="overflow:visible">
-      <path d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z" transform="scale(-0.6,-0.6)" id="path4234" style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"/>
-    </marker>
-  </defs>
-  <style type='text/css'>
-   path { fill:none;stroke:#000080;stroke-width:1.5;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend); }
-   rect { fill:#00ffff;fill-opacity:1;stroke:#0000ff;stroke-width:2; }
-   text { font-size:12px;font-weight: bold;text-align:center;fill:#000000;fill-opacity:1;stroke:none;font-family:monospace; }
-   .middle { text-anchor:middle; }
-   .end { text-anchor:end; }
-   .highlight { font-style: italic; }
-  </style>
-  <g transform="translate(-4.3,-477.125)">
-    <rect width="70" height="80" x="100" y="702"/>
-    <rect width="59.999966" height="79.999962" x="880" y="702"/>
-    <rect width="210" height="80" x="660" y="702"/>
-    <rect width="90" height="80" x="560" y="702"/>
-    <rect width="90" height="80" x="470" y="702"/>
-    <rect width="60" height="80" x="400" y="702"/>
-    <rect width="50" height="80" x="340" y="702"/>
-    <rect width="60" height="80" x="270" y="702"/>
-    <rect width="80" height="80" x="180" y="702"/>
-    <rect width="160" height="50" x="690" y="762"/>
-    <rect width="80" height="50" x="200" y="762"/>
-    <text class="middle"><tspan x="135.28711" y="729">Prompt</tspan><tspan x="135.28711" y="747">for</tspan><tspan x="135.28711" y="764">unload</tspan></text>
-    <text x="219.94189" y="747.12683" class="middle"><tspan>redirect</tspan></text>
-    <text class="middle"><tspan x="299.95557" y="738">App</tspan><tspan x="300" y="755.7572">cache</tspan></text>
-    <text x="365.25977" y="745" class="middle"><tspan>DNS</tspan></text>
-    <text x="430.0376" y="745" class="middle"><tspan>TCP</tspan></text>
-    <text x="514.8667" y="745" class="middle"><tspan>Request</tspan></text>
-    <text x="605.0752" y="745" class="middle"><tspan>Response</tspan></text>
-    <text x="765.01025" y="745" class="middle"><tspan>Processing</tspan></text>
-    <text x="909.77441" y="745" class="middle"><tspan>load</tspan></text>
-    <text x="769.86328" y="792" class="middle"><tspan>DOMContentLoaded</tspan></text>
-    <text x="239.97607" y="792.12683" class="middle"><tspan>unload</tspan></text>
-    <text x="490" y="532" class='highlight'><tspan>startTime</tspan></text>
-    <text x="490" y="552.60315"  class='highlight'><tspan>redirectStart</tspan></text>
-    <text x="490" y="593.08502"><tspan>fetchStart</tspan></text>
-    <text x="490" y="572.84412"  class='highlight'><tspan>redirectEnd</tspan></text>
-    <text x="490" y="613.32599"><tspan>domainLookupStart</tspan></text>
-    <text x="490" y="633.56696"><tspan>domainLookupEnd</tspan></text>
-    <text x="490" y="653.56866"><tspan>connectStart</tspan></text>
-    <text x="490" y="674.04889"><tspan>secureConnectionStart</tspan></text>
-    <text x="490" y="694.28986"><tspan>connectEnd</tspan></text>
-    <text x="440.20801" y="812" class="end"><tspan>requestStart</tspan></text>
-    <text x="440.20801" y="838.98895" class="end"><tspan>responseStart</tspan></text>
-    <text x="440.20801" y="865.85504" class="end"><tspan>responseEnd</tspan></text>
-    <text x="858.44238" y="952" class="end"><tspan>domComplete</tspan></text>
-    <text x="852.79004" y="612" class="end"><tspan>loadEventEnd</tspan></text>
-    <text x="852.79004" y="644.65131" class="end"><tspan>loadEventStart</tspan></text>
-    <text x="439.83203" y="919.10858" class="end"><tspan>domInteractive</tspan></text>
-    <text x="439.83203" y="945.73541" class="end"><tspan>domContentLoadedEventStart</tspan></text>
-    <text x="439.83203" y="972" class="end"><tspan>domContentLoadedEventEnd</tspan></text>
-    <text x="144.81705" y="846" class="end highlight"><tspan>unloadEventStart</tspan></text>
-    <text x="143.46094" y="872" class="end highlight"><tspan>unloadEventEnd</tspan></text>
-    <path d="m 480,532 -280,0 -30,170"/>
-    <path d="m 480,552 -270,0 -30,150"/>
-    <path d="m 480,572 -200,0 -20,130"/>
-    <path d="m 480,592 -180,0 -30,110"/>
-    <path d="m 480,612 -110,0 -30,90"/>
-    <path d="m 480,632 -70,0 -20,70"/>
-    <path d="m 480,652 -50,0 -30,50"/>
-    <path d="m 480,672 -40,0 -20,30"/>
-    <path d="m 480,692 -10,0 -10,10"/>
-    <path d="m 450,812 10,0 10,-30"/>
-    <path d="m 450,832 50,0 60,-50"/>
-    <path d="m 450,862 100,0 100,-80"/>
-    <path d="m 450,922 150,0 80,-120"/>
-    <path d="m 450,942 190,0 50,-130"/>
-    <path d="m 450,972 220,0 180,-160"/>
-    <path d="m 870,952 50,0 -60,-160"/>
-    <path d="m 860,642 10,0 10,60"/>
-    <path d="m 860,612 40,0 40,90"/>
-    <path d="m 150,842 30,0 20,-30"/>
-    <path d="m 150,872 80,0 50,-60"/>
-  </g>
-</svg>
+  <figcaption>
+    This figure illustrates the timing attributes defined by the
+    <a>PerformanceNavigationTiming</a> interface. Attributes in parenthesis
+    indicate that they may not be available for navigations involving
+    documents from different <a href="http://tools.ietf.org/html/rfc6454" title='origin'>origins</a>.
+  </figcaption>
+  <!-- Source: https://docs.google.com/document/d/1I7XGNJ57Qgjkg9pL11s7MK7zGEcwAgdNj1W5f7NKbW8/ -->
+  <img src="timestamp-diagram.svg" alt="Navigation Timing attributes" width="100%">
 </figure>
 
 <ol>
