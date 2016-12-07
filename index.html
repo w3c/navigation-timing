@@ -265,9 +265,9 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
 <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]]
 is part of the <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>
 fetching process</a>. It's covered by the
-<a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-requeststart"><code>requestStart</code></a>,
-<a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responsestart"><code>responseStart</code></a> and
-<a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a> attributes.</p>
+<a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-requeststart"><code>requestStart</code></a>,
+<a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-responsestart"><code>responseStart</code></a> and
+<a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a> attributes.</p>
 </div>
 
 <pre class='idl'>
@@ -463,7 +463,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
   </li>
   <li>Set <a>name</a> to the <code>DOMString</code> "<code>document</code>".</li>
   <li>Set <a>entryType</a> and <a>initiatorType</a> to the <code>DOMString</code> "<code>navigation</code>".</li>
-  <li>Set <a>startTime</a> to a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero, and <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the empty <code>DOMString</code>.</li>
+  <li>Set <a>startTime</a> to a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero, and <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the empty <code>DOMString</code>.</li>
   <li> Record the current navigation type in <a link-for="PerformanceNavigationTiming">type</a>
     if it has not been set:
     <ol style="list-style-type:lower-alpha;">
@@ -493,10 +493,10 @@ it due to backwards compatibility issues with shipped implementations.</p>
     immediately before a user agent checks with the <a
     href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title="relevant application cache">
     relevant application caches</a>, record the current time as
-    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>. Otherwise, immediately before a user agent starts the
+    <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>. Otherwise, immediately before a user agent starts the
     <a href="http://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>
-    fetching process</a>, record the current time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
-  <li>Let <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupstart"><code>domainLookupStart</code></a>, <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>, <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> be the same value as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
+    fetching process</a>, record the current time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
+  <li>Let <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupstart"><code>domainLookupStart</code></a>, <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>, <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> be the same value as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
   <li>If the resource is fetched from the <a
     href="http://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title="relevant application cache">relevant
     application cache</a> or local resources, including the
@@ -505,36 +505,36 @@ it due to backwards compatibility issues with shipped implementations.</p>
   <li>If no domain lookup is required, go to step <a
     href="#step-connect-start">14</a>. Otherwise, immediately before a user
     agent starts the domain name lookup, record the time as
-    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupstart"><code>domainLookupStart</code></a>. </li>
-  <li>Record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>
+    <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupstart"><code>domainLookupStart</code></a>. </li>
+  <li>Record the time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>
     immediately after the domain name lookup is successfully done. A user
     agent MAY need multiple retries before that. If the domain lookup fails,
     abort the rest of the steps. </li>
   <li id="step-connect-start">If a persistent transport connection is used to
-    fetch the resource, let <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and
-    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> be the same value of
-    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>.
-    Otherwise, record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> immediately before initiating
+    fetch the resource, let <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and
+    <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> be the same value of
+    <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>.
+    Otherwise, record the time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> immediately before initiating
     the connection to the server and record the time as
-    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> immediately
+    <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> immediately
     after the connection to the server or the proxy is established. A user agent MAY
-    need multiple retries before this time. Once connection is established set the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the ALPN ID used by the connection. If a connection can not be established, abort the rest of the steps. </li>
+    need multiple retries before this time. Once connection is established set the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the ALPN ID used by the connection. If a connection can not be established, abort the rest of the steps. </li>
   <li>A user agent MUST also
     set the
-    <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a> attribute as follows:
+    <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a> attribute as follows:
     <ol>
     <li>When a secure transport is used, the user agent MUST
-        record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a>
+        record the time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a>
         immediately before the handshake process to secure the connection.</li>
     <li>When a secure transport is not used, the user agent MUST
-        set the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a> to 0.</li>
+        set the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a> to 0.</li>
     </ol></li>
   <li id="step-request-start">Immediately before a user agent starts sending
     request for the document, record the current time as <a
-    href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-resquestStart"><code>requestStart</code></a>.</li>
-  <li id="step-response-start">Record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responsestart"><code>responseStart</code></a> immediately after the user agent receives the first byte
+    href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-resquestStart"><code>requestStart</code></a>.</li>
+  <li id="step-response-start">Record the time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-responsestart"><code>responseStart</code></a> immediately after the user agent receives the first byte
     of the response.</li>
-  <li id="step-response-end">Record the time as <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a> immediately after receiving the
+  <li id="step-response-end">Record the time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a> immediately after receiving the
     last byte of the response.
     <ol>
     <li>Return to step <a href="#step-connect-start">14</a> if the user agent fails to send the request or receive the entire response, and needs to
@@ -548,7 +548,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
     closed</a>. In such case, connectStart, connectEnd and requestStart SHOULD represent
     timing information collected over the re-open connection.</p>
     </div></li>
-    <li>Set the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-transfersize"><code>transferSize</code></a>, <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-encodedbodysize"><code>encodedBodySize</code></a>, <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-decodedbodysize"><code>decodedBodySize</code></a> to corresponding values.</li>
+    <li>Set the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-transfersize"><code>transferSize</code></a>, <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-encodedbodysize"><code>encodedBodySize</code></a>, <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-decodedbodysize"><code>decodedBodySize</code></a> to corresponding values.</li>
     </ol>
   </li>
   <li>If the fetched resource results in an HTTP redirect or
@@ -557,34 +557,34 @@ it due to backwards compatibility issues with shipped implementations.</p>
     <ol style="list-style-type:lower-alpha;">
       <li>if the current document and the document that is redirected to are not from the
         same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-        set <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
-        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
+        set <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
+        <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
         <a link-for="PerformanceNavigationTiming">unloadEventStart</a>,
         <a link-for="PerformanceNavigationTiming">unloadEventEnd</a> and
         <a link-for="PerformanceNavigationTiming">redirectCount</a> to 0. Then,
         return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
       <li>if there is previous redirect involving documents that are not from the
         same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-        set <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
-        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
+        set <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
+        <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
         <a link-for="PerformanceNavigationTiming">unloadEventStart</a>,
         <a link-for="PerformanceNavigationTiming">unloadEventStart</a> and
         <a link-for="PerformanceNavigationTiming">redirectCount</a> to 0. Then,
         return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
       <li>Increment <a link-for="PerformanceNavigationTiming">redirectCount</a> by 1.</li>
-      <li>If the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a> is 0,
-        let it be the value of <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
-      <li>Let <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a> be the value of
-        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a>.</li>
+      <li>If the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a> is 0,
+        let it be the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
+      <li>Let <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a> be the value of
+        <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a>.</li>
       <li>Set all of the attributes in the <a>PerformanceNavigationTiming</a> object to 0 except
         <a>startTime</a>,
-        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
-        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
+        <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
+        <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
         <a link-for="PerformanceNavigationTiming">redirectCount</a>,
         <a link-for="PerformanceNavigationTiming">type</a>,
-        <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a>,
+        <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a>,
         <a link-for="PerformanceNavigationTiming">unloadEventStart</a> and
-        <a link-for="PerformanceNavigationTiming">unloadEventEnd</a>. Set <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the empty <code>DOMString</code>.</li>
+        <a link-for="PerformanceNavigationTiming">unloadEventEnd</a>. Set <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the empty <code>DOMString</code>.</li>
       <li>Return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
     </ol>
   </li>
@@ -661,8 +661,8 @@ domains that are allowed to access the timing information. </p>
 <section id="authentication">
 <h3>Detecting proxy servers</h3>
 <p>In case a proxy is deployed between the user agent and the web server, the time interval
-between the <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and the
-<a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> attributes indicates the delay between the user agent
+between the <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and the
+<a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> attributes indicates the delay between the user agent
 and the proxy instead of the web server. With that, web server can potentially infer the
 existence of the proxy. For SOCKS proxy, this time interval includes the proxy authentication
 time and time the proxy takes to connect to the web server, which obfuscate the proxy detection.
