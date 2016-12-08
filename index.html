@@ -157,7 +157,7 @@ responseEnd:       100.000  // high resolution time of last received byte
 
 <p>The following script shows how a developer can use the <a>PerformanceNavigationTiming</a> interface to obtain accurate timing data related to the navigation of the document:</p>
 
-<pre class="example highlight">
+<pre class="example">
 &lt;!doctype html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -256,8 +256,8 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
   <p class="note">Only the <a>current document</a> resource is included in the performance timeline; there is only one <a>PerformanceNavigationTiming</a> object in the performance timeline.</p>
 </section>
 
-<section id="sec-PerformanceNavigationTiming">
-<h3>The <code>PerformanceNavigationTiming</code> interface</h3>
+<section data-dfn-for="PerformanceNavigationTiming" id="sec-PerformanceNavigationTiming">
+<h3>The <dfn>PerformanceNavigationTiming</dfn> interface</h3>
 
 <!-- from domainLookupEnd -->
 <div class="note">
@@ -287,7 +287,7 @@ interface PerformanceNavigationTiming : PerformanceResourceTiming {
 </pre>
 
 
-<p dfn-for='PerformanceNavigationTiming'>If the previous document and the <a>current document</a> have the same
+<p data-dfn-for='PerformanceNavigationTiming'>If the previous document and the <a>current document</a> have the same
 <a href="http://tools.ietf.org/html/rfc6454">origin</a>
 [[!RFC6454]],
 the <dfn>unloadEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
@@ -299,7 +299,7 @@ different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
 <a>current document</a>, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
-<p dfn-for='PerformanceNavigationTiming'>If the previous document and the <a>current document</a> have the
+<p data-dfn-for='PerformanceNavigationTiming'>If the previous document and the <a>current document</a> have the
 same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
 the <dfn>unloadEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the user agent finishes the
@@ -316,24 +316,24 @@ both <a link-for='PerformanceNavigationTiming'>unloadEventStart</a> and
 <a link-for='PerformanceNavigationTiming'>unloadEventEnd</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
-<p dfn-for='PerformanceNavigationTiming'>The <dfn>domInteractive</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p data-dfn-for='PerformanceNavigationTiming'>The <dfn>domInteractive</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
 document readiness</a> of the <a>current document</a> to
 <a href="http://www.w3.org/TR/html5/syntax.html#the-end" title='"interactive" document readiness'>"interactive"</a> [[!HTML5]].</p>
 
-<p dfn-for='PerformanceNavigationTiming'>The <dfn>domContentLoadedEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p data-dfn-for='PerformanceNavigationTiming'>The <dfn>domContentLoadedEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent fires the <a
 href="http://www.w3.org/TR/html5/syntax.html#the-end">DOMContentLoaded
 event</a> at the <a>current document</a>.</p>
 
-<p dfn-for='PerformanceNavigationTiming'>The <dfn>domContentLoadedEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p data-dfn-for='PerformanceNavigationTiming'>The <dfn>domContentLoadedEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately after the <a>current document</a>'s <a
 href="http://www.w3.org/TR/html5/syntax.html#the-end">DOMContentLoaded
 event</a> completes.</p>
 </dd>
 
-<p dfn-for='PerformanceNavigationTiming'>The <dfn>domComplete</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p data-dfn-for='PerformanceNavigationTiming'>The <dfn>domComplete</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent sets the
 <a href="http://www.w3.org/TR/html5/dom.html#current-document-readiness">current
 document readiness</a> of the <a>current document</a> to
@@ -351,19 +351,19 @@ occurrence of the corresponding
 change [[!HTML5]].</p>
 </dd>
 
-<p dfn-for='PerformanceNavigationTiming'>The <dfn>loadEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p data-dfn-for='PerformanceNavigationTiming'>The <dfn>loadEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the load event of
 the <a>current document</a> is fired. It MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero when the load event is not
 fired yet.</p>
 
-<p dfn-for='PerformanceNavigationTiming'>The <dfn>loadEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p data-dfn-for='PerformanceNavigationTiming'>The <dfn>loadEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time when the load event of the <a>current
 document</a> is completed. It MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero when the load event is not fired
 or is not completed.</p>
 
-<p dfn-for='PerformanceNavigationTiming'>The <dfn>type</dfn> attribute MUST return a <code>DOMString</code> describing the type of the last non-redirect <a
+<p data-dfn-for='PerformanceNavigationTiming'>The <dfn>type</dfn> attribute MUST return a <code>DOMString</code> describing the type of the last non-redirect <a
 href="http://www.w3.org/TR/html5/browsers.html#navigate">navigation</a>
 in the current browsing context. It MUST have one of the <a>NavigationType</a> values. </p>
 
@@ -375,7 +375,7 @@ such as <a link-for="NavigationType">reload</a> if reloading the current page, o
 <a link-for="NavigationType">navigate</a> if navigating to a new URL.</p>
 </div>
 
-<p dfn-for='PerformanceNavigationTiming'>The <dfn>redirectCount</dfn> attribute MUST return the number of redirects since the last
+<p data-dfn-for='PerformanceNavigationTiming'>The <dfn>redirectCount</dfn> attribute MUST return the number of redirects since the last
 non-redirect navigation under the current browsing context. If there is no
 redirect or there is any redirect that is not from the same
 <a href="http://tools.ietf.org/html/rfc6454">
@@ -394,7 +394,7 @@ enum NavigationType {
 </pre>
 
 <p>The values are defined as follows:
-<dl dfn-for='NavigationType'>
+<dl data-dfn-for='NavigationType'>
 <dt><dfn>navigate</dfn></dt>
 <dd>Navigation started by clicking on a link, or entering the URL in the user
 agent's address bar, or form submission, or initializing through a script operation other than the ones used by <a link-for="NavigationType">reload</a> and <a link-for="NavigationType">back_forward</a> as listed below.</p>
@@ -676,11 +676,39 @@ all so it's not always feasible to mitigate this attack.</p>
   <p>This section defines attributes and interfaces previously introduced in [[NAVIGATION-TIMING]] Level 1 and are kept here for backwards compatibility. Authors are <strong>strongly advised</strong> to use the new <a>PerformanceNavigationTiming</a> interface—see <a href="#sotd">summary of changes and improvements</a>.</p>
   <p class="note">All time values defined in this legacy appendix are measured in milliseconds since midnight of <time datetime="1970-01-01T00:00Z">January 1, 1970 (UTC)</time>.</p>
 
-<section>
-<h3>The PerformanceTiming interface</h3>
-
-<dl title='[Exposed=Window] interface PerformanceTiming' class='idl'>
-<dt>readonly attribute unsigned long long navigationStart</dt>
+<section data-dfn-for="PerformanceTiming">
+<h3>The <dfn>PerformanceTiming</dfn> interface</h3>
+<pre>
+</pre>
+<pre class="idl">
+[Exposed = Window]
+interface PerformanceTiming {
+  readonly attribute unsigned long long navigationStart;
+  readonly attribute unsigned long long unloadEventStart;
+  readonly attribute unsigned long long unloadEventEnd;
+  readonly attribute unsigned long long redirectStart;
+  readonly attribute unsigned long long redirectEnd;
+  readonly attribute unsigned long long fetchStart;
+  readonly attribute unsigned long long domainLookupStart;
+  readonly attribute unsigned long long domainLookupEnd;
+  readonly attribute unsigned long long connectStart;
+  readonly attribute unsigned long long connectEnd;
+  readonly attribute unsigned long long secureConnectionStart;
+  readonly attribute unsigned long long requestStart;
+  readonly attribute unsigned long long responseStart;
+  readonly attribute unsigned long long responseEnd;
+  readonly attribute unsigned long long domLoading;
+  readonly attribute unsigned long long domInteractive;
+  readonly attribute unsigned long long domContentLoadedEventStart;
+  readonly attribute unsigned long long domContentLoadedEventEnd;
+  readonly attribute unsigned long long domComplete;
+  readonly attribute unsigned long long loadEventStart;
+  readonly attribute unsigned long long loadEventEnd;
+  serializer = { attribute };
+};
+</pre>
+<dl>
+<dt><dfn>navigationStart</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately after the user agent finishes <a
@@ -688,7 +716,7 @@ href="http://www.w3.org/TR/html5/browsers.html#prompt-to-unload-a-document">prom
 to unload</a> the previous document. If there is no previous document, this attribute must return the time the current document is created.
 
 </dd>
-<dt>readonly attribute unsigned long long unloadEventStart</dt>
+<dt><dfn>unloadEventStart</dfn></dt>
 <dd>
 
 <p>If the previous document and the current document have the same
@@ -703,7 +731,7 @@ different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
 current document, this attribute must return zero.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long unloadEventEnd</dt>
+<dt><dfn>unloadEventEnd</dfn></dt>
 <dd>
 
 <p>If the previous document and the current document have the
@@ -722,7 +750,7 @@ both <a href="#widl-PerformanceTiming-unloadEventStart">unloadEventStart</a> and
 <a href="#widl-PerformanceTiming-unloadEventEnd">unloadEventEnd</a> must return the zero.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long redirectStart</dt>
+<dt><dfn>redirectStart</dfn></dt>
 <dd>
 
 <p>If there are HTTP redirects
@@ -733,7 +761,7 @@ this attribute must return the <a href="#widl-PerformanceTiming-fetchStart">star
 of the fetch</a> that initiates the redirect. Otherwise, this attribute must return zero.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long redirectEnd</dt>
+<dt><dfn>redirectEnd</dfn></dt>
 <dd>
 
 <p>If there are HTTP redirects
@@ -744,7 +772,7 @@ this attribute must return the time immediately after receiving the last byte of
 the response of the last redirect. Otherwise, this attribute must return zero.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long fetchStart</dt>
+<dt><dfn>fetchStart</dfn></dt>
 <dd>
 
 <p>If the new resource is to be
@@ -757,7 +785,7 @@ user agent starts
 <a href="http://www.w3.org/TR/html5/infrastructure.html#fetching-resources">fetching</a> the resource.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long domainLookupStart</dt>
+<dt><dfn>domainLookupStart</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately before the user agent starts the domain name
@@ -769,7 +797,7 @@ application caches</a> or local resources,
 this attribute must return the same value as <a href="#widl-PerformanceTiming-fetchStart">fetchStart</a>. </p>
 
 </dd>
-<dt>readonly attribute unsigned long long domainLookupEnd</dt>
+<dt><dfn>domainLookupEnd</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately after the user agent
@@ -793,7 +821,7 @@ fetching process</a>. It's covered by the
 domainLookupStart and domainLookupEnd represent the times when the user agent
 starts and ends the domain data retrieval from the cache. </p>
 </dd>
-<dt>readonly attribute unsigned long long connectStart</dt>
+<dt><dfn>connectStart</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately before the user agent start
@@ -805,7 +833,7 @@ application caches</a> or local resources,
 this attribute must return value of <a href="#widl-PerformanceTiming-domainLookupEnd">domainLookupEnd</a>.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long connectEnd</dt>
+<dt><dfn>connectEnd</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately after the user agent
@@ -829,7 +857,7 @@ such as SSL handshake and SOCKS authentication.
 </p>
 
 </dd>
-<dt>readonly attribute unsigned long long secureConnectionStart</dt>
+<dt><dfn>secureConnectionStart</dfn></dt>
 <dd>
 
 <p>This attribute is optional. User agents that don't have this attribute
@@ -842,7 +870,7 @@ available but HTTPS is not used, this attribute must return zero.
 </p>
 
 </dd>
-<dt>readonly attribute unsigned long long requestStart</dt>
+<dt><dfn>requestStart</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately before the user agent
@@ -868,7 +896,7 @@ sending the request due to the HTTP layer encapsulation.</li>
 </div>
 
 </dd>
-<dt>readonly attribute unsigned long long responseStart</dt>
+<dt><dfn>responseStart</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately after the user agent receives the first
@@ -877,7 +905,7 @@ byte of the response from the server, or from
 application caches</a> or from local resources. </p>
 
 </dd>
-<dt>readonly attribute unsigned long long responseEnd</dt>
+<dt><dfn>responseEnd</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately after the user agent
@@ -888,7 +916,7 @@ can be received either from the server,
 application caches</a> or from local resources.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long domLoading</dt>
+<dt><dfn>domLoading</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately before the user agent sets the
@@ -900,7 +928,7 @@ document readiness</a> to
  in meaningful metrics.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long domInteractive</dt>
+<dt><dfn>domInteractive</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately before the user agent sets the
@@ -909,7 +937,7 @@ document readiness</a> to
 <a href="http://www.w3.org/TR/html5/syntax.html#the-end">"interactive"</a>.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long domContentLoadedEventStart</dt>
+<dt><dfn>domContentLoadedEventStart</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately before the user agent fires <a
@@ -917,7 +945,7 @@ href="http://www.w3.org/TR/html5/syntax.html#the-end">the DOMContentLoaded
 event</a> at the <a href="http://www.w3.org/TR/html5/dom.html#document"><code>Document</code></a>.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long domContentLoadedEventEnd</dt>
+<dt><dfn>domContentLoadedEventEnd</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately after the document's <a
@@ -925,7 +953,7 @@ href="http://www.w3.org/TR/html5/syntax.html#the-end">DOMContentLoaded
 event</a> completes.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long domComplete</dt>
+<dt><dfn>domComplete</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately before the user agent sets the
@@ -945,7 +973,7 @@ occurrence of the corresponding
 change.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long loadEventStart</dt>
+<dt><dfn>loadEventStart</dfn></dt>
 <dd>
 
 <p>This attribute must return the time immediately before the load event of
@@ -953,37 +981,48 @@ the current document is fired. It must return zero when the load event is not
 fired yet.</p>
 
 </dd>
-<dt>readonly attribute unsigned long long loadEventEnd</dt>
+<dt><dfn>loadEventEnd</dfn></dt>
 <dd>
 
 <p>This attribute must return the time when the load event of the current
 document is completed. It must return zero when the load event is not fired
 or is not completed.</p>
 </dd>
-<dt>serializer = { attribute }</dt>
 </dl>
 </section>
 
-<section>
-<h3>The <code>PerformanceNavigation</code> interface</h3>
-<dl class="idl" title='[Exposed=Window] interface PerformanceNavigation'>
-  <dt>const unsigned short TYPE_NAVIGATE = 0</dt>
+<section data-dfn-for="PerformanceNavigation">
+<h3>The <dfn>PerformanceNavigation</dfn> interface</h3>
+<pre class="idl">
+[Exposed = Window]
+interface PerformanceNavigation {
+  const unsigned short TYPE_NAVIGATE = 0;
+  const unsigned short TYPE_RELOAD = 1;
+  const unsigned short TYPE_BACK_FORWARD = 2;
+  const unsigned short TYPE_RESERVED = 255;
+  readonly attribute unsigned short type;
+  readonly attribute unsigned short redirectCount;
+  serializer = { attribute };
+};
+</pre>
+<dl>
+  <dt><dfn>TYPE_NAVIGATE</dfn></dt>
   <dd><p>Navigation started by clicking on a link, or entering the URL in the user
     agent's address bar, or form submission, or initializing through a script operation other than
     the ones used by <code>TYPE_RELOAD</code>
     and <code>TYPE_BACK_FORWARD</code> as listed below.</p></dd>
-  <dt>const unsigned short TYPE_RELOAD = 1</dt>
+  <dt><dfn>TYPE_RELOAD</dfn></dt>
     <dd><p>Navigation through
     the reload operation or the
     <a href="http://www.w3.org/TR/html5/browsers.html#dom-location-reload">location.reload()</a>
     method.</p></dd>
-  <dt>const unsigned short TYPE_BACK_FORWARD = 2</dt>
+  <dt><dfn>TYPE_BACK_FORWARD</dfn></dt>
    <dd><p>Navigation
   through a <a href="http://www.w3.org/TR/html5/browsers.html#traverse-the-history">history traversal</a> operation.</p></dd>
-  <dt>const unsigned short TYPE_RESERVED = 255</dt>
+  <dt><dfn>TYPE_RESERVED</dfn></dt>
   <dd><p>Any navigation types not defined by values above.</p></dd>
 
-<dt>readonly attribute unsigned short type</dt>
+<dt><dfn>type</dfn></dt>
 <dd>
 
 <p>This attribute must return the type of the last non-redirect <a
@@ -998,7 +1037,7 @@ such as <code>TYPE_RELOAD</code> if reloading the current page, or
 <code>TYPE_NAVIGATE</code> if navigating to a new URL.</p>
 
 </dd>
-<dt>readonly attribute unsigned short redirectCount</dt>
+<dt><dfn>redirectCount</dfn></dt>
 <dd>
 
 <p>This attribute must return the number of redirects since the last
@@ -1007,17 +1046,23 @@ redirect or there is any redirect that is not from the same
 <a href="http://tools.ietf.org/html/rfc6454">
 origin</a> as the destination document, this attribute must return zero. </p>
 </dd>
-<dt>serializer = { attribute }</dt>
 </dl>
 
 </section>
 
-<section>
+<section data-dfn-for="Performance">
 <h3>Extensions to the <code>Performance</code> interface</h3>
+<pre class="idl">
+partial interface Performance {
+  [SameObject]
+  readonly attribute PerformanceTiming timing;
+  [SameObject]
+  readonly attribute PerformanceNavigation navigation;
+};
+</pre>
+<dl>
 
-<dl class='idl' title='[Exposed=Window] partial interface Performance'>
-
-<dt>[SameObject] readonly attribute PerformanceTiming timing</dt>
+<dt><dfn>timing</dfn></dt>
 <dd>
 <p>
   The <code>timing</code> attribute
@@ -1025,7 +1070,7 @@ origin</a> as the destination document, this attribute must return zero. </p>
   last non-redirect navigation. This attribute is defined by the <code>PerformanceTiming</code> interface.
 </p>
 </dd>
-<dt>[SameObject] readonly attribute PerformanceNavigation navigation</dt>
+<dt><dfn>navigation</dfn></dt>
 <dd>
 <p>
   The <code>navigation</code> attribute is defined by the <code>PerformanceNavigation</code> interface.
