@@ -286,34 +286,18 @@ interface PerformanceNavigationTiming : PerformanceResourceTiming {
 };
 </pre>
 
-
-<p data-dfn-for='PerformanceNavigationTiming'>If the previous document and the <a>current document</a> have the same
-<a href="http://tools.ietf.org/html/rfc6454">origin</a>
-[[!RFC6454]],
-the <dfn>unloadEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p data-dfn-for='PerformanceNavigationTiming'>If the previous document, and any HTTP redirects or equivalent when navigating, pass the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm, the <dfn>unloadEventStart</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to the time immediately before the user agent starts
-the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document.
+the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document.</p>
 
-If there is no previous document or the previous document has a
-different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-<a>current document</a>, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p>If there is no previous document or the above <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm does not pass, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
-<p data-dfn-for='PerformanceNavigationTiming'>If the previous document and the <a>current document</a> have the
-same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-the <dfn>unloadEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to the time immediately after the user agent finishes the
-<a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document. If there is no previous document or the previous document has
-a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
-<a>current document</a> or the unload is not yet completed, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-with a time value equal to zero.</p>
+<p data-dfn-for='PerformanceNavigationTiming'>If the previous document, and any HTTP redirects or equivalent when navigating, pass the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm, the <dfn>unloadEventEnd</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+with a time value equal to the time immediately after the user agent finishes
+the <a href="http://www.w3.org/TR/html5/browsers.html#unloading-documents">unload event</a> of the previous document.</p>
 
-<p>If there are HTTP redirects or
-<a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes" title='HTTP response codes equivalence'>equivalent</a>
-when navigating and not all the redirects or equivalent are from the
-same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-both <a link-for='PerformanceNavigationTiming'>unloadEventStart</a> and
-<a link-for='PerformanceNavigationTiming'>unloadEventEnd</a> MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
+<p>If there is no previous document or the above <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm does not pass, this attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 with a time value equal to zero.</p>
 
 <p data-dfn-for='PerformanceNavigationTiming'>The <dfn>domInteractive</dfn> attribute MUST return a <a href="http://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
@@ -376,10 +360,7 @@ such as <a link-for="NavigationType">reload</a> if reloading the current page, o
 </div>
 
 <p data-dfn-for='PerformanceNavigationTiming'>The <dfn>redirectCount</dfn> attribute MUST return the number of redirects since the last
-non-redirect navigation under the current browsing context. If there is no
-redirect or there is any redirect that is not from the same
-<a href="http://tools.ietf.org/html/rfc6454">
-origin</a> [[!RFC6454]] as the destination document, this attribute MUST return zero. </p>
+non-redirect navigation under the current browsing context. If there is no redirect or there is any redirect that does not pass the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm, this attribute MUST return zero.</p>
 
 <section id="sec-performance-navigation-types">
 <h4>Navigation types</h4>
@@ -481,8 +462,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
         let the navigation type be the <code>DOMString</code> "<a link-for="NavigationType">back_forward</a>".</li>
     </ol>
   </li>
-  <li>If the current document and the previous document are from different
-    <a href="http://tools.ietf.org/html/rfc6454" title='origin'>origins</a>,
+  <li>If the previous document does not pass the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm,
     set both <a link-for="PerformanceNavigationTiming">unloadEventStart</a> and
     <a link-for="PerformanceNavigationTiming">unloadEventEnd</a> to 0 then go to step
     <a href="#step-linknegotiation-start">9</a>. Otherwise, record <a link-for="PerformanceNavigationTiming">unloadEventStart</a>
@@ -555,20 +535,11 @@ it due to backwards compatibility issues with shipped implementations.</p>
     <a href="http://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes" title='HTTP response codes equivalence'>equivalent</a>,
     then
     <ol style="list-style-type:lower-alpha;">
-      <li>if the current document and the document that is redirected to are not from the
-        same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+      <li>If the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm does not pass for the <a href="http://tools.ietf.org/html/rfc6454">origin</a> of the fetched resource,
         set <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
         <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
         <a link-for="PerformanceNavigationTiming">unloadEventStart</a>,
         <a link-for="PerformanceNavigationTiming">unloadEventEnd</a> and
-        <a link-for="PerformanceNavigationTiming">redirectCount</a> to 0. Then,
-        return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
-      <li>if there is previous redirect involving documents that are not from the
-        same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
-        set <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
-        <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
-        <a link-for="PerformanceNavigationTiming">unloadEventStart</a>,
-        <a link-for="PerformanceNavigationTiming">unloadEventStart</a> and
         <a link-for="PerformanceNavigationTiming">redirectCount</a> to 0. Then,
         return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
       <li>Increment <a link-for="PerformanceNavigationTiming">redirectCount</a> by 1.</li>
@@ -629,9 +600,8 @@ be altered during the navigation.</p>
 <p>There is the potential for disclosing an end-user's browsing and activity history by using
 carefully crafted timing attacks. For instance, the unloading time reveals how long the previous
 page takes to execute its unload handler, which could be used to infer the user's login status.
-These attacks have been mitigated by enforcing the same
-<a href="http://tools.ietf.org/html/rfc6454">origin</a> policy when
-timing information involving the previous navigation is accessed. [[RFC6454]]</p>
+These attacks have been mitigated by enforcing the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm when
+timing information involving the previous navigation is accessed. [[RESOURCE-TIMING-2]]</p>
 
 <p>The <a href="http://www.w3.org/TR/html5/browsers.html#relaxing-the-same-origin-restriction">
 relaxed same origin policy</a> doesn't provide sufficient protection against unauthorized visits
@@ -652,10 +622,9 @@ to access timing information of the previous one, such as timing regarding redir
 <section id="security" class='informative'>
 <h2>Security</h2>
 
-<p>The <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface exposes timing information for the <a>current document</a> to any resource loaded by the document, such as a web page or a worker. To limit the access to the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface, the <a href="https://tools.ietf.org/html/rfc6454#section-5">same origin</a>
-policy is enforced by default and certain attributes are set to zero, as described in <a href="http://www.w3.org/TR/resource-timing/#cross-origin-resources" class="sec-ref"><span class="secno">4.5</span> <span class="sec-title">Cross-origin Resources</span></a> [[!RESOURCE-TIMING]]. Resource providers can
+<p>The <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface exposes timing information for the <a>current document</a> to any resource loaded by the document, such as a web page or a worker. To limit the access to the <a href="#performancenavigationtiming">PerformanceNavigationTiming</a> interface, the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm is enforced and certain attributes are set to zero, as described in <a href="http://www.w3.org/TR/resource-timing/#cross-origin-resources" class="sec-ref"><span class="secno">4.5</span> <span class="sec-title">Cross-origin Resources</span></a> [[!RESOURCE-TIMING]]. Resource providers can
 explicitly allow all timing information to be collected for a <a>current document</a> by
-adding the <a href="#timing-allow-origin">Timing-Allow-Origin</a> HTTP response header, which specifies the
+adding the <code>Timing-Allow-Origin</code> HTTP response header, which specifies the
 domains that are allowed to access the timing information. </p>
 
 <section id="authentication">
