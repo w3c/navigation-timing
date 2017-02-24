@@ -239,7 +239,7 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
   <h3>Relation with the <a href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry">PerformanceEntry</a> interface</h3>
   <p><a>PerformanceNavigationTiming</a> interface extends the following attributes of <a href="https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry">PerformanceEntry</a> interface:</p>
   <ul>
-    <li>The <dfn id='dom-PerformanceNavigationTiming-name'><code>name</code></dfn> attribute MUST return the <code>DOMString</code> "<code>document</code>".</li>
+    <li>The <dfn id='dom-PerformanceNavigationTiming-name'><code>name</code></dfn> attribute MUST return the <code>DOMString</code> value of the <a href="https://www.w3.org/TR/html5/dom.html#the-document's-address">address</a> of the <a>current document</a>.</li>
     <li>The <dfn id='dom-PerformanceNavigationTiming-entryType'><code>entryType</code></dfn> attribute MUST return the <code>DOMString</code> "<code id="perf-navigation">navigation</code>".</li>
     <li>The <dfn id='dom-PerformanceNavigationTiming-startTime'><code>startTime</code></dfn> attribute MUST return a <a href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of 0. [[!HR-TIME-2]]</li>
     <li>The <dfn id='dom-PerformanceNavigationTiming-duration'><code>duration</code></dfn> attribute MUST return a <a href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> equal to the difference between <a link-for="PerformanceNavigationTiming">loadEventEnd</a> and <a href="#dom-PerformanceNavigationTiming-startTime"><code>startTime</code></a>, respectively.</li>
@@ -476,6 +476,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
     <a href="https://www.w3.org/TR/html5/infrastructure.html#fetch" title='fetch'>
     fetching process</a>, record the current time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
   <li>Let <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupstart"><code>domainLookupStart</code></a>, <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>, <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> be the same value as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
+  <li>Set <a>name</a> to a <code>DOMString</code> value of the <a href="https://www.w3.org/TR/html5/dom.html#the-document's-address">address</a> of the <a>current document</a>.</li>
   <li>If the resource is fetched from the <a
     href="https://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title="relevant application cache">relevant
     application cache</a> or local resources, including the
@@ -540,7 +541,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
         <a link-for="PerformanceNavigationTiming">unloadEventStart</a>,
         <a link-for="PerformanceNavigationTiming">unloadEventEnd</a> and
         <a link-for="PerformanceNavigationTiming">redirectCount</a> to 0. Then,
-        return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
+        return to step <a href="#step-fetch-start">8</a> with the new resource.</li>
       <li>Increment <a link-for="PerformanceNavigationTiming">redirectCount</a> by 1.</li>
       <li>If the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a> is 0,
         let it be the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
