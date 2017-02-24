@@ -1,10 +1,8 @@
-navigation-timing
+Navigation Timing 
 =================
 
-Navigation Timing draft spec from webperf
+This specification defines an interface for web applications to access the complete timing information for navigation of a document.
 
-See
-  https://w3c.github.io/navigation-timing/
-
-For Navigation Timing 1,
-  https://w3c.github.io/web-performance/specs/NavigationTiming/Overview.html
+* Editors draft: https://w3c.github.io/navigation-timing/
+* Navigation Timing Level 2: https://www.w3.org/TR/navigation-timing-2/
+* Navigation Timing Level 1: https://www.w3.org/TR/navigation-timing/
