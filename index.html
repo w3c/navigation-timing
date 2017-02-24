@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <title>Navigation Timing Level 2</title>
   <style>
-    #historical {
+    #obsolete {
       background-position: right;
       background-repeat: repeat-y;
       background-color: rgba(251, 233, 233, 0.5);
       padding: 0 1em;
-      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='300px' width='125px'><text x='0' y='100' fill='red' font-size='15' fill-opacity='0.20'>Legacy interface</text></svg>")
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='300px' width='125px'><text x='0' y='100' fill='red' font-size='15' fill-opacity='0.20'>Obsolete</text></svg>")
     }
   </style>
   <script src='//www.w3.org/Tools/respec/respec-w3c-common' async class='remove'></script>
@@ -640,15 +640,12 @@ all so it's not always feasible to mitigate this attack.</p>
 </section>
 </section>
 
-<section class='appendix'>
-  <h2>Historical</h2>
-  <p>This section defines attributes and interfaces previously introduced in [[NAVIGATION-TIMING]] Level 1 and are kept here for backwards compatibility. Authors are <strong>strongly advised</strong> to use the new <a>PerformanceNavigationTiming</a> interface—see <a href="#sotd">summary of changes and improvements</a>.</p>
-  <p class="note">All time values defined in this legacy appendix are measured in milliseconds since midnight of <time datetime="1970-01-01T00:00Z">January 1, 1970 (UTC)</time>.</p>
+<section>
+  <h2>Obsolete</h2>
+  <p>This section defines attributes and interfaces previously introduced in [[NAVIGATION-TIMING]] Level 1 and are kept here for backwards compatibility. Authors should not use the following interfaces and are <strong>strongly advised</strong> to use the new <a>PerformanceNavigationTiming</a> interface—see <a href="#sotd">summary of changes and improvements</a>.</p>
 
 <section data-dfn-for="PerformanceTiming">
 <h3>The <dfn>PerformanceTiming</dfn> interface</h3>
-<pre>
-</pre>
 <pre class="idl">
 [Exposed = Window]
 interface PerformanceTiming {
@@ -676,6 +673,7 @@ interface PerformanceTiming {
   serializer = { attribute };
 };
 </pre>
+  <p class="note">All time values defined in this section are measured in milliseconds since midnight of <time datetime="1970-01-01T00:00Z">January 1, 1970 (UTC)</time>.</p>
 <dl>
 <dt><dfn>navigationStart</dfn></dt>
 <dd>
