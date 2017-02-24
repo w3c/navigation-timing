@@ -440,8 +440,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
         to allow the document to be unloaded</a>.</li>
     </ol>
   </li>
-  <li id="step-create-object">Create a new <a>PerformanceNavigationTiming</a> object.
-  </li>
+  <li id="step-create-object">Create a new <a>PerformanceNavigationTiming</a> object and add it to the <a href='https://w3c.github.io/performance-timeline/#dfn-performance-entry-buffer'>performance entry buffer</a>.</li>
   <li>Set <a>name</a> to the <code>DOMString</code> "<code>document</code>".</li>
   <li>Set <a>entryType</a> and <a>initiatorType</a> to the <code>DOMString</code> "<code>navigation</code>".</li>
   <li>Set <a>startTime</a> to a <a href="https://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a time value of zero, and <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-nextHopProtocol"><code>nextHopProtocol</code></a> to the empty <code>DOMString</code>.</li>
@@ -581,7 +580,6 @@ it due to backwards compatibility issues with shipped implementations.</p>
 	equal to the difference between <a link-for="PerformanceNavigationTiming">loadEventEnd</a> and <a>startTime</a>, respectively.
   </li>
   <li><a href='http://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry'>Queue</a> the new <a>PerformanceNavigationTiming</a> object.</li>
-  <li>Add the new <a>PerformanceNavigationTiming</a> object to the <a href='https://w3c.github.io/performance-timeline/#dfn-performance-entry-buffer'>performance entry buffer</a>.</li>
 </ol>
 
 <p>Some user agents maintain the DOM structure of the document in memory
