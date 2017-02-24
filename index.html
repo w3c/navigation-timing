@@ -463,11 +463,11 @@ it due to backwards compatibility issues with shipped implementations.</p>
   </li>
   <li>If the previous document does not pass the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm,
     set both <a link-for="PerformanceNavigationTiming">unloadEventStart</a> and
-    <a link-for="PerformanceNavigationTiming">unloadEventEnd</a> to 0 then go to step
-    <a href="#step-fetch-start">9</a>. Otherwise, record <a link-for="PerformanceNavigationTiming">unloadEventStart</a>
+    <a link-for="PerformanceNavigationTiming">unloadEventEnd</a> to 0 then go to
+    <a href="#fetch-start-step">fetch-start-step</a>. Otherwise, record <a link-for="PerformanceNavigationTiming">unloadEventStart</a>
     as the time immediately before the unload event.</li>
-  <li>Immediately after the unload event is completed, record the current time as <a link-for="PerformanceNavigationTiming">unloadEventEnd</a>. If the navigation URL has an <a href="https://www.w3.org/TR/service-workers/#dfn-active-worker">active worker registration</a>, immediately before the user agent <a href="https://www.w3.org/TR/service-workers/#service-worker-concept">runs the worker</a> record the time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-workerstart"><code>workerStart</code></a>, or if the worker is available, record the time before the <a href="https://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">event named `fetch` is fired</a> at the active worker. Otherwise, if the navigation URL has no matching <a href="https://www.w3.org/TR/service-workers/#dfn-service-worker-registration">service worker registration</a>, set <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-workerstart"><code>workerStart</code></a> value to zero.</li>
-  <li id="step-fetch-start">If the new resource is to be fetched using HTTP GET
+  <li>Immediately after the unload event is completed, record the current time as <a link-for="PerformanceNavigationTiming">unloadEventEnd</a>. If the navigation URL has an <a href="https://www.w3.org/TR/service-workers/#dfn-active-worker">active worker registration</a>, immediately before the user agent <a href="https://www.w3.org/TR/service-workers/#service-worker-concept">runs the worker</a> record the time as <a href="#dom-performanceresourcetiming-workerstart"><code>workerStart</code></a>, or if the worker is available, record the time before the <a href="https://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">event named `fetch` is fired</a> at the active worker. Otherwise, if the navigation URL has no matching <a href="https://www.w3.org/TR/service-workers/#dfn-service-worker-registration">service worker registration</a>, set <a href="#dom-performanceresourcetiming-workerstart"><code>workerStart</code></a> value to zero.</li>
+  <li id="fetch-start-step"><i>[fetch-start-step]</i> If the new resource is to be fetched using HTTP GET
     or <a href="https://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-get" title='HTTP GET method equivalence'>equivalent</a>,
     immediately before a user agent checks with the <a
     href="https://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title="relevant application cache">
@@ -481,16 +481,16 @@ it due to backwards compatibility issues with shipped implementations.</p>
     href="https://www.w3.org/TR/html5/browsers.html#relevant-application-cache" title="relevant application cache">relevant
     application cache</a> or local resources, including the
     <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]],
-    go to step <a href="#step-request-start">16</a>.</li>
-  <li>If no domain lookup is required, go to step <a
-    href="#step-connect-start">14</a>. Otherwise, immediately before a user
+    go to <a href="#request-start-step">request-start-step</a>.</li>
+  <li>If no domain lookup is required, go to <a
+    href="#connect-start-step">connect-start-step</a>. Otherwise, immediately before a user
     agent starts the domain name lookup, record the time as
     <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupstart"><code>domainLookupStart</code></a>. </li>
   <li>Record the time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>
     immediately after the domain name lookup is successfully done. A user
     agent MAY need multiple retries before that. If the domain lookup fails,
     abort the rest of the steps. </li>
-  <li id="step-connect-start">If a persistent transport connection is used to
+  <li id="connect-start-step"><i>[connect-start-step]</i> If a persistent transport connection is used to
     fetch the resource, let <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a> and
     <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a> be the same value of
     <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-domainlookupend"><code>domainLookupEnd</code></a>.
@@ -509,7 +509,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
     <li>When a secure transport is not used, the user agent MUST
         set the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-secureconnectionstart"><code>secureConnectionStart</code></a> to 0.</li>
     </ol></li>
-  <li id="step-request-start">Immediately before a user agent starts sending
+  <li id="request-start-step"><i>[request-start-step]</i> Immediately before a user agent starts sending
     request for the document, record the current time as <a
     href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-requeststart"><code>requestStart</code></a>.</li>
   <li id="step-response-start">Record the time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-responsestart"><code>responseStart</code></a> immediately after the user agent receives the first byte
@@ -517,7 +517,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
   <li id="step-response-end">Record the time as <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-responseend"><code>responseEnd</code></a> immediately after receiving the
     last byte of the response.
     <ol>
-    <li>Return to step <a href="#step-connect-start">14</a> if the user agent fails to send the request or receive the entire response, and needs to
+    <li>Return to <a href="#connect-start-step">connect-start-step</a> if the user agent fails to send the request or receive the entire response, and needs to
     reopen the connection.
 
     <div class="note">
@@ -541,7 +541,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
         <a link-for="PerformanceNavigationTiming">unloadEventStart</a>,
         <a link-for="PerformanceNavigationTiming">unloadEventEnd</a> and
         <a link-for="PerformanceNavigationTiming">redirectCount</a> to 0. Then,
-        return to step <a href="#step-fetch-start">8</a> with the new resource.</li>
+        return to <a href="#fetch-start-step">fetch-start-step</a> with the new resource.</li>
       <li>Increment <a link-for="PerformanceNavigationTiming">redirectCount</a> by 1.</li>
       <li>If the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a> is 0,
         let it be the value of <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.</li>
@@ -556,7 +556,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
         <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-nexthopprotocol"><code>nextHopProtocol</code></a>,
         <a link-for="PerformanceNavigationTiming">unloadEventStart</a> and
         <a link-for="PerformanceNavigationTiming">unloadEventEnd</a>. Set <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-nexthopprotocol"><code>nextHopProtocol</code></a> to the empty <code>DOMString</code>.</li>
-      <li>Return to step <a href="#step-fetch-start">9</a> with the new resource.</li>
+      <li>Return to <a href="#fetch-start-step">fetch-start-step</a> with the new resource.</li>
     </ol>
   </li>
   <li>Record the time as <a link-for="PerformanceNavigationTiming">domInteractive</a>
