@@ -579,7 +579,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
     Set the <a>duration</a> to a <a href="https://www.w3.org/TR/hr-time/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
 	equal to the difference between <a link-for="PerformanceNavigationTiming">loadEventEnd</a> and <a>startTime</a>, respectively.
   </li>
-  <li><a href='http://w3c.github.io/performance-timeline/#dfn-queue-a-performanceentry'>Queue</a> the new <a>PerformanceNavigationTiming</a> object.</li>
+  <li><a href='https://www.w3.org/TR/performance-timeline-2/#dfn-queue-a-performanceentry'>Queue</a> the new <a>PerformanceNavigationTiming</a> object.</li>
 </ol>
 
 <p>Some user agents maintain the DOM structure of the document in memory
@@ -995,7 +995,7 @@ href="https://www.w3.org/TR/html5/browsers.html#navigate">navigation</a>
 in the current browsing context. It must have one of the following <a
 href="#dom-performancenavigationtiming-type">navigation type</a> values. </p>
 
-<p class="note">Client-side redirects, such as those using <a href="hhttps://www.w3.org/TR/html5/document-metadata.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
+<p class="note">Client-side redirects, such as those using <a href="https://www.w3.org/TR/html5/document-metadata.html#attr-meta-http-equiv-refresh">the Refresh pragma directive</a>,
 are not considered HTTP redirects <a href="https://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes">or equivalent</a> by this spec.
 In those cases, the <a href="#dom-performancenavigationtiming-type">type</a> attribute should return appropriate value,
 such as <code>TYPE_RELOAD</code> if reloading the current page, or
