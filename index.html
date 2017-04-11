@@ -24,7 +24,7 @@
       url: "https://www.igvita.com/",
       mailto: "igrigorik@gmail.com",
       company: "Google",
-      companyURL: "https://google.com/",
+      companyURL: "https://www.google.com/",
       w3cid: "56102"
     }, {
       name: "Tobin Titus",
@@ -412,7 +412,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
     This figure illustrates the timing attributes defined by the
     <a>PerformanceNavigationTiming</a> interface. Attributes in parenthesis
     indicate that they may not be available for navigations involving
-    documents from different <a href="http://tools.ietf.org/html/rfc6454" title='origin'>origins</a>.
+    documents from different <a href="https://tools.ietf.org/html/rfc6454" title='origin'>origins</a>.
   </figcaption>
   <!-- Source: https://docs.google.com/document/d/1I7XGNJ57Qgjkg9pL11s7MK7zGEcwAgdNj1W5f7NKbW8/ -->
   <img src="timestamp-diagram.svg" alt="Navigation Timing attributes" style='width: 100%'>
@@ -534,7 +534,7 @@ it due to backwards compatibility issues with shipped implementations.</p>
     <a href="https://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes" title='HTTP response codes equivalence'>equivalent</a>,
     then
     <ol style="list-style-type:lower-alpha;">
-      <li>If the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm does not pass for the <a href="http://tools.ietf.org/html/rfc6454">origin</a> of the fetched resource,
+      <li>If the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm does not pass for the <a href="https://tools.ietf.org/html/rfc6454">origin</a> of the fetched resource,
         set <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectstart"><code>redirectStart</code></a>,
         <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-redirectend"><code>redirectEnd</code></a>,
         <a link-for="PerformanceNavigationTiming">unloadEventStart</a>,
@@ -685,14 +685,14 @@ to unload</a> the previous document. If there is no previous document, this attr
 <dd>
 
 <p>If the previous document and the current document have the same
-<a href="http://tools.ietf.org/html/rfc6454">origin</a>
+<a href="https://tools.ietf.org/html/rfc6454">origin</a>
 [[!RFC6454]],
 this attribute must return the time immediately before the user agent starts
 the <a href="https://www.w3.org/TR/html5/browsers.html#unloading-documents">unload</a>
 event of the previous document.
 
 If there is no previous document or the previous document has a
-different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
+different <a href="https://tools.ietf.org/html/rfc6454">origin</a> than the
 current document, this attribute must return zero.</p>
 
 </dd>
@@ -700,17 +700,17 @@ current document, this attribute must return zero.</p>
 <dd>
 
 <p>If the previous document and the current document have the
-same <a href="http://tools.ietf.org/html/rfc6454">same origin</a>,
+same <a href="https://tools.ietf.org/html/rfc6454">same origin</a>,
 this attribute must return the time immediately after the user agent finishes the
 <a href="https://www.w3.org/TR/html5/browsers.html#unload-a-document">unload</a>
 event of the previous document. If there is no previous document or the previous document has
-a different <a href="http://tools.ietf.org/html/rfc6454">origin</a> than the
+a different <a href="https://tools.ietf.org/html/rfc6454">origin</a> than the
 current document or the unload is not yet completed, this attribute must return zero.</p>
 
 <p>If there are HTTP redirects
 <a href="https://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and not all the redirects or equivalent are from the
-same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+same <a href="https://tools.ietf.org/html/rfc6454">origin</a>,
 both <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a> and
 <a href="#dom-performancetiming-unloadeventend">unloadEventEnd</a> must return the zero.</p>
 
@@ -721,7 +721,7 @@ both <a href="#dom-performancetiming-unloadeventstart">unloadEventStart</a> and
 <p>If there are HTTP redirects
 <a href="https://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and if all the redirects or equivalent are from the
-same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+same <a href="https://tools.ietf.org/html/rfc6454">origin</a>,
 this attribute must return the <a href="#dom-performancetiming-fetchstart">starting time
 of the fetch</a> that initiates the redirect. Otherwise, this attribute must return zero.</p>
 
@@ -732,7 +732,7 @@ of the fetch</a> that initiates the redirect. Otherwise, this attribute must ret
 <p>If there are HTTP redirects
 <a href="https://www.w3.org/TR/html5/infrastructure.html#concept-http-equivalent-codes">or equivalent</a>
 when navigating and all redirects and equivalents are from the
-same <a href="http://tools.ietf.org/html/rfc6454">origin</a>,
+same <a href="https://tools.ietf.org/html/rfc6454">origin</a>,
 this attribute must return the time immediately after receiving the last byte of
 the response of the last redirect. Otherwise, this attribute must return zero.</p>
 
@@ -827,12 +827,12 @@ such as SSL handshake and SOCKS authentication.
 
 <p>This attribute is optional. User agents that don't have this attribute
 available must set it as undefined. When this attribute is available, if the
-<a href="https://url.spec.whatwg.org/#concept-url-scheme">scheme</a> of the
-current page is <a href="http://tools.ietf.org/html/rfc2817">HTTPS</a>, this
+<a href="https://url.spec.whatwg.org/#concept-url-scheme">scheme</a> [[URL]] of the
+current page is <a href="https://tools.ietf.org/html/rfc2817">HTTPS</a>, this
 attribute must return the time immediately before the user agent starts the
 handshake process to secure the current connection. If this attribute is
 available but HTTPS is not used, this attribute must return zero.
-</p>[[URL]]
+</p>
 
 </dd>
 <dt><dfn>requestStart</dfn></dt>
@@ -1008,7 +1008,7 @@ such as <code>TYPE_RELOAD</code> if reloading the current page, or
 <p>This attribute must return the number of redirects since the last
 non-redirect navigation under the current browsing context. If there is no
 redirect or there is any redirect that is not from the same
-<a href="http://tools.ietf.org/html/rfc6454">
+<a href="https://tools.ietf.org/html/rfc6454">
 origin</a> as the destination document, this attribute must return zero. </p>
 </dd>
 </dl>
