@@ -247,8 +247,8 @@ official term ECMAScript, since the term JavaScript is more widely known. [[ECMA
 </section>
 
 <section id='PerformanceResourceTiming'>
-  <h3>Relation with the <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming">PerformanceResourceTiming</a> interface</h3>
-  <p><a>PerformanceNavigationTiming</a> interface extends the following attributes of the <a href="https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming">PerformanceResourceTiming</a> interface:</p>
+  <h3>Relation with the <a href="https://www.w3.org/TR/resource-timing-2/#performanceresourcetiming">PerformanceResourceTiming</a> interface</h3>
+  <p><a>PerformanceNavigationTiming</a> interface extends the following attributes of the <a href="https://www.w3.org/TR/resource-timing-2/#performanceresourcetiming">PerformanceResourceTiming</a> interface:</p>
   <ul>
     <li>The <dfn id='dom-PerformanceNavigationTiming-initiatorType'><code>initiatorType</code></dfn> attribute MUST return the <code>DOMString</code> "<code>navigation</code>".</li>
     <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>workerStart</code></dfn> attribute MUST return the time immediately before the user agent <a href="https://www.w3.org/TR/service-workers/#service-worker-concept">ran the worker</a> (if the <a>current document</a> has an <a href="https://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">active service worker registration</a> [[!SERVICE-WORKERS]]) required to service the request, or if the worker was already available, the time immediately before the user agent <a href="https://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">fired an event named `fetch`</a> at the <a href="https://www.w3.org/TR/service-workers/#dfn-active-worker">active worker</a>. Otherwise, if there is no active worker this attribute MUST return zero.</li>
