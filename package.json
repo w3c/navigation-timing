@@ -1,0 +1,28 @@
+{
+  "name": "navigation-timing",
+  "version": "0.0.0",
+  "description": "This specification defines an interface for web applications to access the complete timing information for navigation of a document.",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w3c/navigation-timing.git"
+  },
+  "keywords": [
+    "performance",
+    "performance-metrics",
+    "web-application",
+    "webapp",
+    "specification",
+    "resource-measurement"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/w3c/navigation-timing/issues"
+  },
+  "homepage": "https://github.com/w3c/navigation-timing#readme",
+  "devDependencies": {
+    "colors": "^1.1.2",
+    "fs-promise": "^2.0.2",
+    "jsdom": "^10.1.0"
+  }
+}
