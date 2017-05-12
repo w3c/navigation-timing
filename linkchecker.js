@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const path = require("path");
 const { JSDOM } = require("jsdom");
 const colors = require("colors");
 colors.setTheme({
@@ -27,7 +26,7 @@ function checkForErrors(html) {
     ".report dt[id$='404']"
   );
   if (!invalidLinks.length) {
-    console.log(color.info("👍 is all good!"));
+    console.log(colors.info("👍 is all good!"));
     return process.exit(0);
   }
   Array.from(invalidLinks).map(elem =>
