@@ -22,7 +22,6 @@
   "homepage": "https://github.com/w3c/navigation-timing#readme",
   "devDependencies": {
     "colors": "^1.1.2",
-    "fs-promise": "^2.0.2",
     "jsdom": "^10.1.0"
   }
 }
