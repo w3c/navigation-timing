@@ -7,15 +7,16 @@ install:
   - npm install
 env:
   global:
-  - ECHIDNA_URL = "https://labs.w3.org/echidna/api/request"
-  - SPEC_URL="https://w3c.github.io/navigation-timing/"
+  - ECHIDNA_URL="https://labs.w3.org/echidna/api/request"
+  - SPEC_URL="https://w3c.github.io/navigation-timing"
   - ECHIDNA_MANIFEST_URL="$SPEC_URL/W3CTRMANIFEST"
   - DECISION_URL="http://www.w3.org/2015/06/24-webperf-minutes.html#item01"
   - SPEC_GENERATOR_URL="https://labs.w3.org/spec-generator/?type=respec"
   - LINKCHECKER_URL="https://validator.w3.org/checklink"
   - secure: "qUa2nSP80N6KZcU1FVk9JfxNlVIYGVWLpQ8Ct2ZbCusvHRQE6/qJyclylh+L8qKpbhLbeZOCsJqUJvqX4a701yGhQaWrU0WGXMKjbBJOWGl+Lu25M6wkI0KCL+2V1xfTc81kZIODKNuyQK7JKdTVNWLMt/pCl0lclC+iBiUuofY="
 script:
-  - curl -o linkreport.html "$LINKCHECKER_URL?uri=$SPEC_GENERATOR_URL&url=$SPEC_URL"
+  - echo "☕ Link checker can take about 1-2 mins..."
+  - curl -o linkreport.html -G "$LINKCHECKER_URL" --data-urlencode "url=$SPEC_GENERATOR_URL&url=$SPEC_URL/"
   - node linkchecker.js
   - rm linkreport.html
   - echo "ok"
