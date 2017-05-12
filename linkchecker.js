@@ -28,8 +28,7 @@ function checkForErrors(data) {
   );
   if (!invalidLinks.length) {
     console.log(color.info("👍 is all good!"));
-    process.exit(0);
-    return; // all is well
+    return process.exit(0);
   }
   Array.from(invalidLinks).map(elem =>
     console.error(
@@ -43,4 +42,6 @@ function checkForErrors(data) {
   );
   process.exit(1);
 }
-ready.then(checkForErrors);
+ready
+  .then(checkForErrors)
+  .catch(err => console.log(colors.error(err.message), err.stack));
