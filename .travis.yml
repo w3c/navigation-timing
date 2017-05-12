@@ -15,7 +15,7 @@ env:
   - LINKCHECKER_URL="https://validator.w3.org/checklink"
   - secure: "qUa2nSP80N6KZcU1FVk9JfxNlVIYGVWLpQ8Ct2ZbCusvHRQE6/qJyclylh+L8qKpbhLbeZOCsJqUJvqX4a701yGhQaWrU0WGXMKjbBJOWGl+Lu25M6wkI0KCL+2V1xfTc81kZIODKNuyQK7JKdTVNWLMt/pCl0lclC+iBiUuofY="
 script:
-  - curl -o linkreport.html -G "$LINKCHECKER_URL" --data-urlencode "url=$SPEC_GENERATOR_URL&url=$SPEC_URL/" | node ./linkchecker.js
+  - curl -G "$LINKCHECKER_URL" --data-urlencode "url=$SPEC_GENERATOR_URL&url=$SPEC_URL/" | node ./linkchecker.js
 after_success:
 - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && curl "$ECHIDNA_URL" --data "url=$ECHIDNA_MANIFEST_URL" --data "decision=$DECISION_URL"
   --data "token=$TOKEN"'
