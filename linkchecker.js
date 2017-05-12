@@ -12,17 +12,17 @@ console.log(colors.info("☕ Link checker can take about 1-2 mins... \n"));
 
 const ready = new Promise(resolve => {
   const stdin = process.openStdin();
-  let data = "";
+  let html = "";
   stdin.on("data", chunk => {
-    data += chunk;
+    html += chunk;
   });
   stdin.on("end", () => {
-    resolve(data);
+    resolve(html);
   });
 });
 
-function checkForErrors(data) {
-  const dom = new JSDOM(data);
+function checkForErrors(html) {
+  const dom = new JSDOM(html);
   const invalidLinks = dom.window.document.querySelectorAll(
     ".report dt[id$='404']"
   );
