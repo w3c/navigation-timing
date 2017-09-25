@@ -271,6 +271,7 @@ fetching process</a>. It's covered by the
 </div>
 
 <pre class='idl'>
+[Exposed=Window]
 interface PerformanceNavigationTiming : PerformanceResourceTiming {
     readonly        attribute DOMHighResTimeStamp unloadEventStart;
     readonly        attribute DOMHighResTimeStamp unloadEventEnd;
@@ -282,8 +283,8 @@ interface PerformanceNavigationTiming : PerformanceResourceTiming {
     readonly        attribute DOMHighResTimeStamp loadEventEnd;
     readonly        attribute NavigationType      type;
     readonly        attribute unsigned short      redirectCount;
-    serializer = {inherit, attribute};
-};
+    [Default] object toJSON();
+  };
 </pre>
 
 <p data-dfn-for='PerformanceNavigationTiming'>If the previous document, and any HTTP redirects or equivalent when navigating, pass the <a href="https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing allow check</a> algorithm, the <dfn>unloadEventStart</dfn> attribute MUST return a <a href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
@@ -646,7 +647,7 @@ all so it's not always feasible to mitigate this attack.</p>
 <section data-dfn-for="PerformanceTiming">
 <h3>The <dfn>PerformanceTiming</dfn> interface</h3>
 <pre class="idl">
-[Exposed = Window]
+[Exposed=Window]
 interface PerformanceTiming {
   readonly attribute unsigned long long navigationStart;
   readonly attribute unsigned long long unloadEventStart;
@@ -669,7 +670,7 @@ interface PerformanceTiming {
   readonly attribute unsigned long long domComplete;
   readonly attribute unsigned long long loadEventStart;
   readonly attribute unsigned long long loadEventEnd;
-  serializer = { attribute };
+  [Default] object toJSON();
 };
 </pre>
   <p class="note">All time values defined in this section are measured in milliseconds since midnight of <time datetime="1970-01-01T00:00Z">January 1, 1970 (UTC)</time>.</p>
@@ -960,7 +961,7 @@ or is not completed.</p>
 <section data-dfn-for="PerformanceNavigation">
 <h3>The <dfn>PerformanceNavigation</dfn> interface</h3>
 <pre class="idl">
-[Exposed = Window]
+[Exposed=Window]
 interface PerformanceNavigation {
   const unsigned short TYPE_NAVIGATE = 0;
   const unsigned short TYPE_RELOAD = 1;
@@ -968,7 +969,7 @@ interface PerformanceNavigation {
   const unsigned short TYPE_RESERVED = 255;
   readonly attribute unsigned short type;
   readonly attribute unsigned short redirectCount;
-  serializer = { attribute };
+  [Default] object toJSON();
 };
 </pre>
 <dl>
@@ -1019,6 +1020,7 @@ origin</a> as the destination document, this attribute must return zero. </p>
 <section data-dfn-for="Performance">
 <h3>Extensions to the <code>Performance</code> interface</h3>
 <pre class="idl">
+[Exposed=Window]
 partial interface Performance {
   [SameObject]
   readonly attribute PerformanceTiming timing;
