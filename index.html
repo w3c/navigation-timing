@@ -63,7 +63,7 @@
           data: [
             {
               value: "Can I use Navigation Timing?",
-              href: "http://caniuse.com/#feat=nav-timing",
+              href: "https://caniuse.com/#feat=nav-timing",
             },
           ],
         },
@@ -176,8 +176,8 @@
         and retrieve high resolution performance metric data related to the
         navigation of a document. As the <a>PerformanceNavigationTiming</a>
         interface uses [[HR-TIME-2]], all time values are measured with respect
-        to the <a href="https://www.w3.org/TR/hr-time-2/#time-origin-1">time
-        origin</a> of the Window object.
+        to the <a data-cite="!HR-TIME-2#time-origin">time origin</a> of the
+        Window object.
       </p>
       <p>
         For example, if we know that the response end occurs 100ms after the
@@ -203,30 +203,6 @@
         &lt;/script&gt;
         &lt;body onload="showNavigationDetails()"&gt;
       </pre>
-    </section>
-    <section id="conformance">
-      <p>
-        Requirements phrased in the imperative as part of algorithms (such as
-        "strip any leading space characters" or "return false and abort these
-        steps") are to be interpreted with the meaning of the key word ("MUST",
-        "SHOULD", "MAY", etc) used in introducing the algorithm.
-      </p>
-      <p>
-        Some conformance requirements are phrased as requirements on
-        attributes, methods or objects. Such requirements are to be interpreted
-        as requirements on user agents.
-      </p>
-      <p>
-        Conformance requirements phrased as algorithms or specific steps MAY be
-        implemented in any manner, so long as the end result is equivalent. (In
-        particular, the algorithms defined in this specification are intended
-        to be easy to follow, and not intended to be performant.)
-      </p>
-      <p>
-        The IDL fragments in this specification must be interpreted as required
-        for conforming IDL fragments, as described in the Web IDL
-        specification. [[!WEBIDL]]
-      </p>
     </section>
     <section id="terminology">
       <h2>
@@ -266,14 +242,12 @@
       </h2>
       <section id='performanceentry'>
         <h3>
-          Relation with the <a href=
-          "https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry">PerformanceEntry</a>
-          interface
+          Relation to the <code>PerformanceEntry</code> interface
         </h3>
         <p>
           <a>PerformanceNavigationTiming</a> interface extends the following
-          attributes of <a href=
-          "https://www.w3.org/TR/performance-timeline-2/#dom-performanceentry">PerformanceEntry</a>
+          attributes of <code><dfn data-cite=
+          "PERFORMANCE-TIMELINE-2#dom-performanceentry">PerformanceEntry</dfn></code>
           interface:
         </p>
         <ul>
@@ -290,15 +264,15 @@
           </li>
           <li>The <dfn id=
           'dom-PerformanceNavigationTiming-startTime'><code>startTime</code></dfn>
-          attribute MUST return a <a href=
-          "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value of 0. [[!HR-TIME-2]]
+          attribute MUST return a <a data-cite=
+          "HR-TIME-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value of 0. [[!HR-TIME-2]]
           </li>
           <li>The <dfn id=
           'dom-PerformanceNavigationTiming-duration'><code>duration</code></dfn>
-          attribute MUST return a <a href=
-          "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          equal to the difference between <a data-link-for=
+          attribute MUST return a <a data-cite=
+          "HR-TIME-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> equal to
+          the difference between <a data-link-for=
           "PerformanceNavigationTiming">loadEventEnd</a> and <a href=
           "#dom-PerformanceNavigationTiming-startTime"><code>startTime</code></a>,
           respectively.
@@ -307,21 +281,17 @@
       </section>
       <section id='PerformanceResourceTiming'>
         <h3>
-          Relation with the <a href=
-          "https://www.w3.org/TR/resource-timing-2/#performanceresourcetiming">PerformanceResourceTiming</a>
-          interface
+          Relation to the <code>PerformanceResourceTiming</code> interface
         </h3>
         <p>
           <a>PerformanceNavigationTiming</a> interface extends the following
-          attributes of the <a href=
-          "https://www.w3.org/TR/resource-timing-2/#performanceresourcetiming">PerformanceResourceTiming</a>
+          attributes of the <code><dfn data-cite=
+          "RESOURCE-TIMING-2#performanceresourcetiming">PerformanceResourceTiming</dfn></code>
           interface:
         </p>
-        <ul>
-          <li>The <dfn id=
-          'dom-PerformanceNavigationTiming-initiatorType'><code>initiatorType</code></dfn>
-          attribute MUST return the <code>DOMString</code>
-          "<code>navigation</code>".
+        <ul data-dfn-for="PerformanceResourceTiming">
+          <li>The <dfn>initiatorType</dfn> attribute MUST return the
+          <code>DOMString</code> "<code>navigation</code>".
           </li>
           <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>
             workerStart</code></dfn> attribute MUST return the time immediately
@@ -428,8 +398,8 @@
           sets the <a data-cite=
           "!HTML/dom.html#current-document-readiness">current document
           readiness</a> of the <a>current document</a> to <a data-cite=
-          "!HTML/syntax.html#the-end" title=
-          '"interactive" document readiness'>"interactive"</a> [[!HTML5]].
+          "!HTML/parsing.html#the-end" title=
+          'interactive" document readiness'>"interactive"</a> [[!HTML]].
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>domContentLoadedEventStart</dfn> attribute MUST return a
@@ -455,7 +425,7 @@
           "!HTML/dom.html#current-document-readiness">current document
           readiness</a> of the <a>current document</a> to <a data-cite=
           "!HTML/syntax.html#the-end" title=
-          '"complete" document readiness'>"complete"</a> [[!HTML5]].
+          '"complete" document readiness'>"complete"</a> [[!HTML]].
         </p>
         <p>
           If the <a data-cite=
@@ -472,8 +442,7 @@
           with a time value equal to the time of the first occurrence of the
           corresponding <a data-cite=
           "!HTML/dom.html#current-document-readiness" title=
-          'current document readiness'>document readiness</a> change
-          [[!HTML5]].
+          'current document readiness'>document readiness</a> change [[!HTML]].
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>loadEventStart</dfn> attribute MUST return a <a href=
@@ -1633,6 +1602,7 @@ interface PerformanceNavigation {
         </dl>
       </section>
     </section>
+    <section id="conformance"></section>
     <section id="acknowledgements" class="appendix">
       <h2>
         Acknowledgments
