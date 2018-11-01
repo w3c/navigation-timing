@@ -176,7 +176,7 @@
         and retrieve high resolution performance metric data related to the
         navigation of a document. As the <a>PerformanceNavigationTiming</a>
         interface uses [[HR-TIME-2]], all time values are measured with respect
-        to the <a data-cite="!HR-TIME-2#time-origin">time origin</a> of the
+        to the <a data-cite="HR-TIME-2#sec-time-origin">time origin</a> of the
         Window object.
       </p>
       <p>
@@ -215,11 +215,11 @@
       </p>
       <p>
         The term <dfn>navigation</dfn> refers to the act of <a data-cite=
-        "!HTML/browsing-the-web.html#navigate">navigating</a>.
+        "HTML/browsing-the-web.html#navigate">navigating</a>.
       </p>
       <p>
         The term <dfn>current document</dfn> refers to the document associated
-        with the <a data-cite="!HTML/dom.html#document">Window
+        with the <a data-cite="HTML/dom.html#document">Window
         object's newest Document object</a>.
       </p>
       <p>
@@ -254,7 +254,7 @@
           <li>The <dfn id=
           'dom-PerformanceNavigationTiming-name'><code>name</code></dfn>
           attribute MUST return the <code>DOMString</code> value of the
-          <a data-cite="!HTML/dom.html#the-document's-address">address</a> of
+          <a data-cite="HTML/dom.html#the-document's-address">address</a> of
           the <a>current document</a>.
           </li>
           <li>The <dfn id=
@@ -266,7 +266,7 @@
           'dom-PerformanceNavigationTiming-startTime'><code>startTime</code></dfn>
           attribute MUST return a <a data-cite=
           "HR-TIME-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value of 0. [[!HR-TIME-2]]
+          time value of 0. [[HR-TIME-2]]
           </li>
           <li>The <dfn id=
           'dom-PerformanceNavigationTiming-duration'><code>duration</code></dfn>
@@ -286,7 +286,7 @@
         <p>
           <a>PerformanceNavigationTiming</a> interface extends the following
           attributes of the <code><dfn data-cite=
-          "RESOURCE-TIMING-2#performanceresourcetiming">PerformanceResourceTiming</dfn></code>
+          "RESOURCE-TIMING-2#sec-performanceresourcetiming">PerformanceResourceTiming</dfn></code>
           interface:
         </p>
         <ul data-dfn-for="PerformanceResourceTiming">
@@ -296,13 +296,13 @@
           <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>
             workerStart</code></dfn> attribute MUST return the time immediately
             before the user agent <a href=
-            "https://www.w3.org/TR/service-workers/#service-worker-concept">ran
+            "https://www.w3.org/TR/service-workers/#run-service-worker">ran
             the worker</a> (if the <a>current document</a> has an <a href=
             "https://www.w3.org/TR/service-workers/#dfn-containing-service-worker-registration">
-            active service worker registration</a> [[!SERVICE-WORKERS]])
+            active service worker registration</a> [[SERVICE-WORKERS]])
             required to service the request, or if the worker was already
             available, the time immediately before the user agent <a href=
-            "https://www.w3.org/TR/service-workers/#on-fetch-request-algorithm">
+            "https://www.w3.org/TR/service-workers/#fetchevent">
             fired an event named `fetch`</a> at the <a href=
             "https://www.w3.org/TR/service-workers/#dfn-active-worker">active
             worker</a>. Otherwise, if there is no active worker this attribute
@@ -325,7 +325,7 @@
           <p>
             Checking and retrieving contents from the <a href=
             "https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]] is
-            part of the <a data-cite="!FETCH#concept-fetch" title=
+            part of the <a data-cite="FETCH#concept-fetch" title=
             'fetch'>fetching process</a>. It's covered by the <a href=
             "https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-requeststart">
             <code>requestStart</code></a>, <a href=
@@ -352,40 +352,40 @@
         };
         </pre>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          If the previous document, and any HTTP redirects or equivalent when
-          navigating, pass the <a href=
-          "https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing
+          If the previous document, and any <a data-cite="FETCH#redirect-status">HTTP
+          redirects</a> when navigating, pass the <a href=
+          "https://www.w3.org/TR/resource-timing-2/#dfn-timing-allow-check">timing
           allow check</a> algorithm, the <dfn>unloadEventStart</dfn> attribute
           MUST return a <a href=
           "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to the time immediately before the user agent
           starts the <a data-cite=
-          "!HTML/browsing-the-web.html#unloading-documents">unload event</a> of the
+          "HTML/browsing-the-web.html#unloading-documents">unload event</a> of the
           previous document.
         </p>
         <p>
           If there is no previous document or the above <a href=
-          "https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing
+          "https://www.w3.org/TR/resource-timing-2/#dfn-timing-allow-check">timing
           allow check</a> algorithm does not pass, this attribute MUST return a
           <a href=
           "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to zero.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          If the previous document, and any HTTP redirects or equivalent when
-          navigating, pass the <a href=
-          "https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing
+          If the previous document, and any <a data-cite="FETCH#redirect-status">HTTP
+          redirects</a> when navigating, pass the <a href=
+          "https://www.w3.org/TR/resource-timing-2/#dfn-timing-allow-check">timing
           allow check</a> algorithm, the <dfn>unloadEventEnd</dfn> attribute
           MUST return a <a href=
           "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to the time immediately after the user agent
           finishes the <a data-cite=
-          "!HTML/browsing-the-web.html#unloading-documents">unload event</a> of the
+          "HTML/browsing-the-web.html#unloading-documents">unload event</a> of the
           previous document.
         </p>
         <p>
           If there is no previous document or the above <a href=
-          "https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing
+          "https://www.w3.org/TR/resource-timing-2/#dfn-timing-allow-check">timing
           allow check</a> algorithm does not pass, this attribute MUST return a
           <a href=
           "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
@@ -396,17 +396,17 @@
           "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to the time immediately before the user agent
           sets the <a data-cite=
-          "!HTML/dom.html#current-document-readiness">current document
+          "HTML/dom.html#current-document-readiness">current document
           readiness</a> of the <a>current document</a> to <a data-cite=
-          "!HTML/parsing.html#the-end" title=
-          'interactive" document readiness'>"interactive"</a> [[!HTML]].
+          "HTML/parsing.html#the-end" title=
+          'interactive" document readiness'>"interactive"</a> [[HTML]].
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>domContentLoadedEventStart</dfn> attribute MUST return a
           <a href=
           "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to the time immediately before the user agent
-          fires the <a data-cite="!HTML/parsing.html#the-end">DOMContentLoaded
+          fires the <a data-cite="HTML/parsing.html#the-end">DOMContentLoaded
           event</a> at the <a>current document</a>.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
@@ -415,21 +415,21 @@
           "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to the time immediately after the <a>current
           document</a>'s <a data-cite=
-          "!HTML/parsing.html#the-end">DOMContentLoaded event</a> completes.
+          "HTML/parsing.html#the-end">DOMContentLoaded event</a> completes.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>domComplete</dfn> attribute MUST return a <a href=
           "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to the time immediately before the user agent
           sets the <a data-cite=
-          "!HTML/dom.html#current-document-readiness">current document
+          "HTML/dom.html#current-document-readiness">current document
           readiness</a> of the <a>current document</a> to <a data-cite=
-          "!HTML/parsing.html#the-end" title=
-          '"complete" document readiness'>"complete"</a> [[!HTML]].
+          "HTML/parsing.html#the-end" title=
+          '"complete" document readiness'>"complete"</a> [[HTML]].
         </p>
         <p>
           If the <a data-cite=
-          "!HTML/dom.html#current-document-readiness">current document
+          "HTML/dom.html#current-document-readiness">current document
           readiness</a> changes to the same state multiple times,
           <a data-link-for="PerformanceNavigationTiming">domInteractive</a>,
           <a data-link-for=
@@ -441,8 +441,8 @@
           "https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to the time of the first occurrence of the
           corresponding <a data-cite=
-          "!HTML/dom.html#current-document-readiness" title=
-          'current document readiness'>document readiness</a> change [[!HTML]].
+          "HTML/dom.html#current-document-readiness" title=
+          'current document readiness'>document readiness</a> change [[HTML]].
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>loadEventStart</dfn> attribute MUST return a <a href=
@@ -464,17 +464,15 @@
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>type</dfn> attribute MUST return a <code>DOMString</code>
           describing the type of the last non-redirect <a data-cite=
-          "!HTML/browsing-the-web.html#navigate">navigation</a> in the current browsing
+          "HTML/browsing-the-web.html#navigate">navigation</a> in the current browsing
           context. It MUST have one of the <a>NavigationType</a> values.
         </p>
         <div class="note">
           <p>
             Client-side redirects, such as those using the <a data-cite=
-            "!HTML/semantics.html#attr-meta-http-equiv-refresh">Refresh pragma
-            directive</a>, are not considered HTTP redirects or <a data-cite=
-            "!HTML/infrastructure.html#concept-http-equivalent-codes" title=
-            'HTTP response codes equivalence'>equivalent</a> by this spec. In
-            those cases, the <a data-link-for=
+            "HTML/semantics.html#attr-meta-http-equiv-refresh">Refresh pragma
+            directive</a>, are not considered <a data-cite="FETCH#redirect-status">HTTP
+            redirects</a> by this spec. In those cases, the <a data-link-for=
             "PerformanceNavigationTiming">type</a> attribute SHOULD return
             appropriate value, such as <a data-link-for=
             "NavigationType">reload</a> if reloading the current page, or
@@ -487,12 +485,12 @@
           redirects since the last non-redirect navigation under the current
           browsing context. If there is no redirect or there is any redirect
           that does not pass the <a href=
-          "https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing
+          "https://www.w3.org/TR/resource-timing-2/#dfn-timing-allow-check">timing
           allow check</a> algorithm, this attribute MUST return zero.
         </p>
         <p>
           The <dfn>toJSON()</dfn> method runs [WEBIDL]'s <a data-cite=
-          "!WEBIDL/#default-tojson-operation">default toJSON operation</a>.
+          "WEBIDL/#default-tojson-operation">default toJSON operation</a>.
         </p>
         <section id="sec-performance-navigation-types">
           <h4>
@@ -526,7 +524,7 @@
             </dt>
             <dd>
               Navigation through the reload operation or the <a data-cite=
-              "!HTML/history.html#dom-location-reload">location.reload()</a>
+              "HTML/history.html#dom-location-reload">location.reload()</a>
               method.
             </dd>
             <dt>
@@ -534,7 +532,7 @@
             </dt>
             <dd>
               Navigation through a <a data-cite=
-              "!HTML/browsing-the-web.html#traverse-the-history">history traversal</a>
+              "HTML/browsing-the-web.html#traverse-the-history">history traversal</a>
               operation.
             </dd>
             <dt>
@@ -543,12 +541,12 @@
             <dd>
               Navigation initiated by a <a href=
               'https://www.w3.org/TR/resource-hints/#prerender'>prerender</a>
-              hint [[!RESOURCE-HINTS]].
+              hint [[RESOURCE-HINTS]].
             </dd>
           </dl>
           <p class="note">
             The format of the above enumeration value is inconsistent with the
-            <a data-cite="!WEBIDL/#idl-enums">WebIDL recommendation for
+            <a data-cite="WEBIDL/#idl-enums">WebIDL recommendation for
             formatting of enumeration values</a>. Unfortunately, we are unable
             to change it due to backwards compatibility issues with shipped
             implementations.
@@ -581,19 +579,19 @@
           abort these steps.
             <ol style="list-style-type:lower-alpha;">
               <li>The navigation is aborted due to the <a data-cite=
-              "!HTML/origin.html#sandboxed-navigation-browsing-context-flag">
+              "HTML/origin.html#sandboxed-navigation-browsing-context-flag">
                 sandboxed navigation browsing context flag</a>, the
                 <a data-cite=
-                "!HTML/origin.html#sandboxed-top-level-navigation-without-user-activation-browsing-context-flag">
+                "HTML/origin.html#sandboxed-top-level-navigation-without-user-activation-browsing-context-flag">
                 sandboxed top-level navigation without user activation browsing context flag</a> or the <a data-cite=
-                "!HTML/origin.html#sandboxed-top-level-navigation-with-user-activation-browsing-context-flag">
+                "HTML/origin.html#sandboxed-top-level-navigation-with-user-activation-browsing-context-flag">
                 sandboxed top-level navigation with user activation browsing context flag</a>, a
                 preexisting attempt to navigate the <a data-cite=
-                "!HTML/browsers.html#browsing-context">browsing context</a>, or
+                "HTML/browsers.html#browsing-context">browsing context</a>, or
                 the user canceling the navigation.
               </li>
               <li>The navigation is caused by <a data-cite=
-              "!HTML/browsing-the-web.html#navigate-fragid-step" title=
+              "HTML/browsing-the-web.html#navigate-fragid-step" title=
               'fragment identifiers navigation'>fragment identifiers</a> within
               the page.
               </li>
@@ -604,7 +602,7 @@
               not affect the browsing context.
               </li>
               <li>The user <a data-cite=
-              "!HTML/browsing-the-web.html#refused-to-allow-the-document-to-be-unloaded">
+              "HTML/browsing-the-web.html#refused-to-allow-the-document-to-be-unloaded">
                 refuses to allow the document to be unloaded</a>.
               </li>
             </ol>
@@ -634,28 +632,28 @@
               entering the URL in the user agent's address bar, or form
               submission, or initializing through a script operation other than
               the <a data-cite=
-              "!HTML/history.html#dom-location-reload">location.reload()</a>
+              "HTML/history.html#dom-location-reload">location.reload()</a>
               method, let the navigation type be the <code>DOMString</code>
               "<a data-link-for="NavigationType">navigate</a>".
               </li>
               <li>If the navigation was started either as a result of a
-              <a data-cite="!HTML/semantics.html#attr-meta-http-equiv-refresh"
+              <a data-cite="HTML/semantics.html#attr-meta-http-equiv-refresh"
                 title='Refresh pragma directive'>meta refresh</a>, or the
                 <a data-cite=
-                "!HTML/history.html#dom-location-reload">location.reload()</a>
+                "HTML/history.html#dom-location-reload">location.reload()</a>
                 method, or other equivalent actions, let the navigation type be
                 the <code>DOMString</code> "<a data-link-for=
                 "NavigationType">reload</a>".
               </li>
               <li>If the navigation was started as a result of <a data-cite=
-              "!HTML/browsing-the-web.html#traverse-the-history">history traversal</a>,
+              "HTML/browsing-the-web.html#traverse-the-history">history traversal</a>,
               let the navigation type be the <code>DOMString</code>
               "<a data-link-for="NavigationType">back_forward</a>".
               </li>
             </ol>
           </li>
           <li>If the previous document does not pass the <a href=
-          "https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing
+          "https://www.w3.org/TR/resource-timing-2/#dfn-timing-allow-check">timing
           allow check</a> algorithm, set both <a data-link-for=
           "PerformanceNavigationTiming">unloadEventStart</a> and
           <a data-link-for="PerformanceNavigationTiming">unloadEventEnd</a> to
@@ -670,7 +668,7 @@
           URL has an <a href=
           "https://www.w3.org/TR/service-workers/#dfn-active-worker">active
           worker registration</a>, immediately before the user agent <a href=
-          "https://www.w3.org/TR/service-workers/#service-worker-concept">runs
+          "https://www.w3.org/TR/service-workers/#run-service-worker">runs
           the worker</a> record the time as <a href=
           "#dom-PerformanceNavigationTiming-workerStart"><code>workerStart</code></a>,
           or if the worker is available, record the time before the <a href=
@@ -684,16 +682,14 @@
           </li>
           <li id="fetch-start-step">
             <i>[fetch-start-step]</i> If the new resource is to be fetched
-            using HTTP GET or <a data-cite=
-            "!HTML/infrastructure.html#concept-http-equivalent-get" title=
-            'HTTP GET method equivalence'>equivalent</a>, immediately before a
-            user agent checks with the <a data-cite=
-            "!HTML/offline.html#relevant-application-cache" title=
+            using a "GET" <a data-cite="FETCH#concept-request-method">request method</a>,
+            immediately before a user agent checks with the <a data-cite=
+            "HTML/offline.html#relevant-application-cache" title=
             "relevant application cache">relevant application caches</a>,
             record the current time as <a href=
             "https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart">
             <code>fetchStart</code></a>. Otherwise, immediately before a user
-            agent starts the <a data-cite="!FETCH#concept-fetch"
+            agent starts the <a data-cite="FETCH#concept-fetch"
             title='fetch'>fetching process</a>, record the current time as
             <a href=
             "https://www.w3.org/TR/resource-timing-2/#dom-performanceresourcetiming-fetchstart">
@@ -712,11 +708,11 @@
             <code>fetchStart</code></a>.
           </li>
           <li>Set <a>name</a> to a <code>DOMString</code> value of the
-          <a data-cite="!HTML/dom.html#the-document's-address">address</a> of
+          <a data-cite="HTML/dom.html#the-document's-address">address</a> of
           the <a>current document</a>.
           </li>
           <li>If the resource is fetched from the <a data-cite=
-          "!HTML/offline.html#relevant-application-cache" title=
+          "HTML/offline.html#relevant-application-cache" title=
           "relevant application cache">relevant application cache</a> or local
           resources, including the <a href=
           "https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]], go
@@ -801,7 +797,7 @@
                   <p>
                     When <a href=
                     "https://tools.ietf.org/html/rfc7230#section-6.3">persistent
-                    connection</a> [[!RFC7230]] is enabled, a user agent MAY
+                    connection</a> [[RFC7230]] is enabled, a user agent MAY
                     first try to re-use an open connect to send the request
                     while the connection can be <a href=
                     "https://tools.ietf.org/html/rfc7230#section-6.5">asynchronously
@@ -821,13 +817,11 @@
               </li>
             </ol>
           </li>
-          <li>If the fetched resource results in an HTTP redirect or
-          <a data-cite=
-          "!HTML/infrastructure.html#concept-http-equivalent-codes" title=
-          'HTTP response codes equivalence'>equivalent</a>, then
+          <li>If the fetched resource results in an <a data-cite=
+          "FETCH#redirect-status">HTTP redirect</a>, then
             <ol style="list-style-type:lower-alpha;">
               <li>If the <a href=
-              "https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing
+              "https://www.w3.org/TR/resource-timing-2/#dfn-timing-allow-check">timing
               allow check</a> algorithm does not pass for the <a href=
               "https://tools.ietf.org/html/rfc6454">origin</a> of the fetched
               resource, set <a href=
@@ -886,24 +880,24 @@
           <li>Record the time as <a data-link-for=
           "PerformanceNavigationTiming">domInteractive</a> immediately before
           the user agent sets the <a data-cite=
-          "!HTML/dom.html#current-document-readiness">current document
+          "HTML/dom.html#current-document-readiness">current document
           readiness</a> to "interactive".
           </li>
           <li>Record the time as <a data-link-for=
           "PerformanceNavigationTiming">domContentLoadedEventStart</a>
           immediately before the user agent fires the <a data-cite=
-          "!HTML/parsing.html#the-end">DOMContentLoaded event</a> at the
+          "HTML/parsing.html#the-end">DOMContentLoaded event</a> at the
           document.
           </li>
           <li>Record the time as <a data-link-for=
           "PerformanceNavigationTiming">domContentLoadedEventEnd</a>
           immediately after the <a data-cite=
-          "!HTML/parsing.html#the-end">DOMContentLoaded event</a> completes.
+          "HTML/parsing.html#the-end">DOMContentLoaded event</a> completes.
           </li>
           <li>Record the time as <a data-link-for=
           "PerformanceNavigationTiming">domComplete</a> immediately before the
           user agent sets the <a data-cite=
-          "!HTML/dom.html#current-document-readiness">current document
+          "HTML/dom.html#current-document-readiness">current document
           readiness</a> to "complete".
           </li>
           <li>Record the time as <a data-link-for=
@@ -949,13 +943,13 @@
           to execute its unload handler, which could be used to infer the
           user's login status. These attacks have been mitigated by enforcing
           the <a href=
-          "https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing
+          "https://www.w3.org/TR/resource-timing-2/#dfn-timing-allow-check">timing
           allow check</a> algorithm when timing information involving the
           previous navigation is accessed. [[RESOURCE-TIMING-2]]
         </p>
         <p>
           The <a data-cite=
-          "!HTML/origin.html#relaxing-the-same-origin-restriction">relaxed
+          "HTML/origin.html#relaxing-the-same-origin-restriction">relaxed
           same origin policy</a> doesn't provide sufficient protection against
           unauthorized visits across documents. In shared hosting, an untrusted
           third party is able to host an HTTP server at the same IP address but
@@ -988,12 +982,12 @@
         limit the access to the <a href=
         "#dom-performancenavigationtiming">PerformanceNavigationTiming</a>
         interface, the <a href=
-        "https://www.w3.org/TR/resource-timing-2/#timing-allow-check">timing
+        "https://www.w3.org/TR/resource-timing-2/#dfn-timing-allow-check">timing
         allow check</a> algorithm is enforced and certain attributes are set to
         zero, as described in <a href=
-        "https://www.w3.org/TR/resource-timing-2/#cross-origin-resources"
+        "https://www.w3.org/TR/resource-timing-2/#sec-cross-origin-resources"
         class="sec-ref"><span class="secno">4.5</span> <span class=
-        "sec-title">Cross-origin Resources</span></a> [[!RESOURCE-TIMING]].
+        "sec-title">Cross-origin Resources</span></a> [[RESOURCE-TIMING]].
         Resource providers can explicitly allow all timing information to be
         collected for a <a>current document</a> by adding the
         <code>Timing-Allow-Origin</code> HTTP response header, which specifies
@@ -1076,12 +1070,12 @@ interface PerformanceTiming {
             <p>
               This attribute must return the time immediately after the user
               agent finishes <a data-cite=
-              "!HTML/browsing-the-web.html#prompt-to-unload-a-document">prompting to
+              "HTML/browsing-the-web.html#prompt-to-unload-a-document">prompting to
               unload</a> the previous document. If there is no previous
               document, this attribute must return the time the current
               document is created.
             </p>
-            <p class="note">This attribute is not defined for <a>PerformanceNavigationTiming</a>. Instead, authors can use <a data-cite="!HR-TIME-2#dom-performance-timeorigin">timeOrigin</a> to obtain equivalent timestamp.</p>
+            <p class="note">This attribute is not defined for <a>PerformanceNavigationTiming</a>. Instead, authors can use <a data-cite="HR-TIME-2#dom-performance-timeorigin">timeOrigin</a> to obtain an equivalent timestamp.</p>
           </dd>
           <dt>
             <dfn>unloadEventStart</dfn>
@@ -1090,9 +1084,9 @@ interface PerformanceTiming {
             <p>
               If the previous document and the current document have the same
               <a href="https://tools.ietf.org/html/rfc6454">origin</a>
-              [[!RFC6454]], this attribute must return the time immediately
+              [[RFC6454]], this attribute must return the time immediately
               before the user agent starts the <a data-cite=
-              "!HTML/browsing-the-web.html#unloading-documents">unload</a> event of the
+              "HTML/browsing-the-web.html#unloading-documents">unload</a> event of the
               previous document. If there is no previous document or the
               previous document has a different <a href=
               "https://tools.ietf.org/html/rfc6454">origin</a> than the current
@@ -1108,7 +1102,7 @@ interface PerformanceTiming {
               <a href="https://tools.ietf.org/html/rfc6454">same origin</a>,
               this attribute must return the time immediately after the user
               agent finishes the <a data-cite=
-              "!HTML/browsing-the-web.html#unload-a-document">unload</a> event of the
+              "HTML/browsing-the-web.html#unload-a-document">unload</a> event of the
               previous document. If there is no previous document or the
               previous document has a different <a href=
               "https://tools.ietf.org/html/rfc6454">origin</a> than the current
@@ -1116,15 +1110,14 @@ interface PerformanceTiming {
               return zero.
             </p>
             <p>
-              If there are HTTP redirects <a data-cite=
-              "!HTML/infrastructure.html#concept-http-equivalent-codes">or
-              equivalent</a> when navigating and not all the redirects or
-              equivalent are from the same <a href=
+              If there are <a data-cite=
+              "FETCH#redirect-status">HTTP redirects</a>
+              when navigating and not all the redirects are from the same <a href=
               "https://tools.ietf.org/html/rfc6454">origin</a>, both <a href=
               "#dom-performancetiming-unloadeventstart">unloadEventStart</a>
               and <a href=
               "#dom-performancetiming-unloadeventend">unloadEventEnd</a> must
-              return the zero.
+              return zero.
             </p>
           </dd>
           <dt>
@@ -1132,10 +1125,9 @@ interface PerformanceTiming {
           </dt>
           <dd>
             <p>
-              If there are HTTP redirects <a data-cite=
-              "!HTML/infrastructure.html#concept-http-equivalent-codes">or
-              equivalent</a> when navigating and if all the redirects or
-              equivalent are from the same <a href=
+              If there are <a data-cite=
+              "FETCH#redirect-status">HTTP redirects</a>
+              when navigating and if all the redirects are from the same <a href=
               "https://tools.ietf.org/html/rfc6454">origin</a>, this attribute
               must return the <a href=
               "#dom-performancetiming-fetchstart">starting time of the
@@ -1148,10 +1140,9 @@ interface PerformanceTiming {
           </dt>
           <dd>
             <p>
-              If there are HTTP redirects <a data-cite=
-              "!HTML/infrastructure.html#concept-http-equivalent-codes">or
-              equivalent</a> when navigating and all redirects and equivalents
-              are from the same <a href=
+              If there are <a data-cite=
+              "FETCH#redirect-status">HTTP redirects</a>
+              when navigating and all redirects are from the same <a href=
               "https://tools.ietf.org/html/rfc6454">origin</a>, this attribute
               must return the time immediately after receiving the last byte of
               the response of the last redirect. Otherwise, this attribute must
@@ -1164,15 +1155,14 @@ interface PerformanceTiming {
           <dd>
             <p>
               If the new resource is to be <a data-cite=
-              "!HTML/urls-and-fetching.html#fetching-resources">fetched</a> using
-              HTTP GET <a data-cite=
-              "!HTML/infrastructure.html#concept-http-equivalent-get">or
-              equivalent</a>, fetchStart must return the time immediately
+              "HTML/urls-and-fetching.html#fetching-resources">fetched</a> using
+              a "GET" <a data-cite=FETCH#concept-request-method>request method</a>,
+              fetchStart must return the time immediately
               before the user agent starts checking <a data-cite=
-              "!HTML/offline.html#relevant-application-cache">any relevant
+              "HTML/offline.html#relevant-application-cache">any relevant
               application caches</a>. Otherwise, it must return the time when
               the user agent starts <a data-cite=
-              "!HTML/urls-and-fetching.html#fetching-resources">fetching</a> the
+              "HTML/urls-and-fetching.html#fetching-resources">fetching</a> the
               resource.
             </p>
           </dd>
@@ -1185,9 +1175,9 @@ interface PerformanceTiming {
               agent starts the domain name lookup for the current document. If
               a <a href=
               "https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-              connection</a> [[!RFC2616]] is used or the current document is
+              connection</a> [[RFC2616]] is used or the current document is
               retrieved from <a data-cite=
-              "!HTML/offline.html#relevant-application-cache">relevant
+              "HTML/offline.html#relevant-application-cache">relevant
               application caches</a> or local resources, this attribute must
               return the same value as <a href=
               "#dom-performancetiming-fetchstart">fetchStart</a>.
@@ -1202,9 +1192,9 @@ interface PerformanceTiming {
               agent finishes the domain name lookup for the current document.
               If a <a href=
               "https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-              connection</a> [[!RFC2616]] is used or the current document is
+              connection</a> [[RFC2616]] is used or the current document is
               retrieved from <a data-cite=
-              "!HTML/offline.html#relevant-application-cache">relevant
+              "HTML/offline.html#relevant-application-cache">relevant
               application caches</a> or local resources, this attribute must
               return the same value as <a href=
               "#dom-performancetiming-fetchstart">fetchStart</a>.
@@ -1213,8 +1203,8 @@ interface PerformanceTiming {
               <p>
                 Checking and retrieving contents from the <a href=
                 "https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13">
-                HTTP cache</a> [[!RFC2616]] is part of the <a data-cite=
-                "!HTML/urls-and-fetching.html#fetching-resources">fetching
+                HTTP cache</a> [[RFC2616]] is part of the <a data-cite=
+                "HTML/urls-and-fetching.html#fetching-resources">fetching
                 process</a>. It's covered by the <a href=
                 "#dom-performancetiming-requeststart">requestStart</a>,
                 <a href="#dom-performancetiming-responsestart">responseStart</a>
@@ -1239,9 +1229,9 @@ interface PerformanceTiming {
               agent start establishing the connection to the server to retrieve
               the document. If a <a href=
               "https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-              connection</a> [[!RFC2616]] is used or the current document is
+              connection</a> [[RFC2616]] is used or the current document is
               retrieved from <a data-cite=
-              "!HTML/offline.html#relevant-application-cache">relevant
+              "HTML/offline.html#relevant-application-cache">relevant
               application caches</a> or local resources, this attribute must
               return value of <a href=
               "#dom-performancetiming-domainlookupend">domainLookupEnd</a>.
@@ -1256,9 +1246,9 @@ interface PerformanceTiming {
               agent finishes establishing the connection to the server to
               retrieve the current document. If a <a href=
               "https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-              connection</a> [[!RFC2616]] is used or the current document is
+              connection</a> [[RFC2616]] is used or the current document is
               retrieved from <a data-cite=
-              "!HTML/offline.html#relevant-application-cache">relevant
+              "HTML/offline.html#relevant-application-cache">relevant
               application caches</a> or local resources, this attribute must
               return the value of <a href=
               "#dom-performancetiming-domainlookupend">domainLookupEnd</a>
@@ -1302,7 +1292,7 @@ interface PerformanceTiming {
               This attribute must return the time immediately before the user
               agent starts requesting the current document from the server, or
               from <a data-cite=
-              "!HTML/offline.html#relevant-application-cache">relevant
+              "HTML/offline.html#relevant-application-cache">relevant
               application caches</a> or from local resources.
             </p>
             <p>
@@ -1337,7 +1327,7 @@ interface PerformanceTiming {
               This attribute must return the time immediately after the user
               agent receives the first byte of the response from the server, or
               from <a data-cite=
-              "!HTML/offline.html#relevant-application-cache">relevant
+              "HTML/offline.html#relevant-application-cache">relevant
               application caches</a> or from local resources.
             </p>
           </dd>
@@ -1351,7 +1341,7 @@ interface PerformanceTiming {
               immediately before the transport connection is closed, whichever
               comes first. The document here can be received either from the
               server, <a data-cite=
-              "!HTML/offline.html#relevant-application-cache">relevant
+              "HTML/offline.html#relevant-application-cache">relevant
               application caches</a> or from local resources.
             </p>
           </dd>
@@ -1362,9 +1352,9 @@ interface PerformanceTiming {
             <p>
               This attribute must return the time immediately before the user
               agent sets the <a data-cite=
-              "!HTML/dom.html#current-document-readiness">current document
+              "HTML/dom.html#current-document-readiness">current document
               readiness</a> to <a data-cite=
-              "!HTML/dom.html#current-document-readiness">"loading"</a>.
+              "HTML/dom.html#current-document-readiness">"loading"</a>.
             </p>
             <p class="warning">
               Due to differences in when a Document object is created in
@@ -1380,9 +1370,9 @@ interface PerformanceTiming {
             <p>
               This attribute must return the time immediately before the user
               agent sets the <a data-cite=
-              "!HTML/dom.html#current-document-readiness">current document
+              "HTML/dom.html#current-document-readiness">current document
               readiness</a> to <a data-cite=
-              "!HTML/parsing.html#the-end">"interactive"</a>.
+              "HTML/parsing.html#the-end">"interactive"</a>.
             </p>
           </dd>
           <dt>
@@ -1391,9 +1381,9 @@ interface PerformanceTiming {
           <dd>
             <p>
               This attribute must return the time immediately before the user
-              agent fires <a data-cite="!HTML/parsing.html#the-end">the
+              agent fires <a data-cite="HTML/parsing.html#the-end">the
               DOMContentLoaded event</a> at the <a data-cite=
-              "!HTML/dom.html#document"><code>Document</code></a>.
+              "HTML/dom.html#document"><code>Document</code></a>.
             </p>
           </dd>
           <dt>
@@ -1403,7 +1393,7 @@ interface PerformanceTiming {
             <p>
               This attribute must return the time immediately after the
               document's <a data-cite=
-              "!HTML/parsing.html#the-end">DOMContentLoaded event</a> completes.
+              "HTML/parsing.html#the-end">DOMContentLoaded event</a> completes.
             </p>
           </dd>
           <dt>
@@ -1413,13 +1403,13 @@ interface PerformanceTiming {
             <p>
               This attribute must return the time immediately before the user
               agent sets the <a data-cite=
-              "!HTML/dom.html#current-document-readiness">current document
+              "HTML/dom.html#current-document-readiness">current document
               readiness</a> to <a data-cite=
-              "!HTML/parsing.html#the-end">"complete"</a>.
+              "HTML/parsing.html#the-end">"complete"</a>.
             </p>
             <p>
               If the <a data-cite=
-              "!HTML/dom.html#current-document-readiness">current document
+              "HTML/dom.html#current-document-readiness">current document
               readiness</a> changes to the same state multiple times, <a href=
               "#dom-performancetiming-domloading">domLoading</a>, <a href=
               "#dom-performancetiming-dominteractive">domInteractive</a>,
@@ -1429,7 +1419,7 @@ interface PerformanceTiming {
               "#dom-performancetiming-domcontentloadedeventend">domContentLoadedEventEnd</a>
               and <a href="#dom-performancetiming-domcomplete">domComplete</a>
               must return the time of the first occurrence of the corresponding
-              <a data-cite="!HTML/dom.html#current-document-readiness">document
+              <a data-cite="HTML/dom.html#current-document-readiness">document
               readiness</a> change.
             </p>
           </dd>
@@ -1457,8 +1447,8 @@ interface PerformanceTiming {
             <dfn>toJSON()</dfn>
           </dt>
           <dd>
-            Runs [[!WEBIDL]]'s <a data-cite=
-            "!WEBIDL/#default-tojson-operation">default toJSON operation</a>.
+            Runs [[WEBIDL]]'s <a data-cite=
+            "WEBIDL/#default-tojson-operation">default toJSON operation</a>.
           </dd>
         </dl>
       </section>
@@ -1497,7 +1487,7 @@ interface PerformanceNavigation {
           <dd>
             <p>
               Navigation through the reload operation or the <a data-cite=
-              "!HTML/history.html#dom-location-reload">location.reload()</a>
+              "HTML/history.html#dom-location-reload">location.reload()</a>
               method.
             </p>
           </dd>
@@ -1507,7 +1497,7 @@ interface PerformanceNavigation {
           <dd>
             <p>
               Navigation through a <a data-cite=
-              "!HTML/browsing-the-web.html#traverse-the-history">history traversal</a>
+              "HTML/browsing-the-web.html#traverse-the-history">history traversal</a>
               operation.
             </p>
           </dd>
@@ -1525,18 +1515,17 @@ interface PerformanceNavigation {
           <dd>
             <p>
               This attribute must return the type of the last non-redirect
-              <a data-cite="!HTML/browsing-the-web.html#navigate">navigation</a> in the
+              <a data-cite="HTML/browsing-the-web.html#navigate">navigation</a> in the
               current browsing context. It must have one of the following
               <a href="#dom-performancenavigationtiming-type">navigation
               type</a> values.
             </p>
             <p class="note">
               Client-side redirects, such as those using <a data-cite=
-              "!HTML/semantics.html#attr-meta-http-equiv-refresh">the Refresh
-              pragma directive</a>, are not considered HTTP redirects
-              <a data-cite=
-              "!HTML/infrastructure.html#concept-http-equivalent-codes">or
-              equivalent</a> by this spec. In those cases, the <a href=
+              "HTML/semantics.html#attr-meta-http-equiv-refresh">the Refresh
+              pragma directive</a>, are not considered <a data-cite=
+              "FETCH#redirect-status">HTTP redirects</a>
+              by this spec. In those cases, the <a href=
               "#dom-performancenavigationtiming-type">type</a> attribute should
               return appropriate value, such as <code>TYPE_RELOAD</code> if
               reloading the current page, or <code>TYPE_NAVIGATE</code> if
@@ -1559,8 +1548,8 @@ interface PerformanceNavigation {
             <dfn>toJSON()</dfn>
           </dt>
           <dd>
-            Runs [[!WEBIDL]]'s <a data-cite=
-            "!WEBIDL/#default-tojson-operation">default toJSON operation</a>.
+            Runs [[WEBIDL]]'s <a data-cite=
+            "WEBIDL/#default-tojson-operation">default toJSON operation</a>.
           </dd>
         </dl>
       </section>
@@ -1579,7 +1568,7 @@ interface PerformanceNavigation {
         </pre>
         <p>
           The <dfn>Performance</dfn> interface is defined in
-          [[!PERFORMANCE-TIMELINE-2]].
+          [[PERFORMANCE-TIMELINE-2]].
         </p>
         <dl>
           <dt>
