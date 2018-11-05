@@ -398,7 +398,7 @@
           sets the <a data-cite=
           "HTML/dom.html#current-document-readiness">current document
           readiness</a> of the <a>current document</a> to <a data-cite=
-          "HTML/parsing.html#the-end" title=
+          "HTML/parsing.html#the-end:current-document-readiness" title=
           'interactive" document readiness'>"interactive"</a> [[HTML]].
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
@@ -406,7 +406,7 @@
           <a data-cite=
           "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to the time immediately before the user agent
-          fires the <a data-cite="HTML/parsing.html#event-domcontentloaded">DOMContentLoaded
+          fires the <a data-cite="HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
           event</a> at the <a>current document</a>.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
@@ -415,7 +415,7 @@
           "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value equal to the time immediately after the <a>current
           document</a>'s <a data-cite=
-          "HTML/parsing.html#event-domcontentloaded">DOMContentLoaded event</a> completes.
+          "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded event</a> completes.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>domComplete</dfn> attribute MUST return a <a data-cite=
@@ -424,7 +424,7 @@
           sets the <a data-cite=
           "HTML/dom.html#current-document-readiness">current document
           readiness</a> of the <a>current document</a> to <a data-cite=
-          "HTML/parsing.html#the-end" title=
+          "HTML/parsing.htmlthe-end:current-document-readiness-2" title=
           '"complete" document readiness'>"complete"</a> [[HTML]].
         </p>
         <p>
@@ -1544,7 +1544,7 @@ interface PerformanceNavigation {
             <dfn>toJSON()</dfn>
           </dt>
           <dd>
-            Runs [[WEBIDL]]'s <a data-cite=
+            Runs [WEBIDL]'s <a data-cite=
             "WEBIDL/#default-tojson-operation">default toJSON operation</a>.
           </dd>
         </dl>
