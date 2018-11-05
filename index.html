@@ -292,7 +292,7 @@
         </p>
         <ul data-dfn-for="PerformanceResourceTiming">
           <li>The <dfn>initiatorType</dfn> attribute MUST return the
-          <code><a>DOMString</a></code> "<code>navigation</code>".
+          <a>DOMString</a> "<code>navigation</code>".
           </li>
           <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>
             workerStart</code></dfn> attribute MUST return the time immediately
@@ -462,7 +462,7 @@
           is not completed.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>type</dfn> attribute MUST return a <code><a>DOMString</a></code>
+          The <dfn>type</dfn> attribute MUST return a <a>DOMString</a>
           describing the type of the last non-redirect <a data-cite=
           "HTML/browsing-the-web.html#navigate">navigation</a> in the current browsing
           context. It MUST have one of the <a>NavigationType</a> values.
@@ -612,18 +612,18 @@
             <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>
             performance entry buffer</a>.
           </li>
-          <li>Set <a>name</a> to the <code><a>DOMString</a></code>
+          <li>Set <a>name</a> to the <a>DOMString</a>
           "<code>document</code>".
           </li>
           <li>Set <a>entryType</a> and <a>initiatorType</a> to the
-              <code><a>DOMString</a></code> "<code>navigation</code>".
+              <a>DOMString</a> "<code>navigation</code>".
           </li>
           <li>Set <a>startTime</a> to a <a data-cite=
           "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
           with a time value of zero, and <a data-cite=
           "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
           <code>nextHopProtocol</code></a> to the empty
-          <code><a>DOMString</a></code>.
+          <a>DOMString</a>.
           </li>
           <li>Record the current navigation type in <a data-link-for=
           "PerformanceNavigationTiming">type</a> if it has not been set:
@@ -633,7 +633,7 @@
               submission, or initializing through a script operation other than
               the <a data-cite=
               "HTML/history.html#dom-location-reload">location.reload()</a>
-              method, let the navigation type be the <code><a>DOMString</a></code>
+              method, let the navigation type be the <a>DOMString</a>
               "<a data-link-for="NavigationType">navigate</a>".
               </li>
               <li>If the navigation was started either as a result of a
@@ -642,12 +642,12 @@
                 <a data-cite=
                 "HTML/history.html#dom-location-reload">location.reload()</a>
                 method, or other equivalent actions, let the navigation type be
-                the <code><a>DOMString</a></code> "<a data-link-for=
+                the <a>DOMString</a> "<a data-link-for=
                 "NavigationType">reload</a>".
               </li>
               <li>If the navigation was started as a result of <a data-cite=
               "HTML/browsing-the-web.html#traverse-the-history">history traversal</a>,
-              let the navigation type be the <code><a>DOMString</a></code>
+              let the navigation type be the <a>DOMString</a>
               "<a data-link-for="NavigationType">back_forward</a>".
               </li>
             </ol>
@@ -707,7 +707,7 @@
             "resource-timing-2#dom-performanceresourcetiming-fetchstart">
             <code>fetchStart</code></a>.
           </li>
-          <li>Set <a>name</a> to a <code><a>DOMString</a></code> value of the
+          <li>Set <a>name</a> to a <a>DOMString</a> value of the
           <a data-cite="HTML/dom.html#the-document's-address">address</a> of
           the <a>current document</a>.
           </li>
@@ -870,7 +870,7 @@
                 "PerformanceNavigationTiming">unloadEventEnd</a>. Set <a data-cite=
                 "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
                 <code>nextHopProtocol</code></a> to the empty
-                <code><a>DOMString</a></code>.
+                <a>DOMString</a>.
               </li>
               <li>Return to <a data-cite="#fetch-start-step">fetch-start-step</a>
               with the new resource.
