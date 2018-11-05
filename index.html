@@ -106,8 +106,7 @@
         </li>
         <li>support for [[HR-TIME-2]];
         </li>
-        <li>support for <a data-cite=
-        "resource-hints#prerender">prerender</a>
+        <li>support for <a data-cite="resource-hints#prerender">prerender</a>
         navigations [[RESOURCE-HINTS]];
         </li>
         <li>exposes <a href=
@@ -115,16 +114,16 @@
         redirects</a> since the last non-redirect navigation;
         </li>
         <li>exposes <a href=
-        'resource-timing-2#dom-performanceresourcetiming-nexthopprotocol'>
-          next hop network protocol</a>;
+        'resource-timing-2#dom-performanceresourcetiming-nexthopprotocol'>next
+        hop network protocol</a>;
         </li>
         <li>exposes <a href=
-        'resource-timing-2#dom-performanceresourcetiming-transfersize'>
-          transfer</a>, <a href=
-          'resource-timing-2#dom-performanceresourcetiming-encodedbodysize'>
-          encoded body</a> and <a href=
-          'resource-timing-2#dom-performanceresourcetiming-decodedbodysize'>
-          decoded body</a> size information;
+        'resource-timing-2#dom-performanceresourcetiming-transfersize'>transfer</a>,
+        <a href=
+        'resource-timing-2#dom-performanceresourcetiming-encodedbodysize'>encoded
+        body</a> and <a href=
+        'resource-timing-2#dom-performanceresourcetiming-decodedbodysize'>decoded
+        body</a> size information;
         </li>
         <li>
           <a href=
@@ -219,8 +218,8 @@
       </p>
       <p>
         The term <dfn>current document</dfn> refers to the document associated
-        with the <a data-cite="HTML/dom.html#document">Window
-        object's newest Document object</a>.
+        with the <a data-cite="HTML/dom.html#document">Window object's newest
+        Document object</a>.
       </p>
       <p>
         The term <dfn>JavaScript</dfn> is used to refer to ECMA262, rather than
@@ -253,14 +252,14 @@
         <ul>
           <li>The <dfn id=
           'dom-PerformanceNavigationTiming-name'><code>name</code></dfn>
-          attribute MUST return the <code><dfn
-          data-cite="WEBIDL#es-DOMString">DOMString</dfn></code> value of the
-          <a data-cite="HTML/dom.html#the-document's-address">address</a> of
-          the <a>current document</a>.
+          attribute MUST return the <code><dfn data-cite="WEBIDL#es-DOMString">
+            DOMString</dfn></code> value of the <a data-cite=
+            "HTML/dom.html#the-document's-address">address</a> of the
+            <a>current document</a>.
           </li>
           <li>The <dfn id=
           'dom-PerformanceNavigationTiming-entryType'><code>entryType</code></dfn>
-              attribute MUST return the <a>DOMString</a> "<code id=
+          attribute MUST return the <a>DOMString</a> "<code id=
           "perf-navigation">navigation</code>".
           </li>
           <li>The <dfn id=
@@ -296,15 +295,15 @@
           </li>
           <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>
             workerStart</code></dfn> attribute MUST return the time immediately
-            before the user agent <a data-cite="service-workers-1#run-service-worker">ran
-            the worker</a> (if the <a>current document</a> has an <a data-cite=
-            "service-workers-1#dfn-containing-service-worker-registration">
-            active service worker registration</a> [[SERVICE-WORKERS]])
-            required to service the request, or if the worker was already
-            available, the time immediately before the user agent <a data-cite=
-            "service-workers-1#fetchevent">
-            fired an event named `fetch`</a> at the <a data-cite=
-            "service-workers-1#dfn-active-worker">active
+            before the user agent <a data-cite=
+            "service-workers-1#run-service-worker">ran the worker</a> (if the
+            <a>current document</a> has an <a data-cite=
+            "service-workers-1#dfn-containing-service-worker-registration">active
+            service worker registration</a> [[SERVICE-WORKERS]]) required to
+            service the request, or if the worker was already available, the
+            time immediately before the user agent <a data-cite=
+            "service-workers-1#fetchevent">fired an event named `fetch`</a> at
+            the <a data-cite="service-workers-1#dfn-active-worker">active
             worker</a>. Otherwise, if there is no active worker this attribute
             MUST return zero.
           </li>
@@ -327,12 +326,12 @@
             "https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]] is
             part of the <a data-cite="FETCH#concept-fetch" title=
             'fetch'>fetching process</a>. It's covered by the <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-requeststart">
-            <code>requestStart</code></a>, <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-responsestart">
-            <code>responseStart</code></a> and <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-responseend">
-            <code>responseEnd</code></a> attributes.
+            "resource-timing-2#dom-performanceresourcetiming-requeststart"><code>
+            requestStart</code></a>, <a data-cite=
+            "resource-timing-2#dom-performanceresourcetiming-responsestart"><code>
+            responseStart</code></a> and <a data-cite=
+            "resource-timing-2#dom-performanceresourcetiming-responseend"><code>
+            responseEnd</code></a> attributes.
           </p>
         </div>
         <pre class='idl'>
@@ -352,80 +351,78 @@
         };
         </pre>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          If the previous document, and any <a data-cite="FETCH#redirect-status">HTTP
-          redirects</a> when navigating, pass the <a data-cite=
-          "resource-timing-2#dfn-timing-allow-check">timing
-          allow check</a> algorithm, the <dfn>unloadEventStart</dfn> attribute
-          MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to the time immediately before the user agent
-          starts the <a data-cite=
-          "HTML/browsing-the-web.html#unloading-documents">unload event</a> of the
-          previous document.
+          If the previous document, and any <a data-cite=
+          "FETCH#redirect-status">HTTP redirects</a> when navigating, pass the
+          <a data-cite="resource-timing-2#dfn-timing-allow-check">timing allow
+          check</a> algorithm, the <dfn>unloadEventStart</dfn> attribute MUST
+          return a <a data-cite=
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to the time immediately before the user agent starts
+          the <a data-cite=
+          "HTML/browsing-the-web.html#unloading-documents">unload event</a> of
+          the previous document.
         </p>
         <p>
           If there is no previous document or the above <a data-cite=
-          "resource-timing-2#dfn-timing-allow-check">timing
-          allow check</a> algorithm does not pass, this attribute MUST return a
-          <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to zero.
+          "resource-timing-2#dfn-timing-allow-check">timing allow check</a>
+          algorithm does not pass, this attribute MUST return a <a data-cite=
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to zero.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          If the previous document, and any <a data-cite="FETCH#redirect-status">HTTP
-          redirects</a> when navigating, pass the <a data-cite=
-          "resource-timing-2#dfn-timing-allow-check">timing
-          allow check</a> algorithm, the <dfn>unloadEventEnd</dfn> attribute
-          MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to the time immediately after the user agent
+          If the previous document, and any <a data-cite=
+          "FETCH#redirect-status">HTTP redirects</a> when navigating, pass the
+          <a data-cite="resource-timing-2#dfn-timing-allow-check">timing allow
+          check</a> algorithm, the <dfn>unloadEventEnd</dfn> attribute MUST
+          return a <a data-cite=
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to the time immediately after the user agent
           finishes the <a data-cite=
-          "HTML/browsing-the-web.html#unloading-documents">unload event</a> of the
-          previous document.
+          "HTML/browsing-the-web.html#unloading-documents">unload event</a> of
+          the previous document.
         </p>
         <p>
           If there is no previous document or the above <a data-cite=
-          "resource-timing-2#dfn-timing-allow-check">timing
-          allow check</a> algorithm does not pass, this attribute MUST return a
-          <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to zero.
+          "resource-timing-2#dfn-timing-allow-check">timing allow check</a>
+          algorithm does not pass, this attribute MUST return a <a data-cite=
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to zero.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>domInteractive</dfn> attribute MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to the time immediately before the user agent
-          sets the <a data-cite=
-          "HTML/dom.html#current-document-readiness">current document
-          readiness</a> of the <a>current document</a> to <a data-cite=
-          "HTML/parsing.html#the-end:current-document-readiness" title=
-          'interactive" document readiness'>"interactive"</a> [[HTML]].
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to the time immediately before the user agent sets
+          the <a data-cite="HTML/dom.html#current-document-readiness">current
+          document readiness</a> of the <a>current document</a> to
+          <a data-cite="HTML/parsing.html#the-end:current-document-readiness"
+          title='interactive" document readiness'>"interactive"</a> [[HTML]].
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>domContentLoadedEventStart</dfn> attribute MUST return a
           <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to the time immediately before the user agent
-          fires the <a data-cite="HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to the time immediately before the user agent fires
+          the <a data-cite=
+          "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
           event</a> at the <a>current document</a>.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>domContentLoadedEventEnd</dfn> attribute MUST return a
           <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to the time immediately after the <a>current
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to the time immediately after the <a>current
           document</a>'s <a data-cite=
-          "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded event</a> completes.
+          "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
+          event</a> completes.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>domComplete</dfn> attribute MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to the time immediately before the user agent
-          sets the <a data-cite=
-          "HTML/dom.html#current-document-readiness">current document
-          readiness</a> of the <a>current document</a> to <a data-cite=
-          "HTML/parsing.htmlthe-end:current-document-readiness-2" title=
-          '"complete" document readiness'>"complete"</a> [[HTML]].
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to the time immediately before the user agent sets
+          the <a data-cite="HTML/dom.html#current-document-readiness">current
+          document readiness</a> of the <a>current document</a> to
+          <a data-cite="HTML/parsing.htmlthe-end:current-document-readiness-2"
+          title='"complete" document readiness'>"complete"</a> [[HTML]].
         </p>
         <p>
           If the <a data-cite=
@@ -438,46 +435,47 @@
           "PerformanceNavigationTiming">domContentLoadedEventEnd</a> and
           <a data-link-for="PerformanceNavigationTiming">domComplete</a> MUST
           return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to the time of the first occurrence of the
-          corresponding <a data-cite=
-          "HTML/dom.html#current-document-readiness" title=
-          'current document readiness'>document readiness</a> change [[HTML]].
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to the time of the first occurrence of the
+          corresponding <a data-cite="HTML/dom.html#current-document-readiness"
+          title='current document readiness'>document readiness</a> change
+          [[HTML]].
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>loadEventStart</dfn> attribute MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to the time immediately before the load event
-          of the <a>current document</a> is fired. It MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to zero when the load event is not fired yet.
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to the time immediately before the load event of the
+          <a>current document</a> is fired. It MUST return a <a data-cite=
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to zero when the load event is not fired yet.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>loadEventEnd</dfn> attribute MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to the time when the load event of the
-          <a>current document</a> is completed. It MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value equal to zero when the load event is not fired or
-          is not completed.
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to the time when the load event of the <a>current
+          document</a> is completed. It MUST return a <a data-cite=
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value equal to zero when the load event is not fired or is not
+          completed.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>type</dfn> attribute MUST return a <a>DOMString</a>
           describing the type of the last non-redirect <a data-cite=
-          "HTML/browsing-the-web.html#navigate">navigation</a> in the current browsing
-          context. It MUST have one of the <a>NavigationType</a> values.
+          "HTML/browsing-the-web.html#navigate">navigation</a> in the current
+          browsing context. It MUST have one of the <a>NavigationType</a>
+          values.
         </p>
         <div class="note">
           <p>
             Client-side redirects, such as those using the <a data-cite=
             "HTML/semantics.html#attr-meta-http-equiv-refresh">Refresh pragma
-            directive</a>, are not considered <a data-cite="FETCH#redirect-status">HTTP
-            redirects</a> by this spec. In those cases, the <a data-link-for=
-            "PerformanceNavigationTiming">type</a> attribute SHOULD return
-            appropriate value, such as <a data-link-for=
-            "NavigationType">reload</a> if reloading the current page, or
-            <a data-link-for="NavigationType">navigate</a> if navigating to a
-            new URL.
+            directive</a>, are not considered <a data-cite=
+            "FETCH#redirect-status">HTTP redirects</a> by this spec. In those
+            cases, the <a data-link-for="PerformanceNavigationTiming">type</a>
+            attribute SHOULD return appropriate value, such as
+            <a data-link-for="NavigationType">reload</a> if reloading the
+            current page, or <a data-link-for="NavigationType">navigate</a> if
+            navigating to a new URL.
           </p>
         </div>
         <p data-dfn-for='PerformanceNavigationTiming'>
@@ -485,8 +483,8 @@
           redirects since the last non-redirect navigation under the current
           browsing context. If there is no redirect or there is any redirect
           that does not pass the <a data-cite=
-          "resource-timing-2#dfn-timing-allow-check">timing
-          allow check</a> algorithm, this attribute MUST return zero.
+          "resource-timing-2#dfn-timing-allow-check">timing allow check</a>
+          algorithm, this attribute MUST return zero.
         </p>
         <p>
           The <dfn>toJSON()</dfn> method runs [WEBIDL]'s <a data-cite=
@@ -532,16 +530,15 @@
             </dt>
             <dd>
               Navigation through a <a data-cite=
-              "HTML/browsing-the-web.html#traverse-the-history">history traversal</a>
-              operation.
+              "HTML/browsing-the-web.html#traverse-the-history">history
+              traversal</a> operation.
             </dd>
             <dt>
               <dfn>prerender</dfn>
             </dt>
             <dd>
               Navigation initiated by a <a data-cite=
-              'resource-hints#prerender'>prerender</a>
-              hint [[RESOURCE-HINTS]].
+              'resource-hints#prerender'>prerender</a> hint [[RESOURCE-HINTS]].
             </dd>
           </dl>
           <p class="note">
@@ -579,16 +576,16 @@
           abort these steps.
             <ol style="list-style-type:lower-alpha;">
               <li>The navigation is aborted due to the <a data-cite=
-              "HTML/origin.html#sandboxed-navigation-browsing-context-flag">
-                sandboxed navigation browsing context flag</a>, the
-                <a data-cite=
-                "HTML/origin.html#sandboxed-top-level-navigation-without-user-activation-browsing-context-flag">
-                sandboxed top-level navigation without user activation browsing context flag</a> or the <a data-cite=
+              "HTML/origin.html#sandboxed-navigation-browsing-context-flag">sandboxed
+              navigation browsing context flag</a>, the <a data-cite=
+              "HTML/origin.html#sandboxed-top-level-navigation-without-user-activation-browsing-context-flag">
+                sandboxed top-level navigation without user activation browsing
+                context flag</a> or the <a data-cite=
                 "HTML/origin.html#sandboxed-top-level-navigation-with-user-activation-browsing-context-flag">
-                sandboxed top-level navigation with user activation browsing context flag</a>, a
-                preexisting attempt to navigate the <a data-cite=
-                "HTML/browsers.html#browsing-context">browsing context</a>, or
-                the user canceling the navigation.
+                sandboxed top-level navigation with user activation browsing
+                context flag</a>, a preexisting attempt to navigate the
+                <a data-cite="HTML/browsers.html#browsing-context">browsing
+                context</a>, or the user canceling the navigation.
               </li>
               <li>The navigation is caused by <a data-cite=
               "HTML/browsing-the-web.html#navigate-fragid-step" title=
@@ -609,21 +606,20 @@
           </li>
           <li id="step-create-object">Create a new
           <a>PerformanceNavigationTiming</a> object and add it to the
-            <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>
-            performance entry buffer</a>.
+          <a data-cite=
+          'performance-timeline-2#dfn-performance-entry-buffer'>performance
+          entry buffer</a>.
           </li>
-          <li>Set <a>name</a> to the <a>DOMString</a>
-          "<code>document</code>".
+          <li>Set <a>name</a> to the <a>DOMString</a> "<code>document</code>".
           </li>
           <li>Set <a>entryType</a> and <a>initiatorType</a> to the
-              <a>DOMString</a> "<code>navigation</code>".
+          <a>DOMString</a> "<code>navigation</code>".
           </li>
           <li>Set <a>startTime</a> to a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          with a time value of zero, and <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
-          <code>nextHopProtocol</code></a> to the empty
-          <a>DOMString</a>.
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          time value of zero, and <a data-cite=
+          "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol"><code>
+            nextHopProtocol</code></a> to the empty <a>DOMString</a>.
           </li>
           <li>Record the current navigation type in <a data-link-for=
           "PerformanceNavigationTiming">type</a> if it has not been set:
@@ -638,23 +634,23 @@
               </li>
               <li>If the navigation was started either as a result of a
               <a data-cite="HTML/semantics.html#attr-meta-http-equiv-refresh"
-                title='Refresh pragma directive'>meta refresh</a>, or the
-                <a data-cite=
-                "HTML/history.html#dom-location-reload">location.reload()</a>
-                method, or other equivalent actions, let the navigation type be
-                the <a>DOMString</a> "<a data-link-for=
-                "NavigationType">reload</a>".
+              title='Refresh pragma directive'>meta refresh</a>, or the
+              <a data-cite=
+              "HTML/history.html#dom-location-reload">location.reload()</a>
+              method, or other equivalent actions, let the navigation type be
+              the <a>DOMString</a> "<a data-link-for=
+              "NavigationType">reload</a>".
               </li>
               <li>If the navigation was started as a result of <a data-cite=
-              "HTML/browsing-the-web.html#traverse-the-history">history traversal</a>,
-              let the navigation type be the <a>DOMString</a>
+              "HTML/browsing-the-web.html#traverse-the-history">history
+              traversal</a>, let the navigation type be the <a>DOMString</a>
               "<a data-link-for="NavigationType">back_forward</a>".
               </li>
             </ol>
           </li>
           <li>If the previous document does not pass the <a data-cite=
-          "resource-timing-2#dfn-timing-allow-check">timing
-          allow check</a> algorithm, set both <a data-link-for=
+          "resource-timing-2#dfn-timing-allow-check">timing allow check</a>
+          algorithm, set both <a data-link-for=
           "PerformanceNavigationTiming">unloadEventStart</a> and
           <a data-link-for="PerformanceNavigationTiming">unloadEventEnd</a> to
           0 then go to <a href="#fetch-start-step">fetch-start-step</a>.
@@ -665,51 +661,47 @@
           <li>Immediately after the unload event is completed, record the
           current time as <a data-link-for=
           "PerformanceNavigationTiming">unloadEventEnd</a>. If the navigation
-          URL has an <a data-cite=
-          "service-workers-1#dfn-active-worker">active
-          worker registration</a>, immediately before the user agent <a data-cite=
-          "service-workers-1#run-service-worker">runs
-          the worker</a> record the time as <a data-cite=
+          URL has an <a data-cite="service-workers-1#dfn-active-worker">active
+          worker registration</a>, immediately before the user agent
+          <a data-cite="service-workers-1#run-service-worker">runs the
+          worker</a> record the time as <a data-cite=
           "#dom-PerformanceNavigationTiming-workerStart"><code>workerStart</code></a>,
-          or if the worker is available, record the time before the <a data-cite=
-          "service-workers-1#on-fetch-request-algorithm">
-            event named `fetch` is fired</a> at the active worker. Otherwise,
-            if the navigation URL has no matching <a data-cite=
-            "service-workers-1#dfn-service-worker-registration">
-            service worker registration</a>, set <a data-cite=
-            "#dom-PerformanceNavigationTiming-workerStart"><code>workerStart</code></a>
-            value to zero.
+          or if the worker is available, record the time before the
+          <a data-cite="service-workers-1#on-fetch-request-algorithm">event
+          named `fetch` is fired</a> at the active worker. Otherwise, if the
+          navigation URL has no matching <a data-cite=
+          "service-workers-1#dfn-service-worker-registration">service worker
+          registration</a>, set <a data-cite=
+          "#dom-PerformanceNavigationTiming-workerStart"><code>workerStart</code></a>
+          value to zero.
           </li>
           <li id="fetch-start-step">
             <i>[fetch-start-step]</i> If the new resource is to be fetched
-            using a "GET" <a data-cite="FETCH#concept-request-method">request method</a>,
-            immediately before a user agent checks with the <a data-cite=
-            "HTML/offline.html#relevant-application-cache" title=
+            using a "GET" <a data-cite="FETCH#concept-request-method">request
+            method</a>, immediately before a user agent checks with the
+            <a data-cite="HTML/offline.html#relevant-application-cache" title=
             "relevant application cache">relevant application caches</a>,
             record the current time as <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-fetchstart">
-            <code>fetchStart</code></a>. Otherwise, immediately before a user
-            agent starts the <a data-cite="FETCH#concept-fetch"
-            title='fetch'>fetching process</a>, record the current time as
-            <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-fetchstart">
-            <code>fetchStart</code></a>.
+            "resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.
+            Otherwise, immediately before a user agent starts the <a data-cite=
+            "FETCH#concept-fetch" title='fetch'>fetching process</a>, record
+            the current time as <a data-cite=
+            "resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.
           </li>
           <li>Let <a data-cite=
           "resource-timing-2#dom-performanceresourcetiming-domainlookupstart">
             <code>domainLookupStart</code></a>, <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-domainlookupend">
-            <code>domainLookupEnd</code></a>, <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectstart">
-            <code>connectStart</code></a> and <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectend">
-            <code>connectEnd</code></a> be the same value as <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-fetchstart">
-            <code>fetchStart</code></a>.
+            "resource-timing-2#dom-performanceresourcetiming-domainlookupend"><code>
+            domainLookupEnd</code></a>, <a data-cite=
+            "resource-timing-2#dom-performanceresourcetiming-connectstart"><code>
+            connectStart</code></a> and <a data-cite=
+            "resource-timing-2#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a>
+            be the same value as <a data-cite=
+            "resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.
           </li>
           <li>Set <a>name</a> to a <a>DOMString</a> value of the
-          <a data-cite="HTML/dom.html#the-document's-address">address</a> of
-          the <a>current document</a>.
+            <a data-cite="HTML/dom.html#the-document's-address">address</a> of
+            the <a>current document</a>.
           </li>
           <li>If the resource is fetched from the <a data-cite=
           "HTML/offline.html#relevant-application-cache" title=
@@ -726,34 +718,32 @@
             <code>domainLookupStart</code></a>.
           </li>
           <li>Record the time as <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-domainlookupend">
-            <code>domainLookupEnd</code></a> immediately after the domain name
-            lookup is successfully done. A user agent MAY need multiple retries
-            before that. If the domain lookup fails, abort the rest of the
-            steps.
+          "resource-timing-2#dom-performanceresourcetiming-domainlookupend"><code>
+            domainLookupEnd</code></a> immediately after the domain name lookup
+            is successfully done. A user agent MAY need multiple retries before
+            that. If the domain lookup fails, abort the rest of the steps.
           </li>
           <li id="connect-start-step">
             <i>[connect-start-step]</i> If a persistent transport connection is
             used to fetch the resource, let <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectstart">
-            <code>connectStart</code></a> and <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectend">
-            <code>connectEnd</code></a> be the same value of <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-domainlookupend">
-            <code>domainLookupEnd</code></a>. Otherwise, record the time as
+            "resource-timing-2#dom-performanceresourcetiming-connectstart"><code>
+            connectStart</code></a> and <a data-cite=
+            "resource-timing-2#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a>
+            be the same value of <a data-cite=
+            "resource-timing-2#dom-performanceresourcetiming-domainlookupend"><code>
+            domainLookupEnd</code></a>. Otherwise, record the time as
             <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectstart">
-            <code>connectStart</code></a> immediately before initiating the
+            "resource-timing-2#dom-performanceresourcetiming-connectstart"><code>
+            connectStart</code></a> immediately before initiating the
             connection to the server and record the time as <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectend">
-            <code>connectEnd</code></a> immediately after the connection to the
-            server or the proxy is established. A user agent MAY need multiple
-            retries before this time. Once connection is established set the
-            value of <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
-            <code>nextHopProtocol</code></a> to the ALPN ID used by the
-            connection. If a connection can not be established, abort the rest
-            of the steps.
+            "resource-timing-2#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a>
+            immediately after the connection to the server or the proxy is
+            established. A user agent MAY need multiple retries before this
+            time. Once connection is established set the value of <a data-cite=
+            "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol"><code>
+            nextHopProtocol</code></a> to the ALPN ID used by the connection.
+            If a connection can not be established, abort the rest of the
+            steps.
           </li>
           <li>A user agent MUST also set the <a data-cite=
           "resource-timing-2#dom-performanceresourcetiming-secureconnectionstart">
@@ -776,18 +766,18 @@
             <i>[request-start-step]</i> Immediately before a user agent starts
             sending request for the document, record the current time as
             <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-requeststart">
-            <code>requestStart</code></a>.
+            "resource-timing-2#dom-performanceresourcetiming-requeststart"><code>
+            requestStart</code></a>.
           </li>
           <li id="step-response-start">Record the time as <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-responsestart">
-            <code>responseStart</code></a> immediately after the user agent
-            receives the first byte of the response.
+          "resource-timing-2#dom-performanceresourcetiming-responsestart"><code>
+            responseStart</code></a> immediately after the user agent receives
+            the first byte of the response.
           </li>
           <li id="step-response-end">Record the time as <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-responseend">
-            <code>responseEnd</code></a> immediately after receiving the last
-            byte of the response.
+          "resource-timing-2#dom-performanceresourcetiming-responseend"><code>
+            responseEnd</code></a> immediately after receiving the last byte of
+            the response.
             <ol>
               <li>Return to <a data-cite=
               "#connect-start-step">connect-start-step</a> if the user agent
@@ -808,8 +798,8 @@
                 </div>
               </li>
               <li>Set the value of <a data-cite=
-              "resource-timing-2#dom-performanceresourcetiming-transfersize">
-                <code>transferSize</code></a>, <a data-cite=
+              "resource-timing-2#dom-performanceresourcetiming-transfersize"><code>
+                transferSize</code></a>, <a data-cite=
                 "resource-timing-2#dom-performanceresourcetiming-encodedbodysize">
                 <code>encodedBodySize</code></a>, <a data-cite=
                 "resource-timing-2#dom-performanceresourcetiming-decodedbodysize">
@@ -821,14 +811,14 @@
           "FETCH#redirect-status">HTTP redirect</a>, then
             <ol style="list-style-type:lower-alpha;">
               <li>If the <a data-cite=
-              "resource-timing-2#dfn-timing-allow-check">timing
-              allow check</a> algorithm does not pass for the <a data-cite=
-              "html#concept-origin">origin</a> of the fetched
-              resource, set <a data-cite=
+              "resource-timing-2#dfn-timing-allow-check">timing allow check</a>
+              algorithm does not pass for the <a data-cite=
+              "html#concept-origin">origin</a> of the fetched resource, set
+              <a data-cite=
               "resource-timing-2#dom-performanceresourcetiming-redirectstart">
                 <code>redirectStart</code></a>, <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-redirectend">
-                <code>redirectEnd</code></a>, <a data-link-for=
+                "resource-timing-2#dom-performanceresourcetiming-redirectend"><code>
+                redirectEnd</code></a>, <a data-link-for=
                 "PerformanceNavigationTiming">unloadEventStart</a>,
                 <a data-link-for=
                 "PerformanceNavigationTiming">unloadEventEnd</a> and
@@ -844,22 +834,22 @@
               "resource-timing-2#dom-performanceresourcetiming-redirectstart">
                 <code>redirectStart</code></a> is 0, let it be the value of
                 <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-fetchstart">
-                <code>fetchStart</code></a>.
+                "resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>
+                fetchStart</code></a>.
               </li>
               <li>Let <a data-cite=
-              "resource-timing-2#dom-performanceresourcetiming-redirectend">
-                <code>redirectEnd</code></a> be the value of <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-responseend">
-                <code>responseEnd</code></a>.
+              "resource-timing-2#dom-performanceresourcetiming-redirectend"><code>
+                redirectEnd</code></a> be the value of <a data-cite=
+                "resource-timing-2#dom-performanceresourcetiming-responseend"><code>
+                responseEnd</code></a>.
               </li>
               <li>Set all of the attributes in the
               <a>PerformanceNavigationTiming</a> object to 0 except
               <a>startTime</a>, <a data-cite=
               "resource-timing-2#dom-performanceresourcetiming-redirectstart">
                 <code>redirectStart</code></a>, <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-redirectend">
-                <code>redirectEnd</code></a>, <a data-link-for=
+                "resource-timing-2#dom-performanceresourcetiming-redirectend"><code>
+                redirectEnd</code></a>, <a data-link-for=
                 "PerformanceNavigationTiming">redirectCount</a>,
                 <a data-link-for="PerformanceNavigationTiming">type</a>,
                 <a data-cite=
@@ -867,10 +857,10 @@
                 <code>nextHopProtocol</code></a>, <a data-link-for=
                 "PerformanceNavigationTiming">unloadEventStart</a> and
                 <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventEnd</a>. Set <a data-cite=
+                "PerformanceNavigationTiming">unloadEventEnd</a>. Set
+                <a data-cite=
                 "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
-                <code>nextHopProtocol</code></a> to the empty
-                <a>DOMString</a>.
+                <code>nextHopProtocol</code></a> to the empty <a>DOMString</a>.
               </li>
               <li>Return to <a href="#fetch-start-step">fetch-start-step</a>
               with the new resource.
@@ -909,14 +899,15 @@
           user agent completes the load event.
           </li>
           <li>Set the <a>duration</a> to a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a>
-          equal to the difference between <a data-link-for=
+          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> equal to
+          the difference between <a data-link-for=
           "PerformanceNavigationTiming">loadEventEnd</a> and <a>startTime</a>,
           respectively.
           </li>
           <li>
-            <a data-cite= 'performance-timeline-2#dfn-queue-a-performanceentry'>
-            Queue</a> the new <a>PerformanceNavigationTiming</a> object.
+            <a data-cite=
+            'performance-timeline-2#dfn-queue-a-performanceentry'>Queue</a> the
+            new <a>PerformanceNavigationTiming</a> object.
           </li>
         </ol>
         <p>
@@ -941,15 +932,14 @@
           instance, the unloading time reveals how long the previous page takes
           to execute its unload handler, which could be used to infer the
           user's login status. These attacks have been mitigated by enforcing
-          the <a data-cite=
-          "resource-timing-2#dfn-timing-allow-check">timing
+          the <a data-cite="resource-timing-2#dfn-timing-allow-check">timing
           allow check</a> algorithm when timing information involving the
           previous navigation is accessed. [[RESOURCE-TIMING-2]]
         </p>
         <p>
           The <a data-cite=
-          "HTML/origin.html#relaxing-the-same-origin-restriction">relaxed
-          same origin policy</a> doesn't provide sufficient protection against
+          "HTML/origin.html#relaxing-the-same-origin-restriction">relaxed same
+          origin policy</a> doesn't provide sufficient protection against
           unauthorized visits across documents. In shared hosting, an untrusted
           third party is able to host an HTTP server at the same IP address but
           on a different port.
@@ -981,11 +971,11 @@
         limit the access to the <a data-cite=
         "#dom-performancenavigationtiming">PerformanceNavigationTiming</a>
         interface, the <a data-cite=
-        "resource-timing-2#dfn-timing-allow-check">timing
-        allow check</a> algorithm is enforced and certain attributes are set to
-        zero, as described in <a data-cite=
-        "resource-timing-2#sec-cross-origin-resources"
-        class="sec-ref"><span class="secno">4.5</span> <span class=
+        "resource-timing-2#dfn-timing-allow-check">timing allow check</a>
+        algorithm is enforced and certain attributes are set to zero, as
+        described in <a data-cite=
+        "resource-timing-2#sec-cross-origin-resources" class=
+        "sec-ref"><span class="secno">4.5</span> <span class=
         "sec-title">Cross-origin Resources</span></a> [[RESOURCE-TIMING]].
         Resource providers can explicitly allow all timing information to be
         collected for a <a>current document</a> by adding the
@@ -999,17 +989,17 @@
         <p>
           In case a proxy is deployed between the user agent and the web
           server, the time interval between the <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-connectstart">
-          <code>connectStart</code></a> and the <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-connectend">
-          <code>connectEnd</code></a> attributes indicates the delay between
-          the user agent and the proxy instead of the web server. With that,
-          web server can potentially infer the existence of the proxy. For
-          SOCKS proxy, this time interval includes the proxy authentication
-          time and time the proxy takes to connect to the web server, which
-          obfuscate the proxy detection. In case of an HTTP proxy, the user
-          agent might not have any knowledge about the proxy server at all so
-          it's not always feasible to mitigate this attack.
+          "resource-timing-2#dom-performanceresourcetiming-connectstart"><code>connectStart</code></a>
+          and the <a data-cite=
+          "resource-timing-2#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a>
+          attributes indicates the delay between the user agent and the proxy
+          instead of the web server. With that, web server can potentially
+          infer the existence of the proxy. For SOCKS proxy, this time interval
+          includes the proxy authentication time and time the proxy takes to
+          connect to the web server, which obfuscate the proxy detection. In
+          case of an HTTP proxy, the user agent might not have any knowledge
+          about the proxy server at all so it's not always feasible to mitigate
+          this attack.
         </p>
       </section>
     </section>
@@ -1069,12 +1059,18 @@ interface PerformanceTiming {
             <p>
               This attribute must return the time immediately after the user
               agent finishes <a data-cite=
-              "HTML/browsing-the-web.html#prompt-to-unload-a-document">prompting to
-              unload</a> the previous document. If there is no previous
+              "HTML/browsing-the-web.html#prompt-to-unload-a-document">prompting
+              to unload</a> the previous document. If there is no previous
               document, this attribute must return the time the current
               document is created.
             </p>
-            <p class="note">This attribute is not defined for <a>PerformanceNavigationTiming</a>. Instead, authors can use <a data-cite="HR-TIME-2#dom-performance-timeorigin">timeOrigin</a> to obtain an equivalent timestamp.</p>
+            <p class="note">
+              This attribute is not defined for
+              <a>PerformanceNavigationTiming</a>. Instead, authors can use
+              <a data-cite=
+              "HR-TIME-2#dom-performance-timeorigin">timeOrigin</a> to obtain
+              an equivalent timestamp.
+            </p>
           </dd>
           <dt>
             <dfn>unloadEventStart</dfn>
@@ -1082,13 +1078,14 @@ interface PerformanceTiming {
           <dd>
             <p>
               If the previous document and the current document have the same
-              <a data-cite="html#concept-origin">origin</a>, this attribute must 
-              return the time immediately before the user agent starts the <a
-              data-cite="HTML/browsing-the-web.html#unloading-documents"
-              >unload</a> event of the previous document. If there is no
-              previous document or the previous document has a different <a
-              data-cite="html#concept-origin">origin</a> than the current
-              document, this attribute must return zero.
+              <a data-cite="html#concept-origin">origin</a>, this attribute
+              must return the time immediately before the user agent starts the
+              <a data-cite=
+              "HTML/browsing-the-web.html#unloading-documents">unload</a> event
+              of the previous document. If there is no previous document or the
+              previous document has a different <a data-cite=
+              "html#concept-origin">origin</a> than the current document, this
+              attribute must return zero.
             </p>
           </dd>
           <dt>
@@ -1097,21 +1094,20 @@ interface PerformanceTiming {
           <dd>
             <p>
               If the previous document and the current document have the same
-              <a data-cite="html#same-origin">same origin</a>,
-              this attribute must return the time immediately after the user
-              agent finishes the <a data-cite=
-              "HTML/browsing-the-web.html#unload-a-document">unload</a> event of the
-              previous document. If there is no previous document or the
+              <a data-cite="html#same-origin">same origin</a>, this attribute
+              must return the time immediately after the user agent finishes
+              the <a data-cite=
+              "HTML/browsing-the-web.html#unload-a-document">unload</a> event
+              of the previous document. If there is no previous document or the
               previous document has a different <a data-cite=
-              "html#concept-origin">origin</a> than the current
-              document or the unload is not yet completed, this attribute must
-              return zero.
+              "html#concept-origin">origin</a> than the current document or the
+              unload is not yet completed, this attribute must return zero.
             </p>
             <p>
-              If there are <a data-cite=
-              "FETCH#redirect-status">HTTP redirects</a>
-              when navigating and not all the redirects are from the same <a data-cite=
-              "html#concept-origin">origin</a>, both <a data-cite=
+              If there are <a data-cite="FETCH#redirect-status">HTTP
+              redirects</a> when navigating and not all the redirects are from
+              the same <a data-cite="html#concept-origin">origin</a>, both
+              <a data-cite=
               "#dom-performancetiming-unloadeventstart">unloadEventStart</a>
               and <a data-cite=
               "#dom-performancetiming-unloadeventend">unloadEventEnd</a> must
@@ -1123,11 +1119,10 @@ interface PerformanceTiming {
           </dt>
           <dd>
             <p>
-              If there are <a data-cite=
-              "FETCH#redirect-status">HTTP redirects</a>
-              when navigating and if all the redirects are from the same <a data-cite=
-              "html#concept-origin">origin</a>, this attribute
-              must return the <a data-cite=
+              If there are <a data-cite="FETCH#redirect-status">HTTP
+              redirects</a> when navigating and if all the redirects are from
+              the same <a data-cite="html#concept-origin">origin</a>, this
+              attribute must return the <a data-cite=
               "#dom-performancetiming-fetchstart">starting time of the
               fetch</a> that initiates the redirect. Otherwise, this attribute
               must return zero.
@@ -1138,10 +1133,9 @@ interface PerformanceTiming {
           </dt>
           <dd>
             <p>
-              If there are <a data-cite=
-              "FETCH#redirect-status">HTTP redirects</a>
-              when navigating and all redirects are from the same <a data-cite=
-              "html#concept-origin">origin</a>, this attribute
+              If there are <a data-cite="FETCH#redirect-status">HTTP
+              redirects</a> when navigating and all redirects are from the same
+              <a data-cite="html#concept-origin">origin</a>, this attribute
               must return the time immediately after receiving the last byte of
               the response of the last redirect. Otherwise, this attribute must
               return zero.
@@ -1153,10 +1147,10 @@ interface PerformanceTiming {
           <dd>
             <p>
               If the new resource is to be <a data-cite=
-              "HTML/urls-and-fetching.html#fetching-resources">fetched</a> using
-              a "GET" <a data-cite=FETCH#concept-request-method>request method</a>,
-              fetchStart must return the time immediately
-              before the user agent starts checking <a data-cite=
+              "HTML/urls-and-fetching.html#fetching-resources">fetched</a>
+              using a "GET" <a data-cite="FETCH#concept-request-method">request
+              method</a>, fetchStart must return the time immediately before
+              the user agent starts checking <a data-cite=
               "HTML/offline.html#relevant-application-cache">any relevant
               application caches</a>. Otherwise, it must return the time when
               the user agent starts <a data-cite=
@@ -1205,8 +1199,9 @@ interface PerformanceTiming {
                 "HTML/urls-and-fetching.html#fetching-resources">fetching
                 process</a>. It's covered by the <a data-cite=
                 "#dom-performancetiming-requeststart">requestStart</a>,
-                <a data-cite="#dom-performancetiming-responsestart">responseStart</a>
-                and <a data-cite=
+                <a data-cite=
+                "#dom-performancetiming-responsestart">responseStart</a> and
+                <a data-cite=
                 "#dom-performancetiming-responseend">responseEnd</a>
                 attributes.
               </p>
@@ -1255,14 +1250,14 @@ interface PerformanceTiming {
               If the transport connection fails and the user agent reopens a
               connection, <a data-cite=
               "#dom-performancetiming-connectstart">connectStart</a> and
-              <a data-cite="#dom-performancetiming-connectend">connectEnd</a> should
-              return the corresponding values of the new connection.
+              <a data-cite="#dom-performancetiming-connectend">connectEnd</a>
+              should return the corresponding values of the new connection.
             </p>
             <p>
-              <a data-cite="#dom-performancetiming-connectend">connectEnd</a> must
-              include the time interval to establish the transport connection
-              as well as other time interval such as SSL handshake and SOCKS
-              authentication.
+              <a data-cite="#dom-performancetiming-connectend">connectEnd</a>
+              must include the time interval to establish the transport
+              connection as well as other time interval such as SSL handshake
+              and SOCKS authentication.
             </p>
           </dd>
           <dt>
@@ -1293,7 +1288,8 @@ interface PerformanceTiming {
             </p>
             <p>
               If the transport connection fails after a request is sent and the
-              user agent reopens a connection and resend the request, <a data-cite=
+              user agent reopens a connection and resend the request,
+              <a data-cite=
               "#dom-performancetiming-requeststart">requestStart</a> should
               return the corresponding values of the new request.
             </p>
@@ -1406,15 +1402,17 @@ interface PerformanceTiming {
             <p>
               If the <a data-cite=
               "HTML/dom.html#current-document-readiness">current document
-              readiness</a> changes to the same state multiple times, <a data-cite=
-              "#dom-performancetiming-domloading">domLoading</a>, <a data-cite=
+              readiness</a> changes to the same state multiple times,
+              <a data-cite="#dom-performancetiming-domloading">domLoading</a>,
+              <a data-cite=
               "#dom-performancetiming-dominteractive">domInteractive</a>,
               <a data-cite=
               "#dom-performancetiming-domcontentloadedeventstart">domContentLoadedEventStart</a>,
               <a data-cite=
               "#dom-performancetiming-domcontentloadedeventend">domContentLoadedEventEnd</a>
-              and <a data-cite="#dom-performancetiming-domcomplete">domComplete</a>
-              must return the time of the first occurrence of the corresponding
+              and <a data-cite=
+              "#dom-performancetiming-domcomplete">domComplete</a> must return
+              the time of the first occurrence of the corresponding
               <a data-cite="HTML/dom.html#current-document-readiness">document
               readiness</a> change.
             </p>
@@ -1493,8 +1491,8 @@ interface PerformanceNavigation {
           <dd>
             <p>
               Navigation through a <a data-cite=
-              "HTML/browsing-the-web.html#traverse-the-history">history traversal</a>
-              operation.
+              "HTML/browsing-the-web.html#traverse-the-history">history
+              traversal</a> operation.
             </p>
           </dd>
           <dt>
@@ -1511,17 +1509,18 @@ interface PerformanceNavigation {
           <dd>
             <p>
               This attribute must return the type of the last non-redirect
-              <a data-cite="HTML/browsing-the-web.html#navigate">navigation</a> in the
-              current browsing context. It must have one of the following
-              <a data-cite="#dom-performancenavigationtiming-type">navigation
-              type</a> values.
+              <a data-cite="HTML/browsing-the-web.html#navigate">navigation</a>
+              in the current browsing context. It must have one of the
+              following <a data-cite=
+              "#dom-performancenavigationtiming-type">navigation type</a>
+              values.
             </p>
             <p class="note">
               Client-side redirects, such as those using <a data-cite=
               "HTML/semantics.html#attr-meta-http-equiv-refresh">the Refresh
               pragma directive</a>, are not considered <a data-cite=
-              "FETCH#redirect-status">HTTP redirects</a>
-              by this spec. In those cases, the <a data-cite=
+              "FETCH#redirect-status">HTTP redirects</a> by this spec. In those
+              cases, the <a data-cite=
               "#dom-performancenavigationtiming-type">type</a> attribute should
               return appropriate value, such as <code>TYPE_RELOAD</code> if
               reloading the current page, or <code>TYPE_NAVIGATE</code> if
@@ -1536,8 +1535,8 @@ interface PerformanceNavigation {
               This attribute must return the number of redirects since the last
               non-redirect navigation under the current browsing context. If
               there is no redirect or there is any redirect that is not from
-              the <a data-cite="html#same-origin">same origin</a>
-              as the destination document, this attribute must return zero.
+              the <a data-cite="html#same-origin">same origin</a> as the
+              destination document, this attribute must return zero.
             </p>
           </dd>
           <dt>
