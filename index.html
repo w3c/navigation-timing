@@ -279,10 +279,7 @@
           </li>
         </ul>
         <p>
-          A user agent implementing <a>PerformanceNavigationTiming</a> MUST run the
-          <a data-cite="PERFORMANCE-TIMELINE-2#dfn-register-a-performance-entry-type">
-          register a performance entry type</a> algorithm with <code>"navigation"</code>
-          as input.
+          If the <dfn data-cite="HTML#concept-settings-object-global">global object</dfn> is a <a data-cite="HTML#window">Window</a> object, a user agent implementing <a>PerformanceNavigationTiming</a> MUST run the <a data-cite="PERFORMANCE-TIMELINE-2#dfn-register-a-performance-entry-type"> register a performance entry type</a> algorithm with <code>"navigation"</code> and the <a>global object</a> as input.
         </p>
       </section>
       <section id='PerformanceResourceTiming'>
