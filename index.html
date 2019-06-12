@@ -336,45 +336,38 @@
             [Default] object toJSON();
         };
         </pre>
-      <p data-dfn-for='PerformanceNavigationTiming'>
-        If the previous document, and all <a data-cite="FETCH#redirect-status">HTTP redirects</a> when navigating, pass
-        the
-        <a data-cite="resource-timing-2#dfn-timing-allow-check">timing allow
-          check</a> algorithm, the <dfn>unloadEventStart</dfn> attribute MUST
-        return a {{DOMHighResTimeStamp}} with a
-        time value equal to the time immediately before the user agent starts
-        the <a data-cite="HTML/browsing-the-web.html#unloading-documents">unload event</a> of
-        the previous document.
-      </p>
-      <p>
-        If there is no previous document or the above <a data-cite="resource-timing-2#dfn-timing-allow-check">timing
-          allow check</a>
-        algorithm does not pass, this attribute MUST return a <a
-          data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-        time value equal to zero.
-      </p>
-      <p data-dfn-for='PerformanceNavigationTiming'>
-        If the previous document, and all <a data-cite="FETCH#redirect-status">HTTP redirects</a> when navigating, pass
-        the
-        <a data-cite="resource-timing-2#dfn-timing-allow-check">timing allow
-          check</a> algorithm, the <dfn>unloadEventEnd</dfn> attribute MUST
-        return a {{DOMHighResTimeStamp}} with a
-        time value equal to the time immediately after the user agent
-        finishes the <a data-cite="HTML/browsing-the-web.html#unloading-documents">unload event</a> of
-        the previous document.
-      </p>
-      <p>
-        If there is no previous document or the above <a data-cite="resource-timing-2#dfn-timing-allow-check">timing
-          allow check</a>
-        algorithm does not pass, this attribute MUST return a <a
-          data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-        time value equal to zero.
-      </p>
-      <p data-dfn-for='PerformanceNavigationTiming'>
-        The <dfn>domInteractive</dfn> attribute MUST return a <a
-          data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-        time value equal to the time immediately before the user agent sets
-        the <a data-cite="HTML/dom.html#current-document-readiness">current
+        <p data-dfn-for='PerformanceNavigationTiming'>
+          When getting the value of the <dfn>unloadEventStart</dfn> attribute,
+          run the following steps:
+          <ul>
+            <li>If there is no previous document, or if the <a>same-origin
+              check</a> fails, return a {{DOMHighResTimeStamp}} with a time
+              value equal to zero.</li>    
+            <li>Otherwise, return a <a data-cite=
+              "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+              time value equal to the time immediately before the user agent starts
+              the <a data-cite=
+              "HTML/browsing-the-web.html#unloading-documents">unload event</a> of
+              the previous document.</li>
+        </p>
+        <p data-dfn-for='PerformanceNavigationTiming'>
+          When getting the value of the <dfn>unloadEventEnd</dfn> attribute, run
+          the following steps:
+          <ul>
+            <li>If there is no previous document, or if the <a>same-origin
+              check</a> fails, return a {{DOMHighResTimeStamp}} with a time
+              value equal to zero.</li>    
+            <li>Otherwise, return a {{DOMHighResTimeStamp}} with a time value
+              equal to the time immediately before the user agent starts
+              the <a data-cite=
+              "HTML/browsing-the-web.html#unloading-documents">unload event</a> of
+              the previous document.</li>
+        </p>
+        <p data-dfn-for='PerformanceNavigationTiming'>
+          The <dfn>domInteractive</dfn> attribute MUST return a
+          {{DOMHighResTimeStamp}} with a time value equal to the time
+          immediately before the user agent sets the <a
+          data-cite="HTML/dom.html#current-document-readiness">current
           document readiness</a> of the <a>current document</a> to
         <a data-cite="HTML/parsing.html#the-end:current-document-readiness"
           title='interactive" document readiness'>"interactive"</a> [[HTML]].
@@ -453,11 +446,14 @@
         </p>
       </div>
       <p data-dfn-for='PerformanceNavigationTiming'>
-        The <dfn>redirectCount</dfn> attribute MUST return the number of
-        redirects since the last non-redirect navigation under the current
-        browsing context. If there is no redirect or there is any redirect
-        that does not pass the <a data-cite="resource-timing-2#dfn-timing-allow-check">timing allow check</a>
-        algorithm, this attribute MUST return zero.
+        When getting the <dfn>redirectCount</dfn> attribute, run the following
+        steps:
+        <ul>
+          <li>If there are no redirects or if the <a>same-origin check</a>
+            fails, return zero.</li>
+          <li>Otherwise, return the number of redirects since the last
+            non-redirect navigation under the current browsing context.</li>
+        </ul>
       </p>
       <p>
         The <dfn>toJSON()</dfn> method runs [WEBIDL]'s <a data-cite="WEBIDL/#default-tojson-operation">default toJSON
@@ -609,9 +605,9 @@
             </li>
           </ol>
         </li>
-        <li>If the previous document does not pass the <a data-cite="resource-timing-2#dfn-timing-allow-check">timing
-            allow check</a>
-          algorithm, set both <a data-link-for="PerformanceNavigationTiming">unloadEventStart</a> and
+        <li>If there are no redirects or if the <a>same-origin check</a> fails,
+          set both <a data-link-for=
+          "PerformanceNavigationTiming">unloadEventStart</a> and
           <a data-link-for="PerformanceNavigationTiming">unloadEventEnd</a> to
           0 then go to <a href="#fetch-start-step">fetch-start-step</a>.
           Otherwise, record <a data-link-for="PerformanceNavigationTiming">unloadEventStart</a> as the time
@@ -742,25 +738,31 @@
                 <code>encodedBodySize</code></a>, <a
                 data-cite="resource-timing-2#dom-performanceresourcetiming-decodedbodysize">
                 <code>decodedBodySize</code></a> to corresponding values.
-            </li>
-          </ol>
-        </li>
-        <li>If the fetched resource results in an <a data-cite="FETCH#redirect-status">HTTP redirect</a>, then
-          <ol style="list-style-type:lower-alpha;">
-            <li>If the <a data-cite="resource-timing-2#dfn-timing-allow-check">timing allow check</a>
-              algorithm does not pass for the <a data-cite="html#concept-origin">origin</a> of the fetched resource, set
-              <a data-cite="resource-timing-2#dom-performanceresourcetiming-redirectstart">
-                <code>redirectStart</code></a>, <a
-                data-cite="resource-timing-2#dom-performanceresourcetiming-redirectend"><code>
-                redirectEnd</code></a>, <a data-link-for="PerformanceNavigationTiming">unloadEventStart</a>,
-              <a data-link-for="PerformanceNavigationTiming">unloadEventEnd</a> and
-              <a data-link-for="PerformanceNavigationTiming">redirectCount</a> to 0. Then,
-              return to <a href="#fetch-start-step">fetch-start-step</a> with
-              the new resource.
-            </li>
-            <li>Increment <a data-link-for="PerformanceNavigationTiming">redirectCount</a> by 1.
-            </li>
-            <li>If the value of <a data-cite="resource-timing-2#dom-performanceresourcetiming-redirectstart">
+              </li>
+            </ol>
+          </li>
+          <li>If the fetched resource results in an <a data-cite=
+          "FETCH#redirect-status">HTTP redirect</a>, then
+            <ol style="list-style-type:lower-alpha;">
+              <li>If the <a>same-origin check</a> fails,set
+              <a data-cite=
+              "resource-timing-2#dom-performanceresourcetiming-redirectstart">
+                <code>redirectStart</code></a>, <a data-cite=
+                "resource-timing-2#dom-performanceresourcetiming-redirectend"><code>
+                redirectEnd</code></a>, <a data-link-for=
+                "PerformanceNavigationTiming">unloadEventStart</a>,
+                <a data-link-for=
+                "PerformanceNavigationTiming">unloadEventEnd</a> and
+                <a data-link-for=
+                "PerformanceNavigationTiming">redirectCount</a> to 0. Then,
+                return to <a href="#fetch-start-step">fetch-start-step</a> with
+                the new resource.
+              </li>
+              <li>Increment <a data-link-for=
+              "PerformanceNavigationTiming">redirectCount</a> by 1.
+              </li>
+              <li>If the value of <a data-cite=
+              "resource-timing-2#dom-performanceresourcetiming-redirectstart">
                 <code>redirectStart</code></a> is 0, let it be the value of
               <a data-cite="resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>
                 fetchStart</code></a>.
@@ -829,26 +831,26 @@
       </p>
     </section>
   </section>
-  <section id="privacy" class='informative'>
-    <h2>
-      Privacy
-    </h2>
-    <section id="info_disclosure">
-      <h3>
-        Information disclosure
-      </h3>
-      <p>
-        There is the potential for disclosing an end-user's browsing and
-        activity history by using carefully crafted timing attacks. For
-        instance, the unloading time reveals how long the previous page takes
-        to execute its unload handler, which could be used to infer the
-        user's login status. These attacks have been mitigated by enforcing
-        the <a data-cite="resource-timing-2#dfn-timing-allow-check">timing
-          allow check</a> algorithm when timing information involving the
-        previous navigation is accessed. [[RESOURCE-TIMING-2]]
-      </p>
-      <p>
-        The <a data-cite="HTML/origin.html#relaxing-the-same-origin-restriction">relaxed same
+    <section id="privacy" class='informative'>
+      <h2>
+        Privacy
+      </h2>
+      <section id="info_disclosure">
+        <h3>
+          Information disclosure
+        </h3>
+        <p>
+          There is the potential for disclosing an end-user's browsing and
+          activity history by using carefully crafted timing attacks. For
+          instance, the unloading time reveals how long the previous page takes
+          to execute its unload handler, which could be used to infer the
+          user's login status. These attacks have been mitigated by enforcing
+          the <a>same-origin check</a> algorithm when timing information
+          involving the previous navigation is accessed.
+        </p>
+        <p>
+          The <a data-cite=
+          "HTML/origin.html#relaxing-the-same-origin-restriction">relaxed same
           origin policy</a> doesn't provide sufficient protection against
         unauthorized visits across documents. In shared hosting, an untrusted
         third party is able to host an HTTP server at the same IP address but
@@ -874,18 +876,12 @@
       Security
     </h2>
     <p>
-      The {{PerformanceNavigationTiming}}
-      interface exposes timing information for the <a>current document</a> to
-      any resource loaded by the document, such as a web page or a worker. To
-      limit the access to the {{PerformanceNavigationTiming}}
-      interface, the <a data-cite="resource-timing-2#dfn-timing-allow-check">timing allow check</a>
-      algorithm is enforced and certain attributes are set to zero, as
-      described in <a data-cite="resource-timing-2#sec-cross-origin-resources" class="sec-ref"><span
-          class="secno">4.5</span> <span class="sec-title">Cross-origin Resources</span></a> [[RESOURCE-TIMING]].
-      Resource providers can explicitly allow all timing information to be
-      collected for a <a>current document</a> by adding the
-      <code>Timing-Allow-Origin</code> HTTP response header, which specifies
-      the domains that are allowed to access the timing information.
+      The {{PerformanceNavigationTiming} interface exposes timing information
+      about the previous document to the <a>current document</a>.
+      To limit the access to {{PerformanceNavigationTiming}} attributes which
+      include information on the previous document, the
+      <a>same-origin check</a> algorithm is enforced and attributes related
+      to the previous document are set to zero.
     </p>
     <section id="authentication">
       <h3>
@@ -904,6 +900,27 @@
         case of an HTTP proxy, the user agent might not have any knowledge
         about the proxy server at all so it's not always feasible to mitigate
         this attack.
+      </p>
+    </section>
+    <section id="same-origin-check">
+      <h3>Same-origin check</h3>
+      <p>
+        When asked to run the <dfn>same-origin check</dfn>, the user agent
+        MUST run the following steps:
+        <ul>
+            <li>If the previous document exists and its origin is not <a
+              data-cite="html#same-origin">same origin</a> as the current
+              document's origin, return "fail".</li>
+            <li>Let <var>request</var> be the <a>current document</a>'s <a
+              data-cite="FETCH#concept-request">request</a>.</li>
+            <li>If <var>request</var>'s <a
+              data-cite="FETCH#concept-request-redirect-count">redirect
+              count</a> is not zero, and all of <var>request</var>'s <a
+              data-cite="FETCH#redirect-status">HTTP redirects</a> have the
+              <a data-cite="html#same-origin">same origin</a> as the current
+              document, return "pass".</li>
+          <li>Otherwise, return "fail".</li>
+        </ul>
       </p>
     </section>
   </section>
