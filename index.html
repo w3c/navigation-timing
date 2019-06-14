@@ -278,11 +278,12 @@
           respectively.
           </li>
         </ul>
-        <p>
-          A user agent implementing <a>PerformanceNavigationTiming</a> MUST run the
-          <a data-cite="PERFORMANCE-TIMELINE-2#dfn-register-a-performance-entry-type">
-          register a performance entry type</a> algorithm with <code>"navigation"</code>
-          as input.
+        <p class="note">
+          A user agent implementing <a>PerformanceNavigationTiming</a> would need to include
+          <code>"first-paint"</code> and <code>"first-contentful-paint"</code> in
+          <a data-cite="PERFORMANCE-TIMELINE-2#supportedentrytypes-attribute">
+          supportedEntryTypes</a> for <a data-cite="HTML/window-object.html#window">Window</a>
+          contexts. This allows developers to detect support for Navigation Timing.
         </p>
       </section>
       <section id='PerformanceResourceTiming'>
