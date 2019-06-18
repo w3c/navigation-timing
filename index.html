@@ -59,7 +59,11 @@
       testSuiteURI: "https://wpt.fyi/navigation-timing/",
       caniuse: "nav-timing",
       mdn: true,
-      xref: ["web-platform", "hr-time", "performance-timeline"],
+      xref: {
+        url: "https://respec.org/xref",
+        specs: [ "service-workers", "hr-time-2", "performance-timeline-2", "resource-timing-2"],
+        profile: "web-platform",
+      },
       localBiblio: {
         JSMEASURE: {
           title: "Measuring Client-Perceived Response Times on the WWW",
@@ -167,7 +171,7 @@
       navigation of a document. As the {{PerformanceNavigationTiming}}
       interface uses [[HR-TIME-2]], all time values are measured with respect
       to the <a data-cite="HR-TIME-2#dfn-time-origin">time origin</a> of the
-      Window object.
+      {{Window}} object.
     </p>
     <p>
       For example, if we know that the response end occurs 100ms after the
@@ -205,11 +209,11 @@
     </p>
     <p>
       The term <dfn>navigation</dfn> refers to the act of <a
-        data-cite="HTML/browsing-the-web.html#navigate">navigating</a>.
+        data-lt="navigate">navigating</a>.
     </p>
     <p>
       The term <dfn>current document</dfn> refers to the document associated
-      with the <a data-cite="HTML/dom.html#document">Window object's newest
+      with the <a data-lt="associated document">Window object's newest
         Document object</a>.
     </p>
     <p>
@@ -232,7 +236,7 @@
     </h2>
     <section id='performanceentry'>
       <h3>
-        Relation to the <code>PerformanceEntry</code> interface
+        Relation to the {{PerformanceEntry}} interface
       </h3>
       <p>
         {{PerformanceNavigationTiming}} interface extends the following
@@ -242,19 +246,19 @@
       </p>
       <ul>
         <li>The <dfn id='dom-PerformanceNavigationTiming-name'><code>name</code></dfn>
-          attribute MUST return the <code><dfn data-cite="WEBIDL#es-DOMString">
-            DOMString</dfn></code> value of the <a data-cite="HTML/dom.html#the-document's-address">address</a> of the
+          attribute MUST return the {{DOMString}} value of the
+          <a data-cite="HTML#the-document's-address">address</a> of the
           <a>current document</a>.
         </li>
         <li>The <dfn id='dom-PerformanceNavigationTiming-entryType'><code>entryType</code></dfn>
-          attribute MUST return the <a>DOMString</a> "<code id="perf-navigation">navigation</code>".
+          attribute MUST return the {{DOMString}} "<code id="perf-navigation">navigation</code>".
         </li>
         <li>The <dfn id='dom-PerformanceNavigationTiming-startTime'><code>startTime</code></dfn>
-          attribute MUST return a <a data-cite="HR-TIME-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+          attribute MUST return a <code><dfn data-cite="HR-TIME-2#dom-domhighrestimestamp">DOMHighResTimeStamp</dfn></code> with a
           time value of 0. [[HR-TIME-2]]
         </li>
         <li>The <dfn id='dom-PerformanceNavigationTiming-duration'><code>duration</code></dfn>
-          attribute MUST return a <a data-cite="HR-TIME-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> equal to
+          attribute MUST return a {{DOMHighResTimeStamp}} equal to
           the difference between <a data-link-for="PerformanceNavigationTiming">loadEventEnd</a> and {{startTime}},
           respectively.
         </li>
@@ -278,19 +282,19 @@
       </p>
       <ul data-dfn-for="PerformanceResourceTiming">
         <li>The <dfn>initiatorType</dfn> attribute MUST return the
-          <a>DOMString</a> "<code>navigation</code>".
+          {{DOMString}} "<code>navigation</code>".
         </li>
         <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>
             workerStart</code></dfn> attribute MUST return the time immediately
-          before the user agent <a data-cite="service-workers-1#run-service-worker">ran the worker</a> (if the
+          before the user agent <a data-cite="service-workers#run-service-worker">ran the worker</a> (if the
           <a>current document</a> has an <a
-            data-cite="service-workers-1#dfn-containing-service-worker-registration">active
+            data-cite="service-workers#dfn-containing-service-worker-registration">active
             service worker registration</a> [[SERVICE-WORKERS]]) required to
           service the request, or if the worker was already available, the
-          time immediately before the user agent <a data-cite="service-workers-1#fetchevent">fired an event named
+          time immediately before the user agent <a data-cite="service-workers#fetchevent">fired an event named
             `fetch`</a> at
-          the <a data-cite="service-workers-1#dfn-active-worker">active
-            worker</a>. Otherwise, if there is no active worker this attribute
+          the <a data-cite="service-workers#dfn-active-worker">active worker</a>.
+          Otherwise, if there is no active worker this attribute
           MUST return zero.
         </li>
       </ul>
@@ -337,7 +341,7 @@
         the
         <a data-cite="resource-timing-2#dfn-timing-allow-check">timing allow
           check</a> algorithm, the <dfn>unloadEventStart</dfn> attribute MUST
-        return a <a data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+        return a {{DOMHighResTimeStamp}} with a
         time value equal to the time immediately before the user agent starts
         the <a data-cite="HTML/browsing-the-web.html#unloading-documents">unload event</a> of
         the previous document.
@@ -354,7 +358,7 @@
         the
         <a data-cite="resource-timing-2#dfn-timing-allow-check">timing allow
           check</a> algorithm, the <dfn>unloadEventEnd</dfn> attribute MUST
-        return a <a data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+        return a {{DOMHighResTimeStamp}} with a
         time value equal to the time immediately after the user agent
         finishes the <a data-cite="HTML/browsing-the-web.html#unloading-documents">unload event</a> of
         the previous document.
@@ -377,14 +381,14 @@
       </p>
       <p data-dfn-for='PerformanceNavigationTiming'>
         The <dfn>domContentLoadedEventStart</dfn> attribute MUST return a
-        <a data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+        {{DOMHighResTimeStamp}} with a
         time value equal to the time immediately before the user agent fires
         the <a data-cite="HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
           event</a> at the <a>current document</a>.
       </p>
       <p data-dfn-for='PerformanceNavigationTiming'>
         The <dfn>domContentLoadedEventEnd</dfn> attribute MUST return a
-        <a data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+        {{DOMHighResTimeStamp}} with a
         time value equal to the time immediately after the <a>current
           document</a>'s <a data-cite="HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
           event</a> completes.
@@ -405,7 +409,7 @@
         <a data-link-for="PerformanceNavigationTiming">domContentLoadedEventStart</a>,
         <a data-link-for="PerformanceNavigationTiming">domContentLoadedEventEnd</a> and
         <a data-link-for="PerformanceNavigationTiming">domComplete</a> MUST
-        return a <a data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+        return a {{DOMHighResTimeStamp}} with a
         time value equal to the time of the first occurrence of the
         corresponding <a data-cite="HTML/dom.html#current-document-readiness"
           title='current document readiness'>document readiness</a> change
@@ -429,7 +433,7 @@
         completed.
       </p>
       <p data-dfn-for='PerformanceNavigationTiming'>
-        The <dfn>type</dfn> attribute MUST return a <a>DOMString</a>
+        The <dfn>type</dfn> attribute MUST return a {{DOMString}}
         describing the type of the last non-redirect <a data-cite="HTML/browsing-the-web.html#navigate">navigation</a>
         in the current
         browsing context. It MUST have one of the <a>NavigationType</a>
@@ -572,14 +576,14 @@
           <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance
             entry buffer</a>.
         </li>
-        <li>Set <a>name</a> to the <a>DOMString</a> "<code>document</code>".
+        <li>Set <a>name</a> to the {{DOMString}} "<code>document</code>".
         </li>
         <li>Set <a>entryType</a> and <a>initiatorType</a> to the
-          <a>DOMString</a> "<code>navigation</code>".
+          {{DOMString}} "<code>navigation</code>".
         </li>
-        <li>Set <a>startTime</a> to a <a data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
+        <li>Set {{startTime}} to a {{DOMHighResTimeStamp}} with a
           time value of zero, and <a data-cite="resource-timing-2#dom-performanceresourcetiming-nexthopprotocol"><code>
-            nextHopProtocol</code></a> to the empty <a>DOMString</a>.
+            nextHopProtocol</code></a> to the empty {{DOMString}}.
         </li>
         <li>Record the current navigation type in <a data-link-for="PerformanceNavigationTiming">type</a> if it has not
           been set:
@@ -588,7 +592,7 @@
               entering the URL in the user agent's address bar, or form
               submission, or initializing through a script operation other than
               the <a data-cite="HTML/history.html#dom-location-reload">location.reload()</a>
-              method, let the navigation type be the <a>DOMString</a>
+              method, let the navigation type be the {{DOMString}}
               "<a data-link-for="NavigationType">navigate</a>".
             </li>
             <li>If the navigation was started either as a result of a
@@ -596,11 +600,11 @@
                 refresh</a>, or the
               <a data-cite="HTML/history.html#dom-location-reload">location.reload()</a>
               method, or other equivalent actions, let the navigation type be
-              the <a>DOMString</a> "<a data-link-for="NavigationType">reload</a>".
+              the {{DOMString}} "<a data-link-for="NavigationType">reload</a>".
             </li>
             <li>If the navigation was started as a result of <a
                 data-cite="HTML/browsing-the-web.html#traverse-the-history">history
-                traversal</a>, let the navigation type be the <a>DOMString</a>
+                traversal</a>, let the navigation type be the {{DOMString}}
               "<a data-link-for="NavigationType">back_forward</a>".
             </li>
           </ol>
@@ -615,14 +619,14 @@
         </li>
         <li>Immediately after the unload event is completed, record the
           current time as <a data-link-for="PerformanceNavigationTiming">unloadEventEnd</a>. If the navigation
-          URL has an <a data-cite="service-workers-1#dfn-active-worker">active
+          URL has an <a data-cite="service-workers#dfn-active-worker">active
             worker registration</a>, immediately before the user agent
-          <a data-cite="service-workers-1#run-service-worker">runs the
+          <a data-cite="service-workers#run-service-worker">runs the
             worker</a> record the time as {{workerStart}},
           or if the worker is available, record the time before the
-          <a data-cite="service-workers-1#on-fetch-request-algorithm">event
+          <a data-cite="service-workers#on-fetch-request-algorithm">event
             named `fetch` is fired</a> at the active worker. Otherwise, if the
-          navigation URL has no matching <a data-cite="service-workers-1#dfn-service-worker-registration">service worker
+          navigation URL has no matching <a data-cite="service-workers#dfn-service-worker-registration">service worker
             registration</a>, set {{workerStart}} value to zero.
         </li>
         <li id="fetch-start-step">
@@ -647,7 +651,7 @@
           be the same value as <a
             data-cite="resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.
         </li>
-        <li>Set <a>name</a> to a <a>DOMString</a> value of the
+        <li>Set <a>name</a> to a {{DOMString}} value of the
           <a data-cite="HTML/dom.html#the-document's-address">address</a> of
           the <a>current document</a>.
         </li>
@@ -768,7 +772,7 @@
             </li>
             <li>Set all of the attributes in the
               {{PerformanceNavigationTiming}} object to 0 except
-              <a>startTime</a>, <a data-cite="resource-timing-2#dom-performanceresourcetiming-redirectstart">
+              {{startTime}}, <a data-cite="resource-timing-2#dom-performanceresourcetiming-redirectstart">
                 <code>redirectStart</code></a>, <a
                 data-cite="resource-timing-2#dom-performanceresourcetiming-redirectend"><code>
                 redirectEnd</code></a>, <a data-link-for="PerformanceNavigationTiming">redirectCount</a>,
@@ -778,7 +782,7 @@
               and
               <a data-link-for="PerformanceNavigationTiming">unloadEventEnd</a>. Set
               <a data-cite="resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
-                <code>nextHopProtocol</code></a> to the empty <a>DOMString</a>.
+                <code>nextHopProtocol</code></a> to the empty {{DOMString}}.
             </li>
             <li>Return to <a href="#fetch-start-step">fetch-start-step</a>
               with the new resource.
@@ -807,9 +811,9 @@
         <li>Record the time as <a data-link-for="PerformanceNavigationTiming">loadEventEnd</a> immediately after the
           user agent completes the load event.
         </li>
-        <li>Set the <a>duration</a> to a <a data-cite="hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> equal
+        <li>Set the <a>duration</a> to a {{DOMHighResTimeStamp}} equal
           to
-          the difference between <a data-link-for="PerformanceNavigationTiming">loadEventEnd</a> and <a>startTime</a>,
+          the difference between <a data-link-for="PerformanceNavigationTiming">loadEventEnd</a> and {{startTime}},
           respectively.
         </li>
         <li>
