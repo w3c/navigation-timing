@@ -261,22 +261,23 @@
           attribute MUST return a {{DOMHighResTimeStamp}} equal to
           the difference between <a data-link-for="PerformanceNavigationTiming">loadEventEnd</a> and {{startTime}},
           respectively.
-        </li>
-      </ul>
-      <p>
-        A user agent implementing {{PerformanceNavigationTiming}} MUST run the
-        <a data-cite="PERFORMANCE-TIMELINE-2#dfn-register-a-performance-entry-type">
-          register a performance entry type</a> algorithm with <code>"navigation"</code>
-        as input.
-      </p>
-    </section>
-    <section id='PerformanceResourceTiming'>
-      <h3>
-        Relation to the <code>PerformanceResourceTiming</code> interface
-      </h3>
-      <p>
-        {{PerformanceNavigationTiming}} interface extends the following
-        attributes of the <code><dfn data-cite=
+          </li>
+        </ul>
+        <p class="note">
+          A user agent implementing {{PerformanceNavigationTiming}} would need to include
+          <code>"navigation"</code> in <a data-cite=
+          "PERFORMANCE-TIMELINE-2#supportedentrytypes-attribute"> supportedEntryTypes</a> for
+          <a data-cite="HTML/window-object.html#window">Window</a> contexts. This allows developers
+          to detect support for Navigation Timing.
+        </p>
+      </section>
+      <section id='PerformanceResourceTiming'>
+        <h3>
+          Relation to the <code>PerformanceResourceTiming</code> interface
+        </h3>
+        <p>
+          {{PerformanceNavigationTiming}} interface extends the following
+          attributes of the <code><dfn data-cite=
           "RESOURCE-TIMING-2#dom-performanceresourcetiming">PerformanceResourceTiming</dfn></code>
         interface:
       </p>
