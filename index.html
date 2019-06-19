@@ -746,7 +746,7 @@
           <li>If the fetched resource results in an <a data-cite=
           "FETCH#redirect-status">HTTP redirect</a>, then
             <ol style="list-style-type:lower-alpha;">
-              <li>If the <a>same-origin check</a> fails,set
+              <li>If the <a>same-origin check</a> fails, set
               <a data-cite=
               "resource-timing-2#dom-performanceresourcetiming-redirectstart">
                 <code>redirectStart</code></a>, <a data-cite=
@@ -839,8 +839,8 @@
         MUST run the following steps:
         <ol>
             <li>If the previous document exists and its origin is not <a
-              data-cite="html#same-origin">same origin</a> as the current
-              document's origin, return "fail".</li>
+             data-cite="html#same-origin">same origin</a> as the <a>current
+             document</a>'s origin, return "fail".</li>
             <li>Let <var>request</var> be the <a>current document</a>'s <a
               data-cite="FETCH#concept-request">request</a>.</li>
             <li>If <var>request</var>'s <a
