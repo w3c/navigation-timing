@@ -339,7 +339,7 @@
         <p data-dfn-for='PerformanceNavigationTiming'>
           When getting the value of the <dfn>unloadEventStart</dfn> attribute,
           run the following steps:
-          <ul>
+          <ol>
             <li>If there is no previous document, or if the <a>same-origin
               check</a> fails, return a {{DOMHighResTimeStamp}} with a time
               value equal to zero.</li>    
@@ -349,11 +349,12 @@
               the <a data-cite=
               "HTML/browsing-the-web.html#unloading-documents">unload event</a> of
               the previous document.</li>
+          </ol>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           When getting the value of the <dfn>unloadEventEnd</dfn> attribute, run
           the following steps:
-          <ul>
+          <ol>
             <li>If there is no previous document, or if the <a>same-origin
               check</a> fails, return a {{DOMHighResTimeStamp}} with a time
               value equal to zero.</li>    
@@ -362,6 +363,7 @@
               the <a data-cite=
               "HTML/browsing-the-web.html#unloading-documents">unload event</a> of
               the previous document.</li>
+          </ol>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>domInteractive</dfn> attribute MUST return a
@@ -830,6 +832,27 @@
         altered during the navigation.
       </p>
     </section>
+    <section id="same-origin-check">
+      <h3>Same-origin check</h3>
+      <p>
+        When asked to run the <dfn>same-origin check</dfn>, the user agent
+        MUST run the following steps:
+        <ol>
+            <li>If the previous document exists and its origin is not <a
+              data-cite="html#same-origin">same origin</a> as the current
+              document's origin, return "fail".</li>
+            <li>Let <var>request</var> be the <a>current document</a>'s <a
+              data-cite="FETCH#concept-request">request</a>.</li>
+            <li>If <var>request</var>'s <a
+              data-cite="FETCH#concept-request-redirect-count">redirect
+              count</a> is not zero, and all of <var>request</var>'s <a
+              data-cite="FETCH#redirect-status">HTTP redirects</a> have the
+              <a data-cite="html#same-origin">same origin</a> as the current
+              document, return "pass".</li>
+          <li>Otherwise, return "fail".</li>
+        </ol>
+      </p>
+    </section>
   </section>
     <section id="privacy" class='informative'>
       <h2>
@@ -900,27 +923,6 @@
         case of an HTTP proxy, the user agent might not have any knowledge
         about the proxy server at all so it's not always feasible to mitigate
         this attack.
-      </p>
-    </section>
-    <section id="same-origin-check">
-      <h3>Same-origin check</h3>
-      <p>
-        When asked to run the <dfn>same-origin check</dfn>, the user agent
-        MUST run the following steps:
-        <ul>
-            <li>If the previous document exists and its origin is not <a
-              data-cite="html#same-origin">same origin</a> as the current
-              document's origin, return "fail".</li>
-            <li>Let <var>request</var> be the <a>current document</a>'s <a
-              data-cite="FETCH#concept-request">request</a>.</li>
-            <li>If <var>request</var>'s <a
-              data-cite="FETCH#concept-request-redirect-count">redirect
-              count</a> is not zero, and all of <var>request</var>'s <a
-              data-cite="FETCH#redirect-status">HTTP redirects</a> have the
-              <a data-cite="html#same-origin">same origin</a> as the current
-              document, return "pass".</li>
-          <li>Otherwise, return "fail".</li>
-        </ul>
       </p>
     </section>
   </section>
