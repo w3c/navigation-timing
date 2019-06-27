@@ -5,7 +5,7 @@ branches:
   - gh-pages
 env:
   global:
-  - URL="http://w3c.github.io/navigation-timing/W3CTRMANIFEST"
+  - URL="https://w3c.github.io/navigation-timing/W3CTRMANIFEST"
   - DECISION="http://www.w3.org/2015/06/24-webperf-minutes.html#item01"
   - secure: "qUa2nSP80N6KZcU1FVk9JfxNlVIYGVWLpQ8Ct2ZbCusvHRQE6/qJyclylh+L8qKpbhLbeZOCsJqUJvqX4a701yGhQaWrU0WGXMKjbBJOWGl+Lu25M6wkI0KCL+2V1xfTc81kZIODKNuyQK7JKdTVNWLMt/pCl0lclC+iBiUuofY="
 script:
