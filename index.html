@@ -692,21 +692,10 @@
           If a connection can not be established, abort the rest of the
           steps.
         </li>
-        <li>A user agent MUST also set the <a
-            data-cite="resource-timing-2#dom-performanceresourcetiming-secureconnectionstart">
-            <code>secureConnectionStart</code></a> attribute as follows:
-          <ol>
-            <li>When a secure transport is used, the user agent MUST record
-              the time as <a data-cite="resource-timing-2#dom-performanceresourcetiming-secureconnectionstart">
-                <code>secureConnectionStart</code></a> immediately before the
-              handshake process to secure the connection.
-            </li>
-            <li>When a secure transport is not used, the user agent MUST set
-              the value of <a data-cite="resource-timing-2#dom-performanceresourcetiming-secureconnectionstart">
-                <code>secureConnectionStart</code></a> to 0.
-            </li>
-          </ol>
-        </li>
+        <li>A user agent MUST also set the <a data-cite=
+          "resource-timing-2#dom-performanceresourcetiming-secureconnectionstart">
+          <code>secureConnectionStart</code></a> attribute as defined in the
+          attribute's processing model in [[RESOURCE-TIMING]].</li>
         <li id="request-start-step">
           <i>[request-start-step]</i> Immediately before a user agent starts
           sending request for the document, record the current time as
