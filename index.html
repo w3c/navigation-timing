@@ -312,8 +312,11 @@
             time immediately before the user agent <a data-cite=
             "service-workers#fetchevent">fired an event named `fetch`</a> at
             the <a data-cite="service-workers#dfn-active-worker">active
-            worker</a>. Otherwise, if there is no active worker this attribute
-            MUST return zero.
+            worker</a>. If there were redirects, this is the start time of
+            the the active worker of the first same-origin document in the redirect
+            chain.
+            If there is no active worker for the current document,
+            this attribute MUST return zero.
           </li>
         </ul>
         <p class="note">
@@ -509,7 +512,7 @@
               <dfn>navigate</dfn>
             </dt>
             <dd>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a>
@@ -521,7 +524,7 @@
               <dfn>reload</dfn>
             </dt>
             <dd>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>.
@@ -530,7 +533,7 @@
               <dfn>back_forward</dfn>
             </dt>
             <dd>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>.
@@ -624,7 +627,7 @@
           <li>Record the current navigation type in <a data-link-for=
           "PerformanceNavigationTiming">type</a> if it has not been set:
             <ol style="list-style-type:lower-alpha ;">
-              <li>If the navigation has the 
+              <li>If the navigation has the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               set to
               <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a>
@@ -632,14 +635,14 @@
               let the navigation type be the {{DOMString}}
               "<a data-link-for="NavigationType">navigate</a>".
               </li>
-              <li>If the navigation has the 
+              <li>If the navigation has the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               set to
               <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>,
               let the navigation type be
               the {{DOMString}} "<a data-link-for="NavigationType">reload</a>".
               </li>
-              <li>If the navigation has the 
+              <li>If the navigation has the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               set to
               <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>,
@@ -652,14 +655,17 @@
           fails, set both <a data-link-for=
           "PerformanceNavigationTiming">unloadEventStart</a> and
           <a data-link-for="PerformanceNavigationTiming">unloadEventEnd</a> to
-          0 then go to <a href="#fetch-start-step">fetch-start-step</a>.
+          0 then go to <a href="#worker-start-step">worker-start-step</a>.
           Otherwise, record <a data-link-for=
           "PerformanceNavigationTiming">unloadEventStart</a> as the time
           immediately before the unload event.
           </li>
           <li>Immediately after the unload event is completed, record the
           current time as <a data-link-for=
-          "PerformanceNavigationTiming">unloadEventEnd</a>. If the navigation
+          "PerformanceNavigationTiming">unloadEventEnd</a>.
+          </li>
+          <li id="worker-start-step">
+          If the navigation
           URL has an <a data-cite="service-workers#dfn-active-worker">active
           worker registration</a>, immediately before the user agent
           <a data-cite="service-workers#run-service-worker">runs the worker</a>
@@ -801,10 +807,12 @@
                 redirectEnd</code></a>, <a data-link-for=
                 "PerformanceNavigationTiming">unloadEventStart</a>,
                 <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventEnd</a> and
+                "PerformanceNavigationTiming">unloadEventEnd</a>,
+                <a data-link-for=
+                "PerformanceNavigationTiming">workerStart</a> and
                 <a data-link-for=
                 "PerformanceNavigationTiming">redirectCount</a> to 0. Then,
-                return to <a href="#fetch-start-step">fetch-start-step</a> with
+                return to <a href="#worker-start-step">worker-start-step</a> with
                 the new resource.
               </li>
               <li>Increment <a data-link-for=
@@ -835,9 +843,11 @@
                 <a data-cite=
                 "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
                 <code>nextHopProtocol</code></a>, <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventStart</a> and
+                "PerformanceNavigationTiming">unloadEventStart</a>,
                 <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventEnd</a>. Set
+                "PerformanceNavigationTiming">unloadEventEnd</a> and
+                <a data-link-for=
+                "PerformanceNavigationTiming">workerStart</a>. Set
                 <a data-cite=
                 "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
                 <code>nextHopProtocol</code></a> to the empty {{DOMString}}.
@@ -1445,7 +1455,7 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a> or
@@ -1457,7 +1467,7 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>.
@@ -1468,7 +1478,7 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>.
