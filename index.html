@@ -509,28 +509,31 @@
               <dfn>navigate</dfn>
             </dt>
             <dd>
-              Navigation started by clicking on a link, or entering the URL in
-              the user agent's address bar, or form submission, or initializing
-              through a script operation other than the ones used by
-              <a data-link-for="NavigationType">reload</a> and
-              <a data-link-for="NavigationType">back_forward</a> as listed
-              below.
+              Navigation where the 
+              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
+              is set to
+              <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a>
+              or <a data-cite="HTML/browsing-the-web.html#hh-replace">"replace"</a>
+              and the navigation was not initiated by a <a data-cite=
+              'resource-hints#prerender'>prerender</a> hint [[RESOURCE-HINTS]].
             </dd>
             <dt>
               <dfn>reload</dfn>
             </dt>
             <dd>
-              Navigation through the reload operation or the <a data-cite=
-              "HTML/history.html#dom-location-reload">location.reload()</a>
-              method.
+              Navigation where the 
+              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
+              is set to
+              <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>.
             </dd>
             <dt>
               <dfn>back_forward</dfn>
             </dt>
             <dd>
-              Navigation through a <a data-cite=
-              "HTML/browsing-the-web.html#traverse-the-history">history
-              traversal</a> operation.
+              Navigation where the 
+              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
+              is set to
+              <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>.
             </dd>
             <dt>
               <dfn>prerender</dfn>
@@ -620,26 +623,27 @@
           </li>
           <li>Record the current navigation type in <a data-link-for=
           "PerformanceNavigationTiming">type</a> if it has not been set:
-            <ol style="list-style-type:lower-alpha;">
-              <li>If the navigation was started by clicking on a link, or
-              entering the URL in the user agent's address bar, or form
-              submission, or initializing through a script operation other than
-              the <a data-cite=
-              "HTML/history.html#dom-location-reload">location.reload()</a>
-              method, let the navigation type be the {{DOMString}}
+            <ol style="list-style-type:lower-alpha ;">
+              <li>If the navigation has the 
+              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
+              set to
+              <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a>
+              or <a data-cite="HTML/browsing-the-web.html#hh-replace">"replace"</a>,
+              let the navigation type be the {{DOMString}}
               "<a data-link-for="NavigationType">navigate</a>".
               </li>
-              <li>If the navigation was started either as a result of a
-              <a data-cite="HTML/semantics.html#attr-meta-http-equiv-refresh"
-              title='Refresh pragma directive'>meta refresh</a>, or the
-              <a data-cite=
-              "HTML/history.html#dom-location-reload">location.reload()</a>
-              method, or other equivalent actions, let the navigation type be
+              <li>If the navigation has the 
+              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
+              set to
+              <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>,
+              let the navigation type be
               the {{DOMString}} "<a data-link-for="NavigationType">reload</a>".
               </li>
-              <li>If the navigation was started as a result of <a data-cite=
-              "HTML/browsing-the-web.html#traverse-the-history">history
-              traversal</a>, let the navigation type be the {{DOMString}}
+              <li>If the navigation has the 
+              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
+              set to
+              <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>,
+              let the navigation type be the {{DOMString}}
               "<a data-link-for="NavigationType">back_forward</a>".
               </li>
             </ol>
@@ -1441,11 +1445,11 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation started by clicking on a link, or entering the URL in
-              the user agent's address bar, or form submission, or initializing
-              through a script operation other than the ones used by
-              <code>TYPE_RELOAD</code> and <code>TYPE_BACK_FORWARD</code> as
-              listed below.
+              Navigation where the 
+              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
+              is set to
+              <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a> or
+              <a data-cite="HTML/browsing-the-web.html#hh-replace">"replace"</a>.
             </p>
           </dd>
           <dt>
@@ -1453,9 +1457,10 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation through the reload operation or the <a data-cite=
-              "HTML/history.html#dom-location-reload">location.reload()</a>
-              method.
+              Navigation where the 
+              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
+              is set to
+              <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>.
             </p>
           </dd>
           <dt>
@@ -1463,9 +1468,10 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation through a <a data-cite=
-              "HTML/browsing-the-web.html#traverse-the-history">history
-              traversal</a> operation.
+              Navigation where the 
+              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
+              is set to
+              <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>.
             </p>
           </dd>
           <dt>
