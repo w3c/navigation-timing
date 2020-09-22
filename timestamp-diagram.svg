@@ -43,9 +43,9 @@
      inkscape:window-height="1147"
      id="namedview289"
      showgrid="false"
-     inkscape:zoom="1.6872549"
-     inkscape:cx="498.92675"
-     inkscape:cy="150.30084"
+     inkscape:zoom="1.1930694"
+     inkscape:cx="-29.153202"
+     inkscape:cy="187.90981"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -984,7 +984,7 @@
   </g>
   <text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;line-height:1.25;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';letter-spacing:0px;word-spacing:0px;fill:#b45f06;fill-opacity:1;stroke:none;"
      x="177.81522"
      y="276.70541"
      id="text297"><tspan
@@ -999,7 +999,8 @@
      stroke-linecap="butt"
      d="m 175.83045,273.99655 h -2.38217 l -5.0603,-8.17254"
      fill-rule="evenodd"
-     id="path273-0" />
+     id="path273-0"
+     style="stroke:#b45f06;stroke-opacity:1" />
   <path
      fill="#000000"
      stroke="#000000"
@@ -1007,5 +1008,6 @@
      stroke-linecap="butt"
      d="m 169.92431,265.13674 -2.30748,-4.2424 -0.95934,4.73309 z"
      fill-rule="evenodd"
-     id="path275-9" />
+     id="path275-9"
+     style="stroke:#b45f06;stroke-opacity:1" />
 </svg>
