@@ -132,6 +132,8 @@
           'resource-timing-2#dom-performanceresourcetiming-secureconnectionstart'>
           secureConnectionStart</a> attribute is now mandatory.
         </li>
+        <li>exposes <a data-link-for=
+          "PerformanceNavigationTiming">workerStart</a></li>
       </ul>
     </section>
     <section id="introduction" class='informative'>
@@ -304,22 +306,22 @@
           <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>
             workerStart</code></dfn> attribute:
             <ul>
-              <li>If the <a>same-origin check</a> fails, this attribute MUST return zero.</li>
               <li>If the <a>current document</a> has no <a data-cite=
                 "service-workers#dfn-containing-service-worker-registration">active
-                service worker registration</a> [[SERVICE-WORKERS]], this attribute MUST return zero.</li>
-              <li>If there were redirects, this attribute MUST return the time immediately
-                before the user agent <a data-cite=
+                service worker registration</a> [[SERVICE-WORKERS]], this attribute MUST
+                return a {{DOMHighResTimeStamp}} with a time value equal to zero..</li>
+              <li>If there were redirects, this attribute MUST return a {{DOMHighResTimeStamp}}
+                with a time immediately before the user agent <a data-cite=
                 "service-workers#run-service-worker">ran the worker</a> for
                 the first request in final same-origin redirect
                 chain.</li>
-              <li>If the worker was already available, this attribute MUST return the
-                time immediately before the user agent <a data-cite=
+              <li>If the worker was already available, this attribute MUST return
+                a {{DOMHighResTimeStamp}} with a time immediately before the user agent <a data-cite=
                 "service-workers#fetchevent">fired an event named `fetch`</a> at
                 the <a data-cite="service-workers#dfn-active-worker">active
                 worker.</a></li>
-              <li>Otherwise, this attribute MUST return the time immediately
-                before the user agent <a data-cite=
+              <li>Otherwise, this attribute MUST return a {{DOMHighResTimeStamp}} with a
+                time immediately before the user agent <a data-cite=
                 "service-workers#run-service-worker">ran the worker</a> required to
                 service the request.</li>
             </ul>
@@ -819,7 +821,7 @@
                 "PerformanceNavigationTiming">workerStart</a> and
                 <a data-link-for=
                 "PerformanceNavigationTiming">redirectCount</a> to 0. Then,
-                return to <a href="#fetch-start-step">fetch-start-step</a> with
+                return to <a href="#worker-start-step">worker-start-step</a> with
                 the new resource.
               </li>
               <li>Increment <a data-link-for=
