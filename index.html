@@ -312,9 +312,8 @@
             time immediately before the user agent <a data-cite=
             "service-workers#fetchevent">fired an event named `fetch`</a> at
             the <a data-cite="service-workers#dfn-active-worker">active
-            worker</a>. If there were redirects, this is the start time of
-            the the active worker of the first same-origin document in the redirect
-            chain.
+            worker</a>. If the <a>same-origin check</a>
+            fails, this attribute MUST return zero.
             If there is no active worker for the current document,
             this attribute MUST return zero.
           </li>
