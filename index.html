@@ -672,19 +672,41 @@
           current time as <a data-link-for=
           "PerformanceNavigationTiming">unloadEventEnd</a>.
           </li>
+          <li>Let |lastWorkerStartOrigin| be the [=opaque origin=].</li>
           <li id="worker-start-step">
             <i>[worker-start-step]</i>
-          If the navigation
-          URL has an <a data-cite="service-workers#dfn-active-worker">active
-          worker registration</a>, immediately before the user agent
-          <a data-cite="service-workers#run-service-worker">runs the worker</a>
-          record the time as {{workerStart}}, or if the worker is available,
-          record the time before the <a data-cite=
-          "service-workers#on-fetch-request-algorithm">event named `fetch` is
-          fired</a> at the active worker. Otherwise, if the navigation URL has
-          no matching <a data-cite=
-          "service-workers#dfn-service-worker-registration">service worker
-          registration</a>, set {{workerStart}} value to zero.
+              <ul>
+                <li>If the [=request/current url=]
+                  has no matching <a data-cite=
+                  "service-workers#dfn-service-worker-registration">service worker
+                  registration</a>, set {{workerStart}} to a {{DOMHighResTimeStamp}}
+                  with a time value of 0, and go to the
+                  <a href="#fetch-start-step">fetch-start-step</a>.</li>
+                <li>
+                  If the [=request/current url=] has an <a data-cite="service-workers#dfn-active-worker">active
+                  worker registration</a>:
+                  <ul>
+                    <li>If |lastWorkerStartOrigin| is not the [=request/current url=]'s origin, set {{workerStart}} to a {{DOMHighResTimeStamp}}
+                      with a time value of 0.</li>
+                    <li>If the user agent has not yet
+                      <a data-cite="service-workers#run-service-worker">run the worker</a>,
+                      immediately before the user agent
+                      <a data-cite="service-workers#run-service-worker">runs the worker</a>:
+                      <ol>
+                        <li>Record the time as {{workerStart}}</dfn>.</li>
+                        <li>Let |lastWorkerStartOrigin| be the [=request/current url=]'s origin.</li>
+                        <li>Go to the <a href="#fetch-start-step">fetch-start-step</a>.</li>
+                      </ol>
+                    </li>
+                    <li>If |lastWorkerStartOrigin| is the [=request/current url=]'s origin, go to the
+                      <a href="#fetch-start-step">fetch-start-step</a>.</li>
+                    <li>If the worker is available, immediately before the <a data-cite=
+                      "service-workers#on-fetch-request-algorithm">event named `fetch` is
+                      fired</a> at the active worker, record the time as {{workerStart}}.</li>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
           </li>
           <li id="fetch-start-step">
             <i>[fetch-start-step]</i> If the new resource is to be fetched
@@ -816,10 +838,8 @@
                 redirectEnd</code></a>, <a data-link-for=
                 "PerformanceNavigationTiming">unloadEventStart</a>,
                 <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventEnd</a>,
-                <a data-link-for=
-                "PerformanceNavigationTiming">workerStart</a> and
-                <a data-link-for=
+                "PerformanceNavigationTiming">unloadEventEnd</a>
+                and <a data-link-for=
                 "PerformanceNavigationTiming">redirectCount</a> to 0. Then,
                 return to <a href="#worker-start-step">worker-start-step</a> with
                 the new resource.
