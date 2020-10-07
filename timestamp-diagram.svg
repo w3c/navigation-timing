@@ -27,7 +27,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -47,7 +47,7 @@
      id="namedview1260"
      showgrid="false"
      inkscape:zoom="1"
-     inkscape:cx="527.16338"
+     inkscape:cx="481.66338"
      inkscape:cy="217.48647"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
@@ -1019,7 +1019,7 @@
      id="path1969" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+     style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;"
      x="123.60156"
      y="24.895809"
      id="text1973"><tspan
@@ -1027,26 +1027,26 @@
        id="tspan1971"
        x="123.60156"
        y="24.895809"
-       style="font-size:13.3333px;fill:#000000">Cross Origin</tspan><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;font-family:Consolas;-inkscape-font-specification:'Consolas, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000">Cross Origin</tspan><tspan
        sodipodi:role="line"
        x="123.60156"
-       y="41.562435"
+       y="42.157825"
        id="tspan1975"
-       style="font-size:13.3333px;fill:#000000">Workers &amp;</tspan><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;font-family:Consolas;-inkscape-font-specification:'Consolas, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000">Workers &amp;</tspan><tspan
        sodipodi:role="line"
        x="123.60156"
-       y="58.229057"
+       y="59.419842"
        id="tspan1977"
-       style="font-size:13.3333px;fill:#000000">Redirects</tspan></text>
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;font-family:Consolas;-inkscape-font-specification:'Consolas, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000">Redirects</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:13.3333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
-     x="230.20183"
+     x="224.20183"
      y="24.895809"
      id="text1973-3"><tspan
        sodipodi:role="line"
-       x="230.20183"
+       x="224.20183"
        y="24.895809"
        id="tspan1977-5"
-       style="font-size:13.3333px;fill:#000000">Same Origin</tspan></text>
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.3333px;font-family:Consolas;-inkscape-font-specification:'Consolas, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000">Same Origin</tspan></text>
 </svg>
