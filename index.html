@@ -632,6 +632,7 @@
           "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol"><code>
             nextHopProtocol</code></a> to the empty {{DOMString}}.
           </li>
+          <li>Let |lastWorkerStartOrigin| be the [=opaque origin=].</li>
           <li>Record the current navigation type in <a data-link-for=
           "PerformanceNavigationTiming">type</a> if it has not been set:
             <ol style="list-style-type:lower-alpha ;">
@@ -672,7 +673,6 @@
           current time as <a data-link-for=
           "PerformanceNavigationTiming">unloadEventEnd</a>.
           </li>
-          <li>Let |lastWorkerStartOrigin| be the [=opaque origin=].</li>
           <li id="worker-start-step">
             <i>[worker-start-step]</i>
               <ul>
@@ -686,7 +686,7 @@
                   If the [=request/current url=] has an <a data-cite="service-workers#dfn-active-worker">active
                   worker registration</a>:
                   <ul>
-                    <li>If |lastWorkerStartOrigin| is not the [=request/current url=]'s origin, set {{workerStart}} to a {{DOMHighResTimeStamp}}
+                    <li>If |lastWorkerStartOrigin| is not equal to the [=request/current url=]'s origin, set {{workerStart}} to a {{DOMHighResTimeStamp}}
                       with a time value of 0.</li>
                     <li>If the user agent has not yet
                       <a data-cite="service-workers#run-service-worker">run the worker</a>,
@@ -698,7 +698,7 @@
                         <li>Go to the <a href="#fetch-start-step">fetch-start-step</a>.</li>
                       </ol>
                     </li>
-                    <li>If |lastWorkerStartOrigin| is the [=request/current url=]'s origin, go to the
+                    <li>If |lastWorkerStartOrigin| is equal to the [=request/current url=]'s origin, go to the
                       <a href="#fetch-start-step">fetch-start-step</a>.</li>
                     <li>If the worker is available, immediately before the <a data-cite=
                       "service-workers#on-fetch-request-algorithm">event named `fetch` is
