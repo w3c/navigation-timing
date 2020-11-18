@@ -309,7 +309,7 @@
               <li>If the <a>current document</a> has no <a data-cite=
                 "service-workers#dfn-containing-service-worker-registration">active
                 service worker registration</a> [[SERVICE-WORKERS]], this attribute MUST
-                return a {{DOMHighResTimeStamp}} with a time value equal to zero.</li>
+                return zero.</li>
               <li>If there were redirects, this attribute MUST return a {{DOMHighResTimeStamp}}
                 with a time immediately before the user agent <a data-cite=
                 "service-workers#run-service-worker">ran the worker</a> for
@@ -374,8 +374,7 @@
         </p>
         <ol>
           <li>If there is no previous document, or if the <a>same-origin
-          check</a> fails, return a {{DOMHighResTimeStamp}} with a time value
-          equal to zero.
+          check</a> fails, return zero.
           </li>
           <li>Otherwise, return a <a data-cite=
           "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
@@ -391,8 +390,7 @@
         </p>
         <ol>
           <li>If there is no previous document, or if the <a>same-origin
-          check</a> fails, return a {{DOMHighResTimeStamp}} with a time value
-          equal to zero.
+          check</a> fails, return zero.
           </li>
           <li>Otherwise, return a {{DOMHighResTimeStamp}} with a time value
           equal to the time immediately before the user agent starts the
@@ -451,18 +449,15 @@
           The <dfn>loadEventStart</dfn> attribute MUST return a <a data-cite=
           "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
           time value equal to the time immediately before the load event of the
-          <a>current document</a> is fired. It MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to zero when the load event is not fired yet.
+          <a>current document</a> is fired. It MUST return zero when the
+          load event is not fired yet.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>loadEventEnd</dfn> attribute MUST return a <a data-cite=
           "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
           time value equal to the time when the load event of the <a>current
-          document</a> is completed. It MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to zero when the load event is not fired or is not
-          completed.
+          document</a> is completed. It MUST return zero when the load
+          event is not fired or is not completed.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>type</dfn> attribute MUST return a {{DOMString}} describing
@@ -627,8 +622,7 @@
           <li>Set <a>entryType</a> and <a>initiatorType</a> to the
           {{DOMString}} "<code>navigation</code>".
           </li>
-          <li>Set {{startTime}} to a {{DOMHighResTimeStamp}} with a time value
-          of zero, and <a data-cite=
+          <li>Set {{startTime}} to zero, and <a data-cite=
           "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol"><code>
             nextHopProtocol</code></a> to the empty {{DOMString}}.
           </li>
