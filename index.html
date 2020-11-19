@@ -680,6 +680,7 @@
                   If the [=request/current url=] has an <a data-cite="service-workers#dfn-active-worker">active
                   worker registration</a>:
                   <ul>
+                    <li>Let |worker| be the registration's active worker</li>
                     <li>If |lastWorkerStartOrigin| is not equal to the [=request/current url=]'s origin, set {{workerStart}} to a {{DOMHighResTimeStamp}}
                       with a time value of 0.</li>
                     <li>If the user agent has not yet
@@ -696,7 +697,7 @@
                       <a href="#fetch-start-step">fetch-start-step</a>.</li>
                     <li>If the worker is available, immediately before the <a data-cite=
                       "service-workers#on-fetch-request-algorithm">event named `fetch` is
-                      fired</a> at the active worker, record the time as {{workerStart}}.</li>
+                      fired</a> at the worker, record the time as {{workerStart}}.</li>
                     </li>
                   </ul>
                 </li>
