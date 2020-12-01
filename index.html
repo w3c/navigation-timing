@@ -673,16 +673,14 @@
                 <li>If the [=request/current url=]
                   has no matching <a data-cite=
                   "service-workers#dfn-service-worker-registration">service worker
-                  registration</a>, set {{workerStart}} to a {{DOMHighResTimeStamp}}
-                  with a time value of 0, and go to the
+                  registration</a>, set {{workerStart}} to 0, and go to the
                   <a href="#fetch-start-step">fetch-start-step</a>.</li>
                 <li>
                   If the [=request/current url=] has an <a data-cite="service-workers#dfn-active-worker">active
                   worker registration</a>:
                   <ul>
                     <li>Let |worker| be the registration's active worker</li>
-                    <li>If |lastWorkerStartOrigin| is not equal to the [=request/current url=]'s origin, set {{workerStart}} to a {{DOMHighResTimeStamp}}
-                      with a time value of 0.</li>
+                    <li>If |lastWorkerStartOrigin| is not equal to the [=request/current url=]'s origin, set {{workerStart}} to 0.</li>
                     <li>If the user agent has not yet
                       <a data-cite="service-workers#run-service-worker">run the worker</a>,
                       immediately before the user agent
