@@ -695,8 +695,13 @@
                       <a href="#fetch-start-step">fetch-start-step</a>.</li>
                     <li>If the worker is available, immediately before the <a data-cite=
                       "service-workers#on-fetch-request-algorithm">event named `fetch` is
-                      fired</a> at the worker, record the time as {{workerStart}}.</li>
-                    </li>
+                      fired</a> at the worker:
+                      <ol>
+                        <li>Record the time as {{workerStart}}</dfn>.</li>
+                        <li>Let |lastWorkerStartOrigin| be the [=request/current url=]'s origin.</li>
+                        <li>Go to the <a href="#fetch-start-step">fetch-start-step</a>.</li>
+                      </ol>
+                  </li>
                   </ul>
                 </li>
               </ul>
