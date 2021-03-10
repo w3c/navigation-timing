@@ -135,6 +135,8 @@
           'resource-timing-2#dom-performanceresourcetiming-secureconnectionstart'>
           secureConnectionStart</a> attribute is now mandatory.
         </li>
+        <li>exposes <a data-link-for=
+          "PerformanceNavigationTiming">workerStart</a></li>
       </ul>
     </section>
     <section id="introduction" class='informative'>
@@ -305,18 +307,27 @@
           {{DOMString}} "<code>navigation</code>".
           </li>
           <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>
-            workerStart</code></dfn> attribute MUST return the time immediately
-            before the user agent <a data-cite=
-            "service-workers#run-service-worker">ran the worker</a> (if the
-            <a>current document</a> has an <a data-cite=
-            "service-workers#dfn-containing-service-worker-registration">active
-            service worker registration</a> [[SERVICE-WORKERS]]) required to
-            service the request, or if the worker was already available, the
-            time immediately before the user agent <a data-cite=
-            "service-workers#fetchevent">fired an event named `fetch`</a> at
-            the <a data-cite="service-workers#dfn-active-worker">active
-            worker</a>. Otherwise, if there is no active worker this attribute
-            MUST return zero.
+            workerStart</code></dfn> attribute getter does the following:
+            <ul>
+              <li>If the <a>current document</a> has no <a data-cite=
+                "service-workers#dfn-containing-service-worker-registration">active
+                service worker registration</a> [[SERVICE-WORKERS]], this attribute MUST
+                return zero.</li>
+              <li>If there were redirects, this attribute MUST return a {{DOMHighResTimeStamp}}
+                with a time immediately before the user agent <a data-cite=
+                "service-workers#run-service-worker">ran the worker</a> for
+                the first request in final same-origin redirect
+                chain.</li>
+              <li>If the worker was already available, this attribute MUST return
+                a {{DOMHighResTimeStamp}} with a time immediately before the user agent <a data-cite=
+                "service-workers#fetchevent">fired an event named `fetch`</a> at
+                the <a data-cite="service-workers#dfn-active-worker">active
+                worker.</a></li>
+              <li>Otherwise, this attribute MUST return a {{DOMHighResTimeStamp}} with a
+                time immediately before the user agent <a data-cite=
+                "service-workers#run-service-worker">ran the worker</a> required to
+                service the request.</li>
+            </ul>
           </li>
         </ul>
         <p class="note">
@@ -366,8 +377,7 @@
         </p>
         <ol>
           <li>If there is no previous document, or if the <a>same-origin
-          check</a> fails, return a {{DOMHighResTimeStamp}} with a time value
-          equal to zero.
+          check</a> fails, return zero.
           </li>
           <li>Otherwise, return a <a data-cite=
           "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
@@ -383,8 +393,7 @@
         </p>
         <ol>
           <li>If there is no previous document, or if the <a>same-origin
-          check</a> fails, return a {{DOMHighResTimeStamp}} with a time value
-          equal to zero.
+          check</a> fails, return zero.
           </li>
           <li>Otherwise, return a {{DOMHighResTimeStamp}} with a time value
           equal to the time immediately before the user agent starts the
@@ -443,18 +452,15 @@
           The <dfn>loadEventStart</dfn> attribute MUST return a <a data-cite=
           "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
           time value equal to the time immediately before the load event of the
-          <a>current document</a> is fired. It MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to zero when the load event is not fired yet.
+          <a>current document</a> is fired. It MUST return zero when the
+          load event is not fired yet.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>loadEventEnd</dfn> attribute MUST return a <a data-cite=
           "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
           time value equal to the time when the load event of the <a>current
-          document</a> is completed. It MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to zero when the load event is not fired or is not
-          completed.
+          document</a> is completed. It MUST return zero when the load
+          event is not fired or is not completed.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>type</dfn> attribute MUST return a {{DOMString}} describing
@@ -512,7 +518,7 @@
               <dfn>navigate</dfn>
             </dt>
             <dd>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a>
@@ -524,7 +530,7 @@
               <dfn>reload</dfn>
             </dt>
             <dd>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>.
@@ -533,7 +539,7 @@
               <dfn>back_forward</dfn>
             </dt>
             <dd>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>.
@@ -569,7 +575,7 @@
             This figure illustrates the timing attributes defined by the
             {{PerformanceNavigationTiming}} interface. Attributes in
             parenthesis indicate that they may not be available for navigations
-            involving documents from different <a data-cite=
+            involving documents or redirects from different <a data-cite=
             "html#concept-origin" title='origin'>origins</a>.
           </figcaption>
           <!-- Source: https://docs.google.com/document/d/1I7XGNJ57Qgjkg9pL11s7MK7zGEcwAgdNj1W5f7NKbW8/ -->
@@ -619,15 +625,15 @@
           <li>Set <a>entryType</a> and <a>initiatorType</a> to the
           {{DOMString}} "<code>navigation</code>".
           </li>
-          <li>Set {{startTime}} to a {{DOMHighResTimeStamp}} with a time value
-          of zero, and <a data-cite=
+          <li>Set {{startTime}} to zero, and <a data-cite=
           "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol"><code>
             nextHopProtocol</code></a> to the empty {{DOMString}}.
           </li>
+          <li>Let |lastWorkerStartOrigin| be the [=opaque origin=].</li>
           <li>Record the current navigation type in <a data-link-for=
           "PerformanceNavigationTiming">type</a> if it has not been set:
             <ol style="list-style-type:lower-alpha ;">
-              <li>If the navigation has the 
+              <li>If the navigation has the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               set to
               <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a>
@@ -635,14 +641,14 @@
               let the navigation type be the {{DOMString}}
               "<a data-link-for="NavigationType">navigate</a>".
               </li>
-              <li>If the navigation has the 
+              <li>If the navigation has the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               set to
               <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>,
               let the navigation type be
               the {{DOMString}} "<a data-link-for="NavigationType">reload</a>".
               </li>
-              <li>If the navigation has the 
+              <li>If the navigation has the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               set to
               <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>,
@@ -655,24 +661,53 @@
           fails, set both <a data-link-for=
           "PerformanceNavigationTiming">unloadEventStart</a> and
           <a data-link-for="PerformanceNavigationTiming">unloadEventEnd</a> to
-          0 then go to <a href="#fetch-start-step">fetch-start-step</a>.
+          0 then go to <a href="#worker-start-step">worker-start-step</a>.
           Otherwise, record <a data-link-for=
           "PerformanceNavigationTiming">unloadEventStart</a> as the time
           immediately before the unload event.
           </li>
           <li>Immediately after the unload event is completed, record the
           current time as <a data-link-for=
-          "PerformanceNavigationTiming">unloadEventEnd</a>. If the navigation
-          URL has an <a data-cite="service-workers#dfn-active-worker">active
-          worker registration</a>, immediately before the user agent
-          <a data-cite="service-workers#run-service-worker">runs the worker</a>
-          record the time as {{workerStart}}, or if the worker is available,
-          record the time before the <a data-cite=
-          "service-workers#on-fetch-request-algorithm">event named `fetch` is
-          fired</a> at the active worker. Otherwise, if the navigation URL has
-          no matching <a data-cite=
-          "service-workers#dfn-service-worker-registration">service worker
-          registration</a>, set {{workerStart}} value to zero.
+          "PerformanceNavigationTiming">unloadEventEnd</a>.
+          </li>
+          <li id="worker-start-step">
+            <i>[worker-start-step]</i>
+              <ul>
+                <li>If the [=request/current url=]
+                  has no matching <a data-cite=
+                  "service-workers#dfn-service-worker-registration">service worker
+                  registration</a>, set {{workerStart}} to 0, and go to the
+                  <a href="#fetch-start-step">fetch-start-step</a>.</li>
+                <li>
+                  If the [=request/current url=] has an <a data-cite="service-workers#dfn-active-worker">active
+                  worker registration</a>:
+                  <ul>
+                    <li>Let |worker| be the registration's active worker</li>
+                    <li>If |lastWorkerStartOrigin| is not equal to the [=request/current url=]'s origin, set {{workerStart}} to 0.</li>
+                    <li>If the user agent has not yet
+                      <a data-cite="service-workers#run-service-worker">run the worker</a>,
+                      immediately before the user agent
+                      <a data-cite="service-workers#run-service-worker">runs the worker</a>:
+                      <ol>
+                        <li>Record the time as {{workerStart}}</dfn>.</li>
+                        <li>Let |lastWorkerStartOrigin| be the [=request/current url=]'s origin.</li>
+                        <li>Go to the <a href="#fetch-start-step">fetch-start-step</a>.</li>
+                      </ol>
+                    </li>
+                    <li>If |lastWorkerStartOrigin| is equal to the [=request/current url=]'s origin, go to the
+                      <a href="#fetch-start-step">fetch-start-step</a>.</li>
+                    <li>If the worker is available, immediately before the <a data-cite=
+                      "service-workers#on-fetch-request-algorithm">event named `fetch` is
+                      fired</a> at the worker:
+                      <ol>
+                        <li>Record the time as {{workerStart}}</dfn>.</li>
+                        <li>Let |lastWorkerStartOrigin| be the [=request/current url=]'s origin.</li>
+                        <li>Go to the <a href="#fetch-start-step">fetch-start-step</a>.</li>
+                      </ol>
+                  </li>
+                  </ul>
+                </li>
+              </ul>
           </li>
           <li id="fetch-start-step">
             <i>[fetch-start-step]</i> If the new resource is to be fetched
@@ -804,10 +839,10 @@
                 redirectEnd</code></a>, <a data-link-for=
                 "PerformanceNavigationTiming">unloadEventStart</a>,
                 <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventEnd</a> and
-                <a data-link-for=
+                "PerformanceNavigationTiming">unloadEventEnd</a>
+                and <a data-link-for=
                 "PerformanceNavigationTiming">redirectCount</a> to 0. Then,
-                return to <a href="#fetch-start-step">fetch-start-step</a> with
+                return to <a href="#worker-start-step">worker-start-step</a> with
                 the new resource.
               </li>
               <li>Increment <a data-link-for=
@@ -838,9 +873,11 @@
                 <a data-cite=
                 "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
                 <code>nextHopProtocol</code></a>, <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventStart</a> and
+                "PerformanceNavigationTiming">unloadEventStart</a>,
                 <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventEnd</a>. Set
+                "PerformanceNavigationTiming">unloadEventEnd</a> and
+                <a data-link-for=
+                "PerformanceNavigationTiming">workerStart</a>. Set
                 <a data-cite=
                 "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
                 <code>nextHopProtocol</code></a> to the empty {{DOMString}}.
@@ -914,6 +951,10 @@
           </li>
           <li>Let <var>request</var> be the <a>current document</a>'s
           <a data-cite="FETCH#concept-request">request</a>.
+          </li>
+          <li>If <var>request</var>'s <a data-cite=
+          "FETCH#concept-request-redirect-count">redirect count</a> is zero, return
+          "pass".
           </li>
           <li>If <var>request</var>'s <a data-cite=
           "FETCH#concept-request-redirect-count">redirect count</a> is not
@@ -1448,7 +1489,7 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a> or
@@ -1460,7 +1501,7 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>.
@@ -1471,7 +1512,7 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>.
