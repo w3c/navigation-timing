@@ -361,107 +361,71 @@
         };
         </pre>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          When getting the value of the <dfn>unloadEventStart</dfn> attribute,
-          run the following steps:
-        </p>
-        <ol>
-          <li>If there is no previous document, or if the <a>same-origin
-          check</a> fails, return a {{DOMHighResTimeStamp}} with a time value
-          equal to zero.
+          The <dfn>unloadEventStart</dfn> getter steps are to return the |current document|'s
+          [=load timing info=]'s [=document load timing info/previous document unload timing=]'s
+          [=unload timing info/unload event start time=].
           </li>
-          <li>Otherwise, return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to the time immediately before the user agent starts
-          the <a data-cite=
-          "HTML/browsing-the-web.html#unloading-documents">unload event</a> of
-          the previous document.
-          </li>
+          <p class="note">See <a data-cite=
+          "HTML/browsing-the-web.html#unloading-documents">unload event</a> for more info.</p>
         </ol>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          When getting the value of the <dfn>unloadEventEnd</dfn> attribute,
-          run the following steps:
-        </p>
-        <ol>
-          <li>If there is no previous document, or if the <a>same-origin
-          check</a> fails, return a {{DOMHighResTimeStamp}} with a time value
-          equal to zero.
+          The <dfn>unloadEventEnd</dfn> getter steps are to return the |current document|'s
+          [=load timing info=]'s [=document load timing info/previous document unload timing=]'s
+          [=unload timing info/unload event end time=].
           </li>
-          <li>Otherwise, return a {{DOMHighResTimeStamp}} with a time value
-          equal to the time immediately before the user agent starts the
-          <a data-cite="HTML/browsing-the-web.html#unloading-documents">unload
-          event</a> of the previous document.
-          </li>
+          <p class="note">See <a data-cite=
+          "HTML/browsing-the-web.html#unloading-documents">unload event</a> for more info.</p>
         </ol>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>domInteractive</dfn> attribute MUST return a
-          {{DOMHighResTimeStamp}} with a time value equal to the time
-          immediately before the user agent sets the <a data-cite=
-          "HTML/dom.html#current-document-readiness">current document
-          readiness</a> of the <a>current document</a> to <a data-cite=
-          "HTML/parsing.html#the-end:current-document-readiness" title=
-          'interactive" document readiness'>"interactive"</a> [[HTML]].
+         The <dfn>domInteractive</dfn> getter steps are to return
+         the |current document|'s [=load timing info=]'s
+         [=document load timing info/dom interactive time=].</p>
+        <p class="note">See <a data-cite=
+          "HTML/dom.html#current-document-readiness">document readiness</a> for more info.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>domContentLoadedEventStart</dfn> attribute MUST return a
-          {{DOMHighResTimeStamp}} with a time value equal to the time
-          immediately before the user agent fires the <a data-cite=
-          "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
-          event</a> at the <a>current document</a>.
+         The <dfn>domContentLoadedEventStart</dfn> getter steps are to return
+         the |current document|'s [=load timing info=]'s
+         [=document load timing info/dom content loaded event start time=].</p>
+        <p class="note">See <a data-cite=
+          "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded</a> for more info.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>domContentLoadedEventEnd</dfn> attribute MUST return a
-          {{DOMHighResTimeStamp}} with a time value equal to the time
-          immediately after the <a>current document</a>'s <a data-cite=
+         The <dfn>domContentLoadedEventEnd</dfn> getter steps are to return
+         the |current document|'s [=load timing info=]'s
+         [=document load timing info/dom content loaded event end time=].</p>
           "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
           event</a> completes.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>domComplete</dfn> attribute MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to the time immediately before the user agent sets
-          the <a data-cite="HTML/dom.html#current-document-readiness">current
-          document readiness</a> of the <a>current document</a> to
-          <a data-cite="HTML/parsing.html#the-end:current-document-readiness-2"
-          title='"complete" document readiness'>"complete"</a> [[HTML]].
-        </p>
-        <p>
-          If the <a data-cite=
-          "HTML/dom.html#current-document-readiness">current document
-          readiness</a> changes to the same state multiple times,
-          <a data-link-for="PerformanceNavigationTiming">domInteractive</a>,
-          <a data-link-for=
-          "PerformanceNavigationTiming">domContentLoadedEventStart</a>,
-          <a data-link-for=
-          "PerformanceNavigationTiming">domContentLoadedEventEnd</a> and
-          <a data-link-for="PerformanceNavigationTiming">domComplete</a> MUST
-          return a {{DOMHighResTimeStamp}} with a time value equal to the time
-          of the first occurrence of the corresponding <a data-cite=
-          "HTML/dom.html#current-document-readiness" title=
-          'current document readiness'>document readiness</a> change [[HTML]].
+         The <dfn>domComplete</dfn> getter steps are to return
+         the |current document|'s [=load timing info=]'s
+         [=document load timing info/dom complete time=].</p>
+        <p class="note">See <a data-cite=
+          "HTML/dom.html#current-document-readiness">document readiness</a> for more info.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>loadEventStart</dfn> attribute MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to the time immediately before the load event of the
-          <a>current document</a> is fired. It MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to zero when the load event is not fired yet.
+         The <dfn>loadEventStart</dfn> getter steps are to return
+         the |current document|'s [=load timing info=]'s
+         [=document load timing info/load event start time=].</p>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>loadEventEnd</dfn> attribute MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to the time when the load event of the <a>current
-          document</a> is completed. It MUST return a <a data-cite=
-          "hr-time-2#dom-domhighrestimestamp">DOMHighResTimeStamp</a> with a
-          time value equal to zero when the load event is not fired or is not
-          completed.
+         The <dfn>loadEventEnd</dfn> getter steps are to return
+         the |current document|'s [=load timing info=]'s
+         [=document load timing info/load event end time=].</p>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>type</dfn> attribute MUST return a {{DOMString}} describing
-          the type of the last non-redirect <a data-cite=
-          "HTML/browsing-the-web.html#navigate">navigation</a> in the current
-          browsing context. It MUST have one of the <a>NavigationType</a>
-          values.
+         The <dfn>type</dfn> getter steps are to run the following:
+         <ol>
+           <li>Let |historyHandling| be the |current document|'s [=load timing info=]'s
+           [=document load timing info/history handling=].
+           <li>If |historyHandling| is "<code>default</code>", or "<code>replace</code>", then return 
+           "<a data-link-for="NavigationType">navigate</a>".
+           <li>If |historyHandling| is "<code>entry update</code>", then return
+           "<a data-link-for="NavigationType">back_forward</a>".
+           <li>If |historyHandling| is "<code>reload</code>", then return
+           "<a data-link-for="NavigationType">reload</a>".
+         </ol>
         </p>
         <div class="note">
           <p>
@@ -477,17 +441,10 @@
           </p>
         </div>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          When getting the <dfn>redirectCount</dfn> attribute, run the
-          following steps:
+         The <dfn>redirectCount</dfn> getter steps are to return
+         the |current document|'s [=load timing info=]'s
+         [=document load timing info/redirect count=].</p>
         </p>
-        <ol>
-          <li>If there are no redirects or if the <a>same-origin check</a>
-          fails, return zero.
-          </li>
-          <li>Otherwise, return the number of redirects since the last
-          non-redirect navigation under the current browsing context.
-          </li>
-        </ol>
         <p>
           The <dfn>toJSON()</dfn> method runs [WEBIDL]'s <a data-cite=
           "WEBIDL/#default-tojson-operation">default toJSON operation</a>.
@@ -576,355 +533,6 @@
           <img src="timestamp-diagram.svg" alt="Navigation Timing attributes"
           style='width: 100%'>
         </figure>
-        <ol>
-          <li>If the navigation is aborted for any of the following reasons,
-          abort these steps.
-            <ol style="list-style-type:lower-alpha;">
-              <li>The navigation is aborted due to the <a data-cite=
-              "HTML/origin.html#sandboxed-navigation-browsing-context-flag">sandboxed
-              navigation browsing context flag</a>, the <a data-cite=
-              "HTML/origin.html#sandboxed-top-level-navigation-without-user-activation-browsing-context-flag">
-                sandboxed top-level navigation without user activation browsing
-                context flag</a> or the <a data-cite=
-                "HTML/origin.html#sandboxed-top-level-navigation-with-user-activation-browsing-context-flag">
-                sandboxed top-level navigation with user activation browsing
-                context flag</a>, a preexisting attempt to navigate the
-                <a data-cite="HTML/browsers.html#browsing-context">browsing
-                context</a>, or the user canceling the navigation.
-              </li>
-              <li>The navigation is caused by <a data-cite=
-              "HTML/browsing-the-web.html#navigate-fragid-step" title=
-              'fragment identifiers navigation'>fragment identifiers</a> within
-              the page.
-              </li>
-              <li>The new resource is to be handled by some sort of inline
-              content.
-              </li>
-              <li>The new resource is to be handled using a mechanism that does
-              not affect the browsing context.
-              </li>
-              <li>The user <a data-cite=
-              "HTML/browsing-the-web.html#refused-to-allow-the-document-to-be-unloaded">
-                refuses to allow the document to be unloaded</a>.
-              </li>
-            </ol>
-          </li>
-          <li id="step-create-object">Create a new
-          {{PerformanceNavigationTiming}} object and add it to the
-            <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance
-            entry buffer</a>.
-          </li>
-          <li>Set <a>name</a> to the {{DOMString}} "<code>document</code>".
-          </li>
-          <li>Set <a>entryType</a> and <a>initiatorType</a> to the
-          {{DOMString}} "<code>navigation</code>".
-          </li>
-          <li>Set {{startTime}} to a {{DOMHighResTimeStamp}} with a time value
-          of zero, and <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol"><code>
-            nextHopProtocol</code></a> to the empty {{DOMString}}.
-          </li>
-          <li>Record the current navigation type in <a data-link-for=
-          "PerformanceNavigationTiming">type</a> if it has not been set:
-            <ol style="list-style-type:lower-alpha ;">
-              <li>If the navigation has the 
-              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
-              set to
-              <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a>
-              or <a data-cite="HTML/browsing-the-web.html#hh-replace">"replace"</a>,
-              let the navigation type be the {{DOMString}}
-              "<a data-link-for="NavigationType">navigate</a>".
-              </li>
-              <li>If the navigation has the 
-              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
-              set to
-              <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>,
-              let the navigation type be
-              the {{DOMString}} "<a data-link-for="NavigationType">reload</a>".
-              </li>
-              <li>If the navigation has the 
-              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
-              set to
-              <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>,
-              let the navigation type be the {{DOMString}}
-              "<a data-link-for="NavigationType">back_forward</a>".
-              </li>
-            </ol>
-          </li>
-          <li>If there are no redirects or if the <a>same-origin check</a>
-          fails, set both <a data-link-for=
-          "PerformanceNavigationTiming">unloadEventStart</a> and
-          <a data-link-for="PerformanceNavigationTiming">unloadEventEnd</a> to
-          0 then go to <a href="#fetch-start-step">fetch-start-step</a>.
-          Otherwise, record <a data-link-for=
-          "PerformanceNavigationTiming">unloadEventStart</a> as the time
-          immediately before the unload event.
-          </li>
-          <li>Immediately after the unload event is completed, record the
-          current time as <a data-link-for=
-          "PerformanceNavigationTiming">unloadEventEnd</a>. If the navigation
-          URL has an <a data-cite="service-workers#dfn-active-worker">active
-          worker registration</a>, immediately before the user agent
-          <a data-cite="service-workers#run-service-worker">runs the worker</a>
-          record the time as {{workerStart}}, or if the worker is available,
-          record the time before the <a data-cite=
-          "service-workers#on-fetch-request-algorithm">event named `fetch` is
-          fired</a> at the active worker. Otherwise, if the navigation URL has
-          no matching <a data-cite=
-          "service-workers#dfn-service-worker-registration">service worker
-          registration</a>, set {{workerStart}} value to zero.
-          </li>
-          <li id="fetch-start-step">
-            <i>[fetch-start-step]</i> If the new resource is to be fetched
-            using a "GET" <a data-cite="FETCH#concept-request-method">request
-            method</a>, immediately before a user agent checks with the
-            <a data-cite="HTML/offline.html#relevant-application-cache" title=
-            "relevant application cache">relevant application caches</a>,
-            record the current time as <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.
-            Otherwise, immediately before a user agent starts the <a data-cite=
-            "FETCH#concept-fetch" title='fetch'>fetching process</a>, record
-            the current time as <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.
-          </li>
-          <li>Let <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-domainlookupstart">
-            <code>domainLookupStart</code></a>, <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-domainlookupend"><code>
-            domainLookupEnd</code></a>, <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectstart"><code>
-            connectStart</code></a> and <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a>
-            be the same value as <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>fetchStart</code></a>.
-          </li>
-          <li>Set <a>name</a> to a {{DOMString}} value of the <a data-cite=
-          "HTML/dom.html#the-document's-address">address</a> of the <a>current
-          document</a>.
-          </li>
-          <li>If the resource is fetched from the <a data-cite=
-          "HTML/offline.html#relevant-application-cache" title=
-          "relevant application cache">relevant application cache</a> or local
-          resources, including the <a href=
-          "https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]], go
-          to <a href="#request-start-step">request-start-step</a>.
-          </li>
-          <li>If no domain lookup is required, go to <a href=
-          "#connect-start-step">connect-start-step</a>. Otherwise, immediately
-          before a user agent starts the domain name lookup, record the time as
-          <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-domainlookupstart">
-            <code>domainLookupStart</code></a>.
-          </li>
-          <li>Record the time as <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-domainlookupend"><code>
-            domainLookupEnd</code></a> immediately after the domain name lookup
-            is successfully done. A user agent MAY need multiple retries before
-            that. If the domain lookup fails, abort the rest of the steps.
-          </li>
-          <li id="connect-start-step">
-            <i>[connect-start-step]</i> If a persistent transport connection is
-            used to fetch the resource, let <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectstart"><code>
-            connectStart</code></a> and <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a>
-            be the same value of <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-domainlookupend"><code>
-            domainLookupEnd</code></a>. Otherwise, record the time as
-            <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectstart"><code>
-            connectStart</code></a> immediately before initiating the
-            connection to the server and record the time as <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-connectend"><code>connectEnd</code></a>
-            immediately after the connection to the server or the proxy is
-            established. A user agent MAY need multiple retries before this
-            time. Once connection is established set the value of <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol"><code>
-            nextHopProtocol</code></a> to the ALPN ID used by the connection.
-            If a connection can not be established, abort the rest of the
-            steps.
-          </li>
-          <li>A user agent MUST also set the <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-secureconnectionstart">
-            <code>secureConnectionStart</code></a> attribute as defined in the
-            attribute's processing model in [[RESOURCE-TIMING]].
-          </li>
-          <li id="request-start-step">
-            <i>[request-start-step]</i> Immediately before a user agent starts
-            sending request for the document, record the current time as
-            <a data-cite=
-            "resource-timing-2#dom-performanceresourcetiming-requeststart"><code>
-            requestStart</code></a>.
-          </li>
-          <li id="step-response-start">Record the time as <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-responsestart"><code>
-            responseStart</code></a> immediately after the user agent receives
-            the first byte of the response.
-          </li>
-          <li id="step-response-end">Record the time as <a data-cite=
-          "resource-timing-2#dom-performanceresourcetiming-responseend"><code>
-            responseEnd</code></a> immediately after receiving the last byte of
-            the response.
-            <ol>
-              <li>Return to <a href=
-              "#connect-start-step">connect-start-step</a> if the user agent
-              fails to send the request or receive the entire response, and
-              needs to reopen the connection.
-                <div class="note">
-                  <p>
-                    When <a href=
-                    "https://tools.ietf.org/html/rfc7230#section-6.3">persistent
-                    connection</a> [[RFC7230]] is enabled, a user agent MAY
-                    first try to re-use an open connect to send the request
-                    while the connection can be <a href=
-                    "https://tools.ietf.org/html/rfc7230#section-6.5">asynchronously
-                    closed</a>. In such case, connectStart, connectEnd and
-                    requestStart SHOULD represent timing information collected
-                    over the re-open connection.
-                  </p>
-                </div>
-              </li>
-              <li>Set the value of <a data-cite=
-              "resource-timing-2#dom-performanceresourcetiming-transfersize"><code>
-                transferSize</code></a>, <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-encodedbodysize">
-                <code>encodedBodySize</code></a>, <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-decodedbodysize">
-                <code>decodedBodySize</code></a> to corresponding values.
-              </li>
-            </ol>
-          </li>
-          <li>If the fetched resource results in an <a data-cite=
-          "FETCH#redirect-status">HTTP redirect</a>, then
-            <ol style="list-style-type:lower-alpha;">
-              <li>If the <a>same-origin check</a> fails, set <a data-cite=
-              "resource-timing-2#dom-performanceresourcetiming-redirectstart">
-                <code>redirectStart</code></a>, <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-redirectend"><code>
-                redirectEnd</code></a>, <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventStart</a>,
-                <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventEnd</a> and
-                <a data-link-for=
-                "PerformanceNavigationTiming">redirectCount</a> to 0. Then,
-                return to <a href="#fetch-start-step">fetch-start-step</a> with
-                the new resource.
-              </li>
-              <li>Increment <a data-link-for=
-              "PerformanceNavigationTiming">redirectCount</a> by 1.
-              </li>
-              <li>If the value of <a data-cite=
-              "resource-timing-2#dom-performanceresourcetiming-redirectstart">
-                <code>redirectStart</code></a> is 0, let it be the value of
-                <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-fetchstart"><code>
-                fetchStart</code></a>.
-              </li>
-              <li>Let <a data-cite=
-              "resource-timing-2#dom-performanceresourcetiming-redirectend"><code>
-                redirectEnd</code></a> be the value of <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-responseend"><code>
-                responseEnd</code></a>.
-              </li>
-              <li>Set all of the attributes in the
-              {{PerformanceNavigationTiming}} object to 0 except {{startTime}},
-              <a data-cite=
-              "resource-timing-2#dom-performanceresourcetiming-redirectstart">
-                <code>redirectStart</code></a>, <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-redirectend"><code>
-                redirectEnd</code></a>, <a data-link-for=
-                "PerformanceNavigationTiming">redirectCount</a>,
-                <a data-link-for="PerformanceNavigationTiming">type</a>,
-                <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
-                <code>nextHopProtocol</code></a>, <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventStart</a> and
-                <a data-link-for=
-                "PerformanceNavigationTiming">unloadEventEnd</a>. Set
-                <a data-cite=
-                "resource-timing-2#dom-performanceresourcetiming-nexthopprotocol">
-                <code>nextHopProtocol</code></a> to the empty {{DOMString}}.
-              </li>
-              <li>Return to <a href="#fetch-start-step">fetch-start-step</a>
-              with the new resource.
-              </li>
-            </ol>
-          </li>
-          <li>Record the time as <a data-link-for=
-          "PerformanceNavigationTiming">domInteractive</a> immediately before
-          the user agent sets the <a data-cite=
-          "HTML/dom.html#current-document-readiness">current document
-          readiness</a> to "interactive".
-          </li>
-          <li>Record the time as <a data-link-for=
-          "PerformanceNavigationTiming">domContentLoadedEventStart</a>
-          immediately before the user agent fires the <a data-cite=
-          "HTML/parsing.html#the-end">DOMContentLoaded event</a> at the
-          document.
-          </li>
-          <li>Record the time as <a data-link-for=
-          "PerformanceNavigationTiming">domContentLoadedEventEnd</a>
-          immediately after the <a data-cite=
-          "HTML/parsing.html#the-end">DOMContentLoaded event</a> completes.
-          </li>
-          <li>Record the time as <a data-link-for=
-          "PerformanceNavigationTiming">domComplete</a> immediately before the
-          user agent sets the <a data-cite=
-          "HTML/dom.html#current-document-readiness">current document
-          readiness</a> to "complete".
-          </li>
-          <li>Record the time as <a data-link-for=
-          "PerformanceNavigationTiming">loadEventStart</a> immediately before
-          the user agent fires the load event.
-          </li>
-          <li>Record the time as <a data-link-for=
-          "PerformanceNavigationTiming">loadEventEnd</a> immediately after the
-          user agent completes the load event.
-          </li>
-          <li>Set the <a>duration</a> to a {{DOMHighResTimeStamp}} equal to the
-          difference between <a data-link-for=
-          "PerformanceNavigationTiming">loadEventEnd</a> and {{startTime}},
-          respectively.
-          </li>
-          <li>
-            <a data-cite=
-            'performance-timeline-2#dfn-queue-a-performanceentry'>Queue</a> the
-            new {{PerformanceNavigationTiming}} object.
-          </li>
-        </ol>
-        <p>
-          Some user agents maintain the DOM structure of the document in memory
-          during navigation operations such as forward and backward. In those
-          cases, the {{PerformanceNavigationTiming}} object MUST NOT be altered
-          during the navigation.
-        </p>
-      </section>
-      <section id="same-origin-check">
-        <h3>
-          Same-origin check
-        </h3>
-        <p>
-          When asked to run the <dfn>same-origin check</dfn>, the user agent
-          MUST run the following steps:
-        </p>
-        <ol>
-          <li>If the previous document exists and its origin is not
-          <a data-cite="html#same-origin">same origin</a> as the <a>current
-          document</a>'s origin, return "fail".
-          </li>
-          <li>Let <var>request</var> be the <a>current document</a>'s
-          <a data-cite="FETCH#concept-request">request</a>.
-          </li>
-          <li>If <var>request</var>'s <a data-cite=
-          "FETCH#concept-request-redirect-count">redirect count</a> is not
-          zero, and all of <var>request</var>'s <a data-cite=
-          "FETCH#redirect-status">HTTP redirects</a> have the <a data-cite=
-          "html#same-origin">same origin</a> as the current document, return
-          "pass".
-          </li>
-          <li>Otherwise, return "fail".
-          </li>
-        </ol>
       </section>
     </section>
     <section id="privacy" class='informative'>
@@ -941,7 +549,7 @@
           instance, the unloading time reveals how long the previous page takes
           to execute its unload handler, which could be used to infer the
           user's login status. These attacks have been mitigated by enforcing
-          the <a>same-origin check</a> algorithm when timing information
+          the [=same origin=] check algorithm when timing information
           involving the previous navigation is accessed.
         </p>
         <p>
