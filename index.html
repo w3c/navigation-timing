@@ -360,65 +360,76 @@
             [Default] object toJSON();
         };
         </pre>
+
+        <p>A <a>PerformanceNavigationTiming</a> has an associated
+        [=document load timing info=] <a data-dfn-for="PerformanceResourceTiming">
+        <dfn>document load timing</dfn></a>.
+
+
+        <p>A <a>PerformanceNavigationTiming</a> has an associated
+        [=document unload timing info=] <a data-dfn-for="PerformanceNavigationTiming"><dfn>previous document
+        unload timing</dfn></a>.
+
+        <p>A <a>PerformanceNavigationTiming</a> has an associated
+        number <a data-dfn-for="PerformanceNavigationTiming"><dfn>redirect count</dfn></a>.
+
+        <p>A <a>PerformanceNavigationTiming</a> has an associated
+        [=history handling behavior=] <a data-dfn-for="PerformanceNavigationTiming"><dfn>history
+        handling</dfn></a>.
+
+        </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>unloadEventStart</dfn> getter steps are to return the |current document|'s
-          [=load timing info=]'s [=document load timing info/previous document unload timing=]'s
-          [=unload timing info/unload event start time=].
+          The <dfn>unloadEventStart</dfn> getter steps are to return |this|'
+          <span>previous document unload timing</span>'s [=unload timing info/unload event start time=].
           </li>
           <p class="note">See <a data-cite=
           "HTML/browsing-the-web.html#unloading-documents">unload event</a> for more info.</p>
         </ol>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>unloadEventEnd</dfn> getter steps are to return the |current document|'s
-          [=load timing info=]'s [=document load timing info/previous document unload timing=]'s
-          [=unload timing info/unload event end time=].
-          </li>
+          The <dfn>unloadEventEnd</dfn> getter steps are to return |this|'
+          [=previous document unload timing=]'s [=unload timing info/unload event end time=].</li>
           <p class="note">See <a data-cite=
           "HTML/browsing-the-web.html#unloading-documents">unload event</a> for more info.</p>
         </ol>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domInteractive</dfn> getter steps are to return
-         the |current document|'s [=load timing info=]'s
-         [=document load timing info/dom interactive time=].</p>
+         |this|' [=load timing info=]'s [=document load timing info/dom interactive time=].</p>
         <p class="note">See <a data-cite=
           "HTML/dom.html#current-document-readiness">document readiness</a> for more info.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domContentLoadedEventStart</dfn> getter steps are to return
-         the |current document|'s [=load timing info=]'s
+         |this|' [=load timing info=]'s
          [=document load timing info/dom content loaded event start time=].</p>
         <p class="note">See <a data-cite=
           "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded</a> for more info.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domContentLoadedEventEnd</dfn> getter steps are to return
-         the |current document|'s [=load timing info=]'s
+         |this|' [=load timing info=]'s
          [=document load timing info/dom content loaded event end time=].</p>
           "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
           event</a> completes.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domComplete</dfn> getter steps are to return
-         the |current document|'s [=load timing info=]'s
+         |this|' [=load timing info=]'s 
          [=document load timing info/dom complete time=].</p>
         <p class="note">See <a data-cite=
           "HTML/dom.html#current-document-readiness">document readiness</a> for more info.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>loadEventStart</dfn> getter steps are to return
-         the |current document|'s [=load timing info=]'s
-         [=document load timing info/load event start time=].</p>
+         |this|' [=load timing info=]'s [=document load timing info/load event start time=].</p>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>loadEventEnd</dfn> getter steps are to return
-         the |current document|'s [=load timing info=]'s
-         [=document load timing info/load event end time=].</p>
+         |this|' [=load timing info=]'s [=document load timing info/load event end time=].</p>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>type</dfn> getter steps are to run the following:
          <ol>
-           <li>Let |historyHandling| be the |current document|'s [=load timing info=]'s
-           [=document load timing info/history handling=].
+           <li>Let |historyHandling| be |this|' <span>history handling</span>.
            <li>If |historyHandling| is "<code>default</code>", or "<code>replace</code>", then return 
            "<a data-link-for="NavigationType">navigate</a>".
            <li>If |historyHandling| is "<code>entry update</code>", then return
@@ -441,9 +452,8 @@
           </p>
         </div>
         <p data-dfn-for='PerformanceNavigationTiming'>
-         The <dfn>redirectCount</dfn> getter steps are to return
-         the |current document|'s [=load timing info=]'s
-         [=document load timing info/redirect count=].</p>
+         The <dfn>redirectCount</dfn> getter steps are to return |this|'
+         <span>redirect count</span>.</p>
         </p>
         <p>
           The <dfn>toJSON()</dfn> method runs [WEBIDL]'s <a data-cite=
@@ -535,6 +545,38 @@
         </figure>
       </section>
     </section>
+    <section id="marking-navigation-timing">
+      <h2>Creating a navigation timing entry</h2>
+      <p data-dfn-for="Document">Each [=document=] has an associated <dfn>navigation timing entry</dfn>, initially unset.
+
+      <p>To <dfn export="">create the navigation timing entry</dfn> for {{Document}} |document|, given a
+      [=fetch timing info=] |fetchTiming|, a [=document unload timing info=]
+      |previousDocumentUnloadTiming|, a number |redirectCount|, and a [=history handling behavior=]
+      |historyHandling|, do the following:
+      <ol>
+        <li>Let |global| be |document|'s [=relevant global object=].</li>
+
+        <li>Let |navigationTimingEntry| a new {{PerformanceNavigationTiming}} object in |global|'s
+        [=global object/realm=], with its <a data-for="PerformanceResourceTiming">timing info</a>
+        set to |fetchTiming|, its <a data-for="PerformanceResourceTiming">initiator type</a> set to
+        "<code>document</code>", its <a data-for="PerformanceResourceTiming">requested URL</a> set
+        to |document|'s <a data-cite="HTML#the-document's-address">address</a>, its
+        <a data-for="PerformanceNavigationTiming">document load timing</a> set to |document|'s
+        {{Document/load timing info}}, its <a data-for="PerformanceNavigationTiming">redirect count</a>
+        set to |redirectCount| and its <a data-for="PerformanceNavigationTiming">history handling</a>
+        set to |historyHandling|.</li>
+
+        <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
+
+        <li>add |navigationTimingEntry| to |global|'s
+        <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance entry buffer</a>.
+      </ol>
+
+      <p>To <dfn export="">queue the navigation timing entry</dfn> for {{Document}} |document|,
+      <a data-cite='performance-timeline-2#dfn-queue-a-performanceentry'>queue</a> |document|'s
+      <span>navigation timing entry</span>.
+    </secript>
+
     <section id="privacy" class='informative'>
       <h2>
         Privacy
@@ -549,8 +591,8 @@
           instance, the unloading time reveals how long the previous page takes
           to execute its unload handler, which could be used to infer the
           user's login status. These attacks have been mitigated by enforcing
-          the [=same origin=] check algorithm when timing information
-          involving the previous navigation is accessed.
+          the [=same origin=] check algorithm when unloading a document, as detailed in
+          <a data-cite="HTML#update-the-session-history-with-the-new-page">the HTML spec</a>.
         </p>
         <p>
           The <a data-cite=
@@ -583,9 +625,10 @@
         The {{PerformanceNavigationTiming}} interface exposes timing
         information about the previous document to the <a>current document</a>.
         To limit the access to {{PerformanceNavigationTiming}} attributes which
-        include information on the previous document, the <a>same-origin
-        check</a> algorithm is enforced and attributes related to the previous
-        document are set to zero.
+        include information on the previous document, the 
+        <a data-cite="HTML#update-the-session-history-with-the-new-page">previous document
+        unloading</a> algorithm enforces the <a data-cite="html#same-origin">same origin policy</a>
+        and attributes related to the previous document are set to zero.
       </p>
       <section id="authentication">
         <h3>
