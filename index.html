@@ -374,8 +374,7 @@
         number <a data-dfn-for="PerformanceNavigationTiming"><dfn>redirect count</dfn></a>.
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
-        [=history handling behavior=] <a data-dfn-for="PerformanceNavigationTiming"><dfn>history
-        handling</dfn></a>.
+        {{NavigationType}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>navigation type</dfn></a>.
 
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
@@ -427,16 +426,7 @@
          |this|' [=load timing info=]'s [=document load timing info/load event end time=].</p>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-         The <dfn>type</dfn> getter steps are to run the following:
-         <ol>
-           <li>Let |historyHandling| be |this|' <span>history handling</span>.
-           <li>If |historyHandling| is "<code>default</code>", or "<code>replace</code>", then return 
-           "<a data-link-for="NavigationType">navigate</a>".
-           <li>If |historyHandling| is "<code>entry update</code>", then return
-           "<a data-link-for="NavigationType">back_forward</a>".
-           <li>If |historyHandling| is "<code>reload</code>", then return
-           "<a data-link-for="NavigationType">reload</a>".
-         </ol>
+         The <dfn>type</dfn> getter steps are to run the |this|'s [=navigation type=].
         </p>
         <div class="note">
           <p>
@@ -550,9 +540,8 @@
       <p data-dfn-for="Document">Each [=document=] has an associated <dfn>navigation timing entry</dfn>, initially unset.
 
       <p>To <dfn export="">create the navigation timing entry</dfn> for {{Document}} |document|, given a
-      [=fetch timing info=] |fetchTiming|, a [=document unload timing info=]
-      |previousDocumentUnloadTiming|, a number |redirectCount|, and a [=history handling behavior=]
-      |historyHandling|, do the following:
+      [=fetch timing info=] |fetchTiming|, a number |redirectCount|,
+      and a {{NavigationType}} |navigationType|, do the following:
       <ol>
         <li>Let |global| be |document|'s [=relevant global object=].</li>
 
@@ -562,9 +551,10 @@
         "<code>document</code>", its <a data-for="PerformanceResourceTiming">requested URL</a> set
         to |document|'s <a data-cite="HTML#the-document's-address">address</a>, its
         <a data-for="PerformanceNavigationTiming">document load timing</a> set to |document|'s
-        {{Document/load timing info}}, its <a data-for="PerformanceNavigationTiming">redirect count</a>
-        set to |redirectCount| and its <a data-for="PerformanceNavigationTiming">history handling</a>
-        set to |historyHandling|.</li>
+        {{Document/load timing info}}, its <a data-for="PerformanceNavigationTiming">previous document
+        unload timing</a> set to |document|'s {{Document/previous document unload timing}}, its
+        <a data-for="PerformanceNavigationTiming">redirect count</a> set to |redirectCount| and its
+        <a data-for="PerformanceNavigationTiming">navigation type</a> set to |navigationType|.</li>
 
         <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
 
