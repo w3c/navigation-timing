@@ -72,7 +72,7 @@
       mdn: "navigation-timing",
       xref: {
         url: "https://respec.org/xref",
-        specs: [ "service-workers", "hr-time-2", "performance-timeline-2", "resource-timing-2"],
+        specs: [ "service-workers", "hr-time-2", "performance-timeline-2", "resource-timing-2", "html", "fetch"],
         profile: "web-platform",
       },
       localBiblio: {
@@ -372,8 +372,8 @@
 
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
-        [=document unload timing info=] <a data-dfn-for="PerformanceNavigationTiming"><dfn>previous document
-        unload timing</dfn></a>.
+        [=document unload timing info=] <a data-dfn-for="PerformanceNavigationTiming">
+        <dfn>previous document unload timing</dfn></a>.
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
         number <a data-dfn-for="PerformanceNavigationTiming"><dfn>redirect count</dfn></a>.
@@ -384,51 +384,53 @@
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>unloadEventStart</dfn> getter steps are to return |this|'s
-          <span>previous document unload timing</span>'s [=unload timing info/unload event start time=].
+          [=previous document unload timing=]'s [=document unload timing info/unload event start time=].
           </li>
           <p class="note">See <a data-cite=
           "HTML/browsing-the-web.html#unloading-documents">unload event</a> for more info.</p>
         </ol>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>unloadEventEnd</dfn> getter steps are to return |this|'s
-          [=previous document unload timing=]'s [=unload timing info/unload event end time=].</li>
+          [=previous document unload timing=]'s [=document unload timing info/unload event end time=].</li>
           <p class="note">See <a data-cite=
           "HTML/browsing-the-web.html#unloading-documents">unload event</a> for more info.</p>
         </ol>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domInteractive</dfn> getter steps are to return
-         |this|'s [=load timing info=]'s [=document load timing info/dom interactive time=].</p>
+         |this|'s [=document load timing=]'s <a data-cite="HTML#dom-interactive-time">DOM
+         interactive time</a>.</p>
+
         <p class="note">See <a data-cite=
           "HTML/dom.html#current-document-readiness">document readiness</a> for more info.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-         The <dfn>domContentLoadedEventStart</dfn> getter steps are to return
-         |this|'s [=load timing info=]'s
-         [=document load timing info/dom content loaded event start time=].</p>
+         The <dfn>domContentLoadedEventStart</dfn> getter steps are to return |this|'s
+         [=document load timing=]'s <a data-cite="HTML#dom-content-loaded-event-end-time">DOM
+         content loaded event start time</a>.</p>
         <p class="note">See <a data-cite=
           "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded</a> for more info.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domContentLoadedEventEnd</dfn> getter steps are to return
-         |this|'s [=load timing info=]'s
-         [=document load timing info/dom content loaded event end time=].</p>
+         |this|'s [=document load timing=]'s <a data-cite="HTML#dom-content-loaded-event-end-time">DOM
+         content loaded event end time</a>.</p>
           "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
           event</a> completes.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domComplete</dfn> getter steps are to return
-         |this|'s [=load timing info=]'s
-         [=document load timing info/dom complete time=].</p>
+         |this|'s [=document load timing=]'s <a data-cite="HTML#dom-complete-time">DOM complete
+         time</a>.
         <p class="note">See <a data-cite=
           "HTML/dom.html#current-document-readiness">document readiness</a> for more info.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>loadEventStart</dfn> getter steps are to return
-         |this|'s [=load timing info=]'s [=document load timing info/load event start time=].</p>
+         |this|'s [=document load timing=]'s [=document load timing info/load event start time=].</p>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>loadEventEnd</dfn> getter steps are to return
-         |this|'s [=load timing info=]'s [=document load timing info/load event end time=].</p>
+         |this|'s [=document load timing=]'s [=document load timing info/load event end time=].</p>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>type</dfn> getter steps are to run the |this|'s [=navigation type=].
@@ -544,25 +546,25 @@
       <h2>Creating a navigation timing entry</h2>
       <p data-dfn-for="Document">Each [=document=] has an associated <dfn>navigation timing entry</dfn>, initially unset.
 
-      <p>To <dfn export="">create the navigation timing entry</dfn> for {{Document}} |document|, given a
-      [=fetch timing info=] |fetchTiming|, a number |redirectCount|,
-      and a {{NavigationType}} |navigationType|, do the following:
+      <p>To <dfn export="">create the navigation timing entry</dfn> for {{Document}} |document|,
+      given a [=fetch timing info=] |fetchTiming|, a number |redirectCount|, and a
+      {{NavigationType}} |navigationType|, do the following:
       <ol>
         <li>Let |global| be |document|'s [=relevant global object=].</li>
-
         <li>Let |navigationTimingEntry| be a new {{PerformanceNavigationTiming}} object in |global|'s
-        [=global object/realm=], with its <a data-for="PerformanceResourceTiming">timing info</a>
-        set to |fetchTiming|, its <a data-for="PerformanceResourceTiming">initiator type</a> set to
-        "<code>navigation</code>", its <a data-for="PerformanceResourceTiming">requested URL</a> set
-        to |document|'s <a data-cite="HTML#the-document's-address">address</a>, its
-        <a data-for="PerformanceNavigationTiming">document load timing</a> set to |document|'s
-        {{Document/load timing info}}, its <a data-for="PerformanceNavigationTiming">previous document
-        unload timing</a> set to |document|'s {{Document/previous document unload timing}}, its
-        <a data-for="PerformanceNavigationTiming">redirect count</a> set to |redirectCount| and its
-        <a data-for="PerformanceNavigationTiming">navigation type</a> set to |navigationType|.</li>
-
+        [=global object/realm=].
+        <li><a data-cite="RESOURCE-TIMING-2#dfn-setup-the-resource-timing-entry">Setup the resource
+        timing entry=] for |navigationTimingEntry| given "<code>navigation</code>", |document|'s
+        <a data-cite="HTML#the-document's-address">address</a>, and |fetchTiming|.
+        <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">document load
+        timing</a> to |document|'s [=Document/load timing info=]
+        <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">previous
+        document unload timing</a> to |document|'s [=Document/previous document unload timing=].
+        <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">redirect
+        count</a> to |redirectCount|.
+        <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">navigation
+        type</a> to |navigationType|.
         <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
-
         <li>add |navigationTimingEntry| to |global|'s
         <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance entry buffer</a>.
       </ol>
