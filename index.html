@@ -305,21 +305,21 @@
           "RESOURCE-TIMING-2#dom-performanceresourcetiming">PerformanceResourceTiming</dfn></code>
           interface:
         </p>
-        <ul data-dfn-for="PerformanceResourceTiming">
+        <ul data-dfn-for="PerformanceNavigationTiming">
           <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>
             workerStart</code></dfn> getter steps are to perform the following steps:
             <ol>
-              <li>Let |workerTiming| be |this|'s [=service worker timing=].</p>
-              <li>If |workerTiming| is not null, then return |workerTiming|'s [=service worker timing info/start time=].
-              <li>Return 0.
+              <li>Let |workerTiming| be |this|'s [=service worker timing=].
+              <li>If |workerTiming| is null, then return 0.
+              <li>Return |workerTiming|'s [=service worker timing info/start time=].
             </ol>
           </li>
           <li>The <dfn id='dom-PerformanceNavigationTiming-fetchStart'><code>
             fetchStart</code></dfn> getter steps are to perform the following steps:
             <ol>
-              <li>Let |workerTiming| be |this|'s [=service worker timing=].</p>
-              <li>If |workerTiming| is not null, then return |workerTiming|'s [=service worker timing info/fetch event dispatch time=].
-              <li>Return |this|'s {{PerformanceResourceTiming/fetchStart}}.
+              <li>Let |workerTiming| be |this|'s [=service worker timing=].
+              <li>If |workerTiming| is null, then return |this|'s {{PerformanceResourceTiming/fetchStart}}.
+              <li>Return |workerTiming|'s [=service worker timing info/fetch event dispatch time=].
             </ol>
           </li>
         </ul>
