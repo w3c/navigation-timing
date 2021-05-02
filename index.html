@@ -310,7 +310,7 @@
             workerStart</code></dfn> getter steps are to perform the following steps:
             <ol>
               <li>Let |workerTiming| be |this|'s [=service worker timing=].</p>
-              <li>If |workerTiming| is not null, then return [=service worker timing info/start time=].
+              <li>If |workerTiming| is not null, then return |workerTiming|'s [=service worker timing info/start time=].
               <li>Return 0.
             </ol>
           </li>
@@ -318,7 +318,7 @@
             fetchStart</code></dfn> getter steps are to perform the following steps:
             <ol>
               <li>Let |workerTiming| be |this|'s [=service worker timing=].</p>
-              <li>If |workerTiming| is not null, then return [=service worker timing info/fetch event dispatch time=].
+              <li>If |workerTiming| is not null, then return |workerTiming|'s [=service worker timing info/fetch event dispatch time=].
               <li>Return |this|'s {{PerformanceResourceTiming/fetchStart}}.
             </ol>
           </li>
