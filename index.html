@@ -305,23 +305,20 @@
           "RESOURCE-TIMING-2#dom-performanceresourcetiming">PerformanceResourceTiming</dfn></code>
           interface:
         </p>
-        <ul data-dfn-for="PerformanceResourceTiming">
-          <li>The <dfn>initiatorType</dfn> attribute MUST return the
-          {{DOMString}} "<code>navigation</code>".
+        <ul>
+          <li>The `workerStart` getter steps are to perform the following steps:
+            <ol>
+              <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
+              <li>If |workerTiming| is null, then return |this|'s prototype's `workerStart`.
+              <li>Return |workerTiming|'s [=service worker timing info/start time=].
+            </ol>
           </li>
-          <li>The <dfn id='dom-PerformanceNavigationTiming-workerStart'><code>
-            workerStart</code></dfn> attribute MUST return the time immediately
-            before the user agent <a data-cite=
-            "service-workers#run-service-worker">ran the worker</a> (if the
-            <a>current document</a> has an <a data-cite=
-            "service-workers#dfn-containing-service-worker-registration">active
-            service worker registration</a> [[SERVICE-WORKERS]]) required to
-            service the request, or if the worker was already available, the
-            time immediately before the user agent <a data-cite=
-            "service-workers#fetchevent">fired an event named `fetch`</a> at
-            the <a data-cite="service-workers#dfn-active-worker">active
-            worker</a>. Otherwise, if there is no active worker this attribute
-            MUST return zero.
+          <li>The `fetchStart` getter steps are to perform the following steps:
+            <ol>
+              <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
+              <li>If |workerTiming| is null, then return |this|'s prototype's `fetchStart`.
+              <li>Return |workerTiming|'s [=service worker timing info/fetch event dispatch time=].
+            </ol>
           </li>
         </ul>
         <p class="note">
@@ -370,7 +367,6 @@
         [=document load timing info=] <a data-dfn-for="PerformanceResourceTiming">
         <dfn>document load timing</dfn></a>.
 
-
         <p>A <a>PerformanceNavigationTiming</a> has an associated
         [=document unload timing info=] <a data-dfn-for="PerformanceNavigationTiming">
         <dfn>previous document unload timing</dfn></a>.
@@ -380,6 +376,9 @@
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
         {{NavigationType}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>navigation type</dfn></a>.
+
+        <p>A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=] 
+        <dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
 
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
@@ -546,14 +545,15 @@
       <p data-dfn-for="Document">Each [=document=] has an associated <dfn>navigation timing entry</dfn>, initially unset.
 
       <p>To <dfn export="">create the navigation timing entry</dfn> for {{Document}} |document|,
-      given a [=fetch timing info=] |fetchTiming|, a number |redirectCount|, and a
-      {{NavigationType}} |navigationType|, do the following:
+      given a [=fetch timing info=] |fetchTiming|, a number |redirectCount|, a
+      {{NavigationType}} |navigationType|, and a null or [=service worker timing info=] |serviceWorkerTiming|,
+      do the following:
       <ol>
         <li>Let |global| be |document|'s [=relevant global object=].</li>
         <li>Let |navigationTimingEntry| be a new {{PerformanceNavigationTiming}} object in |global|'s
         [=global object/realm=].
         <li><a data-cite="RESOURCE-TIMING-2#dfn-setup-the-resource-timing-entry">Setup the resource
-        timing entry=] for |navigationTimingEntry| given "<code>navigation</code>", |document|'s
+        timing entry</a> for |navigationTimingEntry| given "<code>navigation</code>", |document|'s
         <a data-cite="HTML#the-document's-address">address</a>, and |fetchTiming|.
         <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">document load
         timing</a> to |document|'s [=Document/load timing info=]
@@ -563,6 +563,8 @@
         count</a> to |redirectCount|.
         <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">navigation
         type</a> to |navigationType|.
+        <li>Set |navigationTimingEntry|'s [=PerformanceNavigationTiming/service worker timing=]
+        to |serviceWorkerTiming|.
         <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
         <li>add |navigationTimingEntry| to |global|'s
         <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance entry buffer</a>.
