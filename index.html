@@ -308,16 +308,15 @@
         <ul>
           <li>The `workerStart` getter steps are to perform the following steps:
             <ol>
-              <li>Let |workerTiming| be |this|'s [=service worker timing=].
-              <li>If |workerTiming| is null, then return |this|'s
-              <a data-cite="resource-timing-2#dom-performanceresourcetiming-workerstart">workerStart</a>.
+              <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
+              <li>If |workerTiming| is null, then return |this|'s prototype's `workerStart`.
               <li>Return |workerTiming|'s [=service worker timing info/start time=].
             </ol>
           </li>
           <li>The `fetchStart` getter steps are to perform the following steps:
             <ol>
-              <li>Let |workerTiming| be |this|'s [=service worker timing=].
-              <li>If |workerTiming| is null, then return |this|'s `fetchStart`.
+              <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
+              <li>If |workerTiming| is null, then return |this|'s prototype's `fetchStart`.
               <li>Return |workerTiming|'s [=service worker timing info/fetch event dispatch time=].
             </ol>
           </li>
