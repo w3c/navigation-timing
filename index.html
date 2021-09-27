@@ -312,6 +312,15 @@
               <li>If |workerTiming| is null, then return |this|'s prototype's `workerStart`.
               <li>Return |workerTiming|'s [=service worker timing info/start time=].
             </ol>
+            <p class="note">
+              Though `workerStart` is exposed in <a data-cite=
+              "RESOURCE-TIMING-2#dom-performanceresourcetiming">PerformanceResourceTiming</a>, it
+              has a different meaning in Navigation Timing, as unlike subresources, a navigation may
+              trigger the activation or running of a service worker.
+              In the context of Navigation Timing, `workerStart` returns the timestamp measured
+              just before the worker has been activated or started. See [[service-workers]] for
+              a precise definition.
+            </p>
           </li>
           <li>The `fetchStart` getter steps are to perform the following steps:
             <ol>
@@ -319,6 +328,17 @@
               <li>If |workerTiming| is null, then return |this|'s prototype's `fetchStart`.
               <li>Return |workerTiming|'s [=service worker timing info/fetch event dispatch time=].
             </ol>
+            <p class="note">
+              When a [=service worker=] is used as part of the navigation, The `fetchStart` overload
+              holds a different meaning than the meaning in
+              <a data-cite="resource-timing-2#dom-performanceresourcetiming-requeststart">
+              <code>PerformanceResourceTiming</code></a>.
+              It returns the timestamp measured right before the {{FetchEvent}} is dispatched for
+              the [=service worker=]. The time difference between `workerStart` and `fetchStart` in
+              the document's navigation timing entry can be used to determine roughly how long it
+              took for the worker to be initialized or activated. See [[service-workers]] for
+              a precise definition.
+            </p>
           </li>
         </ul>
         <p class="note">
@@ -379,56 +399,81 @@
 
         <p>A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=] 
         <dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
-
         </p>
+
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>unloadEventStart</dfn> getter steps are to return |this|'s
-          [=previous document unload timing=]'s [=document unload timing info/unload event start time=].
-          </li>
-          <p class="note">See <a data-cite=
-          "HTML/browsing-the-web.html#unloading-documents">unload event</a> for more info.</p>
-        </ol>
+          [=previous document unload timing=]'s [=document unload timing info/unload event start
+          time=].
+        <p class="note">If the previous document and the current document have the same
+          <a data-cite="html#concept-origin">origin</a>, this timestamp is measured immediately
+          before the user agent starts the <a data-cite=
+          "HTML/browsing-the-web.html#unloading-documents">unload</a> event
+          of the previous document. If there is no previous document or the
+          previous document has a different <a data-cite=
+          "html#concept-origin">origin</a> than the current document, this attribute will return
+          zero.
+        </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>unloadEventEnd</dfn> getter steps are to return |this|'s
-          [=previous document unload timing=]'s [=document unload timing info/unload event end time=].</li>
-          <p class="note">See <a data-cite=
-          "HTML/browsing-the-web.html#unloading-documents">unload event</a> for more info.</p>
-        </ol>
+          [=previous document unload timing=]'s
+          [=document unload timing info/unload event end time=].
+        <p class="note">If the previous document and the current document have the same
+          <a data-cite="html#concept-origin">origin</a>, this timestamp is measured immediately
+          after the user agent handles the <a data-cite=
+          "HTML/browsing-the-web.html#unloading-documents">unload</a> event
+          of the previous document. If there is no previous document or the
+          previous document has a different <a data-cite=
+          "html#concept-origin">origin</a> than the current document, this attribute will return
+          zero.
+        </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domInteractive</dfn> getter steps are to return
          |this|'s [=document load timing=]'s [=document load timing info/DOM interactive time=].</p>
 
-        <p class="note">See <a data-cite=
-          "HTML/dom.html#current-document-readiness">document readiness</a> for more info.
+        <p class="note">This timestamp is measured before the user agent sets the
+          <a data-cite="HTML/dom.html#current-document-readiness">current document readiness</a> to
+          <a data-cite="HTML/parsing.html#the-end">"interactive"</a>.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domContentLoadedEventStart</dfn> getter steps are to return |this|'s
          [=document load timing=]'s
          [=document load timing info/DOM content loaded event start time=].</p>
-        <p class="note">See <a data-cite=
-          "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded</a> for more info.
+        </p>
+        <p class="note">This timestamp is measured before the user agent dispatches the
+          <a data-cite="HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded</a>
+          event.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domContentLoadedEventEnd</dfn> getter steps are to return
          |this|'s [=document load timing=]'s
          [=document load timing info/DOM content loaded event end time=].</p>
-        <p class="note">See <a data-cite=
-          "HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded
-          event</a> completes.
+        <p class="note">This timestamp is measured after the user agent completes handling of the
+          <a data-cite="HTML/parsing.html#the-end:event-domcontentloaded">DOMContentLoaded</a>
+          event.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>domComplete</dfn> getter steps are to return
          |this|'s [=document load timing=]'s [=document load timing info/DOM complete time=].
-        <p class="note">See <a data-cite=
-          "HTML/dom.html#current-document-readiness">document readiness</a> for more info.
+        <p class="note">This timestamp is measured before the user agent sets the
+          <a data-cite="HTML/dom.html#current-document-readiness">current document readiness</a> to
+          <a data-cite="HTML/parsing.html#the-end">"complete"</a>. See <a data-cite=
+          "HTML/dom.html#current-document-readiness">document readiness</a> for a precise
+          definition.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>loadEventStart</dfn> getter steps are to return
          |this|'s [=document load timing=]'s [=document load timing info/load event start time=].</p>
         </p>
+        <p class="note">This timestamp is measured before the user agent dispatches the
+          <a data-cite="HTML/parsing.html#the-end:event-event-load">load</a> event for the document.
+        </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>loadEventEnd</dfn> getter steps are to return
          |this|'s [=document load timing=]'s [=document load timing info/load event end time=].</p>
+        </p>
+        <p class="note">This timestamp is measured after the user agent completes handling the
+          <a data-cite="HTML/parsing.html#the-end:event-event-load">load</a> event for the document.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>type</dfn> getter steps are to run the |this|'s [=navigation type=].
@@ -536,6 +581,19 @@
           </figcaption>
           <!-- Source: https://docs.google.com/document/d/1I7XGNJ57Qgjkg9pL11s7MK7zGEcwAgdNj1W5f7NKbW8/ -->
           <img src="timestamp-diagram.svg" alt="Navigation Timing attributes"
+          style='width: 100%'>
+        </figure>
+        <figure title='Timing attributes with service worker'>
+          <figcaption>
+            This figure illustrates the timing attributes defined by the
+            {{PerformanceNavigationTiming}} interface, when a [=service worker=] is used as part of
+            the fetch. Attributes in
+            parenthesis indicate that they may not be available for navigations
+            involving documents from different <a data-cite=
+            "html#concept-origin" title='origin'>origins</a>.
+          </figcaption>
+          <!-- Source: https://docs.google.com/document/d/1I7XGNJ57Qgjkg9pL11s7MK7zGEcwAgdNj1W5f7NKbW8/ -->
+          <img src="timestamp-diagram-sw.svg" alt="Navigation Timing attributes with Service Worker"
           style='width: 100%'>
         </figure>
       </section>
