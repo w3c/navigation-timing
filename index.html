@@ -379,6 +379,7 @@
             readonly        attribute DOMHighResTimeStamp loadEventEnd;
             readonly        attribute NavigationType      type;
             readonly        attribute unsigned short      redirectCount;
+            readonly        attribute boolean             landing;
             [Default] object toJSON();
         };
         </pre>
@@ -474,6 +475,15 @@
         </p>
         <p class="note">This timestamp is measured after the user agent completes handling the
           <a data-cite="HTML/parsing.html#the-end:event-event-load">load</a> event for the document.
+        </p>
+        <p data-dfn-for='PerformanceNavigationTiming'>
+          The <dfn>landing</dfn> getter steps are as following:
+          <ul>
+            <li><p>Let |document| be |this|'s [=relevant global object=]'s [=associated Document=].</p></li>
+            <li><p>Let |history entry| be |document|'s [=browsing context=]'s [=session history=]'s first entry.</p></li>
+            <li><p>If |history entry|'s [=session history entry/document=] equals |document|, return true.</p></li>
+            <li><p>Return false.</p></li> 
+          </ul>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>type</dfn> getter steps are to run the |this|'s [=navigation type=].
