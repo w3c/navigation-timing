@@ -22,7 +22,6 @@
       editors: [{
         name: "Yoav Weiss",
         url: "https://blog.yoav.ws/",
-        mailto: "yoav@yoav.ws",
         company: "Google",
         companyURL: "https://google.com/",
         w3cid: "58673"
@@ -36,7 +35,6 @@
         {
           name: "Ilya Grigorik",
           url: "https://www.igvita.com/",
-          mailto: "igrigorik@gmail.com",
           company: "Google",
           companyURL: "https://www.google.com/",
           w3cid: "56102",
@@ -72,7 +70,7 @@
       mdn: "navigation-timing",
       xref: {
         url: "https://respec.org/xref",
-        specs: [ "service-workers", "hr-time-2", "performance-timeline-2", "resource-timing-2", "html", "fetch"],
+        specs: [ "service-workers", "hr-time", "performance-timeline", "resource-timing", "html", "fetch"],
         profile: "web-platform",
       },
       localBiblio: {
@@ -84,7 +82,7 @@
           status:
             "The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS)",
           date: "March 2001",
-        },
+        }
       },
       lint: {
         "check-punctuation": true,
@@ -184,8 +182,8 @@
         interface which participates in the [[PERFORMANCE-TIMELINE-2]] to store
         and retrieve high resolution performance metric data related to the
         navigation of a document. As the {{PerformanceNavigationTiming}}
-        interface uses [[HR-TIME-2]], all time values are measured with respect
-        to the <a data-cite="HR-TIME-2#dfn-time-origin">time origin</a> of the
+        interface uses [[HR-TIME]], all time values are measured with respect
+        to the [=time origin=] of the
         {{Window}} object.
       </p>
       <p>
@@ -224,18 +222,9 @@
         "an object implementing the interface <code>Foo</code>.
       </p>
       <p>
-        The term <dfn>navigation</dfn> refers to the act of <a data-lt=
-        "navigate">navigating</a>.
-      </p>
-      <p>
         The term <dfn>current document</dfn> refers to the document associated
         with the <a data-lt="associated document">Window object's newest
         Document object</a>.
-      </p>
-      <p>
-        The term <dfn>JavaScript</dfn> is used to refer to ECMA262, rather than
-        the official term ECMAScript, since the term JavaScript is more widely
-        known. [[ECMASCRIPT]]
       </p>
       <p>
         Throughout this work, all time values are measured in milliseconds
@@ -243,7 +232,7 @@
         of navigation of the document occurs at time 0. The term <i>current
         time</i> refers to the number of milliseconds since the start of
         navigation of the document until the current moment in time. This
-        definition of time is based on [[HR-TIME-2]] specification.
+        definition of time is based on [[HR-TIME]] specification.
       </p>
     </section>
     <section id="sec-navigation-timing">
@@ -256,34 +245,22 @@
         </h3>
         <p>
           {{PerformanceNavigationTiming}} interface extends the following
-          attributes of <code><dfn data-cite=
-          "PERFORMANCE-TIMELINE-2#dom-performanceentry">PerformanceEntry</dfn></code>
-          interface:
+          attributes of {{PerformanceEntry}} interface:
         </p>
         <ul>
-          <li>The <dfn id=
-          'dom-PerformanceNavigationTiming-name'><code>name</code></dfn>
-          attribute MUST return the {{DOMString}} value of the <a data-cite=
-          "HTML#the-document's-address">address</a> of the <a>current
-          document</a>.
+          <li>The <code>name</code>
+          getter steps are to return the [=current document=]'s {{Document/URL}}.
           </li>
-          <li>The <dfn id=
-          'dom-PerformanceNavigationTiming-entryType'><code>entryType</code></dfn>
-          attribute MUST return the {{DOMString}} "<code id=
-          "perf-navigation">navigation</code>".
+          <li>The <code>entryType</code>
+          getter step is to return the {{DOMString}} "<code id="perf-navigation">navigation</code>".
           </li>
-          <li>The <dfn id=
-          'dom-PerformanceNavigationTiming-startTime'><code>startTime</code></dfn>
-          attribute MUST return a <code><dfn data-cite=
-          "HR-TIME-2#dom-domhighrestimestamp">DOMHighResTimeStamp</dfn></code>
-          with a time value of 0. [[HR-TIME-2]]
+          <li>The {{PerformanceEntry/startTime}}
+          getter step is to return a {{DOMHighResTimeStamp}}</code>
+          with a time value of 0.
           </li>
-          <li>The <dfn id=
-          'dom-PerformanceNavigationTiming-duration'><code>duration</code></dfn>
-          attribute MUST return a {{DOMHighResTimeStamp}} equal to the
-          difference between <a data-link-for=
-          "PerformanceNavigationTiming">loadEventEnd</a> and {{startTime}},
-          respectively.
+          <li>The {{PerformanceEntry/duration}}
+          getter step is to return a {{DOMHighResTimeStamp}} equal to the
+          difference between {{PerformanceNavigationTiming/loadEventEnd}} and [=this=]'s {{PerformanceEntry/startTime}}.
           </li>
         </ul>
         <p class="note">
@@ -306,7 +283,7 @@
           interface:
         </p>
         <ul>
-          <li>The `workerStart` getter steps are to perform the following steps:
+          <li>The {{PerformanceResourceTiming/workerStart}} getter steps are to perform the following steps:
             <ol>
               <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
               <li>If |workerTiming| is null, then return |this|'s prototype's `workerStart`.
@@ -322,7 +299,7 @@
               a precise definition.
             </p>
           </li>
-          <li>The `fetchStart` getter steps are to perform the following steps:
+          <li>The {{PerformanceResourceTiming/fetchStart}} getter steps are to perform the following steps:
             <ol>
               <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
               <li>If |workerTiming| is null, then return |this|'s prototype's `fetchStart`.
@@ -496,8 +473,7 @@
          <span>redirect count</span>.</p>
         </p>
         <p>
-          The <dfn>toJSON()</dfn> method runs [WEBIDL]'s <a data-cite=
-          "WEBIDL/#default-tojson-operation">default toJSON operation</a>.
+          The <dfn>toJSON()</dfn> method runs the [=default toJSON steps=] for [=this=].
         </p>
         <section id="sec-performance-navigation-types">
           <h4>
@@ -555,10 +531,10 @@
           </dl>
           <p class="note">
             The format of the above enumeration value is inconsistent with the
-            <a data-cite="WEBIDL/#idl-enums">WebIDL recommendation for
-            formatting of enumeration values</a>. Unfortunately, we are unable
+            [=enumeration|WebIDL recommendation for
+            formatting of enumeration values=]. Unfortunately, we are unable
             to change it due to backwards compatibility issues with shipped
-            implementations.
+            implementations. [[WebIDL]]
           </p>
         </section>
       </section>
@@ -617,12 +593,12 @@
 
       <p>To <dfn data-export="">queue the navigation timing entry</dfn> for {{Document}} |document|,
       <a data-cite='performance-timeline-2#dfn-queue-a-performanceentry'>queue</a> |document|'s
-      <span>navigation timing entry</span>.
+      [=navigation timing entry=].
     </secript>
 
     <section id="privacy" class='informative'>
       <h2>
-        Privacy
+        Privacy Considerations
       </h2>
       <section id="info_disclosure">
         <h3>
@@ -662,7 +638,7 @@
     </section>
     <section id="security" class='informative'>
       <h2>
-        Security
+        Security Considerations
       </h2>
       <p>
         The {{PerformanceNavigationTiming}} interface exposes timing
@@ -758,9 +734,7 @@ interface PerformanceTiming {
             <p class="note">
               This attribute is not defined for
               {{PerformanceNavigationTiming}}. Instead, authors can use
-              <a data-cite=
-              "HR-TIME-2#dom-performance-timeorigin">timeOrigin</a> to obtain
-              an equivalent timestamp.
+              {{Performance/timeOrigin}} to obtain an equivalent timestamp.
             </p>
           </dd>
           <dt>
@@ -1115,8 +1089,7 @@ interface PerformanceTiming {
             <dfn>toJSON()</dfn>
           </dt>
           <dd>
-            Runs [WEBIDL]'s <a data-cite=
-            "WEBIDL/#default-tojson-operation">default toJSON operation</a>.
+            Runs the [=default toJSON steps=] for [=this=].
           </dd>
         </dl>
       </section>
@@ -1217,8 +1190,7 @@ interface PerformanceNavigation {
             <dfn>toJSON()</dfn>
           </dt>
           <dd>
-            Runs [WEBIDL]'s <a data-cite=
-            "WEBIDL/#default-tojson-operation">default toJSON operation</a>.
+            Runs the [=default toJSON steps=] for [=this=].
           </dd>
         </dl>
       </section>
