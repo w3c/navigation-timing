@@ -285,14 +285,14 @@
         <ul>
           <li>The {{PerformanceResourceTiming/redirectStart}} getter steps are to perform the following steps:
             <ol>
-              <li>If |this|'s [=PerformanceNavigationTiming/has cross origin redirects] is true, return 0.
+              <li>If |this|'s [=PerformanceNavigationTiming/redirect count] is 0, return 0.
               <li>Otherwise return |this|'s {{PerformanceResourceTiming/redirectStart}}.
             </ol>
           </li>
           <li>The {{PerformanceResourceTiming/redirectEnd}} getter steps are to perform the following steps:
             <ol>
-              <li>If |this|'s [=PerformanceNavigationTiming/has cross origin redirects] is true, return 0.
-              <li>Otherwise return |this|'s {{PerformanceResourceTiming/redirectEnd}}.
+              <li>If |this|'s [=PerformanceNavigationTiming/redirect count] is 0, return 0.
+                <li>Otherwise return |this|'s {{PerformanceResourceTiming/redirectEnd}}.
             </ol>
             <p class="note">
               Though `redirectStart` and `redirectEnd` are exposed in <a data-cite=
@@ -388,9 +388,6 @@
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
         number <a data-dfn-for="PerformanceNavigationTiming"><dfn>redirect count</dfn></a>.
-
-        <p>A <a>PerformanceNavigationTiming</a> has an associated
-        boolean <a data-dfn-for="PerformanceNavigationTiming"><dfn>has cross-origin redirects</dfn></a>.
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
         {{NavigationType}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>navigation type</dfn></a>.
@@ -588,8 +585,8 @@
 
       <p>To <dfn data-export="">create the navigation timing entry</dfn> for {{Document}} |document|,
       given a [=fetch timing info=] |fetchTiming|, a number |redirectCount|, a
-      {{NavigationType}} |navigationType|, a null or [=service worker timing info=] |serviceWorkerTiming|,
-      and a boolean |hasCrossOriginRedirects|, do the following:
+      {{NavigationType}} |navigationType|, and a null or [=service worker timing info=] |serviceWorkerTiming|,
+      do the following:
       <ol>
         <li>Let |global| be |document|'s [=relevant global object=].</li>
         <li>Let |navigationTimingEntry| be a new {{PerformanceNavigationTiming}} object in |global|'s
@@ -607,8 +604,6 @@
         type</a> to |navigationType|.
         <li>Set |navigationTimingEntry|'s [=PerformanceNavigationTiming/service worker timing=]
         to |serviceWorkerTiming|.
-        <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">has cross-origin redirects</a>
-        to |hasCrossOriginRedirects|.
         <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
         <li>add |navigationTimingEntry| to |global|'s
         <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance entry buffer</a>.
