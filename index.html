@@ -283,6 +283,24 @@
           interface:
         </p>
         <ul>
+          <li>The {{PerformanceResourceTiming/redirectStart}} getter steps are to perform the following steps:
+            <ol>
+              <li>If |this|'s [=PerformanceNavigationTiming/redirect count] is 0, return 0.
+              <li>Otherwise return |this|'s {{PerformanceResourceTiming/redirectStart}}.
+            </ol>
+          </li>
+          <li>The {{PerformanceResourceTiming/redirectEnd}} getter steps are to perform the following steps:
+            <ol>
+              <li>If |this|'s [=PerformanceNavigationTiming/redirect count] is 0, return 0.
+                <li>Otherwise return |this|'s {{PerformanceResourceTiming/redirectEnd}}.
+            </ol>
+            <p class="note">
+              Though `redirectStart` and `redirectEnd` are exposed in <a data-cite=
+              "RESOURCE-TIMING-2#dom-performanceresourcetiming">PerformanceResourceTiming</a>, they
+              have a different meaning in Navigation Timing, where they return zero for navigations with
+              cross-origin redirects.
+            </p>
+          </li>
           <li>The {{PerformanceResourceTiming/workerStart}} getter steps are to perform the following steps:
             <ol>
               <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
