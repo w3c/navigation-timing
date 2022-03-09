@@ -350,7 +350,7 @@
         <div class="note">
           <p>
             Checking and retrieving contents from the <a href=
-            "https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234]] is
+            "https://tools.ietf.org/html/RFC7234">HTTP cache</a> [[RFC7234]] is
             part of the <a data-cite="FETCH#concept-fetch" title=
             'fetch'>fetching process</a>. It's covered by the <a data-cite=
             "resource-timing-2#dom-performanceresourcetiming-requeststart"><code>
@@ -830,9 +830,8 @@ interface PerformanceTiming {
               "HTML/urls-and-fetching.html#fetching-resources">fetched</a>
               using a "GET" <a data-cite="FETCH#concept-request-method">request
               method</a>, fetchStart must return the time immediately before
-              the user agent starts checking <a data-cite=
-              "HTML/offline.html#relevant-application-cache">any relevant
-              application caches</a>. Otherwise, it must return the time when
+              the user agent starts checking the [[RFC7234|HTTP cache]]. Otherwise, it must
+              return the time when
               the user agent starts <a data-cite=
               "HTML/urls-and-fetching.html#fetching-resources">fetching</a> the
               resource.
@@ -848,9 +847,7 @@ interface PerformanceTiming {
               a <a href=
               "https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
               connection</a> [[RFC2616]] is used or the current document is
-              retrieved from <a data-cite=
-              "HTML/offline.html#relevant-application-cache">relevant
-              application caches</a> or local resources, this attribute must
+              retrieved from the [[RFC7234|HTTP cache]] or local resources, this attribute must
               return the same value as {{PerformanceTiming.fetchStart}}.
             </p>
           </dd>
@@ -864,9 +861,7 @@ interface PerformanceTiming {
               If a <a href=
               "https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
               connection</a> [[RFC2616]] is used or the current document is
-              retrieved from <a data-cite=
-              "HTML/offline.html#relevant-application-cache">relevant
-              application caches</a> or local resources, this attribute must
+              retrieved from the [[RFC7234|HTTP cache]] or local resources, this attribute must
               return the same value as {{PerformanceTiming.fetchStart}}.
             </p>
             <div class="note">
@@ -898,9 +893,7 @@ interface PerformanceTiming {
               the document. If a <a href=
               "https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
               connection</a> [[RFC2616]] is used or the current document is
-              retrieved from <a data-cite=
-              "HTML/offline.html#relevant-application-cache">relevant
-              application caches</a> or local resources, this attribute must
+              retrieved from the [[RFC7234|HTTP cache]] or local resources, this attribute must
               return value of {{PerformanceTiming.domainLookupEnd}}.
             </p>
           </dd>
@@ -914,9 +907,7 @@ interface PerformanceTiming {
               retrieve the current document. If a <a href=
               "https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
               connection</a> [[RFC2616]] is used or the current document is
-              retrieved from <a data-cite=
-              "HTML/offline.html#relevant-application-cache">relevant
-              application caches</a> or local resources, this attribute must
+              retrieved from the [[RFC7234|HTTP cache]] or local resources, this attribute must
               return the value of {{PerformanceTiming.domainLookupEnd}}.
             </p>
             <p>
@@ -953,9 +944,7 @@ interface PerformanceTiming {
             <p>
               This attribute must return the time immediately before the user
               agent starts requesting the current document from the server, or
-              from <a data-cite=
-              "HTML/offline.html#relevant-application-cache">relevant
-              application caches</a> or from local resources.
+              from the [[RFC7234|HTTP cache]] or from local resources.
             </p>
             <p>
               If the transport connection fails after a request is sent and the
@@ -988,9 +977,7 @@ interface PerformanceTiming {
             <p>
               This attribute must return the time immediately after the user
               agent receives the first byte of the response from the server, or
-              from <a data-cite=
-              "HTML/offline.html#relevant-application-cache">relevant
-              application caches</a> or from local resources.
+              from the [[RFC7234|HTTP cache]] or from local resources.
             </p>
           </dd>
           <dt>
@@ -1002,9 +989,7 @@ interface PerformanceTiming {
               agent receives the last byte of the current document or
               immediately before the transport connection is closed, whichever
               comes first. The document here can be received either from the
-              server, <a data-cite=
-              "HTML/offline.html#relevant-application-cache">relevant
-              application caches</a> or from local resources.
+              server, the [[RFC7234|HTTP cache]] or from local resources.
             </p>
           </dd>
           <dt>
