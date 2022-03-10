@@ -364,16 +364,16 @@
         <pre class='idl'>
         [Exposed=Window]
         interface PerformanceNavigationTiming : PerformanceResourceTiming {
-            readonly        attribute DOMHighResTimeStamp unloadEventStart;
-            readonly        attribute DOMHighResTimeStamp unloadEventEnd;
-            readonly        attribute DOMHighResTimeStamp domInteractive;
-            readonly        attribute DOMHighResTimeStamp domContentLoadedEventStart;
-            readonly        attribute DOMHighResTimeStamp domContentLoadedEventEnd;
-            readonly        attribute DOMHighResTimeStamp domComplete;
-            readonly        attribute DOMHighResTimeStamp loadEventStart;
-            readonly        attribute DOMHighResTimeStamp loadEventEnd;
-            readonly        attribute NavigationType      type;
-            readonly        attribute unsigned short      redirectCount;
+            readonly        attribute DOMHighResTimeStamp  unloadEventStart;
+            readonly        attribute DOMHighResTimeStamp  unloadEventEnd;
+            readonly        attribute DOMHighResTimeStamp  domInteractive;
+            readonly        attribute DOMHighResTimeStamp  domContentLoadedEventStart;
+            readonly        attribute DOMHighResTimeStamp  domContentLoadedEventEnd;
+            readonly        attribute DOMHighResTimeStamp  domComplete;
+            readonly        attribute DOMHighResTimeStamp  loadEventStart;
+            readonly        attribute DOMHighResTimeStamp  loadEventEnd;
+            readonly        attribute NavigationTimingType type;
+            readonly        attribute unsigned short       redirectCount;
             [Default] object toJSON();
         };
         </pre>
@@ -390,7 +390,7 @@
         number <a data-dfn-for="PerformanceNavigationTiming"><dfn>redirect count</dfn></a>.
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
-        {{NavigationType}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>navigation type</dfn></a>.
+        {{NavigationTimingType}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>navigation type</dfn></a>.
 
         <p>A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=] 
         <dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
@@ -481,8 +481,8 @@
             "FETCH#redirect-status">HTTP redirects</a> by this spec. In those
             cases, the <a data-link-for="PerformanceNavigationTiming">type</a>
             attribute SHOULD return appropriate value, such as
-            <a data-link-for="NavigationType">reload</a> if reloading the
-            current page, or <a data-link-for="NavigationType">navigate</a> if
+            <a data-link-for="NavigationTimingType">reload</a> if reloading the
+            current page, or <a data-link-for="NavigationTimingType">navigate</a> if
             navigating to a new URL.
           </p>
         </div>
@@ -495,10 +495,10 @@
         </p>
         <section id="sec-performance-navigation-types">
           <h4>
-            <dfn>NavigationType</dfn> enum
+            <dfn>NavigationTimingType</dfn> enum
           </h4>
           <pre class='idl'>
-            enum NavigationType {
+            enum NavigationTimingType {
                 "navigate",
                 "reload",
                 "back_forward",
@@ -508,7 +508,7 @@
           <p>
             The values are defined as follows:
           </p>
-          <dl data-dfn-for='NavigationType'>
+          <dl data-dfn-for='NavigationTimingType'>
             <dt>
               <dfn>navigate</dfn>
             </dt>
@@ -585,7 +585,7 @@
 
       <p>To <dfn data-export="">create the navigation timing entry</dfn> for {{Document}} |document|,
       given a [=fetch timing info=] |fetchTiming|, a number |redirectCount|, a
-      {{NavigationType}} |navigationType|, and a null or [=service worker timing info=] |serviceWorkerTiming|,
+      {{NavigationTimingType}} |navigationType|, and a null or [=service worker timing info=] |serviceWorkerTiming|,
       do the following:
       <ol>
         <li>Let |global| be |document|'s [=relevant global object=].</li>
