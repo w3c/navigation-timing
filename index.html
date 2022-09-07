@@ -248,9 +248,6 @@
           attributes of {{PerformanceEntry}} interface:
         </p>
         <ul>
-          <li>The <code>name</code>
-          getter steps are to return the [=current document=]'s {{Document/URL}}.
-          </li>
           <li>The <code>entryType</code>
           getter step is to return the {{DOMString}} "<code id="perf-navigation">navigation</code>".
           </li>
@@ -593,8 +590,7 @@
         [=global object/realm=].
         <li><a data-cite="RESOURCE-TIMING-2#dfn-setup-the-resource-timing-entry">Setup the resource
         timing entry</a> for |navigationTimingEntry| given "<code>navigation</code>", |document|'s
-        <a data-cite="HTML#the-document's-address">address</a>, |fetchTiming|, |cacheMode|, and
-        |bodyInfo|.
+        {{Document/URL}}, |fetchTiming|, |cacheMode|, and |bodyInfo|.
         <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">document load
         timing</a> to |document|'s [=Document/load timing info=]
         <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">previous
