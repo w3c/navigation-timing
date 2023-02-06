@@ -183,8 +183,8 @@
         and retrieve high resolution performance metric data related to the
         navigation of a document. As the {{PerformanceNavigationTiming}}
         interface uses [[HR-TIME]], all time values are measured with respect
-        to the [=time origin=] of the
-        {{Window}} object.
+        to the [=environment settings object/time origin=] of the entry's
+        [=relevant settings object=].
       </p>
       <p>
         For example, if we know that the response end occurs 100ms after the
@@ -458,14 +458,14 @@
          |this|'s [=document load timing=]'s [=document load timing info/load event start time=].</p>
         </p>
         <p class="note">This timestamp is measured before the user agent dispatches the
-          <a data-cite="HTML/parsing.html#the-end:event-event-load">load</a> event for the document.
+          [=Window/load=] event for the document.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>loadEventEnd</dfn> getter steps are to return
          |this|'s [=document load timing=]'s [=document load timing info/load event end time=].</p>
         </p>
         <p class="note">This timestamp is measured after the user agent completes handling the
-          <a data-cite="HTML/parsing.html#the-end:event-event-load">load</a> event for the document.
+        [=Window/load=] event for the document.
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>type</dfn> getter steps are to run the |this|'s [=navigation type=].
@@ -522,19 +522,15 @@
               <dfn>reload</dfn>
             </dt>
             <dd>
-              Navigation where the 
-              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
-              is set to
-              <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>.
+              Navigation where the [=navigable=] was <a
+              data-cite="HTML/browsing-the-web.html#reload">reloaded</a>.
             </dd>
             <dt>
               <dfn>back_forward</dfn>
             </dt>
             <dd>
-              Navigation where the 
-              <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
-              is set to
-              <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>.
+              Navigation that's <a
+              data-cite="HTML/browsing-the-web.html#apply-the-history-step">applied from history</a>.
             </dd>
             <dt>
               <dfn>prerender</dfn>
