@@ -371,7 +371,7 @@
             readonly        attribute DOMHighResTimeStamp  loadEventEnd;
             readonly        attribute NavigationTimingType type;
             readonly        attribute unsigned short       redirectCount;
-            readonly        attribute boolean              criticalCHRestartOccured;
+            readonly        attribute DOMHighResTimeStamp  criticalCHRestart;
             [Default] object toJSON();
         };
         </pre>
@@ -391,7 +391,7 @@
         {{NavigationTimingType}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>navigation type</dfn></a>.
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
-          boolean <a data-dfn-for="PerformanceNavigationTiming"><dfn>critical ch restart occured</dfn></a>.
+          {{DOMHighResTimeStamp}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>critical ch restart</dfn></a>.
 
         <p>A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=] 
         <dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
@@ -492,8 +492,8 @@
          <span>redirect count</span>.</p>
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
-          The <dfn>criticalCHRestartOccured</dfn> getter steps are to return |this|'s
-         <span>critical ch restart occured</span>.</p>
+          The <dfn>criticalCHRestart</dfn> getter steps are to return |this|'s
+         <span>critical ch restart</span>.</p>
          </p>
         <p>
           The <dfn>toJSON()</dfn> method runs the [=default toJSON steps=] for [=this=].
@@ -587,7 +587,7 @@
       <p>To <dfn data-export="">create the navigation timing entry</dfn> for {{Document}} |document|,
       given a [=fetch timing info=] |fetchTiming|, a number |redirectCount|, a
       {{NavigationTimingType}} |navigationType|, a null or [=service worker timing info=] |serviceWorkerTiming|,
-      a DOMString |cacheMode|, a boolean |criticalCHRestartOccured|, and a [=response body info=] |bodyInfo|, do the following:
+      a DOMString |cacheMode|, a {{DOMHighResTimeStamp}} |criticalCHRestart|, and a [=response body info=] |bodyInfo|, do the following:
       <ol>
         <li>Let |global| be |document|'s [=relevant global object=].</li>
         <li>Let |navigationTimingEntry| be a new {{PerformanceNavigationTiming}} object in |global|'s
@@ -607,7 +607,7 @@
         to |serviceWorkerTiming|.
         <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
         <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">critical
-          ch restart occured</a> to |criticalCHRestartOccured|.
+          ch restart</a> to |criticalCHRestart|.
         <li>add |navigationTimingEntry| to |global|'s
         <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance entry buffer</a>.
       </ol>
