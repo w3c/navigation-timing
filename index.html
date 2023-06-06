@@ -391,7 +391,7 @@
         {{NavigationTimingType}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>navigation type</dfn></a>.
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
-          {{DOMHighResTimeStamp}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>critical ch restart</dfn></a>.
+          {{DOMHighResTimeStamp}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>`Critical-CH` restart time</dfn></a>.
 
         <p>A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=] 
         <dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
@@ -493,7 +493,7 @@
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>criticalCHRestart</dfn> getter steps are to return |this|'s
-         <span>critical ch restart</span>.</p>
+         <span>`Critical-CH` restart time</span>.</p>
          </p>
         <p>
           The <dfn>toJSON()</dfn> method runs the [=default toJSON steps=] for [=this=].
@@ -606,8 +606,8 @@
         <li>Set |navigationTimingEntry|'s [=PerformanceNavigationTiming/service worker timing=]
         to |serviceWorkerTiming|.
         <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
-        <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">critical
-          ch restart</a> to |criticalCHRestart|.
+        <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">`Critical-CH` restart time</a>
+        to |criticalCHRestart|.
         <li>add |navigationTimingEntry| to |global|'s
         <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance entry buffer</a>.
       </ol>
