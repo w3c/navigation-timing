@@ -493,8 +493,15 @@
         </p>
         <p data-dfn-for='PerformanceNavigationTiming'>
           The <dfn>criticalCHRestart</dfn> getter steps are to return |this|'s
-         <span>`Critical-CH` restart time</span>.</p>
-         </p>
+        <span>`Critical-CH` restart time</span>.</p>
+        </p>
+        <div class="note">
+          <p>
+            If |criticalCHRestart| is not 0 it will be before all other timestamps except for
+            |navigationStart|, |unloadEventStart|, and |unloadEventEnd|. This is because it marks
+            the moment the redirection part of the navigation was restarted.
+          </p>
+        </div>
         <p>
           The <dfn>toJSON()</dfn> method runs the [=default toJSON steps=] for [=this=].
         </p>
