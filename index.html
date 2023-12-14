@@ -372,6 +372,7 @@
             readonly        attribute NavigationTimingType type;
             readonly        attribute unsigned short       redirectCount;
             readonly        attribute DOMHighResTimeStamp  criticalCHRestart;
+            readonly        attribute NotRestoredReasons?  notRestoredReasons;
             [Default] object toJSON();
         };
         </pre>
@@ -392,6 +393,9 @@
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
           {{DOMHighResTimeStamp}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>`Critical-CH` restart time</dfn></a>.
+
+        <p>A <a>PerformanceNavigationTiming</a> has an associated
+        {{NotRestoredReasons}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>not restored reasons</dfn></a>.
 
         <p>A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=] 
         <dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
