@@ -622,9 +622,8 @@
         <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
         <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">`Critical-CH` restart time</a>
         to |criticalCHRestart|.
-        <li>If |document|'s [=Document/not restored reasons=] is not null, then set
-        |navigationTimingEntry|'s [=PerformanceNavigationTiming/not restored reasons=] to the
-        result of [=creating a NotRestoredReasons object=] given |document|'s
+        <li> Set |navigationTimingEntry|'s [=PerformanceNavigationTiming/not restored reasons=]
+        to the result of [=creating a NotRestoredReasons object=] given |document|'s
         [=Document/not restored reasons=].</li>
         <li>add |navigationTimingEntry| to |global|'s
         <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance entry buffer</a>.
