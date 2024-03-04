@@ -372,6 +372,7 @@
             readonly        attribute NavigationTimingType type;
             readonly        attribute unsigned short       redirectCount;
             readonly        attribute DOMHighResTimeStamp  criticalCHRestart;
+            readonly        attribute NotRestoredReasons?  notRestoredReasons;
             [Default] object toJSON();
         };
         </pre>
@@ -392,6 +393,9 @@
 
         <p>A <a>PerformanceNavigationTiming</a> has an associated
           {{DOMHighResTimeStamp}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>`Critical-CH` restart time</dfn></a>.
+
+        <p>A <a>PerformanceNavigationTiming</a> has an associated
+        {{NotRestoredReasons}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>not restored reasons</dfn></a>.
 
         <p>A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=] 
         <dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
@@ -502,6 +506,9 @@
             the moment the redirection part of the navigation was restarted.
           </p>
         </div>
+        <p data-dfn-for='PerformanceNavigationTiming'>
+         The <dfn>notRestoredReasons</dfn> getter steps are to return |this|'s
+        <span>not restored reasons</span>.</p>
         <p>
           The <dfn>toJSON()</dfn> method runs the [=default toJSON steps=] for [=this=].
         </p>
@@ -615,6 +622,9 @@
         <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
         <li>Set |navigationTimingEntry|'s <a data-for="PerformanceNavigationTiming">`Critical-CH` restart time</a>
         to |criticalCHRestart|.
+        <li> Set |navigationTimingEntry|'s [=PerformanceNavigationTiming/not restored reasons=]
+        to the result of <a data-lt="create a notrestoredreasons object">creating a
+        NotRestoredReasons object</a> given |document|'s [=Document/not restored reasons=].</li>
         <li>add |navigationTimingEntry| to |global|'s
         <a data-cite='performance-timeline-2#dfn-performance-entry-buffer'>performance entry buffer</a>.
       </ol>
