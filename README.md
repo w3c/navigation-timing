@@ -8,4 +8,3 @@ This specification defines an interface for web applications to access the compl
 * Navigation Timing Level 1: https://www.w3.org/TR/navigation-timing/
 
 See also [Web performance README](https://github.com/w3c/web-performance/blob/gh-pages/README.md)
-
