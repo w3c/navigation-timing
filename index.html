@@ -114,9 +114,6 @@
         </li>
         <li>support for [[HR-TIME-2]];
         </li>
-        <li>support for <a data-cite="resource-hints#prerender">prerender</a>
-        navigations [[RESOURCE-HINTS]];
-        </li>
         <li>exposes <a data-lt=
         'PerformanceNavigationTiming.redirectCount'>number of redirects</a>
         since the last non-redirect navigation;
@@ -520,8 +517,7 @@
             enum NavigationTimingType {
                 "navigate",
                 "reload",
-                "back_forward",
-                "prerender"
+                "back_forward"
             };
           </pre>
           <p>
@@ -536,9 +532,7 @@
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a>
-              or <a data-cite="HTML/browsing-the-web.html#hh-replace">"replace"</a>
-              and the navigation was not initiated by a <a data-cite=
-              'resource-hints#prerender'>prerender</a> hint [[RESOURCE-HINTS]].
+              or <a data-cite="HTML/browsing-the-web.html#hh-replace">"replace"</a>.
             </dd>
             <dt>
               <dfn>reload</dfn>
@@ -553,13 +547,6 @@
             <dd>
               Navigation that's <a
               data-cite="HTML/browsing-the-web.html#apply-the-history-step">applied from history</a>.
-            </dd>
-            <dt>
-              <dfn>prerender</dfn>
-            </dt>
-            <dd>
-              Navigation initiated by a <a data-cite=
-              'resource-hints#prerender'>prerender</a> hint [[RESOURCE-HINTS]].
             </dd>
           </dl>
           <p class="note">
