@@ -370,6 +370,7 @@
             readonly        attribute unsigned short       redirectCount;
             readonly        attribute DOMHighResTimeStamp  criticalCHRestart;
             readonly        attribute NotRestoredReasons?  notRestoredReasons;
+            readonly        attribute PerformanceTimingConfidence confidence;
             [Default] object toJSON();
         };
         </pre>
@@ -394,7 +395,18 @@
         <p>A <a>PerformanceNavigationTiming</a> has an associated
         {{NotRestoredReasons}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>not restored reasons</dfn></a>.
 
-        <p>A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=] 
+        <p>A <a>PerformanceNavigationTiming</a> has an associated
+        {{PerformanceTimingConfidence}} <a data-dfn-for="PerformanceNavigationTiming"><dfn>confidence value</dfn></a>.
+
+        <p>A <a>PerformanceNavigationTiming</a> has an associated real number
+        <a data-dfn-for="PerformanceNavigationTiming"><dfn>randomized trigger rate</dfn></a>
+        which is [=implementation-defined=].</p>
+
+        <p>A <a>PerformanceNavigationTiming</a> has an associated {{PerformanceTimingConfidenceValue}}
+        <a data-dfn-for="PerformanceNavigationTiming"><dfn>underlying confidence value</dfn></a>
+        which is [=implementation-defined=].</p>
+
+        <p>A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=]
         <dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
         </p>
 
@@ -506,6 +518,110 @@
         <p data-dfn-for='PerformanceNavigationTiming'>
          The <dfn>notRestoredReasons</dfn> getter steps are to return |this|'s
         <span>not restored reasons</span>.</p>
+        <p data-dfn-for='PerformanceNavigationTiming'>
+         The <dfn>confidence</dfn> getter steps are to run these steps:
+        <ol>
+          <li>If |this|'s [=document load timing=]'s
+          [=document load timing info/DOM interactive time=] is 0, return null.</li>
+          <li>If |this|'s <a data-for="PerformanceNavigationTiming">confidence value</a> is not null,
+          return it.</li>
+          <li>Let |confidence| be a new {{PerformanceTimingConfidence}} object created in
+          [=this=]'s [=relevant settings object=]'s [=relevant realm=].</li>
+          <li>Set |confidence|'s {{PerformanceTimingConfidence/randomizedTriggerRate}} to
+          |this|'s [=randomized trigger rate=].</li>
+          <li>Set |confidence|'s {{PerformanceTimingConfidence/value}} as determined by the following algorithm:
+            <ol>
+              <li>Let |p| be |confidence|'s {{PerformanceTimingConfidence/randomizedTriggerRate}}.</li>
+              <li>Let |underlying| be [=this=]'s [=underlying confidence value=], a
+              {{PerformanceTimingConfidenceValue}}.</li>
+              <li>Let |r| be a real number drawn uniformly at random from the interval [0, 1).</li>
+              <li>If |r| &gt; or equal |p|, return |underlying|.</li>
+              <li>Otherwise:
+                <ol>
+                  <li>Let |s| be an integer drawn uniformly at random from the set {0, 1}.</li>
+                  <li>If |s| equals 0, return {{PerformanceTimingConfidenceValue/high}}.</li>
+                  <li>Otherwise, return {{PerformanceTimingConfidenceValue/low}}.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Return |confidence|.</li>
+        </ol>
+        </p>
+        <div class="note">
+          <p>
+            These values should be set once, and not change for the lifetime of [=this=].
+          </p>
+        </div>
+        <div class="note">
+          <p>
+            This section is intended to help RUM providers and developers interpret
+            |confidence|. Since the [=randomized trigger rate=] can vary across records,
+            per-record weighting is needed to recover unbiased aggregates. The procedure
+            below illustrates how weighting based on {{PerformanceTimingConfidence/value}}
+            can be applied before computing summary statistics.
+          </p>
+          <p>
+            To compute debiased means for both {{PerformanceTimingConfidenceValue/high}} and {{PerformanceTimingConfidenceValue/low}}:
+            <ol>
+              <li>
+                For each record:
+                <ul>
+                  <li>Let |p| be the record's {{PerformanceTimingConfidence/randomizedTriggerRate}}.</li>
+                  <li>Let |c| be the record's {{PerformanceTimingConfidence/value}}.</li>
+                  <li>Let |R| be 1 when |c| is {{PerformanceTimingConfidenceValue/high}}, otherwise 0.</li>
+                  <li>Compute per-record weight |w| based on |c|:
+                    <ul>
+                      <li>For estimating the high mean: |w|<code> = (R - (p / 2)) / (1 - p)</code>.</li>
+                      <li>For estimating the low mean: |w|<code> = ((1 - R) - (p / 2)) / (1 - p)</code>.</li>
+                    </ul>
+                    Note that |w| may be negative for some records; keep every record.
+                  </li>
+                  <li>Let |weighted_duration| = {{PerformanceEntry/duration}} * |w|.</li>
+                </ul>
+              </li>
+              <li>Let |total_weighted_duration| be the sum of |weighted_duration| values across all records.</li>
+              <li>Let |sum_weights| be the sum of |w| values across all records.</li>
+              <li>Let |debiased_mean| = |total_weighted_duration| / |sum_weights|, provided |sum_weights| is not near zero.</li>
+            </ol>
+
+            To compute debiased percentiles for both {{PerformanceTimingConfidenceValue/high}} and {{PerformanceTimingConfidenceValue/low}}:
+            <ol>
+              <li>Follow the same steps as computing the debiased mean to compute a per-record weight |w|.</li>
+              <li>Let |sum_weights| be the sum of |w| values across all records.</li>
+              <li>Let |sorted_records| be all records sorted by {{PerformanceEntry/duration}} in ascending order.</li>
+              <li>For a desired |percentile| (0-100), compute |q|<code> = |percentile| / 100.0</code></li>
+              <li>Walk |sorted_records| and for each record:
+                <ul>
+                  <li>Compute cumulative weight |cw| per-record: |cw|<code> = sum_{i: duration_i &lt;= duration_j} w_i</code>.</li>
+                  <li>Compute debiased cumulative distribution function per-record: |cdf|<code> = |cw| / |sum_weights|</code></li>
+                </ul>
+              </li>
+              <li>Find the first index |idx| with |cdf| &gt;= |q|.
+                <ul>
+                  <li>If |idx| is 0, return {{PerformanceEntry/duration}} for |sorted_records|[0].</li>
+                  <li>If no such |idx| exists, return {{PerformanceEntry/duration}} for |sorted_records|[n].</li>
+                </ul>
+              </li>
+              <li>
+                Compute interpolation fraction:
+                <ul>
+                  <li>Let |lower_cdf| be |cdf| for |sorted_records|[idx-1]</li>
+                  <li>Let |upper_cdf| be |cdf| for |sorted_records|[idx]</li>
+                  <li>if |lower_cdf| = |upper_cdf|, return {{PerformanceEntry/duration}} for |sorted_records|[idx].
+                  <li>Otherwise:
+                    <ul>
+                      <li>Let |ifrac|<code> = (|q| - |lower_cdf|) / (|upper_cdf| - |lower_cdf|)</code></li>
+                      <li>Let |lower_duration| be {{PerformanceEntry/duration}} for |sorted_records|[idx-1]</code></li>
+                      <li>Let |upper_duration| be {{PerformanceEntry/duration}} for |sorted_records|[idx]</code></li>
+                      <li>return lower_duration + (upper_duration - lower_duration) * ifrac</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </p>
+        </div>
         <p>
           The <dfn>toJSON()</dfn> method runs the [=default toJSON steps=] for [=this=].
         </p>
@@ -528,7 +644,7 @@
               <dfn>navigate</dfn>
             </dt>
             <dd>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a>
@@ -556,6 +672,99 @@
             to change it due to backwards compatibility issues with shipped
             implementations. [[WebIDL]]
           </p>
+        </section>
+        <section id="sec-performance-timing-confidence">
+          <h4>
+            <dfn>PerformanceTimingConfidence</dfn> interface
+          </h4>
+          <pre class='idl'>
+          [Exposed=Window]
+          interface PerformanceTimingConfidence {
+              readonly attribute double randomizedTriggerRate;
+              readonly attribute PerformanceTimingConfidenceValue value;
+              object toJSON();
+          };
+          </pre>
+          <dl data-dfn-for='PerformanceTimingConfidence'>
+            <dt>
+              <dfn>randomizedTriggerRate</dfn>
+            </dt>
+            <dd>
+              <p>
+                This attribute must return a real number the interval [0, 1),
+                indicating how often noise is applied when exposing the
+                confidence {{PerformanceTimingConfidence/value}}.
+              </p>
+            </dd>
+            <dt>
+              <dfn>value</dfn>
+            </dt>
+            <dd>
+              <p>
+                This attribute must return a {{PerformanceTimingConfidenceValue}}.
+              </p>
+            </dd>
+            <dt>
+              <dfn>toJSON()</dfn>
+            </dt>
+            <dd>
+              <p>
+                This method runs the [=default toJSON steps=] for [=this=].
+              </p>
+            </dd>
+          </dl>
+        </section>
+
+        <section id="sec-performance-timing-confidence-value">
+          <h4>
+            <dfn>PerformanceTimingConfidenceValue</dfn> enum
+          </h4>
+          <pre class='idl'>
+          enum PerformanceTimingConfidenceValue {
+            "high",
+            "low"
+          };
+          </pre>
+          <p>
+            The values are defined as follows:
+          </p>
+          <dl data-dfn-for='PerformanceTimingConfidenceValue'>
+            <dt>
+              <dfn>high</dfn>
+            </dt>
+            <dd>
+              The user agent considers the navigation metrics to be
+              representative on the current user's device.
+            </dd>
+            <dt>
+              <dfn>low</dfn>
+            </dt>
+            <dd>
+              The navigation metrics may not be representative of the current
+              user's device. The user agent may consider the state of the
+              machine, or user configuration.
+            </dd>
+          </dl>
+          <div class="note">
+            <p>
+              When determining the [=underlying confidence value=], user agents
+              MUST only base their decision on <em>transient runtime
+              conditions</em>, such as user agent startup, temporarily high CPU
+              usage, temporary memory pressure, or other short-lived
+              considerations.
+            </p>
+            <p>
+              User agents MUST NOT base the [=underlying confidence value=] on
+              permanent device or profile characteristics. Examples of prohibited
+              factors include the amount of physical RAM on the device, the
+              number of CPU cores, the number of installed extensions, or other
+              static environment settings.
+            </p>
+            <p>
+              Confidence is intended to reflect runtime variability rather than
+              system capabilities.
+            </p>
+          </div>
         </section>
       </section>
     </section>
@@ -669,7 +878,7 @@
         The {{PerformanceNavigationTiming}} interface exposes timing
         information about the previous document to the <a>current document</a>.
         To limit the access to {{PerformanceNavigationTiming}} attributes which
-        include information on the previous document, the 
+        include information on the previous document, the
         <a data-cite="HTML#update-the-session-history-with-the-new-page">previous document
         unloading</a> algorithm enforces the <a data-cite="html#same-origin">same origin policy</a>
         and attributes related to the previous document are set to zero.
@@ -1125,7 +1334,7 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-default">"default"</a> or
@@ -1137,7 +1346,7 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-reload">"reload"</a>.
@@ -1148,7 +1357,7 @@ interface PerformanceNavigation {
           </dt>
           <dd>
             <p>
-              Navigation where the 
+              Navigation where the
               <a data-cite="HTML/browsing-the-web.html#history-handling-behavior">history handling behavior</a>
               is set to
               <a data-cite="HTML/browsing-the-web.html#hh-entry-update">"entry update"</a>.
