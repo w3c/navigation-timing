@@ -1,0 +1,1354 @@
+<pre class='metadata'>
+Title: Navigation Timing Level 2
+Shortname: navigation-timing-2
+Status: ED
+Group: webperf
+URL: https://w3c.github.io/navigation-timing/
+TR: https://www.w3.org/TR/navigation-timing-2/
+Test Suite: https://wpt.fyi/navigation-timing/
+Editor: Yoav Weiss, Google https://google.com/, https://blog.yoav.ws/, w3cid 58673
+Editor: Noam Rosenthal, Invited Expert, noam.j.rosenthal@gmail.com, w3cid 121539
+Former Editor: Ilya Grigorik, Google https://google.com/, https://www.igvita.com/, w3cid 56102
+Former Editor: Tobin Titus, Microsoft Corp., tobint@microsoft.com, w3cid 69474
+Former Editor: Jatinder Mann, Microsoft Corp., jmann@microsoft.com, w3cid 44357
+Former Editor: Arvind Jain, Google Inc., arvind@google.com, w3cid 45188
+Repository: w3c/navigation-timing
+Mailing List: public-web-perf@w3.org
+Mailing List Archives: https://lists.w3.org/Archives/Public/public-web-perf/
+Include Can I Use Panels: yes
+Can I Use URL: https://caniuse.com/nav-timing
+Abstract: This specification defines an interface for web applications to access the complete timing information for navigation of a document.
+Level: none
+Complain About: accidental-2119 yes, missing-example-ids no
+Markup Shorthands: markdown no
+Ignored Vars: navigationStart, unloadEventStart, unloadEventEnd, R, debiased_mean, ifrac, lower_duration, upper_duration
+Status Text:
+ Navigation Timing 2 replaces the first version of [[NAVIGATION-TIMING]]
+ and includes the following changes:
+ <ul>
+  <li>the definition of Performance interface was moved to
+  [[PERFORMANCE-TIMELINE-2]];</li>
+  <li>builds on top of [[RESOURCE-TIMING-2]];</li>
+  <li>support for [[PERFORMANCE-TIMELINE-2]];</li>
+  <li>support for [[HR-TIME-2]];</li>
+  <li>exposes <a href="https://www.w3.org/TR/navigation-timing-2/#dom-performancenavigationtiming-redirectcount">number of redirects</a>
+  since the last non-redirect navigation;</li>
+  <li>exposes <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-nexthopprotocol">next
+  hop network protocol</a>;</li>
+  <li>exposes <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-transfersize">transfer</a>,
+  <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-encodedbodysize">encoded
+  body</a> and <a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-decodedbodysize">decoded
+  body</a> size information;</li>
+  <li><a href="https://www.w3.org/TR/resource-timing/#dom-performanceresourcetiming-secureconnectionstart">secureConnectionStart</a> attribute is now mandatory.</li>
+ </ul>
+</pre>
+
+<pre class=link-defaults>
+spec:html; type:dfn; for:/; text:global object
+spec:html; type:dfn; for:/; text:navigable
+spec:dom; type:dfn; for:/; text:document
+spec:fetch; type:dfn; for:/; text:request
+spec:fetch; type:dfn; for:/; text:response
+spec:service-workers; type:dfn; for:/; text:service worker
+spec:service-workers; type:dfn; text:service worker timing info
+</pre>
+
+<pre class=anchors>
+urlPrefix: https://www.w3.org/TR/performance-timeline/; spec: PERFORMANCE-TIMELINE-2; type: dfn
+    text: performance entry buffer; url: #dfn-performance-entry-buffer
+    text: Queue a PerformanceEntry; url: #dfn-queue-a-performanceentry
+urlPrefix: https://www.w3.org/TR/resource-timing/; spec: RESOURCE-TIMING-2; type: dfn
+    text: setup the resource timing entry; url: #dfn-setup-the-resource-timing-entry
+urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
+    type: dfn
+        text: unloading documents; url: browsing-the-web.html#unloading-documents
+        text: unload a document; url: browsing-the-web.html#unload-a-document
+        text: history handling behavior; url: browsing-the-web.html#history-handling-behavior
+        text: hh-default; url: browsing-the-web.html#hh-default
+        text: hh-replace; url: browsing-the-web.html#hh-replace
+        text: hh-reload; url: browsing-the-web.html#hh-reload
+        text: hh-entry-update; url: browsing-the-web.html#hh-entry-update
+        text: reload; url: browsing-the-web.html#reload
+        text: apply the history step; url: browsing-the-web.html#apply-the-history-step
+        text: navigate; url: browsing-the-web.html#navigate
+        text: update the session history with the new page; url: #update-the-session-history-with-the-new-page
+        text: prompt to unload a document; url: browsing-the-web.html#prompt-to-unload-a-document
+        text: current document readiness; url: dom.html#current-document-readiness
+        text: the end; url: parsing.html#the-end
+        text: DOMContentLoaded; url: parsing.html#the-end:event-domcontentloaded
+        text: fetching resources; url: urls-and-fetching.html#fetching-resources
+        text: Refresh pragma directive; url: semantics.html#attr-meta-http-equiv-refresh
+        text: relaxing the same-origin restriction; url: origin.html#relaxing-the-same-origin-restriction
+        text: Window; url: window-object.html#window
+    type: attribute
+        text: associated document; url: window-object.html#concept-document-window
+urlPrefix: https://www.w3.org/TR/performance-timeline/; spec: PERFORMANCE-TIMELINE-2; type: attribute
+    text: supportedEntryTypes; url: #supportedentrytypes-attribute
+urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH; type: dfn
+    text: fetch; url: #concept-fetch
+    text: redirect status; url: #redirect-status
+    text: concept-request-method; url: #concept-request-method
+urlPrefix: https://url.spec.whatwg.org/; spec: URL; type: dfn
+    text: concept-url-scheme; url: #concept-url-scheme
+urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
+    type: dfn
+        text: create a notrestoredreasons object; url: nav-history-apis.html#create-a-notrestoredreasons-object
+        text: Document/not restored reasons; url: nav-history-apis.html#document-not-restored-reasons
+        text: queue a navigation performanceentry; url: nav-history-apis.html#queue-a-navigation-performanceentry
+    type: interface
+        text: NotRestoredReasons; url: nav-history-apis.html#notrestoredreasons
+</pre>
+
+<pre class=biblio>
+{
+  "JSMEASURE": {
+    "title": "Measuring Client-Perceived Response Times on the WWW",
+    "href": "http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.69.7329&rep=rep1&type=pdf",
+    "authors": ["Ramakrishnan Rajamony", "Mootaz Elnozahy"],
+    "status": "The Proceedings of the 3rd USENIX Symposium on Internet Technologies and Systems (USITS)",
+    "date": "March 2001"
+  }
+}
+</pre>
+
+<style>
+#obsolete {
+  background-position: right;
+  background-repeat: repeat-y;
+  background-color: rgba(251, 233, 233, 0.5);
+  padding: 0 1em;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='300px' width='125px'><text x='0' y='100' fill='red' font-size='15' fill-opacity='0.20'>Obsolete</text></svg>")
+}
+.note:not(.no-marker)::before {
+  content: "Note";
+}
+</style>
+
+
+<h2 id="introduction" class='informative'>Introduction</h2>
+
+<em>This section is non-normative.</em>
+
+Accurately measuring performance characteristics of web applications is
+an important aspect of making web applications faster. While
+JavaScript-based mechanisms, such as the one described in
+[[JSMEASURE]], can provide comprehensive instrumentation for user
+latency measurements within an application, in many cases, they are
+unable to provide a complete or detailed end-to-end latency picture.
+For example, the following JavaScript shows a naive attempt to measure
+the time it takes to fully load a page:
+
+<pre class='example' id="example-naive-timing" highlight='html'>
+  &lt;html&gt;
+  &lt;head&gt;
+  &lt;script type="text/javascript"&gt;
+  var start = new Date().getTime();
+  function onLoad() {
+    var now = new Date().getTime();
+    var latency = now - start;
+    alert("page loading time: " + latency);
+  }
+  &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload="onLoad()"&gt;
+  &lt;!- Main page body goes from here. --&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+
+The above script calculates the time it takes to load the page
+<b>after</b> the first bit of JavaScript in the head is executed, but
+it does not give any information about the time it takes to get the
+page from the server, or the initialization lifecycle of the page.
+
+This specification defines the {{PerformanceNavigationTiming}}
+interface which participates in the [[PERFORMANCE-TIMELINE-2]] to store
+and retrieve high resolution performance metric data related to the
+navigation of a document. As the {{PerformanceNavigationTiming}}
+interface uses [[HR-TIME]], all time values are measured with respect
+to the [=environment settings object/time origin=] of the entry's
+[=relevant settings object=].
+
+For example, if we know that the response end occurs 100ms after the
+start of navigation, the {{PerformanceNavigationTiming}} data could
+look like so:
+
+<pre class="example" id="example-data">
+startTime:           0.000  // start time of the navigation request
+responseEnd:       100.000  // high resolution time of last received byte
+</pre>
+
+The following script shows how a developer can use the
+{{PerformanceNavigationTiming}} interface to obtain accurate timing
+data related to the navigation of the document:
+
+<pre class="example" id="example-navigation-details" highlight="html">
+  &lt;script&gt;
+  function showNavigationDetails() {
+    // Get the first entry
+    const [entry] = performance.getEntriesByType("navigation");
+    // Show it in a nice table in the developer console
+    console.table(entry.toJSON());
+  }
+  &lt;/script&gt;
+  &lt;body onload="showNavigationDetails()"&gt;
+</pre>
+
+<h2 id="terminology">Terminology</h2>
+
+The construction "a <code>Foo</code> object", where <code>Foo</code> is
+actually an interface, is sometimes used instead of the more accurate
+"an object implementing the interface <code>Foo</code>.
+
+The term <dfn>current document</dfn> refers to the document associated
+with the <a data-lt="associated document">Window object's newest
+Document object</a>.
+
+Throughout this work, all time values are measured in milliseconds
+since the start of navigation of the document. For example, the start
+of navigation of the document occurs at time 0. The term <i>current
+time</i> refers to the number of milliseconds since the start of
+navigation of the document until the current moment in time. This
+definition of time is based on [[HR-TIME]] specification.
+
+<h2 id="sec-navigation-timing">Navigation Timing</h2>
+
+<h3 id='performanceentry'>Relation to the {{PerformanceEntry}} interface</h3>
+
+{{PerformanceNavigationTiming}} interface extends the following
+attributes of {{PerformanceEntry}} interface:
+
+<ul>
+  <li>The <code>entryType</code>
+  getter step is to return the {{DOMString}} "<code id="perf-navigation">navigation</code>".
+  </li>
+  <li>The {{PerformanceEntry/startTime}}
+  getter step is to return a {{DOMHighResTimeStamp}}
+  with a time value of 0.
+  </li>
+  <li>The {{PerformanceEntry/duration}}
+  getter step is to return a {{DOMHighResTimeStamp}} equal to the
+  difference between {{PerformanceNavigationTiming/loadEventEnd}} and [=this=]'s {{PerformanceEntry/startTime}}.
+  </li>
+</ul>
+
+<p class="note">
+  A user agent implementing {{PerformanceNavigationTiming}} would need
+  to include <code>"navigation"</code> in
+  {{supportedEntryTypes}}
+  for [=Window=]
+  contexts. This allows developers to detect support for Navigation
+  Timing.
+</p>
+
+<h3 id='PerformanceResourceTiming'>Relation to the <code>PerformanceResourceTiming</code> interface</h3>
+
+{{PerformanceNavigationTiming}} interface extends the following
+attributes of the {{PerformanceResourceTiming}}
+interface:
+
+<ul>
+  <li>The {{PerformanceResourceTiming/redirectStart}} getter steps are to perform the following steps:
+    <ol>
+      <li>If |this|'s [=PerformanceNavigationTiming/redirect count=] is 0, return 0.
+      <li>Otherwise return |this|'s {{PerformanceResourceTiming/redirectStart}}.
+    </ol>
+  </li>
+  <li>The {{PerformanceResourceTiming/redirectEnd}} getter steps are to perform the following steps:
+    <ol>
+      <li>If |this|'s [=PerformanceNavigationTiming/redirect count=] is 0, return 0.
+        <li>Otherwise return |this|'s {{PerformanceResourceTiming/redirectEnd}}.
+    </ol>
+    <p class="note">
+      Though `redirectStart` and `redirectEnd` are exposed in {{PerformanceResourceTiming}}, they
+      have a different meaning in Navigation Timing, where they return zero for navigations with
+      cross-origin redirects.
+    </p>
+  </li>
+  <li>The {{PerformanceResourceTiming/workerStart}} getter steps are to perform the following steps:
+    <ol>
+      <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
+      <li>If |workerTiming| is null, then return |this|'s prototype's `workerStart`.
+      <li>Return |workerTiming|'s [=service worker timing info/start time=].
+    </ol>
+    <p class="note">
+      Though `workerStart` is exposed in {{PerformanceResourceTiming}}, it
+      has a different meaning in Navigation Timing, as unlike subresources, a navigation <span class=allow-2119>may</span>
+      trigger the activation or running of a service worker.
+      In the context of Navigation Timing, `workerStart` returns the timestamp measured
+      just before the worker has been activated or started. See [[service-workers]] for
+      a precise definition.
+    </p>
+  </li>
+  <li>The {{PerformanceResourceTiming/fetchStart}} getter steps are to perform the following steps:
+    <ol>
+      <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
+      <li>If |workerTiming| is null, then return |this|'s prototype's `fetchStart`.
+      <li>Return |workerTiming|'s [=service worker timing info/fetch event dispatch time=].
+    </ol>
+    <p class="note">
+      When a [=service worker=] is used as part of the navigation, The `fetchStart` overload
+      holds a different meaning than the meaning in
+      {{PerformanceResourceTiming}}.
+      It returns the timestamp measured right before the {{FetchEvent}} is dispatched for
+      the [=service worker=]. The time difference between `workerStart` and `fetchStart` in
+      the document's navigation timing entry can be used to determine roughly how long it
+      took for the worker to be initialized or activated. See [[service-workers]] for
+      a precise definition.
+    </p>
+  </li>
+</ul>
+
+<p class="note">
+  Only the <a>current document</a> resource is included in the
+  performance timeline; there is only one
+  {{PerformanceNavigationTiming}} object in the performance timeline.
+</p>
+
+<h3 id="sec-PerformanceNavigationTiming" data-dfn-for="PerformanceNavigationTiming">
+  The <dfn data-export>PerformanceNavigationTiming</dfn> interface
+</h3>
+
+<div class="note">
+  Checking and retrieving contents from the
+  <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] is
+  part of the [=fetch|fetching process=].
+  It's covered by the
+  {{PerformanceResourceTiming/requestStart}},
+  {{PerformanceResourceTiming/responseStart}} and
+  {{PerformanceResourceTiming/responseEnd}} attributes.
+</div>
+
+<pre class='idl'>
+[Exposed=Window]
+interface PerformanceNavigationTiming : PerformanceResourceTiming {
+    readonly        attribute DOMHighResTimeStamp  unloadEventStart;
+    readonly        attribute DOMHighResTimeStamp  unloadEventEnd;
+    readonly        attribute DOMHighResTimeStamp  domInteractive;
+    readonly        attribute DOMHighResTimeStamp  domContentLoadedEventStart;
+    readonly        attribute DOMHighResTimeStamp  domContentLoadedEventEnd;
+    readonly        attribute DOMHighResTimeStamp  domComplete;
+    readonly        attribute DOMHighResTimeStamp  loadEventStart;
+    readonly        attribute DOMHighResTimeStamp  loadEventEnd;
+    readonly        attribute NavigationTimingType type;
+    readonly        attribute unsigned short       redirectCount;
+    readonly        attribute DOMHighResTimeStamp  criticalCHRestart;
+    readonly        attribute NotRestoredReasons?  notRestoredReasons;
+    readonly        attribute PerformanceTimingConfidence confidence;
+    [Default] object toJSON();
+};
+</pre>
+
+A {{PerformanceNavigationTiming}} has an associated
+[=document load timing info=] <dfn data-dfn-for="PerformanceNavigationTiming">document load timing</dfn>.
+
+A {{PerformanceNavigationTiming}} has an associated
+[=document unload timing info=] <dfn data-dfn-for="PerformanceNavigationTiming">previous document unload timing</dfn>.
+
+A {{PerformanceNavigationTiming}} has an associated
+number <dfn data-dfn-for="PerformanceNavigationTiming">redirect count</dfn>.
+
+A {{PerformanceNavigationTiming}} has an associated
+{{NavigationTimingType}} <dfn data-dfn-for="PerformanceNavigationTiming">navigation type</dfn>.
+
+A {{PerformanceNavigationTiming}} has an associated
+{{DOMHighResTimeStamp}} <dfn data-dfn-for="PerformanceNavigationTiming">`Critical-CH` restart time</dfn>.
+
+A {{PerformanceNavigationTiming}} has an associated
+{{NotRestoredReasons}} <dfn data-dfn-for="PerformanceNavigationTiming">not restored reasons</dfn>.
+
+A {{PerformanceNavigationTiming}} has an associated
+{{PerformanceTimingConfidence}} <dfn data-dfn-for="PerformanceNavigationTiming">confidence value</dfn>.
+
+A {{PerformanceNavigationTiming}} has an associated real number
+<dfn data-dfn-for="PerformanceNavigationTiming">randomized trigger rate</dfn>
+which is [=implementation-defined=].
+
+A {{PerformanceNavigationTiming}} has an associated {{PerformanceTimingConfidenceValue}}
+<dfn data-dfn-for="PerformanceNavigationTiming">underlying confidence value</dfn>
+which is [=implementation-defined=].
+
+A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=]
+<dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
+
+<p data-dfn-for='PerformanceNavigationTiming'>
+  The <dfn data-export>unloadEventStart</dfn> getter steps are to return |this|'s
+  [=previous document unload timing=]'s [=document unload timing info/unload event start
+  time=].
+<p class="note">If the previous document and the current document have the same
+  <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>, this timestamp is measured immediately
+  before the user agent starts the [=unloading documents|unload=]
+  event
+  of the previous document. If there is no previous document or the
+  previous document has a different <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a> than the current document, this attribute will return
+  zero.
+</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+  The <dfn data-export>unloadEventEnd</dfn> getter steps are to return |this|'s
+  [=previous document unload timing=]'s
+  [=document unload timing info/unload event end time=].
+<p class="note">If the previous document and the current document have the same
+  <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>, this timestamp is measured immediately
+  after the user agent handles the [=unloading documents|unload=]
+  event
+  of the previous document. If there is no previous document or the
+  previous document has a different <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a> than the current document, this attribute will return
+  zero.
+</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn data-export>domInteractive</dfn> getter steps are to return
+ |this|'s [=document load timing=]'s [=document load timing info/DOM interactive time=].</p>
+
+<p class="note">This timestamp is measured before the user agent sets the
+  [=current document readiness=] to
+  [=the end|"interactive"=].
+</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn data-export>domContentLoadedEventStart</dfn> getter steps are to return |this|'s
+ [=document load timing=]'s
+ [=document load timing info/DOM content loaded event start time=].</p>
+<p class="note">This timestamp is measured before the user agent dispatches the
+  [=DOMContentLoaded=]
+  event.
+</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn data-export>domContentLoadedEventEnd</dfn> getter steps are to return
+ |this|'s [=document load timing=]'s
+ [=document load timing info/DOM content loaded event end time=].</p>
+<p class="note">This timestamp is measured after the user agent completes handling of the
+  [=DOMContentLoaded=]
+  event.
+</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn data-export>domComplete</dfn> getter steps are to return
+ |this|'s [=document load timing=]'s [=document load timing info/DOM complete time=].
+<p class="note">This timestamp is measured before the user agent sets the
+  [=current document readiness=] to
+  [=the end|"complete"=]. See [=current document readiness|document readiness=] for a precise
+  definition.
+</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn data-export>loadEventStart</dfn> getter steps are to return
+ |this|'s [=document load timing=]'s [=document load timing info/load event start time=].</p>
+<p class="note">This timestamp is measured before the user agent dispatches the
+  <a href="https://html.spec.whatwg.org/multipage/indices.html#event-load">load</a> event for the document.
+</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn data-export>loadEventEnd</dfn> getter steps are to return
+ |this|'s [=document load timing=]'s [=document load timing info/load event end time=].</p>
+<p class="note">This timestamp is measured after the user agent completes handling the
+<a href="https://html.spec.whatwg.org/multipage/indices.html#event-load">load</a> event for the document.
+</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn>type</dfn> getter steps are to run the |this|'s [=navigation type=].
+</p>
+<div class="note">
+  <p>
+    Client-side redirects, such as those using the [=Refresh pragma directive|Refresh pragma
+    directive=], are not considered [=redirect status|HTTP redirects=] by this spec. In those
+    cases, the <a for="PerformanceNavigationTiming">type</a>
+    attribute SHOULD return appropriate value, such as
+    <a for="NavigationTimingType">reload</a> if reloading the
+    current page, or <a for="NavigationTimingType">navigate</a> if
+    navigating to a new URL.
+  </p>
+</div>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn data-export>redirectCount</dfn> getter steps are to return |this|'s
+ <span>redirect count</span>.</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+  The <dfn data-export>criticalCHRestart</dfn> getter steps are to return |this|'s
+<span>`Critical-CH` restart time</span>.</p>
+<div class="note">
+  <p>
+    If |criticalCHRestart| is not 0 it will be before all other timestamps except for
+    |navigationStart|, |unloadEventStart|, and |unloadEventEnd|. This is because it marks
+    the moment the redirection part of the navigation was restarted.
+  </p>
+</div>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn data-export>notRestoredReasons</dfn> getter steps are to return |this|'s
+<span>not restored reasons</span>.</p>
+<p data-dfn-for='PerformanceNavigationTiming'>
+ The <dfn data-export>confidence</dfn> getter steps are to run these steps:
+<ol>
+  <li>If |this|'s [=document load timing=]'s
+  [=document load timing info/DOM interactive time=] is 0, return null.</li>
+  <li>If |this|'s <a for="PerformanceNavigationTiming">confidence value</a> is not null,
+  return it.</li>
+  <li>Let |confidence| be a new {{PerformanceTimingConfidence}} object created in
+  [=this=]'s [=relevant settings object=]'s [=relevant realm=].</li>
+  <li>Set |confidence|'s {{PerformanceTimingConfidence/randomizedTriggerRate}} to
+  |this|'s [=randomized trigger rate=].</li>
+  <li>Set |confidence|'s {{PerformanceTimingConfidence/value}} as determined by the following algorithm:
+    <ol>
+      <li>Let |p| be |confidence|'s {{PerformanceTimingConfidence/randomizedTriggerRate}}.</li>
+      <li>Let |underlying| be [=this=]'s [=underlying confidence value=], a
+      {{PerformanceTimingConfidenceValue}}.</li>
+      <li>Let |r| be a real number drawn uniformly at random from the interval [0, 1).</li>
+      <li>If |r| &gt; or equal |p|, return |underlying|.</li>
+      <li>Otherwise:
+        <ol>
+          <li>Let |s| be an integer drawn uniformly at random from the set {0, 1}.</li>
+          <li>If |s| equals 0, return {{PerformanceTimingConfidenceValue/high}}.</li>
+          <li>Otherwise, return {{PerformanceTimingConfidenceValue/low}}.</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>Return |confidence|.</li>
+</ol>
+<div class="note">
+  <p>
+    These values <span class=allow-2119>should</span> be set once, and not change for the lifetime of [=this=].
+  </p>
+</div>
+<div class="note">
+  <p>
+    This section is intended to help RUM providers and developers interpret
+    |confidence|. Since the [=randomized trigger rate=] can vary across records,
+    per-record weighting is needed to recover unbiased aggregates. The procedure
+    below illustrates how weighting based on {{PerformanceTimingConfidence/value}}
+    can be applied before computing summary statistics.
+  </p>
+  <p>
+    To compute debiased means for both {{PerformanceTimingConfidenceValue/high}} and {{PerformanceTimingConfidenceValue/low}}:
+    <ol>
+      <li>
+        For each record:
+        <ul>
+          <li>Let |p| be the record's {{PerformanceTimingConfidence/randomizedTriggerRate}}.</li>
+          <li>Let |c| be the record's {{PerformanceTimingConfidence/value}}.</li>
+          <li>Let |R| be 1 when |c| is {{PerformanceTimingConfidenceValue/high}}, otherwise 0.</li>
+          <li>Compute per-record weight |w| based on |c|:
+            <ul>
+              <li>For estimating the high mean: |w|<code> = (R - (p / 2)) / (1 - p)</code>.</li>
+              <li>For estimating the low mean: |w|<code> = ((1 - R) - (p / 2)) / (1 - p)</code>.</li>
+            </ul>
+            Note that |w| <span class=allow-2119>may</span> be negative for some records; keep every record.
+          </li>
+          <li>Let |weighted_duration| = {{PerformanceEntry/duration}} * |w|.</li>
+        </ul>
+      </li>
+      <li>Let |total_weighted_duration| be the sum of |weighted_duration| values across all records.</li>
+      <li>Let |sum_weights| be the sum of |w| values across all records.</li>
+      <li>Let |debiased_mean| = |total_weighted_duration| / |sum_weights|, provided |sum_weights| is not near zero.</li>
+    </ol>
+
+    To compute debiased percentiles for both {{PerformanceTimingConfidenceValue/high}} and {{PerformanceTimingConfidenceValue/low}}:
+    <ol>
+      <li>Follow the same steps as computing the debiased mean to compute a per-record weight |w|.</li>
+      <li>Let |sum_weights| be the sum of |w| values across all records.</li>
+      <li>Let |sorted_records| be all records sorted by {{PerformanceEntry/duration}} in ascending order.</li>
+      <li>For a desired |percentile| (0-100), compute |q|<code> = |percentile| / 100.0</code></li>
+      <li>Walk |sorted_records| and for each record:
+        <ul>
+          <li>Compute cumulative weight |cw| per-record: |cw|<code> = sum_{i: duration_i &lt;= duration_j} w_i</code>.</li>
+          <li>Compute debiased cumulative distribution function per-record: |cdf|<code> = |cw| / |sum_weights|</code></li>
+        </ul>
+      </li>
+      <li>Find the first index |idx| with |cdf| &gt;= |q|.
+        <ul>
+          <li>If |idx| is 0, return {{PerformanceEntry/duration}} for |sorted_records|[0].</li>
+          <li>If no such |idx| exists, return {{PerformanceEntry/duration}} for |sorted_records|[n].</li>
+        </ul>
+      </li>
+      <li>
+        Compute interpolation fraction:
+        <ul>
+          <li>Let |lower_cdf| be |cdf| for |sorted_records|[idx-1]</li>
+          <li>Let |upper_cdf| be |cdf| for |sorted_records|[idx]</li>
+          <li>if |lower_cdf| = |upper_cdf|, return {{PerformanceEntry/duration}} for |sorted_records|[idx].
+          <li>Otherwise:
+            <ul>
+              <li>Let |ifrac|<code> = (|q| - |lower_cdf|) / (|upper_cdf| - |lower_cdf|)</code></li>
+              <li>Let |lower_duration| be {{PerformanceEntry/duration}} for |sorted_records|[idx-1]</li>
+              <li>Let |upper_duration| be {{PerformanceEntry/duration}} for |sorted_records|[idx]</li>
+              <li>return lower_duration + (upper_duration - lower_duration) * ifrac</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+</div>
+
+The <dfn data-export data-dfn-for="PerformanceNavigationTiming">toJSON()</dfn> method runs the [=default toJSON steps=] for [=this=].
+
+<h4 id="sec-performance-navigation-types">The {{NavigationTimingType}} enum</h4>
+
+<pre class='idl'>
+  enum NavigationTimingType {
+      "navigate",
+      "reload",
+      "back_forward"
+  };
+</pre>
+
+The values are defined as follows:
+
+<dl data-dfn-for='NavigationTimingType'>
+  <dt>
+    <dfn>navigate</dfn>
+  </dt>
+  <dd>
+    Navigation where the
+    [=history handling behavior=]
+    is set to
+    [=hh-default|"default"=]
+    or [=hh-replace|"replace"=].
+  </dd>
+  <dt>
+    <dfn>reload</dfn>
+  </dt>
+  <dd>
+    Navigation where the <a href="https://html.spec.whatwg.org/multipage/document-sequences.html#navigable">navigable</a> was <a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#reload">reloaded</a>.
+  </dd>
+  <dt>
+    <dfn data-export>back_forward</dfn>
+  </dt>
+  <dd>
+    Navigation that's [=apply the history step|applied from history=].
+  </dd>
+</dl>
+
+<p class="note">
+  The format of the above enumeration value is inconsistent with the
+  [=enumeration|WebIDL recommendation for
+  formatting of enumeration values=]. Unfortunately, we are unable
+  to change it due to backwards compatibility issues with shipped
+  implementations. [[WebIDL]]
+</p>
+
+<h4 id="sec-performance-timing-confidence">The {{PerformanceTimingConfidence}} interface</h4>
+
+<pre class='idl'>
+[Exposed=Window]
+interface PerformanceTimingConfidence {
+    readonly attribute double randomizedTriggerRate;
+    readonly attribute PerformanceTimingConfidenceValue value;
+    object toJSON();
+};
+</pre>
+<dl data-dfn-for='PerformanceTimingConfidence'>
+  <dt>
+    <dfn data-export>randomizedTriggerRate</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return a real number the interval [0, 1),
+      indicating how often noise is applied when exposing the
+      confidence {{PerformanceTimingConfidence/value}}.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>value</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return a {{PerformanceTimingConfidenceValue}}.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>toJSON()</dfn>
+  </dt>
+  <dd>
+    <p>
+      This method runs the [=default toJSON steps=] for [=this=].
+    </p>
+  </dd>
+</dl>
+
+<h4 id="sec-performance-timing-confidence-value">The {{PerformanceTimingConfidenceValue}} enum</h4>
+
+<pre class='idl'>
+enum PerformanceTimingConfidenceValue {
+  "high",
+  "low"
+};
+</pre>
+
+The values are defined as follows:
+
+<dl data-dfn-for='PerformanceTimingConfidenceValue'>
+  <dt>
+    <dfn data-export>high</dfn>
+  </dt>
+  <dd>
+    The user agent considers the navigation metrics to be
+    representative on the current user's device.
+  </dd>
+  <dt>
+    <dfn data-export>low</dfn>
+  </dt>
+  <dd>
+    The navigation metrics may not be representative of the current
+    user's device. The user agent may consider the state of the
+    machine, or user configuration.
+  </dd>
+</dl>
+<div class="note">
+  <p>
+    When determining the [=underlying confidence value=], user agents
+    MUST only base their decision on <em>transient runtime
+    conditions</em>, such as user agent startup, temporarily high CPU
+    usage, temporary memory pressure, or other short-lived
+    considerations.
+  </p>
+  <p>
+    User agents MUST NOT base the [=underlying confidence value=] on
+    permanent device or profile characteristics. Examples of prohibited
+    factors include the amount of physical RAM on the device, the
+    number of CPU cores, the number of installed extensions, or other
+    static environment settings.
+  </p>
+  <p>
+    Confidence is intended to reflect runtime variability rather than
+    system capabilities.
+  </p>
+</div>
+
+<h2 id="process">Process</h2>
+
+<h3 id="processing-model">Processing Model</h3>
+
+<figure>
+  <figcaption>
+    This figure illustrates the timing attributes defined by the
+    {{PerformanceNavigationTiming}} interface. Attributes in
+    parenthesis indicate that they may not be available for navigations
+    involving documents from different <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origins</a>.
+  </figcaption>
+  <!-- Source: https://docs.google.com/document/d/1I7XGNJ57Qgjkg9pL11s7MK7zGEcwAgdNj1W5f7NKbW8/ -->
+  <img src="timestamp-diagram.svg" alt="Navigation Timing attributes"
+  width="1152" height="440" style='width: 100%'>
+</figure>
+
+<h2 id="marking-navigation-timing">Creating a navigation timing entry</h2>
+
+<p data-dfn-for="Document">Each [=document=] has an associated <dfn>navigation timing entry</dfn>, initially unset.
+
+<p>To <dfn data-export="">create the navigation timing entry</dfn> for {{Document}} |document|,
+given a [=fetch timing info=] |fetchTiming|, a number |redirectCount|, a
+{{NavigationTimingType}} |navigationType|, a null or [=service worker timing info=] |serviceWorkerTiming|,
+a DOMString |cacheMode|, a {{DOMHighResTimeStamp}} |criticalCHRestart|, and a [=response body info=] |bodyInfo|, do the following:
+<ol>
+  <li>Let |global| be |document|'s [=relevant global object=].</li>
+  <li>Let |navigationTimingEntry| be a new {{PerformanceNavigationTiming}} object in |global|'s
+  [=global object/realm=].
+  <li>[=setup the resource timing entry|Setup the resource
+  timing entry=] for |navigationTimingEntry| given "<code>navigation</code>", |document|'s
+  {{Document/URL}}, |fetchTiming|, |cacheMode|, and |bodyInfo|.
+  <li>Set |navigationTimingEntry|'s <a for="PerformanceNavigationTiming">document load
+  timing</a> to |document|'s [=Document/load timing info=]
+  <li>Set |navigationTimingEntry|'s <a for="PerformanceNavigationTiming">previous
+  document unload timing</a> to |document|'s [=Document/previous document unload timing=].
+  <li>Set |navigationTimingEntry|'s <a for="PerformanceNavigationTiming">redirect
+  count</a> to |redirectCount|.
+  <li>Set |navigationTimingEntry|'s <a for="PerformanceNavigationTiming">navigation
+  type</a> to |navigationType|.
+  <li>Set |navigationTimingEntry|'s [=PerformanceNavigationTiming/service worker timing=]
+  to |serviceWorkerTiming|.
+  <li>Set |document|'s <span>navigation timing entry</span> to |navigationTimingEntry|.
+  <li>Set |navigationTimingEntry|'s <a for="PerformanceNavigationTiming">`Critical-CH` restart time</a>
+  to |criticalCHRestart|.
+  <li> Set |navigationTimingEntry|'s [=PerformanceNavigationTiming/not restored reasons=]
+  to the result of <a data-lt="create a notrestoredreasons object">creating a
+  NotRestoredReasons object</a> given |document|'s [=Document/not restored reasons=].</li>
+  <li>add |navigationTimingEntry| to |global|'s
+  [=performance entry buffer=].
+</ol>
+
+<p>To <dfn data-export="">queue the navigation timing entry</dfn> for {{Document}} |document|,
+<a data-lt="queue a navigation performanceentry">queue</a> |document|'s
+[=navigation timing entry=].
+
+<h2 id="privacy" class='informative'>Privacy Considerations</h2>
+
+<em>This section is non-normative.</em>
+
+<h3 id="info_disclosure">Information disclosure</h3>
+
+There is the potential for disclosing an end-user's browsing and
+activity history by using carefully crafted timing attacks. For
+instance, the unloading time reveals how long the previous page takes
+to execute its unload handler, which could be used to infer the
+user's login status. These attacks have been mitigated by enforcing
+the <a href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a> check algorithm when unloading a document, as detailed in
+[=update the session history with the new page|the HTML spec=].
+
+The [=relaxing the same-origin restriction|relaxed same
+origin policy=] doesn't provide sufficient protection against
+unauthorized visits across documents. In shared hosting, an untrusted
+third party is able to host an HTTP server at the same IP address but
+on a different port.
+
+<h3 id="cross-directory">Cross-directory access</h3>
+
+Different pages sharing one host name, for example contents from
+different authors hosted on sites with user generated content are
+considered from the same origin because there is no feature to
+restrict the access by pathname. Navigating between these pages
+allows a latter page to access timing information of the previous
+one, such as timing regarding redirection and unload event.
+
+<h2 id="security" class='informative'>Security Considerations</h2>
+
+<em>This section is non-normative.</em>
+
+The {{PerformanceNavigationTiming}} interface exposes timing
+information about the previous document to the <a>current document</a>.
+To limit the access to {{PerformanceNavigationTiming}} attributes which
+include information on the previous document, the
+[=update the session history with the new page|previous document
+unloading=] algorithm enforces the <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">same origin policy</a>
+and attributes related to the previous document are set to zero.
+
+<h3 id="authentication">Detecting proxy servers</h3>
+
+In case a proxy is deployed between the user agent and the web
+server, the time interval between the
+{{PerformanceResourceTiming/connectStart}}
+and the
+{{PerformanceResourceTiming/connectEnd}}
+attributes indicates the delay between the user agent and the proxy
+instead of the web server. With that, web server can potentially
+infer the existence of the proxy. For SOCKS proxy, this time interval
+includes the proxy authentication time and time the proxy takes to
+connect to the web server, which obfuscate the proxy detection. In
+case of an HTTP proxy, the user agent might not have any knowledge
+about the proxy server at all so it's not always feasible to mitigate
+this attack.
+
+<div id='obsolete'>
+<h2 id='obsolete-heading'>Obsolete</h2>
+
+This section defines attributes and interfaces previously introduced in
+[[NAVIGATION-TIMING]] Level 1 and are kept here for backwards
+compatibility. Authors should not use the following interfaces and are
+<strong>strongly advised</strong> to use the new
+{{PerformanceNavigationTiming}} interface—see <a href="#sotd">summary
+of changes and improvements</a>.
+
+<h3 id="the-performancetiming-interface" data-dfn-for="PerformanceTiming">
+  The <dfn data-export>PerformanceTiming</dfn> interface
+</h3>
+
+<pre class="idl">
+[Exposed=Window]
+interface PerformanceTiming {
+  readonly attribute unsigned long long navigationStart;
+  readonly attribute unsigned long long unloadEventStart;
+  readonly attribute unsigned long long unloadEventEnd;
+  readonly attribute unsigned long long redirectStart;
+  readonly attribute unsigned long long redirectEnd;
+  readonly attribute unsigned long long fetchStart;
+  readonly attribute unsigned long long domainLookupStart;
+  readonly attribute unsigned long long domainLookupEnd;
+  readonly attribute unsigned long long connectStart;
+  readonly attribute unsigned long long connectEnd;
+  readonly attribute unsigned long long secureConnectionStart;
+  readonly attribute unsigned long long requestStart;
+  readonly attribute unsigned long long responseStart;
+  readonly attribute unsigned long long responseEnd;
+  readonly attribute unsigned long long domLoading;
+  readonly attribute unsigned long long domInteractive;
+  readonly attribute unsigned long long domContentLoadedEventStart;
+  readonly attribute unsigned long long domContentLoadedEventEnd;
+  readonly attribute unsigned long long domComplete;
+  readonly attribute unsigned long long loadEventStart;
+  readonly attribute unsigned long long loadEventEnd;
+  [Default] object toJSON();
+};
+</pre>
+
+<p class="note">
+  All time values defined in this section are measured in milliseconds
+  since midnight of <time datetime="1970-01-01T00:00Z">January 1, 1970
+  (UTC)</time>.
+</p>
+
+<dl data-dfn-for="PerformanceTiming">
+  <dt>
+    <dfn data-export>navigationStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately after the user
+      agent finishes [=prompt to unload a document|prompting
+      to unload=] the previous document. If there is no previous
+      document, this attribute must return the time the current
+      document is created.
+    </p>
+    <p class="note">
+      This attribute is not defined for
+      {{PerformanceNavigationTiming}}. Instead, authors can use
+      {{Performance/timeOrigin}} to obtain an equivalent timestamp.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>unloadEventStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      If the previous document and the current document have the same
+      <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>, this attribute
+      must return the time immediately before the user agent starts the
+      [=unloading documents|unload=] event
+      of the previous document. If there is no previous document or the
+      previous document has a different <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a> than the current document, this
+      attribute must return zero.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>unloadEventEnd</dfn>
+  </dt>
+  <dd>
+    <p>
+      If the previous document and the current document have the same
+      <a href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a>, this attribute
+      must return the time immediately after the user agent finishes
+      the [=unload a document|unload=] event
+      of the previous document. If there is no previous document or the
+      previous document has a different <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a> than the current document or the
+      unload is not yet completed, this attribute must return zero.
+    </p>
+    <p>
+      If there are [=redirect status|HTTP
+      redirects=] when navigating and not all the redirects are from
+      the same <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>, both
+      {{PerformanceTiming/unloadEventStart}} and
+      {{PerformanceTiming/unloadEventEnd}} must return zero.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>redirectStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      If there are [=redirect status|HTTP
+      redirects=] when navigating and if all the redirects are from
+      the same <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>, this
+      attribute must return the {{PerformanceTiming/fetchStart|starting time of the fetch}}
+      that initiates the redirect. Otherwise, this attribute must
+      return zero.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>redirectEnd</dfn>
+  </dt>
+  <dd>
+    <p>
+      If there are [=redirect status|HTTP
+      redirects=] when navigating and all redirects are from the same
+      <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">origin</a>, this attribute
+      must return the time immediately after receiving the last byte of
+      the response of the last redirect. Otherwise, this attribute must
+      return zero.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>fetchStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      If the new resource is to be [=fetching resources|fetched=]
+      using a "GET" [=concept-request-method|request
+      method=], fetchStart must return the time immediately before
+      the user agent starts checking the
+      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]]. Otherwise, it must
+      return the time when
+      the user agent starts [=fetching resources|fetching=] the
+      resource.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>domainLookupStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately before the user
+      agent starts the domain name lookup for the current document. If
+      a <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+      connection</a> [[RFC2616 obsolete]] is used or the current document is
+      retrieved from the
+      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or local resources, this attribute must
+      return the same value as {{PerformanceTiming/fetchStart}}.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>domainLookupEnd</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately after the user
+      agent finishes the domain name lookup for the current document.
+      If a <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+      connection</a> [[RFC2616 obsolete]] is used or the current document is
+      retrieved from the
+      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or local resources, this attribute must
+      return the same value as {{PerformanceTiming/fetchStart}}.
+    </p>
+    <div class="note">
+      <p>
+        Checking and retrieving contents from the <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13">
+        HTTP cache</a> [[RFC2616 obsolete]] is part of the [=fetching resources|fetching
+        process=]. It's covered by the
+        {{PerformanceTiming/requestStart}},
+        {{PerformanceTiming/responseStart}} and
+        {{PerformanceTiming/responseEnd}} attributes.
+      </p>
+    </div>
+    <p class="note">
+      In case where the user agent already has the domain information
+      in cache, domainLookupStart and domainLookupEnd represent the
+      times when the user agent starts and ends the domain data
+      retrieval from the cache.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>connectStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately before the user
+      agent start establishing the connection to the server to retrieve
+      the document. If a <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+      connection</a> [[RFC2616 obsolete]] is used or the current document is
+      retrieved from the
+      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or local resources, this attribute must
+      return value of {{PerformanceTiming/domainLookupEnd}}.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>connectEnd</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately after the user
+      agent finishes establishing the connection to the server to
+      retrieve the current document. If a <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
+      connection</a> [[RFC2616 obsolete]] is used or the current document is
+      retrieved from the
+      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or local resources, this attribute must
+      return the value of {{PerformanceTiming/domainLookupEnd}}.
+    </p>
+    <p>
+      If the transport connection fails and the user agent reopens a
+      connection, {{PerformanceTiming/connectStart}} and
+      {{PerformanceTiming/connectEnd}} should return the corresponding
+      values of the new connection.
+    </p>
+    <p>
+      {{PerformanceTiming/connectEnd}} must include the time interval
+      to establish the transport connection as well as other time
+      interval such as SSL handshake and SOCKS authentication.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>secureConnectionStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute is optional. User agents that don't have this
+      attribute available must set it as undefined. When this attribute
+      is available, if the [=concept-url-scheme|scheme=] [[URL]] of the current page
+      is "https", this attribute must return the time immediately
+      before the user agent starts the handshake process to secure the
+      current connection. If this attribute is available but HTTPS is
+      not used, this attribute must return zero.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>requestStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately before the user
+      agent starts requesting the current document from the server, or
+      from the <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or from local resources.
+    </p>
+    <p>
+      If the transport connection fails after a request is sent and the
+      user agent reopens a connection and resend the request,
+      {{PerformanceTiming/requestStart}} should return the
+      corresponding values of the new request.
+    </p>
+    <div class="note">
+      <p>
+        This interface does not include an attribute to represent the
+        completion of sending the request, e.g., requestEnd.
+      </p>
+      <ul>
+        <li>Completion of sending the request from the user agent does
+        not always indicate the corresponding completion time in the
+        network transport, which brings most of the benefit of having
+        such an attribute.
+        </li>
+        <li>Some user agents have high cost to determine the actual
+        completion time of sending the request due to the HTTP layer
+        encapsulation.
+        </li>
+      </ul>
+    </div>
+  </dd>
+  <dt>
+    <dfn data-export>responseStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately after the user
+      agent receives the first byte of the response from the server, or
+      from the <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or from local resources.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>responseEnd</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately after the user
+      agent receives the last byte of the current document or
+      immediately before the transport connection is closed, whichever
+      comes first. The document here can be received either from the
+      server, the <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or from local resources.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>domLoading</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately before the user
+      agent sets the [=current document readiness|current document
+      readiness=] to [=current document readiness|"loading"=].
+    </p>
+    <p class="warning">
+      Due to differences in when a Document object is created in
+      existing user agents, the value returned by the
+      <code>domLoading</code> is implementation specific and should not
+      be used in meaningful metrics.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>domInteractive</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately before the user
+      agent sets the [=current document readiness|current document
+      readiness=] to [=the end|"interactive"=].
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>domContentLoadedEventStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately before the user
+      agent fires [=the end|the
+      DOMContentLoaded event=] at the {{Document}}.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>domContentLoadedEventEnd</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately after the
+      document's [=the end|DOMContentLoaded event=] completes.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>domComplete</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately before the user
+      agent sets the [=current document readiness|current document
+      readiness=] to [=the end|"complete"=].
+    </p>
+    <p>
+      If the [=current document readiness|current document
+      readiness=] changes to the same state multiple times,
+      {{PerformanceTiming/domLoading}},
+      {{PerformanceTiming/domInteractive}},
+      {{PerformanceTiming/domContentLoadedEventStart}},
+      {{PerformanceTiming/domContentLoadedEventEnd}} and
+      {{PerformanceTiming/domComplete}} must return the time of the
+      first occurrence of the corresponding [=current document readiness|document readiness=]
+      change.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>loadEventStart</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time immediately before the load
+      event of the current document is fired. It must return zero when
+      the load event is not fired yet.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>loadEventEnd</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the time when the load event of the
+      current document is completed. It must return zero when the load
+      event is not fired or is not completed.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>toJSON()</dfn>
+  </dt>
+  <dd>
+    Runs the [=default toJSON steps=] for [=this=].
+  </dd>
+</dl>
+
+<h3 id="the-performancenavigation-interface" data-dfn-for="PerformanceNavigation">
+  The <dfn data-export>PerformanceNavigation</dfn> interface
+</h3>
+
+<pre class="idl">
+[Exposed=Window]
+interface PerformanceNavigation {
+  const unsigned short TYPE_NAVIGATE = 0;
+  const unsigned short TYPE_RELOAD = 1;
+  const unsigned short TYPE_BACK_FORWARD = 2;
+  const unsigned short TYPE_RESERVED = 255;
+  readonly attribute unsigned short type;
+  readonly attribute unsigned short redirectCount;
+  [Default] object toJSON();
+};
+</pre>
+
+<dl data-dfn-for="PerformanceNavigation">
+  <dt>
+    <dfn data-export>TYPE_NAVIGATE</dfn>
+  </dt>
+  <dd>
+    <p>
+      Navigation where the
+      [=history handling behavior=]
+      is set to
+      [=hh-default|"default"=] or
+      [=hh-replace|"replace"=].
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>TYPE_RELOAD</dfn>
+  </dt>
+  <dd>
+    <p>
+      Navigation where the
+      [=history handling behavior=]
+      is set to
+      [=hh-reload|"reload"=].
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>TYPE_BACK_FORWARD</dfn>
+  </dt>
+  <dd>
+    <p>
+      Navigation where the
+      [=history handling behavior=]
+      is set to
+      [=hh-entry-update|"entry update"=].
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>TYPE_RESERVED</dfn>
+  </dt>
+  <dd>
+    <p>
+      Any navigation types not defined by values above.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>type</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the type of the last non-redirect
+      <a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigate">navigation</a>.
+      It must have one of the following {{PerformanceNavigationTiming/type|navigation type}} values.
+    </p>
+    <p class="note">
+      Client-side redirects, such as those using [=Refresh pragma directive|the Refresh
+      pragma directive=], are not considered [=redirect status|HTTP redirects=] by this spec. In those
+      cases, the {{PerformanceNavigationTiming/type|type}}
+      attribute <span class=allow-2119>should</span> return appropriate value, such as
+      <code>TYPE_RELOAD</code> if reloading the current page, or
+      <code>TYPE_NAVIGATE</code> if navigating to a new URL.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>redirectCount</dfn>
+  </dt>
+  <dd>
+    <p>
+      This attribute must return the number of redirects since the last
+      non-redirect navigation. If there is no redirect or there is any
+      redirect that is not from the
+      <a href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">same origin</a> as the
+      destination document, this attribute must return zero.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>toJSON()</dfn>
+  </dt>
+  <dd>
+    Runs the [=default toJSON steps=] for [=this=].
+  </dd>
+</dl>
+
+<h3 id="extensions-to-the-performance-interface" data-dfn-for="Performance">
+  Extensions to the <code>Performance</code> interface
+</h3>
+
+<pre class="idl">
+[Exposed=Window]
+partial interface Performance {
+  [SameObject]
+  readonly attribute PerformanceTiming timing;
+  [SameObject]
+  readonly attribute PerformanceNavigation navigation;
+};
+</pre>
+
+The <dfn data-export>Performance</dfn> interface is defined in
+[[PERFORMANCE-TIMELINE-2]].
+
+<dl data-dfn-for="Performance">
+  <dt>
+    <dfn data-export>timing</dfn>
+  </dt>
+  <dd>
+    <p>
+      The <code>timing</code> attribute represents the timing
+      information since the last non-redirect navigation.
+      This attribute is defined by the
+      <code>PerformanceTiming</code> interface.
+    </p>
+  </dd>
+  <dt>
+    <dfn data-export>navigation</dfn>
+  </dt>
+  <dd>
+    <p>
+      The <code>navigation</code> attribute is defined by the
+      <code>PerformanceNavigation</code> interface.
+    </p>
+  </dd>
+</dl>
+</div>
+
+<h2 id="acknowledgements" class="appendix">Acknowledgments</h2>
+
+Thanks to Anne Van Kesteren, Arvind Jain, Boris Zbarsky, Jason Weber,
+Jonas Sicking, James Simonsen, Karen Anderson, Nic Jansma, Philippe Le
+Hegaret, Steve Souders, Todd Reifsteck, Tony Gentilcore, William Chan
+and Zhiheng Wang for their contributions to this work.

@@ -8,11 +8,12 @@ jobs:
     name: Build, Validate and Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: w3c/spec-prod@v2
         with:
+          TOOLCHAIN: bikeshed
           W3C_ECHIDNA_TOKEN: ${{ secrets.W3C_TR_TOKEN }}
           W3C_WG_DECISION_URL: https://lists.w3.org/Archives/Public/public-web-perf/2021Apr/0005.html
           W3C_BUILD_OVERRIDE: |
-             shortName: navigation-timing-2
-             specStatus: WD
+             Shortname: navigation-timing-2
+             Status: WD
