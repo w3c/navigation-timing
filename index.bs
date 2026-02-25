@@ -6,8 +6,8 @@ Group: webperf
 URL: https://w3c.github.io/navigation-timing/
 TR: https://www.w3.org/TR/navigation-timing-2/
 Test Suite: https://wpt.fyi/navigation-timing/
-Editor: Yoav Weiss, Google https://google.com/, https://blog.yoav.ws/, w3cid 58673
-Editor: Noam Rosenthal, Invited Expert, noam.j.rosenthal@gmail.com, w3cid 121539
+Editor: Yoav Weiss, Shopify https://shopify.com/, https://blog.yoav.ws/, w3cid 58673
+Editor: Noam Rosenthal, Google https://google.com/, noam.j.rosenthal@gmail.com, w3cid 121539
 Former Editor: Ilya Grigorik, Google https://google.com/, https://www.igvita.com/, w3cid 56102
 Former Editor: Tobin Titus, Microsoft Corp., tobint@microsoft.com, w3cid 69474
 Former Editor: Jatinder Mann, Microsoft Corp., jmann@microsoft.com, w3cid 44357
