@@ -198,7 +198,7 @@ data related to the navigation of the document:
 
 The construction "a <code>Foo</code> object", where <code>Foo</code> is
 actually an interface, is sometimes used instead of the more accurate
-"an object implementing the interface <code>Foo</code>.
+"an object implementing the interface <code>Foo</code>".
 
 The term <dfn>current document</dfn> refers to the document associated
 with the <a data-lt="associated document">Window object's newest
