@@ -372,7 +372,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
 <dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
 
 <p data-dfn-for='PerformanceNavigationTiming'>
-  The <dfn data-export>unloadEventStart</dfn> getter steps are to return |this|'s
+  The <dfn attribute data-export>unloadEventStart</dfn> getter steps are to return |this|'s
   [=previous document unload timing=]'s [=document unload timing info/unload event start
   time=].
 <p class="note">If the previous document and the current document have the same
@@ -384,7 +384,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   zero.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
-  The <dfn data-export>unloadEventEnd</dfn> getter steps are to return |this|'s
+  The <dfn attribute data-export>unloadEventEnd</dfn> getter steps are to return |this|'s
   [=previous document unload timing=]'s
   [=document unload timing info/unload event end time=].
 <p class="note">If the previous document and the current document have the same
@@ -396,7 +396,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   zero.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn data-export>domInteractive</dfn> getter steps are to return
+ The <dfn attribute data-export>domInteractive</dfn> getter steps are to return
  |this|'s [=document load timing=]'s [=document load timing info/DOM interactive time=].</p>
 
 <p class="note">This timestamp is measured before the user agent sets the
@@ -404,7 +404,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   [=the end|"interactive"=].
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn data-export>domContentLoadedEventStart</dfn> getter steps are to return |this|'s
+ The <dfn attribute data-export>domContentLoadedEventStart</dfn> getter steps are to return |this|'s
  [=document load timing=]'s
  [=document load timing info/DOM content loaded event start time=].</p>
 <p class="note">This timestamp is measured before the user agent dispatches the
@@ -412,7 +412,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   event.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn data-export>domContentLoadedEventEnd</dfn> getter steps are to return
+ The <dfn attribute data-export>domContentLoadedEventEnd</dfn> getter steps are to return
  |this|'s [=document load timing=]'s
  [=document load timing info/DOM content loaded event end time=].</p>
 <p class="note">This timestamp is measured after the user agent completes handling of the
@@ -420,7 +420,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   event.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn data-export>domComplete</dfn> getter steps are to return
+ The <dfn attribute data-export>domComplete</dfn> getter steps are to return
  |this|'s [=document load timing=]'s [=document load timing info/DOM complete time=].
 <p class="note">This timestamp is measured before the user agent sets the
   [=current document readiness=] to
@@ -428,25 +428,25 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   definition.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn data-export>loadEventStart</dfn> getter steps are to return
+ The <dfn attribute data-export>loadEventStart</dfn> getter steps are to return
  |this|'s [=document load timing=]'s [=document load timing info/load event start time=].</p>
 <p class="note">This timestamp is measured before the user agent dispatches the
   <a href="https://html.spec.whatwg.org/multipage/indices.html#event-load">load</a> event for the document.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn data-export>loadEventEnd</dfn> getter steps are to return
+ The <dfn attribute data-export>loadEventEnd</dfn> getter steps are to return
  |this|'s [=document load timing=]'s [=document load timing info/load event end time=].</p>
 <p class="note">This timestamp is measured after the user agent completes handling the
 <a href="https://html.spec.whatwg.org/multipage/indices.html#event-load">load</a> event for the document.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn>type</dfn> getter steps are to run the |this|'s [=navigation type=].
+ The <dfn attribute>type</dfn> getter steps are to run the |this|'s [=navigation type=].
 </p>
 <div class="note">
   <p>
     Client-side redirects, such as those using the [=Refresh pragma directive|Refresh pragma
     directive=], are not considered [=redirect status|HTTP redirects=] by this spec. In those
-    cases, the <a for="PerformanceNavigationTiming">type</a>
+    cases, the {{PerformanceNavigationTiming/type}}
     attribute SHOULD return appropriate value, such as
     <a for="NavigationTimingType">reload</a> if reloading the
     current page, or <a for="NavigationTimingType">navigate</a> if
@@ -454,10 +454,10 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   </p>
 </div>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn data-export>redirectCount</dfn> getter steps are to return |this|'s
+ The <dfn attribute data-export>redirectCount</dfn> getter steps are to return |this|'s
  <span>redirect count</span>.</p>
 <p data-dfn-for='PerformanceNavigationTiming'>
-  The <dfn data-export>criticalCHRestart</dfn> getter steps are to return |this|'s
+  The <dfn attribute data-export>criticalCHRestart</dfn> getter steps are to return |this|'s
 <span>`Critical-CH` restart time</span>.</p>
 <div class="note">
   <p>
@@ -467,10 +467,10 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   </p>
 </div>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn data-export>notRestoredReasons</dfn> getter steps are to return |this|'s
+ The <dfn attribute data-export>notRestoredReasons</dfn> getter steps are to return |this|'s
 <span>not restored reasons</span>.</p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn data-export>confidence</dfn> getter steps are to run these steps:
+ The <dfn attribute data-export>confidence</dfn> getter steps are to run these steps:
 <ol>
   <li>If |this|'s [=document load timing=]'s
   [=document load timing info/DOM interactive time=] is 0, return null.</li>
@@ -631,7 +631,7 @@ interface PerformanceTimingConfidence {
 </pre>
 <dl data-dfn-for='PerformanceTimingConfidence'>
   <dt>
-    <dfn data-export>randomizedTriggerRate</dfn>
+    <dfn attribute data-export>randomizedTriggerRate</dfn>
   </dt>
   <dd>
     <p>
@@ -641,7 +641,7 @@ interface PerformanceTimingConfidence {
     </p>
   </dd>
   <dt>
-    <dfn data-export>value</dfn>
+    <dfn attribute data-export>value</dfn>
   </dt>
   <dd>
     <p>
