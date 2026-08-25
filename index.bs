@@ -311,7 +311,7 @@ interface:
 
 <div class="note">
   Checking and retrieving contents from the
-  <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] is
+  [[!RFC9111 inline|HTTP cache]] [[RFC9111]] is
   part of the [=fetch|fetching process=].
   It's covered by the
   {{PerformanceResourceTiming/requestStart}},
@@ -955,7 +955,7 @@ interface PerformanceTiming {
       using a "GET" [=concept-request-method|request
       method=], fetchStart must return the time immediately before
       the user agent starts checking the
-      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]]. Otherwise, it must
+      [[!RFC9111 inline|HTTP cache]] [[RFC9111]]. Otherwise, it must
       return the time when
       the user agent starts [=fetching resources|fetching=] the
       resource.
@@ -968,11 +968,11 @@ interface PerformanceTiming {
     <p>
       This attribute must return the time immediately before the user
       agent starts the domain name lookup for the current document. If
-      a <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-      connection</a> [[RFC2616 obsolete]] is used or the current document is
-      retrieved from the
-      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or local resources, this attribute must
-      return the same value as {{PerformanceTiming/fetchStart}}.
+      a [[RFC9112#persistent.connections|persistent connection]]
+      [[RFC9112]] is used or the current document is retrieved from the
+      [[!RFC9111 inline|HTTP cache]] [[RFC9111]] or local resources,
+      this attribute must return the same value as
+      {{PerformanceTiming/fetchStart}}.
     </p>
   </dd>
   <dt>
@@ -982,17 +982,17 @@ interface PerformanceTiming {
     <p>
       This attribute must return the time immediately after the user
       agent finishes the domain name lookup for the current document.
-      If a <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-      connection</a> [[RFC2616 obsolete]] is used or the current document is
-      retrieved from the
-      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or local resources, this attribute must
-      return the same value as {{PerformanceTiming/fetchStart}}.
+      If a [[RFC9112#persistent.connections|persistent connection]]
+      [[RFC9112]] is used or the current document is retrieved from the
+      [[!RFC9111 inline|HTTP cache]] [[RFC9111]] or local resources,
+      this attribute must return the same value as
+      {{PerformanceTiming/fetchStart}}.
     </p>
     <div class="note">
       <p>
-        Checking and retrieving contents from the <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13">
-        HTTP cache</a> [[RFC2616 obsolete]] is part of the [=fetching resources|fetching
-        process=]. It's covered by the
+        Checking and retrieving contents from the
+        [[!RFC9111 inline|HTTP cache]] [[RFC9111]] is part of the
+        [=fetching resources|fetching process=]. It's covered by the
         {{PerformanceTiming/requestStart}},
         {{PerformanceTiming/responseStart}} and
         {{PerformanceTiming/responseEnd}} attributes.
@@ -1012,11 +1012,11 @@ interface PerformanceTiming {
     <p>
       This attribute must return the time immediately before the user
       agent start establishing the connection to the server to retrieve
-      the document. If a <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-      connection</a> [[RFC2616 obsolete]] is used or the current document is
-      retrieved from the
-      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or local resources, this attribute must
-      return value of {{PerformanceTiming/domainLookupEnd}}.
+      the document. If a [[RFC9112#persistent.connections|persistent
+      connection]] [[RFC9112]] is used or the current document is
+      retrieved from the [[!RFC9111 inline|HTTP cache]] [[RFC9111]] or
+      local resources, this attribute must return value of
+      {{PerformanceTiming/domainLookupEnd}}.
     </p>
   </dd>
   <dt>
@@ -1026,11 +1026,12 @@ interface PerformanceTiming {
     <p>
       This attribute must return the time immediately after the user
       agent finishes establishing the connection to the server to
-      retrieve the current document. If a <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1">persistent
-      connection</a> [[RFC2616 obsolete]] is used or the current document is
-      retrieved from the
-      <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or local resources, this attribute must
-      return the value of {{PerformanceTiming/domainLookupEnd}}.
+      retrieve the current document. If a
+      [[RFC9112#persistent.connections|persistent connection]]
+      [[RFC9112]] is used or the current document is retrieved from the
+      [[!RFC9111 inline|HTTP cache]] [[RFC9111]] or local resources,
+      this attribute must return the value of
+      {{PerformanceTiming/domainLookupEnd}}.
     </p>
     <p>
       If the transport connection fails and the user agent reopens a
@@ -1065,7 +1066,8 @@ interface PerformanceTiming {
     <p>
       This attribute must return the time immediately before the user
       agent starts requesting the current document from the server, or
-      from the <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or from local resources.
+      [[!RFC9111 inline|HTTP cache]] [[RFC9111]] or from local
+      resources.
     </p>
     <p>
       If the transport connection fails after a request is sent and the
@@ -1098,7 +1100,8 @@ interface PerformanceTiming {
     <p>
       This attribute must return the time immediately after the user
       agent receives the first byte of the response from the server, or
-      from the <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or from local resources.
+      [[!RFC9111 inline|HTTP cache]] [[RFC9111]] or from local
+      resources.
     </p>
   </dd>
   <dt>
@@ -1110,7 +1113,8 @@ interface PerformanceTiming {
       agent receives the last byte of the current document or
       immediately before the transport connection is closed, whichever
       comes first. The document here can be received either from the
-      server, the <a href="https://tools.ietf.org/html/rfc7234">HTTP cache</a> [[RFC7234 obsolete]] or from local resources.
+      server, the [[!RFC9111 inline|HTTP cache]] [[RFC9111]] or from
+      local resources.
     </p>
   </dd>
   <dt>
