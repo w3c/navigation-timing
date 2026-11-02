@@ -138,7 +138,7 @@ unable to provide a complete or detailed end-to-end latency picture.
 For example, the following JavaScript shows a naive attempt to measure
 the time it takes to fully load a page:
 
-<pre class='example' id="example-naive-timing" highlight='html'>
+<pre class='example' id="example-naive-timing" highlight='html' oldids="example-1">
   &lt;html&gt;
   &lt;head&gt;
   &lt;script type="text/javascript"&gt;
@@ -173,7 +173,7 @@ For example, if we know that the response end occurs 100ms after the
 start of navigation, the {{PerformanceNavigationTiming}} data could
 look like so:
 
-<pre class="example" id="example-data">
+<pre class="example" id="example-data" oldids="example-2">
 startTime:           0.000  // start time of the navigation request
 responseEnd:       100.000  // high resolution time of last received byte
 </pre>
@@ -182,7 +182,7 @@ The following script shows how a developer can use the
 {{PerformanceNavigationTiming}} interface to obtain accurate timing
 data related to the navigation of the document:
 
-<pre class="example" id="example-navigation-details" highlight="html">
+<pre class="example" id="example-navigation-details" highlight="html" oldids="example-3">
   &lt;script&gt;
   function showNavigationDetails() {
     // Get the first entry
@@ -200,7 +200,7 @@ The construction "a <code>Foo</code> object", where <code>Foo</code> is
 actually an interface, is sometimes used instead of the more accurate
 "an object implementing the interface <code>Foo</code>".
 
-The term <dfn>current document</dfn> refers to the document associated
+The term <dfn oldids="dfn-current-document">current document</dfn> refers to the document associated
 with the <a data-lt="associated document">Window object's newest
 Document object</a>.
 
@@ -244,7 +244,7 @@ attributes of {{PerformanceEntry}} interface:
 <h3 id='PerformanceResourceTiming'>Relation to the <code>PerformanceResourceTiming</code> interface</h3>
 
 {{PerformanceNavigationTiming}} interface extends the following
-attributes of the {{PerformanceResourceTiming}}
+attributes of the <span id="dfn-performanceresourcetiming">{{PerformanceResourceTiming}}</span>
 interface:
 
 <ul>
@@ -306,7 +306,7 @@ interface:
 </p>
 
 <h3 id="sec-PerformanceNavigationTiming" data-dfn-for="PerformanceNavigationTiming">
-  The <dfn data-export>PerformanceNavigationTiming</dfn> interface
+  The <dfn data-export oldids="dom-performancenavigationtiming,idl-def-performancenavigationtiming">PerformanceNavigationTiming</dfn> interface
 </h3>
 
 <div class="note">
@@ -340,39 +340,39 @@ interface PerformanceNavigationTiming : PerformanceResourceTiming {
 </pre>
 
 A {{PerformanceNavigationTiming}} has an associated
-[=document load timing info=] <dfn data-dfn-for="PerformanceNavigationTiming">document load timing</dfn>.
+[=document load timing info=] <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-document-load-timing">document load timing</dfn>.
 
 A {{PerformanceNavigationTiming}} has an associated
-[=document unload timing info=] <dfn data-dfn-for="PerformanceNavigationTiming">previous document unload timing</dfn>.
+[=document unload timing info=] <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-previous-document-unload-timing">previous document unload timing</dfn>.
 
 A {{PerformanceNavigationTiming}} has an associated
-number <dfn data-dfn-for="PerformanceNavigationTiming">redirect count</dfn>.
+number <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-redirect-count">redirect count</dfn>.
 
 A {{PerformanceNavigationTiming}} has an associated
-{{NavigationTimingType}} <dfn data-dfn-for="PerformanceNavigationTiming">navigation type</dfn>.
+{{NavigationTimingType}} <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-navigation-type">navigation type</dfn>.
 
 A {{PerformanceNavigationTiming}} has an associated
-{{DOMHighResTimeStamp}} <dfn data-dfn-for="PerformanceNavigationTiming">`Critical-CH` restart time</dfn>.
+{{DOMHighResTimeStamp}} <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-critical-ch-restart-time">`Critical-CH` restart time</dfn>.
 
 A {{PerformanceNavigationTiming}} has an associated
-{{NotRestoredReasons}} <dfn data-dfn-for="PerformanceNavigationTiming">not restored reasons</dfn>.
+{{NotRestoredReasons}} <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-not-restored-reasons">not restored reasons</dfn>.
 
 A {{PerformanceNavigationTiming}} has an associated
-{{PerformanceTimingConfidence}} <dfn data-dfn-for="PerformanceNavigationTiming">confidence value</dfn>.
+{{PerformanceTimingConfidence}} <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-confidence-value">confidence value</dfn>.
 
 A {{PerformanceNavigationTiming}} has an associated real number
-<dfn data-dfn-for="PerformanceNavigationTiming">randomized trigger rate</dfn>
+<dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-randomized-trigger-rate">randomized trigger rate</dfn>
 which is [=implementation-defined=].
 
 A {{PerformanceNavigationTiming}} has an associated {{PerformanceTimingConfidenceValue}}
-<dfn data-dfn-for="PerformanceNavigationTiming">underlying confidence value</dfn>
+<dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-underlying-confidence-value">underlying confidence value</dfn>
 which is [=implementation-defined=].
 
 A {{PerformanceNavigationTiming}} has an associated null or [=service worker timing info=]
-<dfn data-dfn-for="PerformanceNavigationTiming">service worker timing</dfn>.
+<dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-service-worker-timing">service worker timing</dfn>.
 
 <p data-dfn-for='PerformanceNavigationTiming'>
-  The <dfn attribute data-export>unloadEventStart</dfn> getter steps are to return |this|'s
+  The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-unloadeventstart">unloadEventStart</dfn> getter steps are to return |this|'s
   [=previous document unload timing=]'s [=document unload timing info/unload event start
   time=].
 <p class="note">If the previous document and the current document have the same
@@ -384,7 +384,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   zero.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
-  The <dfn attribute data-export>unloadEventEnd</dfn> getter steps are to return |this|'s
+  The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-unloadeventend">unloadEventEnd</dfn> getter steps are to return |this|'s
   [=previous document unload timing=]'s
   [=document unload timing info/unload event end time=].
 <p class="note">If the previous document and the current document have the same
@@ -396,7 +396,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   zero.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute data-export>domInteractive</dfn> getter steps are to return
+ The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-dominteractive">domInteractive</dfn> getter steps are to return
  |this|'s [=document load timing=]'s [=document load timing info/DOM interactive time=].</p>
 
 <p class="note">This timestamp is measured before the user agent sets the
@@ -404,7 +404,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   [=the end|"interactive"=].
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute data-export>domContentLoadedEventStart</dfn> getter steps are to return |this|'s
+ The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-domcontentloadedeventstart">domContentLoadedEventStart</dfn> getter steps are to return |this|'s
  [=document load timing=]'s
  [=document load timing info/DOM content loaded event start time=].</p>
 <p class="note">This timestamp is measured before the user agent dispatches the
@@ -412,7 +412,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   event.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute data-export>domContentLoadedEventEnd</dfn> getter steps are to return
+ The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-domcontentloadedeventend">domContentLoadedEventEnd</dfn> getter steps are to return
  |this|'s [=document load timing=]'s
  [=document load timing info/DOM content loaded event end time=].</p>
 <p class="note">This timestamp is measured after the user agent completes handling of the
@@ -420,7 +420,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   event.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute data-export>domComplete</dfn> getter steps are to return
+ The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-domcomplete">domComplete</dfn> getter steps are to return
  |this|'s [=document load timing=]'s [=document load timing info/DOM complete time=].
 <p class="note">This timestamp is measured before the user agent sets the
   [=current document readiness=] to
@@ -428,19 +428,19 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   definition.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute data-export>loadEventStart</dfn> getter steps are to return
+ The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-loadeventstart">loadEventStart</dfn> getter steps are to return
  |this|'s [=document load timing=]'s [=document load timing info/load event start time=].</p>
 <p class="note">This timestamp is measured before the user agent dispatches the
   <a href="https://html.spec.whatwg.org/multipage/indices.html#event-load">load</a> event for the document.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute data-export>loadEventEnd</dfn> getter steps are to return
+ The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-loadeventend">loadEventEnd</dfn> getter steps are to return
  |this|'s [=document load timing=]'s [=document load timing info/load event end time=].</p>
 <p class="note">This timestamp is measured after the user agent completes handling the
 <a href="https://html.spec.whatwg.org/multipage/indices.html#event-load">load</a> event for the document.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute>type</dfn> getter steps are to run the |this|'s [=navigation type=].
+ The <dfn attribute oldids="idl-def-performancenavigationtiming-type">type</dfn> getter steps are to run the |this|'s [=navigation type=].
 </p>
 <div class="note">
   <p>
@@ -454,10 +454,10 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   </p>
 </div>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute data-export>redirectCount</dfn> getter steps are to return |this|'s
+ The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-redirectcount">redirectCount</dfn> getter steps are to return |this|'s
  <span>redirect count</span>.</p>
 <p data-dfn-for='PerformanceNavigationTiming'>
-  The <dfn attribute data-export>criticalCHRestart</dfn> getter steps are to return |this|'s
+  The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-criticalchrestart">criticalCHRestart</dfn> getter steps are to return |this|'s
 <span>`Critical-CH` restart time</span>.</p>
 <div class="note">
   <p>
@@ -467,10 +467,10 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
   </p>
 </div>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute data-export>notRestoredReasons</dfn> getter steps are to return |this|'s
+ The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-notrestoredreasons">notRestoredReasons</dfn> getter steps are to return |this|'s
 <span>not restored reasons</span>.</p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute data-export>confidence</dfn> getter steps are to run these steps:
+ The <dfn attribute data-export oldids="idl-def-performancenavigationtiming-confidence">confidence</dfn> getter steps are to run these steps:
 <ol>
   <li>If |this|'s [=document load timing=]'s
   [=document load timing info/DOM interactive time=] is 0, return null.</li>
@@ -572,9 +572,9 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
     </ol>
 </div>
 
-The <dfn data-export data-dfn-for="PerformanceNavigationTiming">toJSON()</dfn> method runs the [=default toJSON steps=] for [=this=].
+The <dfn data-export data-dfn-for="PerformanceNavigationTiming" oldids="idl-def-performancenavigationtiming-tojson">toJSON()</dfn> method runs the [=default toJSON steps=] for [=this=].
 
-<h4 id="sec-performance-navigation-types">The {{NavigationTimingType}} enum</h4>
+<h4 id="sec-performance-navigation-types" oldids="dom-navigationtimingtype,idl-def-navigationtimingtype">The {{NavigationTimingType}} enum</h4>
 
 <pre class='idl'>
   enum NavigationTimingType {
@@ -619,7 +619,7 @@ The values are defined as follows:
   implementations. [[WebIDL]]
 </p>
 
-<h4 id="sec-performance-timing-confidence">The {{PerformanceTimingConfidence}} interface</h4>
+<h4 id="sec-performance-timing-confidence" oldids="dom-performancetimingconfidence,idl-def-performancetimingconfidence">The {{PerformanceTimingConfidence}} interface</h4>
 
 <pre class='idl'>
 [Exposed=Window]
@@ -631,7 +631,7 @@ interface PerformanceTimingConfidence {
 </pre>
 <dl data-dfn-for='PerformanceTimingConfidence'>
   <dt>
-    <dfn attribute data-export>randomizedTriggerRate</dfn>
+    <dfn attribute data-export oldids="idl-def-performancetimingconfidence-randomizedtriggerrate">randomizedTriggerRate</dfn>
   </dt>
   <dd>
     <p>
@@ -641,7 +641,7 @@ interface PerformanceTimingConfidence {
     </p>
   </dd>
   <dt>
-    <dfn attribute data-export>value</dfn>
+    <dfn attribute data-export oldids="idl-def-performancetimingconfidence-value">value</dfn>
   </dt>
   <dd>
     <p>
@@ -649,7 +649,7 @@ interface PerformanceTimingConfidence {
     </p>
   </dd>
   <dt>
-    <dfn data-export>toJSON()</dfn>
+    <dfn data-export oldids="idl-def-performancetimingconfidence-tojson">toJSON()</dfn>
   </dt>
   <dd>
     <p>
@@ -658,7 +658,7 @@ interface PerformanceTimingConfidence {
   </dd>
 </dl>
 
-<h4 id="sec-performance-timing-confidence-value">The {{PerformanceTimingConfidenceValue}} enum</h4>
+<h4 id="sec-performance-timing-confidence-value" oldids="dom-performancetimingconfidencevalue,idl-def-performancetimingconfidencevalue">The {{PerformanceTimingConfidenceValue}} enum</h4>
 
 <pre class='idl'>
 enum PerformanceTimingConfidenceValue {
@@ -711,7 +711,7 @@ The values are defined as follows:
 
 <h3 id="processing-model">Processing Model</h3>
 
-<figure>
+<figure id=fig-this-figure-illustrates-the-timing-attributes-defined-by-the-performancenavigationtiming-interface-attributes-in-parenthesis-indicate-that-they-may-not-be-available-for-navigations-involving-documents-from-different-origins>
   <figcaption>
     This figure illustrates the timing attributes defined by the
     {{PerformanceNavigationTiming}} interface. Attributes in
@@ -725,9 +725,9 @@ The values are defined as follows:
 
 <h2 id="marking-navigation-timing">Creating a navigation timing entry</h2>
 
-<p data-dfn-for="Document">Each [=document=] has an associated <dfn>navigation timing entry</dfn>, initially unset.
+<p data-dfn-for="Document">Each [=document=] has an associated <dfn oldids="dfn-navigation-timing-entry">navigation timing entry</dfn>, initially unset.
 
-<p>To <dfn data-export="">create the navigation timing entry</dfn> for {{Document}} |document|,
+<p>To <dfn data-export="" oldids="dfn-create-the-navigation-timing-entry">create the navigation timing entry</dfn> for {{Document}} |document|,
 given a [=fetch timing info=] |fetchTiming|, a number |redirectCount|, a
 {{NavigationTimingType}} |navigationType|, a null or [=service worker timing info=] |serviceWorkerTiming|,
 a DOMString |cacheMode|, a {{DOMHighResTimeStamp}} |criticalCHRestart|, and a [=response body info=] |bodyInfo|, do the following:
@@ -758,7 +758,7 @@ a DOMString |cacheMode|, a {{DOMHighResTimeStamp}} |criticalCHRestart|, and a [=
   [=performance entry buffer=].
 </ol>
 
-<p>To <dfn data-export="">queue the navigation timing entry</dfn> for {{Document}} |document|,
+<p>To <dfn data-export="" oldids="dfn-queue-the-navigation-timing-entry">queue the navigation timing entry</dfn> for {{Document}} |document|,
 <a data-lt="queue a navigation performanceentry">queue</a> |document|'s
 [=navigation timing entry=].
 
@@ -830,7 +830,7 @@ compatibility. Authors should not use the following interfaces and are
 of changes and improvements</a>.
 
 <h3 id="the-performancetiming-interface" data-dfn-for="PerformanceTiming">
-  The <dfn data-export>PerformanceTiming</dfn> interface
+  The <dfn data-export oldids="dom-performancetiming,idl-def-performancetiming">PerformanceTiming</dfn> interface
 </h3>
 
 <pre class="idl">
@@ -869,7 +869,7 @@ interface PerformanceTiming {
 
 <dl data-dfn-for="PerformanceTiming">
   <dt>
-    <dfn data-export>navigationStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-navigationstart">navigationStart</dfn>
   </dt>
   <dd>
     <p>
@@ -886,7 +886,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>unloadEventStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-unloadeventstart">unloadEventStart</dfn>
   </dt>
   <dd>
     <p>
@@ -900,7 +900,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>unloadEventEnd</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-unloadeventend">unloadEventEnd</dfn>
   </dt>
   <dd>
     <p>
@@ -921,7 +921,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>redirectStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-redirectstart">redirectStart</dfn>
   </dt>
   <dd>
     <p>
@@ -934,7 +934,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>redirectEnd</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-redirectend">redirectEnd</dfn>
   </dt>
   <dd>
     <p>
@@ -947,7 +947,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>fetchStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-fetchstart">fetchStart</dfn>
   </dt>
   <dd>
     <p>
@@ -962,7 +962,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>domainLookupStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-domainlookupstart">domainLookupStart</dfn>
   </dt>
   <dd>
     <p>
@@ -976,7 +976,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>domainLookupEnd</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-domainlookupend">domainLookupEnd</dfn>
   </dt>
   <dd>
     <p>
@@ -1006,7 +1006,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>connectStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-connectstart">connectStart</dfn>
   </dt>
   <dd>
     <p>
@@ -1020,7 +1020,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>connectEnd</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-connectend">connectEnd</dfn>
   </dt>
   <dd>
     <p>
@@ -1046,7 +1046,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>secureConnectionStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-secureconnectionstart">secureConnectionStart</dfn>
   </dt>
   <dd>
     <p>
@@ -1060,7 +1060,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>requestStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-requeststart">requestStart</dfn>
   </dt>
   <dd>
     <p>
@@ -1094,7 +1094,7 @@ interface PerformanceTiming {
     </div>
   </dd>
   <dt>
-    <dfn data-export>responseStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-responsestart">responseStart</dfn>
   </dt>
   <dd>
     <p>
@@ -1105,7 +1105,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>responseEnd</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-responseend">responseEnd</dfn>
   </dt>
   <dd>
     <p>
@@ -1118,7 +1118,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>domLoading</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-domloading">domLoading</dfn>
   </dt>
   <dd>
     <p>
@@ -1134,7 +1134,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>domInteractive</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-dominteractive">domInteractive</dfn>
   </dt>
   <dd>
     <p>
@@ -1144,7 +1144,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>domContentLoadedEventStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-domcontentloadedeventstart">domContentLoadedEventStart</dfn>
   </dt>
   <dd>
     <p>
@@ -1154,7 +1154,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>domContentLoadedEventEnd</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-domcontentloadedeventend">domContentLoadedEventEnd</dfn>
   </dt>
   <dd>
     <p>
@@ -1163,7 +1163,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>domComplete</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-domcomplete">domComplete</dfn>
   </dt>
   <dd>
     <p>
@@ -1184,7 +1184,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>loadEventStart</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-loadeventstart">loadEventStart</dfn>
   </dt>
   <dd>
     <p>
@@ -1194,7 +1194,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>loadEventEnd</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-loadeventend">loadEventEnd</dfn>
   </dt>
   <dd>
     <p>
@@ -1204,7 +1204,7 @@ interface PerformanceTiming {
     </p>
   </dd>
   <dt>
-    <dfn data-export>toJSON()</dfn>
+    <dfn data-export oldids="idl-def-performancetiming-tojson">toJSON()</dfn>
   </dt>
   <dd>
     Runs the [=default toJSON steps=] for [=this=].
@@ -1212,7 +1212,7 @@ interface PerformanceTiming {
 </dl>
 
 <h3 id="the-performancenavigation-interface" data-dfn-for="PerformanceNavigation">
-  The <dfn data-export>PerformanceNavigation</dfn> interface
+  The <dfn data-export oldids="dom-performancenavigation,idl-def-performancenavigation">PerformanceNavigation</dfn> interface
 </h3>
 
 <pre class="idl">
@@ -1230,7 +1230,7 @@ interface PerformanceNavigation {
 
 <dl data-dfn-for="PerformanceNavigation">
   <dt>
-    <dfn data-export>TYPE_NAVIGATE</dfn>
+    <dfn data-export oldids="idl-def-performancenavigation-type_navigate">TYPE_NAVIGATE</dfn>
   </dt>
   <dd>
     <p>
@@ -1242,7 +1242,7 @@ interface PerformanceNavigation {
     </p>
   </dd>
   <dt>
-    <dfn data-export>TYPE_RELOAD</dfn>
+    <dfn data-export oldids="idl-def-performancenavigation-type_reload">TYPE_RELOAD</dfn>
   </dt>
   <dd>
     <p>
@@ -1253,7 +1253,7 @@ interface PerformanceNavigation {
     </p>
   </dd>
   <dt>
-    <dfn data-export>TYPE_BACK_FORWARD</dfn>
+    <dfn data-export oldids="idl-def-performancenavigation-type_back_forward">TYPE_BACK_FORWARD</dfn>
   </dt>
   <dd>
     <p>
@@ -1264,7 +1264,7 @@ interface PerformanceNavigation {
     </p>
   </dd>
   <dt>
-    <dfn data-export>TYPE_RESERVED</dfn>
+    <dfn data-export oldids="idl-def-performancenavigation-type_reserved">TYPE_RESERVED</dfn>
   </dt>
   <dd>
     <p>
@@ -1272,7 +1272,7 @@ interface PerformanceNavigation {
     </p>
   </dd>
   <dt>
-    <dfn data-export>type</dfn>
+    <dfn data-export oldids="idl-def-performancenavigation-type">type</dfn>
   </dt>
   <dd>
     <p>
@@ -1290,7 +1290,7 @@ interface PerformanceNavigation {
     </p>
   </dd>
   <dt>
-    <dfn data-export>redirectCount</dfn>
+    <dfn data-export oldids="idl-def-performancenavigation-redirectcount">redirectCount</dfn>
   </dt>
   <dd>
     <p>
@@ -1302,7 +1302,7 @@ interface PerformanceNavigation {
     </p>
   </dd>
   <dt>
-    <dfn data-export>toJSON()</dfn>
+    <dfn data-export oldids="idl-def-performancenavigation-tojson">toJSON()</dfn>
   </dt>
   <dd>
     Runs the [=default toJSON steps=] for [=this=].
@@ -1313,7 +1313,7 @@ interface PerformanceNavigation {
   Extensions to the <code>Performance</code> interface
 </h3>
 
-<pre class="idl">
+<pre class="idl" id=idl-def-performance-partial-1>
 [Exposed=Window]
 partial interface Performance {
   [SameObject]
@@ -1323,12 +1323,12 @@ partial interface Performance {
 };
 </pre>
 
-The <dfn data-export>Performance</dfn> interface is defined in
+The <dfn data-export oldids="dom-performance">Performance</dfn> interface is defined in
 [[PERFORMANCE-TIMELINE-2]].
 
 <dl data-dfn-for="Performance">
   <dt>
-    <dfn data-export>timing</dfn>
+    <dfn data-export oldids="idl-def-performance-timing">timing</dfn>
   </dt>
   <dd>
     <p>
@@ -1339,7 +1339,7 @@ The <dfn data-export>Performance</dfn> interface is defined in
     </p>
   </dd>
   <dt>
-    <dfn data-export>navigation</dfn>
+    <dfn data-export oldids="idl-def-performance-navigation">navigation</dfn>
   </dt>
   <dd>
     <p>
@@ -1356,3 +1356,5 @@ Thanks to Anne Van Kesteren, Arvind Jain, Boris Zbarsky, Jason Weber,
 Jonas Sicking, James Simonsen, Karen Anderson, Nic Jansma, Philippe Le
 Hegaret, Steve Souders, Todd Reifsteck, Tony Gentilcore, William Chan
 and Zhiheng Wang for their contributions to this work.
+<!-- Keeps ReSpec's #conformance anchor working; Bikeshed's Conformance section is #w3c-conformance. -->
+<div id=conformance></div>
