@@ -5,9 +5,9 @@
   <title>Navigation Timing Level 2</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version ac92c2f0d, updated Fri Aug 21 16:01:29 2026 -0700" name="generator">
+  <meta content="Bikeshed version 49e9fdd4f, updated Tue Oct 13 14:27:53 2026 -0700" name="generator">
   <link href="https://www.w3.org/TR/navigation-timing-2/" rel="canonical">
-  <meta content="245fee24bc57263dc468a2697dc19c86b4f2281e" name="revision">
+  <meta content="48c0048236faf98b9dbbfc09d74a519da5d46284" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -742,7 +742,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 </p>
    <h1 class="no-ref p-name" id="title">Navigation Timing Level 2</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2026-09-01">1 September 2026</time></p>
+    <time class="dt-updated" datetime="2026-11-02">2 November 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -824,7 +824,7 @@ body</a> size information;
       <li><a href="#PerformanceResourceTiming"><span class="secno">3.2</span> <span class="content">Relation to the <code>PerformanceResourceTiming</code> interface</span></a>
       <li>
        <a href="#sec-PerformanceNavigationTiming"><span class="secno">3.3</span> <span class="content">
-  The <span>PerformanceNavigationTiming</span> interface
+  The <span><span class="bs-old-id"></span><span class="bs-old-id"></span>PerformanceNavigationTiming</span> interface
 </span></a>
        <ol class="toc">
         <li><a href="#sec-performance-navigation-types"><span class="secno">3.3.1</span> <span class="content">The <code class="idl"><span>NavigationTimingType</span></code> enum</span></a>
@@ -853,10 +853,10 @@ body</a> size information;
      <a href="#obsolete-heading"><span class="secno">8</span> <span class="content">Obsolete</span></a>
      <ol class="toc">
       <li><a href="#the-performancetiming-interface"><span class="secno">8.1</span> <span class="content">
-  The <span>PerformanceTiming</span> interface
+  The <span><span class="bs-old-id"></span><span class="bs-old-id"></span>PerformanceTiming</span> interface
 </span></a>
       <li><a href="#the-performancenavigation-interface"><span class="secno">8.2</span> <span class="content">
-  The <span>PerformanceNavigation</span> interface
+  The <span><span class="bs-old-id"></span><span class="bs-old-id"></span>PerformanceNavigation</span> interface
 </span></a>
       <li><a href="#extensions-to-the-performance-interface"><span class="secno">8.3</span> <span class="content">
   Extensions to the <code>Performance</code> interface
@@ -895,7 +895,7 @@ latency measurements within an application, in many cases, they are
 unable to provide a complete or detailed end-to-end latency picture.
 For example, the following JavaScript shows a naive attempt to measure
 the time it takes to fully load a page:</p>
-<pre class="example highlight" id="example-naive-timing"><a class="self-link" href="#example-naive-timing"></a><c- p>&lt;</c-><c- f>html</c-><c- p>></c->
+<pre class="example highlight" id="example-naive-timing"><a class="self-link" href="#example-naive-timing"></a><span class="bs-old-id" id="example-1"></span><c- p>&lt;</c-><c- f>html</c-><c- p>></c->
 <c- p>&lt;</c-><c- f>head</c-><c- p>></c->
 <c- p>&lt;</c-><c- f>script</c-> <c- e>type</c-><c- o>=</c-><c- s>"text/javascript"</c-><c- p>></c->
 <c- a>var</c-> start <c- o>=</c-> <c- ow>new</c-> Date<c- p>().</c->getTime<c- p>();</c->
@@ -925,13 +925,13 @@ to the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/weba
    <p>For example, if we know that the response end occurs 100ms after the
 start of navigation, the <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming②">PerformanceNavigationTiming</a></code> data could
 look like so:</p>
-<pre class="example" id="example-data"><a class="self-link" href="#example-data"></a>startTime:           0.000  // start time of the navigation request
+<pre class="example" id="example-data"><a class="self-link" href="#example-data"></a><span class="bs-old-id" id="example-2"></span>startTime:           0.000  // start time of the navigation request
 responseEnd:       100.000  // high resolution time of last received byte
 </pre>
    <p>The following script shows how a developer can use the
 <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming③">PerformanceNavigationTiming</a></code> interface to obtain accurate timing
 data related to the navigation of the document:</p>
-<pre class="example highlight" id="example-navigation-details"><a class="self-link" href="#example-navigation-details"></a><c- p>&lt;</c-><c- f>script</c-><c- p>></c->
+<pre class="example highlight" id="example-navigation-details"><a class="self-link" href="#example-navigation-details"></a><span class="bs-old-id" id="example-3"></span><c- p>&lt;</c-><c- f>script</c-><c- p>></c->
 <c- a>function</c-> showNavigationDetails<c- p>()</c-> <c- p>{</c->
   <c- c1>// Get the first entry</c->
   <c- a>const</c-> <c- p>[</c->entry<c- p>]</c-> <c- o>=</c-> performance<c- p>.</c->getEntriesByType<c- p>(</c-><c- u>"navigation"</c-><c- p>);</c->
@@ -945,7 +945,7 @@ data related to the navigation of the document:</p>
    <p>The construction "a <code>Foo</code> object", where <code>Foo</code> is
 actually an interface, is sometimes used instead of the more accurate
 "an object implementing the interface <code>Foo</code>".</p>
-   <p>The term <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="current-document">current document</dfn> refers to the document associated
+   <p>The term <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="current-document"><span class="bs-old-id" id="dfn-current-document"></span>current document</dfn> refers to the document associated
 with the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window">Window object’s newest
 Document object</a>.</p>
    <p>Throughout this work, all time values are measured in milliseconds
@@ -981,7 +981,7 @@ attributes of <code class="idl"><a data-link-type="idl" href="https://w3c.github
 </p>
    <h3 class="heading settled" data-level="3.2" id="PerformanceResourceTiming"><span class="secno">3.2. </span><span class="content">Relation to the <code>PerformanceResourceTiming</code> interface</span><a class="self-link" href="#PerformanceResourceTiming"></a></h3>
    <p><code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming⑥">PerformanceNavigationTiming</a></code> interface extends the following
-attributes of the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/resource-timing/#performanceresourcetiming" id="ref-for-performanceresourcetiming">PerformanceResourceTiming</a></code>
+attributes of the <span id="dfn-performanceresourcetiming"><code class="idl"><a data-link-type="idl" href="https://w3c.github.io/resource-timing/#performanceresourcetiming" id="ref-for-performanceresourcetiming">PerformanceResourceTiming</a></code></span>
 interface:</p>
    <ul>
     <li>
@@ -1054,7 +1054,7 @@ interface:</p>
   <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming⑦">PerformanceNavigationTiming</a></code> object in the performance timeline.
 </p>
    <h3 class="heading settled" data-dfn-for="PerformanceNavigationTiming" data-level="3.3" id="sec-PerformanceNavigationTiming"><span class="secno">3.3. </span><span class="content">
-  The <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-export id="performancenavigationtiming-performancenavigationtiming">PerformanceNavigationTiming</dfn> interface
+  The <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-export id="performancenavigationtiming-performancenavigationtiming"><span class="bs-old-id" id="idl-def-performancenavigationtiming"></span><span class="bs-old-id" id="dom-performancenavigationtiming"></span>PerformanceNavigationTiming</dfn> interface
 </span><a class="self-link" href="#sec-PerformanceNavigationTiming"></a></h3>
    <div class="note" role="note">
   Checking and retrieving contents from the
@@ -1084,29 +1084,29 @@ interface:</p>
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming⑧">PerformanceNavigationTiming</a></code> has an associated
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#document-load-timing-info" id="ref-for-document-load-timing-info">document load timing info</a> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-document-load-timing">document load timing</dfn>.</p>
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#document-load-timing-info" id="ref-for-document-load-timing-info">document load timing info</a> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-document-load-timing"><span class="bs-old-id" id="dfn-document-load-timing"></span>document load timing</dfn>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming⑨">PerformanceNavigationTiming</a></code> has an associated
-<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#document-unload-timing-info" id="ref-for-document-unload-timing-info">document unload timing info</a> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-previous-document-unload-timing">previous document unload timing</dfn>.</p>
+<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#document-unload-timing-info" id="ref-for-document-unload-timing-info">document unload timing info</a> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-previous-document-unload-timing"><span class="bs-old-id" id="dfn-previous-document-unload-timing"></span>previous document unload timing</dfn>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming①⓪">PerformanceNavigationTiming</a></code> has an associated
-number <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-redirect-count">redirect count</dfn>.</p>
+number <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-redirect-count"><span class="bs-old-id" id="dfn-redirect-count"></span>redirect count</dfn>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming①①">PerformanceNavigationTiming</a></code> has an associated
-<code class="idl"><a data-link-type="idl" href="#enumdef-navigationtimingtype" id="ref-for-enumdef-navigationtimingtype①">NavigationTimingType</a></code> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-navigation-type">navigation type</dfn>.</p>
+<code class="idl"><a data-link-type="idl" href="#enumdef-navigationtimingtype" id="ref-for-enumdef-navigationtimingtype①">NavigationTimingType</a></code> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-navigation-type"><span class="bs-old-id" id="dfn-navigation-type"></span>navigation type</dfn>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming①②">PerformanceNavigationTiming</a></code> has an associated
-<code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#typedefdef-domhighrestimestamp" id="ref-for-typedefdef-domhighrestimestamp①①">DOMHighResTimeStamp</a></code> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-critical-ch-restart-time">`Critical-CH` restart time</dfn>.</p>
+<code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#typedefdef-domhighrestimestamp" id="ref-for-typedefdef-domhighrestimestamp①①">DOMHighResTimeStamp</a></code> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-critical-ch-restart-time"><span class="bs-old-id" id="dfn-critical-ch-restart-time"></span>`Critical-CH` restart time</dfn>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming①③">PerformanceNavigationTiming</a></code> has an associated
-<code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#notrestoredreasons" id="ref-for-notrestoredreasons①">NotRestoredReasons</a></code> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-not-restored-reasons">not restored reasons</dfn>.</p>
+<code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#notrestoredreasons" id="ref-for-notrestoredreasons①">NotRestoredReasons</a></code> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-not-restored-reasons"><span class="bs-old-id" id="dfn-not-restored-reasons"></span>not restored reasons</dfn>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming①④">PerformanceNavigationTiming</a></code> has an associated
-<code class="idl"><a data-link-type="idl" href="#performancetimingconfidence" id="ref-for-performancetimingconfidence①">PerformanceTimingConfidence</a></code> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-confidence-value">confidence value</dfn>.</p>
+<code class="idl"><a data-link-type="idl" href="#performancetimingconfidence" id="ref-for-performancetimingconfidence①">PerformanceTimingConfidence</a></code> <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-confidence-value"><span class="bs-old-id" id="dfn-confidence-value"></span>confidence value</dfn>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming①⑤">PerformanceNavigationTiming</a></code> has an associated real number
-<dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-randomized-trigger-rate">randomized trigger rate</dfn>
+<dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-randomized-trigger-rate"><span class="bs-old-id" id="dfn-randomized-trigger-rate"></span>randomized trigger rate</dfn>
 which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementation-defined" id="ref-for-implementation-defined">implementation-defined</a>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming①⑥">PerformanceNavigationTiming</a></code> has an associated <code class="idl"><a data-link-type="idl" href="#enumdef-performancetimingconfidencevalue" id="ref-for-enumdef-performancetimingconfidencevalue">PerformanceTimingConfidenceValue</a></code>
-<dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-underlying-confidence-value">underlying confidence value</dfn>
+<dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-underlying-confidence-value"><span class="bs-old-id" id="dfn-underlying-confidence-value"></span>underlying confidence value</dfn>
 which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementation-defined" id="ref-for-implementation-defined①">implementation-defined</a>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming①⑦">PerformanceNavigationTiming</a></code> has an associated null or <a data-link-type="dfn" href="https://w3c.github.io/ServiceWorker/#service-worker-timing-info" id="ref-for-service-worker-timing-info">service worker timing info</a>
-<dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-service-worker-timing">service worker timing</dfn>.</p>
+<dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-noexport id="performancenavigationtiming-service-worker-timing"><span class="bs-old-id" id="dfn-service-worker-timing"></span>service worker timing</dfn>.</p>
    <p>
-  The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-unloadeventstart"><code>unloadEventStart</code></dfn> getter steps are to return <var>this</var>’s
+  The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-unloadeventstart"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-unloadeventstart"></span><code>unloadEventStart</code></code></dfn> getter steps are to return <var>this</var>’s
   <a data-link-type="dfn" href="#performancenavigationtiming-previous-document-unload-timing" id="ref-for-performancenavigationtiming-previous-document-unload-timing">previous document unload timing</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#unload-event-start-time" id="ref-for-unload-event-start-time">unload event start time</a>.
 </p>
    <p class="note" role="note">If the previous document and the current document have the same
@@ -1118,7 +1118,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
   zero.
 </p>
    <p>
-  The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-unloadeventend"><code>unloadEventEnd</code></dfn> getter steps are to return <var>this</var>’s
+  The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-unloadeventend"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-unloadeventend"></span><code>unloadEventEnd</code></code></dfn> getter steps are to return <var>this</var>’s
   <a data-link-type="dfn" href="#performancenavigationtiming-previous-document-unload-timing" id="ref-for-performancenavigationtiming-previous-document-unload-timing①">previous document unload timing</a>’s
   <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#unload-event-end-time" id="ref-for-unload-event-end-time">unload event end time</a>.
 </p>
@@ -1131,14 +1131,14 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
   zero.
 </p>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-dominteractive"><code>domInteractive</code></dfn> getter steps are to return
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-dominteractive"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-dominteractive"></span><code>domInteractive</code></code></dfn> getter steps are to return
  <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-document-load-timing" id="ref-for-performancenavigationtiming-document-load-timing">document load timing</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#dom-interactive-time" id="ref-for-dom-interactive-time">DOM interactive time</a>.</p>
    <p class="note" role="note">This timestamp is measured before the user agent sets the
   <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#current-document-readiness" id="ref-for-current-document-readiness">current document readiness</a> to
   <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/parsing.html#the-end" id="ref-for-the-end">"interactive"</a>.
 </p>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-domcontentloadedeventstart"><code>domContentLoadedEventStart</code></dfn> getter steps are to return <var>this</var>’s
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-domcontentloadedeventstart"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-domcontentloadedeventstart"></span><code>domContentLoadedEventStart</code></code></dfn> getter steps are to return <var>this</var>’s
  <a data-link-type="dfn" href="#performancenavigationtiming-document-load-timing" id="ref-for-performancenavigationtiming-document-load-timing①">document load timing</a>’s
  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#dom-content-loaded-event-start-time" id="ref-for-dom-content-loaded-event-start-time">DOM content loaded event start time</a>.</p>
    <p class="note" role="note">This timestamp is measured before the user agent dispatches the
@@ -1146,7 +1146,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
   event.
 </p>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-domcontentloadedeventend"><code>domContentLoadedEventEnd</code></dfn> getter steps are to return
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-domcontentloadedeventend"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-domcontentloadedeventend"></span><code>domContentLoadedEventEnd</code></code></dfn> getter steps are to return
  <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-document-load-timing" id="ref-for-performancenavigationtiming-document-load-timing②">document load timing</a>’s
  <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#dom-content-loaded-event-end-time" id="ref-for-dom-content-loaded-event-end-time">DOM content loaded event end time</a>.</p>
    <p class="note" role="note">This timestamp is measured after the user agent completes handling of the
@@ -1154,7 +1154,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
   event.
 </p>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-domcomplete"><code>domComplete</code></dfn> getter steps are to return
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-domcomplete"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-domcomplete"></span><code>domComplete</code></code></dfn> getter steps are to return
  <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-document-load-timing" id="ref-for-performancenavigationtiming-document-load-timing③">document load timing</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#dom-complete-time" id="ref-for-dom-complete-time">DOM complete time</a>.
 </p>
    <p class="note" role="note">This timestamp is measured before the user agent sets the
@@ -1163,19 +1163,19 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
   definition.
 </p>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-loadeventstart"><code>loadEventStart</code></dfn> getter steps are to return
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-loadeventstart"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-loadeventstart"></span><code>loadEventStart</code></code></dfn> getter steps are to return
  <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-document-load-timing" id="ref-for-performancenavigationtiming-document-load-timing④">document load timing</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#load-event-start-time" id="ref-for-load-event-start-time">load event start time</a>.</p>
    <p class="note" role="note">This timestamp is measured before the user agent dispatches the
   <a href="https://html.spec.whatwg.org/multipage/indices.html#event-load">load</a> event for the document.
 </p>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-loadeventend"><code>loadEventEnd</code></dfn> getter steps are to return
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-loadeventend"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-loadeventend"></span><code>loadEventEnd</code></code></dfn> getter steps are to return
  <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-document-load-timing" id="ref-for-performancenavigationtiming-document-load-timing⑤">document load timing</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/dom.html#load-event-end-time" id="ref-for-load-event-end-time">load event end time</a>.</p>
    <p class="note" role="note">This timestamp is measured after the user agent completes handling the
 <a href="https://html.spec.whatwg.org/multipage/indices.html#event-load">load</a> event for the document.
 </p>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-type"><code>type</code></dfn> getter steps are to run the <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-navigation-type" id="ref-for-performancenavigationtiming-navigation-type">navigation type</a>.
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-type"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-type"></span><code>type</code></code></dfn> getter steps are to run the <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-navigation-type" id="ref-for-performancenavigationtiming-navigation-type">navigation type</a>.
 </p>
    <div class="note" role="note">
     <p>
@@ -1189,10 +1189,10 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
   </p>
    </div>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-redirectcount"><code>redirectCount</code></dfn> getter steps are to return <var>this</var>’s
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-redirectcount"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-redirectcount"></span><code>redirectCount</code></code></dfn> getter steps are to return <var>this</var>’s
  <span>redirect count</span>.</p>
    <p>
-  The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-criticalchrestart"><code>criticalCHRestart</code></dfn> getter steps are to return <var>this</var>’s
+  The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-criticalchrestart"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-criticalchrestart"></span><code>criticalCHRestart</code></code></dfn> getter steps are to return <var>this</var>’s
 <span>`Critical-CH` restart time</span>.</p>
    <div class="note" role="note">
     <p>
@@ -1202,10 +1202,10 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
   </p>
    </div>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-notrestoredreasons"><code>notRestoredReasons</code></dfn> getter steps are to return <var>this</var>’s
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-notrestoredreasons"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-notrestoredreasons"></span><code>notRestoredReasons</code></code></dfn> getter steps are to return <var>this</var>’s
 <span>not restored reasons</span>.</p>
    <p>
- The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-confidence"><code>confidence</code></dfn> getter steps are to run these steps:
+ The <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="attribute" data-export id="dom-performancenavigationtiming-confidence"><code><span class="bs-old-id" id="idl-def-performancenavigationtiming-confidence"></span><code>confidence</code></code></dfn> getter steps are to run these steps:
 </p>
    <ol>
     <li>If <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-document-load-timing" id="ref-for-performancenavigationtiming-document-load-timing⑥">document load timing</a>’s
@@ -1318,8 +1318,8 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
       </ul>
     </ol>
    </div>
-   <p>The <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-export id="performancenavigationtiming-tojson">toJSON()</dfn> method runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this④">this</a>.</p>
-   <h4 class="heading settled" data-level="3.3.1" id="sec-performance-navigation-types"><span class="secno">3.3.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#enumdef-navigationtimingtype" id="ref-for-enumdef-navigationtimingtype②">NavigationTimingType</a></code> enum</span><a class="self-link" href="#sec-performance-navigation-types"></a></h4>
+   <p>The <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-export id="performancenavigationtiming-tojson"><span class="bs-old-id" id="idl-def-performancenavigationtiming-tojson"></span>toJSON()</dfn> method runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this④">this</a>.</p>
+   <h4 class="heading settled" data-level="3.3.1" id="sec-performance-navigation-types"><span class="secno">3.3.1. </span><span class="bs-old-id" id="idl-def-navigationtimingtype"></span><span class="bs-old-id" id="dom-navigationtimingtype"></span><span class="content">The <code class="idl"><a data-link-type="idl" href="#enumdef-navigationtimingtype" id="ref-for-enumdef-navigationtimingtype②">NavigationTimingType</a></code> enum</span><a class="self-link" href="#sec-performance-navigation-types"></a></h4>
 <pre class="def highlight idl"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-navigationtimingtype"><code><c- g>NavigationTimingType</c-></code></dfn> {
     <dfn class="dfn-paneled idl-code" data-dfn-for="NavigationTimingType" data-dfn-type="enum-value" data-export id="dom-navigationtimingtype-navigate"><code><c- s>"navigate"</c-></code></dfn>,
     <dfn class="dfn-paneled idl-code" data-dfn-for="NavigationTimingType" data-dfn-type="enum-value" data-export id="dom-navigationtimingtype-reload"><code><c- s>"reload"</c-></code></dfn>,
@@ -1358,7 +1358,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
   to change it due to backwards compatibility issues with shipped
   implementations. <a data-link-type="biblio" href="#biblio-webidl" title="Web IDL Standard">[WebIDL]</a>
 </p>
-   <h4 class="heading settled" data-level="3.3.2" id="sec-performance-timing-confidence"><span class="secno">3.3.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#performancetimingconfidence" id="ref-for-performancetimingconfidence③">PerformanceTimingConfidence</a></code> interface</span><a class="self-link" href="#sec-performance-timing-confidence"></a></h4>
+   <h4 class="heading settled" data-level="3.3.2" id="sec-performance-timing-confidence"><span class="secno">3.3.2. </span><span class="bs-old-id" id="idl-def-performancetimingconfidence"></span><span class="bs-old-id" id="dom-performancetimingconfidence"></span><span class="content">The <code class="idl"><a data-link-type="idl" href="#performancetimingconfidence" id="ref-for-performancetimingconfidence③">PerformanceTimingConfidence</a></code> interface</span><a class="self-link" href="#sec-performance-timing-confidence"></a></h4>
 <pre class="def highlight idl">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="performancetimingconfidence"><code><c- g>PerformanceTimingConfidence</c-></code></dfn> {
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double"><c- b>double</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="double" href="#dom-performancetimingconfidence-randomizedtriggerrate" id="ref-for-dom-performancetimingconfidence-randomizedtriggerrate③"><c- g>randomizedTriggerRate</c-></a>;
@@ -1368,7 +1368,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
 </pre>
    <dl>
     <dt>
-    <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceTimingConfidence" data-dfn-type="attribute" data-export id="dom-performancetimingconfidence-randomizedtriggerrate"><code>randomizedTriggerRate</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double①">double</a>, readonly</span>
+    <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceTimingConfidence" data-dfn-type="attribute" data-export id="dom-performancetimingconfidence-randomizedtriggerrate"><code><span class="bs-old-id" id="idl-def-performancetimingconfidence-randomizedtriggerrate"></span><code>randomizedTriggerRate</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double①">double</a>, readonly</span>
     <dd>
      <p>
       This attribute must return a real number the interval [0, 1),
@@ -1376,20 +1376,20 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
       confidence <code class="idl"><a data-link-type="idl" href="#dom-performancetimingconfidence-value" id="ref-for-dom-performancetimingconfidence-value④">value</a></code>.
     </p>
     <dt>
-    <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceTimingConfidence" data-dfn-type="attribute" data-export id="dom-performancetimingconfidence-value"><code>value</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-performancetimingconfidencevalue" id="ref-for-enumdef-performancetimingconfidencevalue③">PerformanceTimingConfidenceValue</a>, readonly</span>
+    <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceTimingConfidence" data-dfn-type="attribute" data-export id="dom-performancetimingconfidence-value"><code><span class="bs-old-id" id="idl-def-performancetimingconfidence-value"></span><code>value</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-performancetimingconfidencevalue" id="ref-for-enumdef-performancetimingconfidencevalue③">PerformanceTimingConfidenceValue</a>, readonly</span>
     <dd>
      <p>
       This attribute must return a <code class="idl"><a data-link-type="idl" href="#enumdef-performancetimingconfidencevalue" id="ref-for-enumdef-performancetimingconfidencevalue④">PerformanceTimingConfidenceValue</a></code>.
     </p>
     <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTimingConfidence" data-dfn-type="dfn" data-export id="performancetimingconfidence-tojson">toJSON()</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTimingConfidence" data-dfn-type="dfn" data-export id="performancetimingconfidence-tojson"><span class="bs-old-id" id="idl-def-performancetimingconfidence-tojson"></span>toJSON()</dfn>
   
     <dd>
      <p>
       This method runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps①">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑤">this</a>.
     </p>
    </dl>
-   <h4 class="heading settled" data-level="3.3.3" id="sec-performance-timing-confidence-value"><span class="secno">3.3.3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#enumdef-performancetimingconfidencevalue" id="ref-for-enumdef-performancetimingconfidencevalue⑤">PerformanceTimingConfidenceValue</a></code> enum</span><a class="self-link" href="#sec-performance-timing-confidence-value"></a></h4>
+   <h4 class="heading settled" data-level="3.3.3" id="sec-performance-timing-confidence-value"><span class="secno">3.3.3. </span><span class="bs-old-id" id="idl-def-performancetimingconfidencevalue"></span><span class="bs-old-id" id="dom-performancetimingconfidencevalue"></span><span class="content">The <code class="idl"><a data-link-type="idl" href="#enumdef-performancetimingconfidencevalue" id="ref-for-enumdef-performancetimingconfidencevalue⑤">PerformanceTimingConfidenceValue</a></code> enum</span><a class="self-link" href="#sec-performance-timing-confidence-value"></a></h4>
 <pre class="def highlight idl"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-performancetimingconfidencevalue"><code><c- g>PerformanceTimingConfidenceValue</c-></code></dfn> {
   <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceTimingConfidenceValue" data-dfn-type="enum-value" data-export id="dom-performancetimingconfidencevalue-high"><code><c- s>"high"</c-></code></dfn>,
   <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceTimingConfidenceValue" data-dfn-type="enum-value" data-export id="dom-performancetimingconfidencevalue-low"><code><c- s>"low"</c-></code></dfn>
@@ -1435,7 +1435,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
    </div>
    <h2 class="heading settled" data-level="4" id="process"><span class="secno">4. </span><span class="content">Process</span><a class="self-link" href="#process"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="processing-model"><span class="secno">4.1. </span><span class="content">Processing Model</span><a class="self-link" href="#processing-model"></a></h3>
-   <figure>
+   <figure id="fig-this-figure-illustrates-the-timing-attributes-defined-by-the-performancenavigationtiming-interface-attributes-in-parenthesis-indicate-that-they-may-not-be-available-for-navigations-involving-documents-from-different-origins">
     <figcaption>
     This figure illustrates the timing attributes defined by the
     <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming①⑧">PerformanceNavigationTiming</a></code> interface. Attributes in
@@ -1447,10 +1447,10 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
 
    </figure>
    <h2 class="heading settled" data-level="5" id="marking-navigation-timing"><span class="secno">5. </span><span class="content">Creating a navigation timing entry</span><a class="self-link" href="#marking-navigation-timing"></a></h2>
-   <p>Each <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document">document</a> has an associated <dfn class="dfn-paneled" data-dfn-for="Document" data-dfn-type="dfn" data-noexport id="document-navigation-timing-entry">navigation timing entry</dfn>, initially unset.
+   <p>Each <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-document" id="ref-for-concept-document">document</a> has an associated <dfn class="dfn-paneled" data-dfn-for="Document" data-dfn-type="dfn" data-noexport id="document-navigation-timing-entry"><span class="bs-old-id" id="dfn-navigation-timing-entry"></span>navigation timing entry</dfn>, initially unset.
 
 </p>
-   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="create-the-navigation-timing-entry">create the navigation timing entry</dfn> for <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document">Document</a></code> <var>document</var>,
+   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="create-the-navigation-timing-entry"><span class="bs-old-id" id="dfn-create-the-navigation-timing-entry"></span>create the navigation timing entry</dfn> for <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document">Document</a></code> <var>document</var>,
 given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#fetch-timing-info" id="ref-for-fetch-timing-info">fetch timing info</a> <var>fetchTiming</var>, a number <var>redirectCount</var>, a
 <code class="idl"><a data-link-type="idl" href="#enumdef-navigationtimingtype" id="ref-for-enumdef-navigationtimingtype③">NavigationTimingType</a></code> <var>navigationType</var>, a null or <a data-link-type="dfn" href="https://w3c.github.io/ServiceWorker/#service-worker-timing-info" id="ref-for-service-worker-timing-info①">service worker timing info</a> <var>serviceWorkerTiming</var>,
 a DOMString <var>cacheMode</var>, a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#typedefdef-domhighrestimestamp" id="ref-for-typedefdef-domhighrestimestamp①②">DOMHighResTimeStamp</a></code> <var>criticalCHRestart</var>, and a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#response-body-info" id="ref-for-response-body-info">response body info</a> <var>bodyInfo</var>, do the following:
@@ -1491,7 +1491,7 @@ a DOMString <var>cacheMode</var>, a <code class="idl"><a data-link-type="idl" hr
   <a data-link-type="dfn" href="https://www.w3.org/TR/performance-timeline/#dfn-performance-entry-buffer" id="ref-for-dfn-performance-entry-buffer">performance entry buffer</a>.
 
    </ol>
-   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="queue-the-navigation-timing-entry">queue the navigation timing entry</dfn> for <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document①">Document</a></code> <var>document</var>,
+   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="queue-the-navigation-timing-entry"><span class="bs-old-id" id="dfn-queue-the-navigation-timing-entry"></span>queue the navigation timing entry</dfn> for <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document①">Document</a></code> <var>document</var>,
 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#queue-a-navigation-performanceentry" id="ref-for-queue-a-navigation-performanceentry">queue</a> <var>document</var>’s
 <a data-link-type="dfn" href="#document-navigation-timing-entry" id="ref-for-document-navigation-timing-entry">navigation timing entry</a>.
 
@@ -1550,7 +1550,7 @@ compatibility. Authors should not use the following interfaces and are
 <code class="idl"><a data-link-type="idl" href="#performancenavigationtiming" id="ref-for-performancenavigationtiming②②">PerformanceNavigationTiming</a></code> interface—see <a href="#sotd">summary
 of changes and improvements</a>.</p>
     <h3 class="heading settled" data-dfn-for="PerformanceTiming" data-level="8.1" id="the-performancetiming-interface"><span class="secno">8.1. </span><span class="content">
-  The <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-performancetiming">PerformanceTiming</dfn> interface
+  The <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-performancetiming"><span class="bs-old-id" id="idl-def-performancetiming"></span><span class="bs-old-id" id="dom-performancetiming"></span>PerformanceTiming</dfn> interface
 </span><a class="self-link" href="#the-performancetiming-interface"></a></h3>
 <pre class="def highlight idl">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="performancetiming"><code><c- g>PerformanceTiming</c-></code></dfn> {
@@ -1585,7 +1585,7 @@ of changes and improvements</a>.</p>
 </p>
     <dl>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-navigationstart">navigationStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-navigationstart"><span class="bs-old-id" id="idl-def-performancetiming-navigationstart"></span>navigationStart</dfn>
   
      <dd>
       <p>
@@ -1601,7 +1601,7 @@ of changes and improvements</a>.</p>
       <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#dom-performance-timeorigin" id="ref-for-dom-performance-timeorigin">timeOrigin</a></code> to obtain an equivalent timestamp.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-unloadeventstart">unloadEventStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-unloadeventstart"><span class="bs-old-id" id="idl-def-performancetiming-unloadeventstart"></span>unloadEventStart</dfn>
   
      <dd>
       <p>
@@ -1614,7 +1614,7 @@ of changes and improvements</a>.</p>
       attribute must return zero.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-unloadeventend">unloadEventEnd</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-unloadeventend"><span class="bs-old-id" id="idl-def-performancetiming-unloadeventend"></span>unloadEventEnd</dfn>
   
      <dd>
       <p>
@@ -1634,7 +1634,7 @@ of changes and improvements</a>.</p>
       <code class="idl"><a data-link-type="idl" href="#dom-performancetiming-unloadeventend" id="ref-for-dom-performancetiming-unloadeventend">unloadEventEnd</a></code> must return zero.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-redirectstart">redirectStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-redirectstart"><span class="bs-old-id" id="idl-def-performancetiming-redirectstart"></span>redirectStart</dfn>
   
      <dd>
       <p>
@@ -1646,7 +1646,7 @@ of changes and improvements</a>.</p>
       return zero.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-redirectend">redirectEnd</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-redirectend"><span class="bs-old-id" id="idl-def-performancetiming-redirectend"></span>redirectEnd</dfn>
   
      <dd>
       <p>
@@ -1658,7 +1658,7 @@ of changes and improvements</a>.</p>
       return zero.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-fetchstart">fetchStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-fetchstart"><span class="bs-old-id" id="idl-def-performancetiming-fetchstart"></span>fetchStart</dfn>
   
      <dd>
       <p>
@@ -1672,7 +1672,7 @@ of changes and improvements</a>.</p>
       resource.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domainlookupstart">domainLookupStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domainlookupstart"><span class="bs-old-id" id="idl-def-performancetiming-domainlookupstart"></span>domainLookupStart</dfn>
   
      <dd>
       <p>
@@ -1685,7 +1685,7 @@ of changes and improvements</a>.</p>
       <code class="idl"><a data-link-type="idl" href="#dom-performancetiming-fetchstart" id="ref-for-dom-performancetiming-fetchstart①">fetchStart</a></code>.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domainlookupend">domainLookupEnd</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domainlookupend"><span class="bs-old-id" id="idl-def-performancetiming-domainlookupend"></span>domainLookupEnd</dfn>
   
      <dd>
       <p>
@@ -1714,7 +1714,7 @@ of changes and improvements</a>.</p>
       retrieval from the cache.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-connectstart">connectStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-connectstart"><span class="bs-old-id" id="idl-def-performancetiming-connectstart"></span>connectStart</dfn>
   
      <dd>
       <p>
@@ -1727,7 +1727,7 @@ of changes and improvements</a>.</p>
       <code class="idl"><a data-link-type="idl" href="#dom-performancetiming-domainlookupend" id="ref-for-dom-performancetiming-domainlookupend">domainLookupEnd</a></code>.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-connectend">connectEnd</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-connectend"><span class="bs-old-id" id="idl-def-performancetiming-connectend"></span>connectEnd</dfn>
   
      <dd>
       <p>
@@ -1752,7 +1752,7 @@ of changes and improvements</a>.</p>
       interval such as SSL handshake and SOCKS authentication.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-secureconnectionstart">secureConnectionStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-secureconnectionstart"><span class="bs-old-id" id="idl-def-performancetiming-secureconnectionstart"></span>secureConnectionStart</dfn>
   
      <dd>
       <p>
@@ -1765,7 +1765,7 @@ of changes and improvements</a>.</p>
       not used, this attribute must return zero.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-requeststart">requestStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-requeststart"><span class="bs-old-id" id="idl-def-performancetiming-requeststart"></span>requestStart</dfn>
   
      <dd>
       <p>
@@ -1798,7 +1798,7 @@ of changes and improvements</a>.</p>
        </ul>
       </div>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-responsestart">responseStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-responsestart"><span class="bs-old-id" id="idl-def-performancetiming-responsestart"></span>responseStart</dfn>
   
      <dd>
       <p>
@@ -1808,7 +1808,7 @@ of changes and improvements</a>.</p>
       resources.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-responseend">responseEnd</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-responseend"><span class="bs-old-id" id="idl-def-performancetiming-responseend"></span>responseEnd</dfn>
   
      <dd>
       <p>
@@ -1820,7 +1820,7 @@ of changes and improvements</a>.</p>
       local resources.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domloading">domLoading</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domloading"><span class="bs-old-id" id="idl-def-performancetiming-domloading"></span>domLoading</dfn>
   
      <dd>
       <p>
@@ -1835,7 +1835,7 @@ of changes and improvements</a>.</p>
       be used in meaningful metrics.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-dominteractive">domInteractive</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-dominteractive"><span class="bs-old-id" id="idl-def-performancetiming-dominteractive"></span>domInteractive</dfn>
   
      <dd>
       <p>
@@ -1844,7 +1844,7 @@ of changes and improvements</a>.</p>
       readiness</a> to <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/parsing.html#the-end" id="ref-for-the-end②">"interactive"</a>.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domcontentloadedeventstart">domContentLoadedEventStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domcontentloadedeventstart"><span class="bs-old-id" id="idl-def-performancetiming-domcontentloadedeventstart"></span>domContentLoadedEventStart</dfn>
   
      <dd>
       <p>
@@ -1853,7 +1853,7 @@ of changes and improvements</a>.</p>
       DOMContentLoaded event</a> at the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document②">Document</a></code>.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domcontentloadedeventend">domContentLoadedEventEnd</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domcontentloadedeventend"><span class="bs-old-id" id="idl-def-performancetiming-domcontentloadedeventend"></span>domContentLoadedEventEnd</dfn>
   
      <dd>
       <p>
@@ -1861,7 +1861,7 @@ of changes and improvements</a>.</p>
       document’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/parsing.html#the-end" id="ref-for-the-end④">DOMContentLoaded event</a> completes.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domcomplete">domComplete</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-domcomplete"><span class="bs-old-id" id="idl-def-performancetiming-domcomplete"></span>domComplete</dfn>
   
      <dd>
       <p>
@@ -1881,7 +1881,7 @@ of changes and improvements</a>.</p>
       change.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-loadeventstart">loadEventStart</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-loadeventstart"><span class="bs-old-id" id="idl-def-performancetiming-loadeventstart"></span>loadEventStart</dfn>
   
      <dd>
       <p>
@@ -1890,7 +1890,7 @@ of changes and improvements</a>.</p>
       the load event is not fired yet.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-loadeventend">loadEventEnd</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-loadeventend"><span class="bs-old-id" id="idl-def-performancetiming-loadeventend"></span>loadEventEnd</dfn>
   
      <dd>
       <p>
@@ -1899,14 +1899,14 @@ of changes and improvements</a>.</p>
       event is not fired or is not completed.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-tojson">toJSON()</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-tojson"><span class="bs-old-id" id="idl-def-performancetiming-tojson"></span>toJSON()</dfn>
   
      <dd>
     Runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps②">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑥">this</a>.
   
     </dl>
     <h3 class="heading settled" data-dfn-for="PerformanceNavigation" data-level="8.2" id="the-performancenavigation-interface"><span class="secno">8.2. </span><span class="content">
-  The <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-performancenavigation">PerformanceNavigation</dfn> interface
+  The <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-performancenavigation"><span class="bs-old-id" id="idl-def-performancenavigation"></span><span class="bs-old-id" id="dom-performancenavigation"></span>PerformanceNavigation</dfn> interface
 </span><a class="self-link" href="#the-performancenavigation-interface"></a></h3>
 <pre class="def highlight idl">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed③"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="performancenavigation"><code><c- g>PerformanceNavigation</c-></code></dfn> {
@@ -1921,7 +1921,7 @@ of changes and improvements</a>.</p>
 </pre>
     <dl>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type_navigate">TYPE_NAVIGATE</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type_navigate"><span class="bs-old-id" id="idl-def-performancenavigation-type_navigate"></span>TYPE_NAVIGATE</dfn>
   
      <dd>
       <p>
@@ -1932,7 +1932,7 @@ of changes and improvements</a>.</p>
       <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#hh-replace" id="ref-for-hh-replace①">"replace"</a>.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type_reload">TYPE_RELOAD</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type_reload"><span class="bs-old-id" id="idl-def-performancenavigation-type_reload"></span>TYPE_RELOAD</dfn>
   
      <dd>
       <p>
@@ -1942,7 +1942,7 @@ of changes and improvements</a>.</p>
       <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#hh-reload" id="ref-for-hh-reload">"reload"</a>.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type_back_forward">TYPE_BACK_FORWARD</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type_back_forward"><span class="bs-old-id" id="idl-def-performancenavigation-type_back_forward"></span>TYPE_BACK_FORWARD</dfn>
   
      <dd>
       <p>
@@ -1952,14 +1952,14 @@ of changes and improvements</a>.</p>
       <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#hh-entry-update" id="ref-for-hh-entry-update">"entry update"</a>.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type_reserved">TYPE_RESERVED</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type_reserved"><span class="bs-old-id" id="idl-def-performancenavigation-type_reserved"></span>TYPE_RESERVED</dfn>
   
      <dd>
       <p>
       Any navigation types not defined by values above.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type">type</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-type"><span class="bs-old-id" id="idl-def-performancenavigation-type"></span>type</dfn>
   
      <dd>
       <p>
@@ -1976,7 +1976,7 @@ of changes and improvements</a>.</p>
       <code>TYPE_NAVIGATE</code> if navigating to a new URL.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-redirectcount">redirectCount</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-redirectcount"><span class="bs-old-id" id="idl-def-performancenavigation-redirectcount"></span>redirectCount</dfn>
   
      <dd>
       <p>
@@ -1987,7 +1987,7 @@ of changes and improvements</a>.</p>
       destination document, this attribute must return zero.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-tojson">toJSON()</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-tojson"><span class="bs-old-id" id="idl-def-performancenavigation-tojson"></span>toJSON()</dfn>
   
      <dd>
     Runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps③">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑦">this</a>.
@@ -1996,7 +1996,7 @@ of changes and improvements</a>.</p>
     <h3 class="heading settled" data-dfn-for="Performance" data-level="8.3" id="extensions-to-the-performance-interface"><span class="secno">8.3. </span><span class="content">
   Extensions to the <code>Performance</code> interface
 </span><a class="self-link" href="#extensions-to-the-performance-interface"></a></h3>
-<pre class="def highlight idl">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed④"><c- g>Exposed</c-></a>=<c- n>Window</c->]
+<pre class="def highlight idl" id="idl-def-performance-partial-1">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed④"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://w3c.github.io/hr-time/#performance" id="ref-for-performance"><c- g>Performance</c-></a> {
   [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-SameObject"><c- g>SameObject</c-></a>]
   <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="#performancetiming" id="ref-for-performancetiming"><c- n>PerformanceTiming</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Performance" data-dfn-type="attribute" data-export data-readonly data-type="PerformanceTiming" id="dom-performance-timing"><code><c- g>timing</c-></code></dfn>;
@@ -2004,11 +2004,11 @@ of changes and improvements</a>.</p>
   <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="#performancenavigation" id="ref-for-performancenavigation"><c- n>PerformanceNavigation</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Performance" data-dfn-type="attribute" data-export data-readonly data-type="PerformanceNavigation" id="dom-performance-navigation"><code><c- g>navigation</c-></code></dfn>;
 };
 </pre>
-    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="performance">Performance</dfn> interface is defined in
+    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="performance"><span class="bs-old-id" id="dom-performance"></span>Performance</dfn> interface is defined in
 <a data-link-type="biblio" href="#biblio-performance-timeline-2" title="Performance Timeline">[PERFORMANCE-TIMELINE-2]</a>.</p>
     <dl>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="Performance" data-dfn-type="dfn" data-export id="performance-timing">timing</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="Performance" data-dfn-type="dfn" data-export id="performance-timing"><span class="bs-old-id" id="idl-def-performance-timing"></span>timing</dfn>
   
      <dd>
       <p>
@@ -2018,7 +2018,7 @@ of changes and improvements</a>.</p>
       <code>PerformanceTiming</code> interface.
     </p>
      <dt>
-    <dfn class="dfn-paneled" data-dfn-for="Performance" data-dfn-type="dfn" data-export id="performance-navigation">navigation</dfn>
+    <dfn class="dfn-paneled" data-dfn-for="Performance" data-dfn-type="dfn" data-export id="performance-navigation"><span class="bs-old-id" id="idl-def-performance-navigation"></span>navigation</dfn>
   
      <dd>
       <p>
@@ -2032,6 +2032,7 @@ of changes and improvements</a>.</p>
 Jonas Sicking, James Simonsen, Karen Anderson, Nic Jansma, Philippe Le
 Hegaret, Steve Souders, Todd Reifsteck, Tony Gentilcore, William Chan
 and Zhiheng Wang for their contributions to this work.</p>
+   <div id="conformance"></div>
   </main>
   <div data-fill-with="conformance">
    <h2 class="heading no-num no-ref settled" id="w3c-conformance"><span class="content">Conformance</span><a class="self-link" href="#w3c-conformance"></a></h2>
