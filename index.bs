@@ -440,7 +440,7 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
 <a href="https://html.spec.whatwg.org/multipage/indices.html#event-load">load</a> event for the document.
 </p>
 <p data-dfn-for='PerformanceNavigationTiming'>
- The <dfn attribute oldids="idl-def-performancenavigationtiming-type">type</dfn> getter steps are to run the |this|'s [=navigation type=].
+ The <dfn attribute oldids="idl-def-performancenavigationtiming-type">type</dfn> getter steps are to return |this|'s [=navigation type=].
 </p>
 <div class="note">
   <p>
