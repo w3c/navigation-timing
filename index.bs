@@ -268,7 +268,7 @@ interface:
   <li>The {{PerformanceResourceTiming/workerStart}} getter steps are to perform the following steps:
     <ol>
       <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
-      <li>If |workerTiming| is null, then return |this|'s prototype's `workerStart`.
+      <li>If |workerTiming| is null, then return the result of running the {{PerformanceResourceTiming/workerStart}} getter steps with [=this=] as the receiver.
       <li>Return |workerTiming|'s [=service worker timing info/start time=].
     </ol>
     <p class="note">
@@ -283,7 +283,7 @@ interface:
   <li>The {{PerformanceResourceTiming/fetchStart}} getter steps are to perform the following steps:
     <ol>
       <li>Let |workerTiming| be |this|'s [=PerformanceNavigationTiming/service worker timing=].
-      <li>If |workerTiming| is null, then return |this|'s prototype's `fetchStart`.
+      <li>If |workerTiming| is null, then return the result of running the {{PerformanceResourceTiming/fetchStart}} getter steps with [=this=] as the receiver.
       <li>Return |workerTiming|'s [=service worker timing info/fetch event dispatch time=].
     </ol>
     <p class="note">
