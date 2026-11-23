@@ -5,9 +5,9 @@
   <title>Navigation Timing Level 2</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 49e9fdd4f, updated Tue Oct 13 14:27:53 2026 -0700" name="generator">
+  <meta content="Bikeshed version e0b165ae4, updated Mon Nov 2 15:16:49 2026 -0800" name="generator">
   <link href="https://www.w3.org/TR/navigation-timing-2/" rel="canonical">
-  <meta content="48c0048236faf98b9dbbfc09d74a519da5d46284" name="revision">
+  <meta content="200d0cb5780b873eef301081f62c55bece0dc4b4" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -372,14 +372,17 @@ figure.table figcaption:not(.no-marker)::before {
     height: auto;
     max-height: 500px;
     overflow: auto;
+    margin: 0;
     padding: 0.5em 0.75em;
     font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
     background: var(--dfnpanel-bg);
     color: var(--dfnpanel-text);
     border: outset 0.2em;
     white-space: normal; /* in case it's moved into a pre */
+    inset: auto;
+    position-area: bottom span-right;
+    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
 }
-.dfn-panel:not(.on) { display: none; }
 .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
 .dfn-panel > b { display: block; }
 .dfn-panel a { color: var(--dfnpanel-text); }
@@ -399,6 +402,9 @@ figure.table figcaption:not(.no-marker)::before {
 .dfn-panel.activated {
     display: inline-block;
     position: fixed;
+    position-area: none;
+    top: auto;
+    right: auto;
     left: 8px;
     bottom: 2em;
     margin: 0 auto;
@@ -455,7 +461,8 @@ figure.table figcaption:not(.no-marker)::before {
     opacity: 1;
 }
 
-.dfn-paneled[role="button"] { cursor: help; }
+.dfn-paneled { cursor: help; }
+.dfn-paneled > .dfn-panelbutton { all: unset; }
 
 .highlighted {
     animation: target-fade 3s;
@@ -742,7 +749,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 </p>
    <h1 class="no-ref p-name" id="title">Navigation Timing Level 2</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>,
-    <time class="dt-updated" datetime="2026-11-02">2 November 2026</time></p>
+    <time class="dt-updated" datetime="2026-11-23">23 November 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1013,7 +1020,7 @@ interface:</p>
      <ol>
       <li>Let <var>workerTiming</var> be <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-service-worker-timing" id="ref-for-performancenavigationtiming-service-worker-timing">service worker timing</a>.
       
-      <li>If <var>workerTiming</var> is null, then return <var>this</var>’s prototype’s `workerStart`.
+      <li>If <var>workerTiming</var> is null, then return the result of running the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-workerstart" id="ref-for-dom-performanceresourcetiming-workerstart①">workerStart</a></code> getter steps with <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①">this</a> as the receiver.
       
       <li>Return <var>workerTiming</var>’s <a data-link-type="dfn" href="https://w3c.github.io/ServiceWorker/#service-worker-timing-info-start-time" id="ref-for-service-worker-timing-info-start-time">start time</a>.
     
@@ -1032,7 +1039,7 @@ interface:</p>
      <ol>
       <li>Let <var>workerTiming</var> be <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-service-worker-timing" id="ref-for-performancenavigationtiming-service-worker-timing①">service worker timing</a>.
       
-      <li>If <var>workerTiming</var> is null, then return <var>this</var>’s prototype’s `fetchStart`.
+      <li>If <var>workerTiming</var> is null, then return the result of running the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-fetchstart" id="ref-for-dom-performanceresourcetiming-fetchstart①">fetchStart</a></code> getter steps with <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this②">this</a> as the receiver.
       
       <li>Return <var>workerTiming</var>’s <a data-link-type="dfn" href="https://w3c.github.io/ServiceWorker/#service-worker-timing-info-fetch-event-dispatch-time" id="ref-for-service-worker-timing-info-fetch-event-dispatch-time">fetch event dispatch time</a>.
     
@@ -1213,7 +1220,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
     <li>If <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-confidence-value" id="ref-for-performancenavigationtiming-confidence-value">confidence value</a> is not null,
   return it.
     <li>Let <var>confidence</var> be a new <code class="idl"><a data-link-type="idl" href="#performancetimingconfidence" id="ref-for-performancetimingconfidence②">PerformanceTimingConfidence</a></code> object created in
-  <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①">this</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object①">relevant settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm">relevant realm</a>.
+  <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this③">this</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object①">relevant settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm">relevant realm</a>.
     <li>Set <var>confidence</var>’s <code class="idl"><a data-link-type="idl" href="#dom-performancetimingconfidence-randomizedtriggerrate" id="ref-for-dom-performancetimingconfidence-randomizedtriggerrate">randomizedTriggerRate</a></code> to
   <var>this</var>’s <a data-link-type="dfn" href="#performancenavigationtiming-randomized-trigger-rate" id="ref-for-performancenavigationtiming-randomized-trigger-rate">randomized trigger rate</a>.
     <li>
@@ -1221,7 +1228,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
     
      <ol>
       <li>Let <var>p</var> be <var>confidence</var>’s <code class="idl"><a data-link-type="idl" href="#dom-performancetimingconfidence-randomizedtriggerrate" id="ref-for-dom-performancetimingconfidence-randomizedtriggerrate①">randomizedTriggerRate</a></code>.
-      <li>Let <var>underlying</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this②">this</a>’s <a data-link-type="dfn" href="#performancenavigationtiming-underlying-confidence-value" id="ref-for-performancenavigationtiming-underlying-confidence-value">underlying confidence value</a>, a
+      <li>Let <var>underlying</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this④">this</a>’s <a data-link-type="dfn" href="#performancenavigationtiming-underlying-confidence-value" id="ref-for-performancenavigationtiming-underlying-confidence-value">underlying confidence value</a>, a
       <code class="idl"><a data-link-type="idl" href="#enumdef-performancetimingconfidencevalue" id="ref-for-enumdef-performancetimingconfidencevalue①">PerformanceTimingConfidenceValue</a></code>.
       <li>Let <var>r</var> be a real number drawn uniformly at random from the interval [0, 1).
       <li>If <var>r</var> > or equal <var>p</var>, return <var>underlying</var>.
@@ -1238,7 +1245,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
    </ol>
    <div class="note" role="note">
     <p>
-    These values <span class="allow-2119">should</span> be set once, and not change for the lifetime of <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this③">this</a>.
+    These values <span class="allow-2119">should</span> be set once, and not change for the lifetime of <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑤">this</a>.
   </p>
    </div>
    <div class="note" role="note">
@@ -1318,7 +1325,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
       </ul>
     </ol>
    </div>
-   <p>The <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-export id="performancenavigationtiming-tojson"><span class="bs-old-id" id="idl-def-performancenavigationtiming-tojson"></span>toJSON()</dfn> method runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this④">this</a>.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigationTiming" data-dfn-type="dfn" data-export id="performancenavigationtiming-tojson"><span class="bs-old-id" id="idl-def-performancenavigationtiming-tojson"></span>toJSON()</dfn> method runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑥">this</a>.</p>
    <h4 class="heading settled" data-level="3.3.1" id="sec-performance-navigation-types"><span class="secno">3.3.1. </span><span class="bs-old-id" id="idl-def-navigationtimingtype"></span><span class="bs-old-id" id="dom-navigationtimingtype"></span><span class="content">The <code class="idl"><a data-link-type="idl" href="#enumdef-navigationtimingtype" id="ref-for-enumdef-navigationtimingtype②">NavigationTimingType</a></code> enum</span><a class="self-link" href="#sec-performance-navigation-types"></a></h4>
 <pre class="def highlight idl"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-navigationtimingtype"><code><c- g>NavigationTimingType</c-></code></dfn> {
     <dfn class="dfn-paneled idl-code" data-dfn-for="NavigationTimingType" data-dfn-type="enum-value" data-export id="dom-navigationtimingtype-navigate"><code><c- s>"navigate"</c-></code></dfn>,
@@ -1386,7 +1393,7 @@ which is <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementa
   
     <dd>
      <p>
-      This method runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps①">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑤">this</a>.
+      This method runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps①">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑦">this</a>.
     </p>
    </dl>
    <h4 class="heading settled" data-level="3.3.3" id="sec-performance-timing-confidence-value"><span class="secno">3.3.3. </span><span class="bs-old-id" id="idl-def-performancetimingconfidencevalue"></span><span class="bs-old-id" id="dom-performancetimingconfidencevalue"></span><span class="content">The <code class="idl"><a data-link-type="idl" href="#enumdef-performancetimingconfidencevalue" id="ref-for-enumdef-performancetimingconfidencevalue⑤">PerformanceTimingConfidenceValue</a></code> enum</span><a class="self-link" href="#sec-performance-timing-confidence-value"></a></h4>
@@ -1902,7 +1909,7 @@ of changes and improvements</a>.</p>
     <dfn class="dfn-paneled" data-dfn-for="PerformanceTiming" data-dfn-type="dfn" data-export id="performancetiming-tojson"><span class="bs-old-id" id="idl-def-performancetiming-tojson"></span>toJSON()</dfn>
   
      <dd>
-    Runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps②">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑥">this</a>.
+    Runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps②">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑧">this</a>.
   
     </dl>
     <h3 class="heading settled" data-dfn-for="PerformanceNavigation" data-level="8.2" id="the-performancenavigation-interface"><span class="secno">8.2. </span><span class="content">
@@ -1990,7 +1997,7 @@ of changes and improvements</a>.</p>
     <dfn class="dfn-paneled" data-dfn-for="PerformanceNavigation" data-dfn-type="dfn" data-export id="performancenavigation-tojson"><span class="bs-old-id" id="idl-def-performancenavigation-tojson"></span>toJSON()</dfn>
   
      <dd>
-    Runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps③">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑦">this</a>.
+    Runs the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#default-tojson-steps" id="ref-for-default-tojson-steps③">default toJSON steps</a> for <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑨">this</a>.
   
     </dl>
     <h3 class="heading settled" data-dfn-for="Performance" data-level="8.3" id="extensions-to-the-performance-interface"><span class="secno">8.3. </span><span class="content">
@@ -2811,15 +2818,15 @@ let dfnPanelData = {
 "3c75104d": {"dfnID":"3c75104d","dfnText":"apply the history step","external":true,"refSections":[{"refs":[{"id":"ref-for-apply-the-history-step"}],"title":"3.3.1. The NavigationTimingType enum"}],"url":"https://html.spec.whatwg.org/multipage/browsing-the-web.html#apply-the-history-step"},
 "3ce53adc": {"dfnID":"3ce53adc","dfnText":"not restored reasons","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-document-nrr"}],"title":"5. Creating a navigation timing entry"}],"url":"https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-nrr"},
 "3cf17585": {"dfnID":"3cf17585","dfnText":"requestStart","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceresourcetiming-requeststart"}],"title":"3.3. \n  The PerformanceNavigationTiming interface\n"}],"url":"https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-requeststart"},
-"4013a022": {"dfnID":"4013a022","dfnText":"this","external":true,"refSections":[{"refs":[{"id":"ref-for-this"}],"title":"3.1. Relation to the PerformanceEntry interface"},{"refs":[{"id":"ref-for-this\u2460"},{"id":"ref-for-this\u2461"},{"id":"ref-for-this\u2462"},{"id":"ref-for-this\u2463"}],"title":"3.3. \n  The PerformanceNavigationTiming interface\n"},{"refs":[{"id":"ref-for-this\u2464"}],"title":"3.3.2. The PerformanceTimingConfidence interface"},{"refs":[{"id":"ref-for-this\u2465"}],"title":"8.1. \n  The PerformanceTiming interface\n"},{"refs":[{"id":"ref-for-this\u2466"}],"title":"8.2. \n  The PerformanceNavigation interface\n"}],"url":"https://webidl.spec.whatwg.org/#this"},
+"4013a022": {"dfnID":"4013a022","dfnText":"this","external":true,"refSections":[{"refs":[{"id":"ref-for-this"}],"title":"3.1. Relation to the PerformanceEntry interface"},{"refs":[{"id":"ref-for-this\u2460"},{"id":"ref-for-this\u2461"}],"title":"3.2. Relation to the PerformanceResourceTiming interface"},{"refs":[{"id":"ref-for-this\u2462"},{"id":"ref-for-this\u2463"},{"id":"ref-for-this\u2464"},{"id":"ref-for-this\u2465"}],"title":"3.3. \n  The PerformanceNavigationTiming interface\n"},{"refs":[{"id":"ref-for-this\u2466"}],"title":"3.3.2. The PerformanceTimingConfidence interface"},{"refs":[{"id":"ref-for-this\u2467"}],"title":"8.1. \n  The PerformanceTiming interface\n"},{"refs":[{"id":"ref-for-this\u2468"}],"title":"8.2. \n  The PerformanceNavigation interface\n"}],"url":"https://webidl.spec.whatwg.org/#this"},
 "40df8c1c": {"dfnID":"40df8c1c","dfnText":"current document readiness","external":true,"refSections":[{"refs":[{"id":"ref-for-current-document-readiness"},{"id":"ref-for-current-document-readiness\u2460"},{"id":"ref-for-current-document-readiness\u2461"}],"title":"3.3. \n  The PerformanceNavigationTiming interface\n"},{"refs":[{"id":"ref-for-current-document-readiness\u2462"},{"id":"ref-for-current-document-readiness\u2463"},{"id":"ref-for-current-document-readiness\u2464"},{"id":"ref-for-current-document-readiness\u2465"},{"id":"ref-for-current-document-readiness\u2466"},{"id":"ref-for-current-document-readiness\u2467"}],"title":"8.1. \n  The PerformanceTiming interface\n"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#current-document-readiness"},
-"413a6ece": {"dfnID":"413a6ece","dfnText":"fetchStart","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceresourcetiming-fetchstart"}],"title":"3.2. Relation to the PerformanceResourceTiming interface"}],"url":"https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-fetchstart"},
+"413a6ece": {"dfnID":"413a6ece","dfnText":"fetchStart","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceresourcetiming-fetchstart"},{"id":"ref-for-dom-performanceresourcetiming-fetchstart\u2460"}],"title":"3.2. Relation to the PerformanceResourceTiming interface"}],"url":"https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-fetchstart"},
 "4435c177": {"dfnID":"4435c177","dfnText":"concept-url-scheme","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-url-scheme"}],"title":"8.1. \n  The PerformanceTiming interface\n"}],"url":"https://url.spec.whatwg.org/#concept-url-scheme"},
 "447a3f0c": {"dfnID":"447a3f0c","dfnText":"DOMContentLoaded","external":true,"refSections":[{"refs":[{"id":"ref-for-the-end:event-domcontentloaded"},{"id":"ref-for-the-end:event-domcontentloaded\u2460"}],"title":"3.3. \n  The PerformanceNavigationTiming interface\n"}],"url":"https://html.spec.whatwg.org/multipage/parsing.html#the-end:event-domcontentloaded"},
 "450958f7": {"dfnID":"450958f7","dfnText":"unsigned short","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-unsigned-short"}],"title":"3.3. \n  The PerformanceNavigationTiming interface\n"},{"refs":[{"id":"ref-for-idl-unsigned-short\u2460"},{"id":"ref-for-idl-unsigned-short\u2461"},{"id":"ref-for-idl-unsigned-short\u2462"},{"id":"ref-for-idl-unsigned-short\u2463"},{"id":"ref-for-idl-unsigned-short\u2464"},{"id":"ref-for-idl-unsigned-short\u2465"}],"title":"8.2. \n  The PerformanceNavigation interface\n"}],"url":"https://webidl.spec.whatwg.org/#idl-unsigned-short"},
 "48a44355": {"dfnID":"48a44355","dfnText":"document load timing info","external":true,"refSections":[{"refs":[{"id":"ref-for-document-load-timing-info"}],"title":"3.3. \n  The PerformanceNavigationTiming interface\n"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#document-load-timing-info"},
 "4eb8f82a": {"dfnID":"4eb8f82a","dfnText":"service worker timing info","external":true,"refSections":[{"refs":[{"id":"ref-for-service-worker-timing-info"}],"title":"3.3. \n  The PerformanceNavigationTiming interface\n"},{"refs":[{"id":"ref-for-service-worker-timing-info\u2460"}],"title":"5. Creating a navigation timing entry"}],"url":"https://w3c.github.io/ServiceWorker/#service-worker-timing-info"},
-"4ef598f5": {"dfnID":"4ef598f5","dfnText":"workerStart","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceresourcetiming-workerstart"}],"title":"3.2. Relation to the PerformanceResourceTiming interface"}],"url":"https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-workerstart"},
+"4ef598f5": {"dfnID":"4ef598f5","dfnText":"workerStart","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-performanceresourcetiming-workerstart"},{"id":"ref-for-dom-performanceresourcetiming-workerstart\u2460"}],"title":"3.2. Relation to the PerformanceResourceTiming interface"}],"url":"https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-workerstart"},
 "5192865e": {"dfnID":"5192865e","dfnText":"update the session history with the new page","external":true,"refSections":[{"refs":[{"id":"ref-for-update-the-session-history-with-the-new-page"}],"title":"6.1. Information disclosure"},{"refs":[{"id":"ref-for-update-the-session-history-with-the-new-page\u2460"}],"title":"7. Security Considerations"}],"url":"https://html.spec.whatwg.org/multipage/#update-the-session-history-with-the-new-page"},
 "5991ccfb": {"dfnID":"5991ccfb","dfnText":"relevant realm","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-relevant-realm"}],"title":"3.3. \n  The PerformanceNavigationTiming interface\n"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm"},
 "5a84ded6": {"dfnID":"5a84ded6","dfnText":"URL","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-document-url"}],"title":"5. Creating a navigation timing entry"}],"url":"https://dom.spec.whatwg.org/#dom-document-url"},
@@ -2994,16 +3001,6 @@ let dfnPanelData = {
 
 document.addEventListener("DOMContentLoaded", ()=>{
     genAllDfnPanels();
-
-    document.body.addEventListener("click", (e) => {
-        // If not handled already, just hide all dfn panels.
-        hideAllDfnPanels();
-    });
-});
-
-window.addEventListener("resize", () => {
-    // Pin any visible dfn panel
-    queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>positionDfnPanel(el));
 });
 
 function genAllDfnPanels() {
@@ -3015,16 +3012,17 @@ function genAllDfnPanels() {
             continue;
         }
         dfn.panelData = panelData;
-        insertDfnPopupAction(dfn);
+        genDfnPanel(dfn, panelData);
     }
 }
 
 function genDfnPanel(dfn, { dfnID, url, dfnText, refSections, external }) {
-    const dfnPanel = mk.aside({
-        class: "dfn-panel on",
+    const dfnPanel = mk.dialog({
+        class: "dfn-panel",
         id: `infopanel-for-${dfnID}`,
+        popover: "hint",
         "data-for": dfnID,
-        "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+        "aria-labelledby": `infopaneltitle-for-${dfnID}`,
         },
         mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
             `Info about the '${dfnText}' ${external?"external":""} reference.`),
@@ -3056,106 +3054,34 @@ function genDfnPanel(dfn, { dfnID, url, dfnText, refSections, external }) {
         event.stopPropagation();
         refocusOnTarget(event);
     });
-    dfnPanel.addEventListener('keydown', (event) => {
-        if(event.keyCode == 27) { // Escape key
-            hideDfnPanel({dfnPanel});
-            event.stopPropagation();
-            event.preventDefault();
+
+    dfnPanel.addEventListener('toggle', event=>{
+        if(event.newState == "closed") {
+            unpinDfnPanel(dfnPanel);
         }
     });
 
     dfnPanel.dfn = dfn;
     dfn.dfnPanel = dfnPanel;
+    dfn.after(dfnPanel);
+    const button = mk.button(
+        {
+            class:"dfn-panelbutton",
+            "popovertarget":dfnPanel.id
+        },
+        ...dfn.childNodes
+    );
+    dfn.append(button);
     return dfnPanel;
-}
-
-
-
-function hideAllDfnPanels() {
-    // Delete the currently-active dfn panel.
-    queryAll(".dfn-panel").forEach(dfnPanel=>hideDfnPanel({dfnPanel}));
-}
-
-function showDfnPanel(dfn) {
-    hideAllDfnPanels(); // Only display one at a time.
-
-    dfn.setAttribute("aria-expanded", "true");
-
-    const dfnPanel = genDfnPanel(dfn, dfn.panelData);
-
-    // Give the dfn a unique tabindex, and then
-    // give all the tabbable panel bits successive indexes.
-    let tabIndex = 100;
-    dfn.tabIndex = tabIndex++;
-    const tabbable = dfnPanel.querySelectorAll(":is(a, button)");
-    for (const el of tabbable) {
-        el.tabIndex = tabIndex++;
-    }
-
-    append(document.body, dfnPanel);
-    positionDfnPanel(dfnPanel);
-}
-
-function positionDfnPanel(dfnPanel) {
-    const dfn = dfnPanel.dfn;
-    const dfnPos = getBounds(dfn);
-    dfnPanel.style.top = dfnPos.bottom + "px";
-    dfnPanel.style.left = dfnPos.left + "px";
-
-    const panelPos = dfnPanel.getBoundingClientRect();
-    const panelMargin = 8;
-    const maxRight = document.body.parentNode.clientWidth - panelMargin;
-    if (panelPos.right > maxRight) {
-        const overflowAmount = panelPos.right - maxRight;
-        const newLeft = Math.max(panelMargin, dfnPos.left - overflowAmount);
-        dfnPanel.style.left = newLeft + "px";
-    }
 }
 
 function pinDfnPanel(dfnPanel) {
     // Switch it to "activated" state, which pins it.
     dfnPanel.classList.add("activated");
-    dfnPanel.style.position = "fixed";
-    dfnPanel.style.left = null;
-    dfnPanel.style.top = null;
 }
 
-function hideDfnPanel({dfn, dfnPanel}) {
-    if(!dfnPanel) dfnPanel = dfn.dfnPanel;
-    if(!dfn) dfn = dfnPanel.dfn;
-    dfn.dfnPanel = undefined;
-    dfnPanel.dfn = undefined;
-    dfn.setAttribute("aria-expanded", "false");
-    dfn.tabIndex = undefined;
-    dfnPanel.remove()
-}
-
-function toggleDfnPanel(dfn) {
-    if(dfn.dfnPanel) {
-        hideDfnPanel(dfn);
-    } else {
-        showDfnPanel(dfn);
-    }
-}
-
-function insertDfnPopupAction(dfn) {
-    dfn.setAttribute('role', 'button');
-    dfn.setAttribute('aria-expanded', 'false')
-    dfn.tabIndex = 0;
-    dfn.classList.add('has-dfn-panel');
-    dfn.addEventListener('click', (event) => {
-        toggleDfnPanel(dfn);
-        event.stopPropagation();
-    });
-    dfn.addEventListener('keypress', (event) => {
-        const kc = event.keyCode;
-        // 32->Space, 13->Enter
-        if(kc == 32 || kc == 13) {
-            toggleDfnPanel(dfn);
-            event.stopPropagation();
-            event.preventDefault();
-        }
-    });
+function unpinDfnPanel(dfnPanel) {
+    dfnPanel.classList.remove("activated");
 }
 
 function refocusOnTarget(event) {
@@ -3165,21 +3091,6 @@ function refocusOnTarget(event) {
         // This is needed after browser scrolls to the destination.
         target.focus();
     });
-}
-
-// TODO: shared util
-// Returns the root-level absolute position {left and top} of element.
-function getBounds(el, relativeTo=document.body) {
-    const relativeRect = relativeTo.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    const top = elRect.top - relativeRect.top;
-    const left = elRect.left - relativeRect.left;
-    return {
-        top,
-        left,
-        bottom: top + elRect.height,
-        right: left + elRect.width,
-    }
 }
 
 function scrollToTargetAndHighlight(event) {
