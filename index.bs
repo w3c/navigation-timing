@@ -334,7 +334,7 @@ interface PerformanceNavigationTiming : PerformanceResourceTiming {
     readonly        attribute unsigned short       redirectCount;
     readonly        attribute DOMHighResTimeStamp  criticalCHRestart;
     readonly        attribute NotRestoredReasons?  notRestoredReasons;
-    readonly        attribute PerformanceTimingConfidence confidence;
+    readonly        attribute PerformanceTimingConfidence? confidence;
     [Default] object toJSON();
 };
 </pre>
@@ -357,8 +357,9 @@ A {{PerformanceNavigationTiming}} has an associated
 A {{PerformanceNavigationTiming}} has an associated
 {{NotRestoredReasons}} <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-not-restored-reasons">not restored reasons</dfn>.
 
-A {{PerformanceNavigationTiming}} has an associated
-{{PerformanceTimingConfidence}} <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-confidence-value">confidence value</dfn>.
+A {{PerformanceNavigationTiming}} has an associated null or
+{{PerformanceTimingConfidenceValue}} <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-confidence-value">confidence value</dfn>,
+initially null.
 
 A {{PerformanceNavigationTiming}} has an associated real number
 <dfn data-dfn-for="PerformanceNavigationTiming" oldids="dfn-randomized-trigger-rate">randomized trigger rate</dfn>
@@ -474,28 +475,23 @@ A {{PerformanceNavigationTiming}} has an associated null or [=service worker tim
 <ol>
   <li>If |this|'s [=document load timing=]'s
   [=document load timing info/DOM interactive time=] is 0, return null.</li>
-  <li>If |this|'s <a for="PerformanceNavigationTiming">confidence value</a> is not null,
-  return it.</li>
-  <li>Let |confidence| be a new {{PerformanceTimingConfidence}} object created in
-  [=this=]'s [=relevant settings object=]'s [=relevant realm=].</li>
-  <li>Set |confidence|'s {{PerformanceTimingConfidence/randomizedTriggerRate}} to
-  |this|'s [=randomized trigger rate=].</li>
-  <li>Set |confidence|'s {{PerformanceTimingConfidence/value}} as determined by the following algorithm:
+  <li>Let |p| be |this|'s [=randomized trigger rate=].</li>
+  <li>If |this|'s <a for="PerformanceNavigationTiming">confidence value</a> is null, set it to the
+  result of running these steps:
     <ol>
-      <li>Let |p| be |confidence|'s {{PerformanceTimingConfidence/randomizedTriggerRate}}.</li>
-      <li>Let |underlying| be [=this=]'s [=underlying confidence value=], a
-      {{PerformanceTimingConfidenceValue}}.</li>
+      <li>Let |underlying| be |this|'s [=underlying confidence value=].</li>
       <li>Let |r| be a real number drawn uniformly at random from the interval [0, 1).</li>
-      <li>If |r| &gt; or equal |p|, return |underlying|.</li>
-      <li>Otherwise:
-        <ol>
-          <li>Let |s| be an integer drawn uniformly at random from the set {0, 1}.</li>
-          <li>If |s| equals 0, return {{PerformanceTimingConfidenceValue/high}}.</li>
-          <li>Otherwise, return {{PerformanceTimingConfidenceValue/low}}.</li>
-        </ol>
-      </li>
+      <li>If |r| is greater than or equal to |p|, return |underlying|.</li>
+      <li>Let |s| be an integer drawn uniformly at random from the set {0, 1}.</li>
+      <li>If |s| equals 0, return {{PerformanceTimingConfidenceValue/high}}.</li>
+      <li>Return {{PerformanceTimingConfidenceValue/low}}.</li>
     </ol>
   </li>
+  <li>Let |confidence| be a new {{PerformanceTimingConfidence}} object created in
+  [=this=]'s [=relevant settings object=]'s [=relevant realm=].</li>
+  <li>Set |confidence|'s {{PerformanceTimingConfidence/randomizedTriggerRate}} to |p|.</li>
+  <li>Set |confidence|'s {{PerformanceTimingConfidence/value}} to |this|'s
+  <a for="PerformanceNavigationTiming">confidence value</a>.</li>
   <li>Return |confidence|.</li>
 </ol>
 <div class="note">
