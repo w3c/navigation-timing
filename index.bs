@@ -94,7 +94,6 @@ urlPrefix: https://html.spec.whatwg.org/multipage/; spec: HTML
     type: dfn
         text: create a notrestoredreasons object; url: nav-history-apis.html#create-a-notrestoredreasons-object
         text: Document/not restored reasons; url: nav-history-apis.html#document-not-restored-reasons
-        text: queue a navigation performanceentry; url: nav-history-apis.html#queue-a-navigation-performanceentry
     type: interface
         text: NotRestoredReasons; url: nav-history-apis.html#notrestoredreasons
 </pre>
@@ -755,7 +754,7 @@ a DOMString |cacheMode|, a {{DOMHighResTimeStamp}} |criticalCHRestart|, and a [=
 </ol>
 
 <p>To <dfn data-export="" oldids="dfn-queue-the-navigation-timing-entry">queue the navigation timing entry</dfn> for {{Document}} |document|,
-<a data-lt="queue a navigation performanceentry">queue</a> |document|'s
+[=Queue a PerformanceEntry|queue=] |document|'s
 [=navigation timing entry=].
 
 <h2 id="privacy" class='informative'>Privacy Considerations</h2>
